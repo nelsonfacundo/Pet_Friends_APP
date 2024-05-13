@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Pet Friends APP</string>
+    <string name="titulo_login">Inicio de sesion</string>
+    <string name="txt_email">Email</string>
+    <string name="txt_pass">Contraseña</string>
+    <string name="place_holder_input_user">Ingrese email</string>
+    <string name="place_holder_input_password">Ingrese contraseña</string>
+    <string name="txt_btn_login">Ingresar</string>
+    <string name="txt_registro">registrarse</string>
 </resources>
