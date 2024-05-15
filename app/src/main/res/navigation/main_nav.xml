@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav"
+    app:startDestination="@id/loginActivity">
+
+    <activity
+        android:id="@+id/loginActivity"
+        android:name="com.example.petfriendsapp.LoginActivity"
+        android:label="login_activity"
+        tools:layout="@layout/login_activity" />
+
+    <fragment
+        android:id="@+id/blankFragmentRegistrar"
+        android:name="com.example.petfriendsapp.fragments.BlankFragmentRegistrar"
+        android:label="BlankFragmentRegistrar"
+        tools:layout="@layout/fragment_registrar">
+        <action
+            android:id="@+id/action_blankFragmentRegistrar_to_loginActivity"
+            app:destination="@id/loginActivity" />
+    </fragment>
+</navigation>
