@@ -4,7 +4,7 @@
         <!-- Customize your light theme here. -->
          <item name="colorPrimary">@color/primary</item>
          <item name="colorAccent">@color/accent</item>
-         <item name="colorButtonNormal">@color/accent</item>
+
     </style>
 
     <style name="Theme.PetFriendsAPP" parent="Base.Theme.PetFriendsAPP" />
