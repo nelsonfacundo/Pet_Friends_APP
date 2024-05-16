@@ -61,7 +61,7 @@ class RegistroActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     // Registro exitoso, redirigir a la pantalla de inicio
                     Toast.makeText(this, "Registro exitoso", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this, LoginActivity::class.java)
+                    val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                     finish()
                 } else {

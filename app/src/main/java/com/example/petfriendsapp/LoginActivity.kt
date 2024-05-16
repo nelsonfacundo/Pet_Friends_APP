@@ -13,11 +13,12 @@ import androidx.core.view.WindowInsetsCompat
 
 class LoginActivity : AppCompatActivity() {
     lateinit var txt_registro: TextView
-    private lateinit var bntLogin: Button
+    lateinit var txt_forgot_pass: TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.login_activity)
+        setContentView(R.layout.activity_login)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.login)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -34,6 +35,7 @@ class LoginActivity : AppCompatActivity() {
                 // Si las credenciales son válidas, navega a la siguiente actividad
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
+                finish()
             } else {
                 // Si las credenciales son inválidas, muestra un mensaje de error
                 Toast.makeText(this, "Credenciales inválidas", Toast.LENGTH_SHORT).show()
@@ -41,18 +43,19 @@ class LoginActivity : AppCompatActivity() {
         }
 
         txt_registro = findViewById(R.id.registro)
-        bntLogin = findViewById(R.id.btn_login)
+        txt_forgot_pass = findViewById(R.id.txt_forgot_pass)
 
         txt_registro.setOnClickListener {
             val intent = Intent(this, RegistroActivity::class.java)
             startActivity(intent)
         }
 
-        bntLogin.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
+        txt_forgot_pass.setOnClickListener {
+            val intent = Intent(this, ForgotPasswordActivity::class.java)
             startActivity(intent)
-            finish()
         }
+
+
 
     }
 
