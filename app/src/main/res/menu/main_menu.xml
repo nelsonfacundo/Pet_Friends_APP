@@ -3,10 +3,10 @@
 
     <item android:title="Inicio"
         android:icon="@drawable/inicio_icon"
-        android:id="@+id/inicio" />
+        android:id="@+id/inicio"/>
     <item android:title="Chats"
         android:icon="@drawable/chat"
-        android:id="@+id/chats" />
+        android:id="@+id/chats"/>
     <item android:title="Menu"
         android:icon="@drawable/menu"
         android:id="@+id/menu"/>
