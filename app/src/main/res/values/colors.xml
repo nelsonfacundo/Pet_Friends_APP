@@ -2,6 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+<<<<<<< HEAD
     <color name="green">#008000</color>
     <color name="pink">#fae0e4</color>
     <color name="brown">#9d8189</color>
@@ -11,4 +12,8 @@
     <color name="yellow">#e09f3e</color>
     <color name="VerdeOscuro">#335c67</color>
 
+=======
+    <color name="primary">#AFF4C6</color>
+    <color name="accent">#0D99FF</color>
+>>>>>>> 189e2a3b73f583787a553a01b3304cdc977ca7af
 </resources>
