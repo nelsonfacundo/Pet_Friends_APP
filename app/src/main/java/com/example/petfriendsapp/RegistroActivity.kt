@@ -30,7 +30,11 @@ class RegistroActivity : AppCompatActivity() {
         backButton.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
-
+        }
+        bntRegistrar.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 }
