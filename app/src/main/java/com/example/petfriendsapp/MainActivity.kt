@@ -23,8 +23,8 @@ class MainActivity : AppCompatActivity() {
             insets
 
         }
-        navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
-        bottomNavView = findViewById(R.id.bottom_var)
-        NavigationUI.setupWithNavController(bottomNavView,navHostFragment.navController)
+        //navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+        //bottomNavView = findViewById(R.id.bottom_var)
+        //NavigationUI.setupWithNavController(bottomNavView,navHostFragment.navController)
     }
 }

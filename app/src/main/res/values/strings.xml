@@ -6,14 +6,8 @@
     <string name="place_holder_input_user">Ingrese email</string>
     <string name="place_holder_input_password">Ingrese contraseña</string>
     <string name="txt_btn_login">Ingresar</string>
-<<<<<<< HEAD
-    <string name="txt_registro">registrarse</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Fragmento de Inicio</string>
-=======
     <string name="txt_registro">Registrarse</string>
     <string name="txt_name">Nombre</string>
     <string name="txt_last_name">Apellido</string>
     <string name="hello_blank_fragment">Hello Blank Fragment</string>
->>>>>>> 189e2a3b73f583787a553a01b3304cdc977ca7af
 </resources>
