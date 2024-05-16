@@ -5,9 +5,12 @@
     <string name="txt_pass">Contraseña</string>
     <string name="place_holder_input_user">Ingrese email</string>
     <string name="place_holder_input_password">Ingrese contraseña</string>
+    <string name="place_holder_input_nombre">Ingrese su nombre</string>
+    <string name="place_holder_input_apellido">Ingrese su apellido</string>
     <string name="txt_btn_login">Ingresar</string>
     <string name="txt_registro">Registrarse</string>
     <string name="txt_name">Nombre</string>
     <string name="txt_last_name">Apellido</string>
+    <string name="txt_forgot_password">Forgot password</string>
     <string name="hello_blank_fragment">Hello Blank Fragment</string>
 </resources>
