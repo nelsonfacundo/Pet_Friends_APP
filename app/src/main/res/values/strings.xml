@@ -26,4 +26,9 @@
     <string name="login_error">El email o contraseña no corresponde al usuario</string>
     <string name="login_empty_error">Email y contraseña no pueden estar vacíos</string>
 
+
+    /Forgot passowrd/
+    <string name="forgot_succes">Email enviado con exito</string>
+    <string name="forgot_error">Email no existe </string>
+    <string name="forgot_empty_error">Email no puede estar vacío</string>
 </resources>
