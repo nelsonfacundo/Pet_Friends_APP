@@ -26,13 +26,13 @@
         style="@style/textViewEditTitle"
         android:text="@string/titulo_login"
         android:textAlignment="textStart"
-        app:layout_constraintBottom_toTopOf="@+id/input_user"
+        app:layout_constraintBottom_toTopOf="@+id/input_email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logo" />
 
     <EditText
-        android:id="@+id/input_user"
+        android:id="@+id/input_email"
         android:layout_width="354dp"
         android:layout_height="48dp"
         android:autofillHints=""
@@ -75,7 +75,7 @@
         android:layout_height="wrap_content"
         style="@style/textViewEdit"
         android:text="@string/txt_email"
-        app:layout_constraintBottom_toTopOf="@+id/input_user"
+        app:layout_constraintBottom_toTopOf="@+id/input_email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.085"
         app:layout_constraintStart_toStartOf="parent"
@@ -94,7 +94,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.094"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_user" />
+        app:layout_constraintTop_toBottomOf="@+id/input_email" />
 
     <Button
         android:id="@+id/btn_login"
@@ -130,7 +130,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="27dp"
         android:text="@string/txt_forgot_password"
-        android:textColor="@color/grey"
+        android:textColor="@color/gray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/registro"
         app:layout_constraintHorizontal_bias="0.155"
