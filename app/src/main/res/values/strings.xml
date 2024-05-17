@@ -3,8 +3,10 @@
     <string name="titulo_login">Inicio de sesion</string>
     <string name="txt_email">Email</string>
     <string name="txt_pass">Contraseña</string>
+    <string name="txt_pass_confirmar">Confirme contraseña</string>
     <string name="place_holder_input_user">Ingrese email</string>
     <string name="place_holder_input_password">Ingrese contraseña</string>
+    <string name="place_holder_input_repassword">Confirme contraseña</string>
     <string name="place_holder_input_nombre">Ingrese su nombre</string>
     <string name="place_holder_input_apellido">Ingrese su apellido</string>
     <string name="txt_btn_login">Ingresar</string>

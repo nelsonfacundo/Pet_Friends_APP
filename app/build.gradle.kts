@@ -52,6 +52,10 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
+    //OTRA FORMA DE IMPLEMENTAR LAS DEPENDECIAS PARA QUE NO GENERE ERROR
+    implementation(libs.firebase.database.ktx)
+    implementation(libs.firebase.auth.ktx)
+
     //FIREBASE DEPENDENCIAS
     implementation(platform("com.google.firebase:firebase-bom:33.0.0"))
     implementation("com.google.firebase:firebase-analytics")
