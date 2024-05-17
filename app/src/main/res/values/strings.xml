@@ -1,18 +1,48 @@
 <resources>
     <string name="app_name">Pet Friends APP</string>
-    <string name="titulo_login">Inicio de sesion</string>
-    <string name="txt_email">Email</string>
-    <string name="txt_pass">Contraseña</string>
-    <string name="txt_pass_confirmar">Confirme contraseña</string>
+
+    /PlaceHolder inputs//
     <string name="place_holder_input_user">Ingrese email</string>
     <string name="place_holder_input_password">Ingrese contraseña</string>
     <string name="place_holder_input_repassword">Confirme contraseña</string>
     <string name="place_holder_input_nombre">Ingrese su nombre</string>
     <string name="place_holder_input_apellido">Ingrese su apellido</string>
-    <string name="txt_btn_login">Ingresar</string>
+
+
+    /Register/
     <string name="txt_registro">Registrarse</string>
     <string name="txt_name">Nombre</string>
     <string name="txt_last_name">Apellido</string>
     <string name="txt_forgot_password">Forgot password</string>
+    <string name="txt_pass_confirmar">Confirme contraseña</string>
+    <string name="register_success">Registro exitoso</string>
+    <string name="msj_email_registrado">Email ya registrado</string>
+    <string name="msj_campos_vacios">Por favor, complete todos los campos</string>
+    <string name="msj_email_formato_bad">Formato de email no válido</string>
+    <string name="msj_pass_no_coinciden">Las contraseñas no coinciden</string>
+    <string name="msj_pass_falta_caracteres">La contraseña debe tener al menos 6 caracteres</string>
+    <string name="msj_error_consulta_bd">Error en la consulta de la base de datos</string>
+    <string name="msj_error_register">Error al registrar.</string>
+
+
+
+
     <string name="hello_blank_fragment">Hello Blank Fragment</string>
+
+
+    /Login/
+    <string name="titulo_login">Inicio de sesion</string>
+    <string name="txt_email">Email</string>
+    <string name="txt_pass">Contraseña</string>
+    <string name="txt_btn_login">Ingresar</string>
+    <string name="login_success">Inicio de sesión exitoso</string>
+    <string name="login_error">El email o contraseña no corresponde al usuario</string>
+    <string name="login_empty_error">Email y contraseña no pueden estar vacíos</string>
+
+
+    /Forgot passowrd/
+    <string name="forgot_succes">Email enviado con exito</string>
+    <string name="forgot_error">Email no existe </string>
+    <string name="forgot_empty_error">Email no puede estar vacío</string>
+    <string name="txt_btn_forgot_password">Enviar email</string>
 </resources>

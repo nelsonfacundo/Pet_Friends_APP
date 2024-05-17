@@ -1,9 +1,7 @@
 package com.example.petfriendsapp
 
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -82,25 +80,25 @@ class RegistroActivity : AppCompatActivity() {
     ): Boolean {
         // Verifica si algún campo está vacío
         if (email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
-            Toast.makeText(this, "Por favor, complete todos los campos", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.msj_campos_vacios, Toast.LENGTH_SHORT).show()
             return false
         }
 
         // Verifica si el formato del email es correcto
         if (!isValidEmail(email)) {
-            Toast.makeText(this, "Formato de email no válido", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.msj_email_formato_bad, Toast.LENGTH_SHORT).show()
             return false
         }
 
         // Verifica si las contraseñas coinciden
         if (password != confirmPassword) {
-            Toast.makeText(this, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.msj_pass_no_coinciden, Toast.LENGTH_SHORT).show()
             return false
         }
 
         // Verifica si las contraseñas tiene al menos 6 caracteres
-        if (password.length <= 6 || confirmPassword.length <= 6 ) {
-            Toast.makeText(this, "La contraseña debe tener al menos 6 caracteres", Toast.LENGTH_SHORT).show()
+        if (password.length <= 6) {
+            Toast.makeText(this, R.string.msj_pass_falta_caracteres, Toast.LENGTH_SHORT).show()
             return false
         }
 
@@ -118,11 +116,11 @@ class RegistroActivity : AppCompatActivity() {
                         registerUser()
                     } else {
                         // El email ya está registrado
-                        Toast.makeText(this, "Email ya registrado", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, R.string.msj_email_registrado, Toast.LENGTH_SHORT).show()
                     }
                 } else {
                     // Error en la consulta de la base de datos
-                    Toast.makeText(this, "Error en la consulta de la base de datos", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, R.string.msj_error_consulta_bd, Toast.LENGTH_SHORT).show()
                 }
             }
     }
@@ -132,7 +130,7 @@ class RegistroActivity : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     // Registro exitoso, redirigir a la pantalla de inicio
-                    Toast.makeText(this, "Registro exitoso", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, R.string.register_success, Toast.LENGTH_SHORT).show()
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                     finish()
@@ -141,7 +139,7 @@ class RegistroActivity : AppCompatActivity() {
                     val errorMessage = task.exception?.localizedMessage
                     if (errorMessage == "The email address is already in use by another account.") {
                         // Sobre escribo el mensaje de error de firebase
-                        Toast.makeText(this,"Email ya registrado", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, R.string.msj_email_registrado, Toast.LENGTH_SHORT).show()
                     } else {
                         // Error en el registro
                         Toast.makeText(baseContext, "Error al registrar. ${task.exception?.message}",Toast.LENGTH_SHORT).show()
