@@ -31,4 +31,14 @@
     <string name="forgot_succes">Email enviado con exito</string>
     <string name="forgot_error">Email no existe </string>
     <string name="forgot_empty_error">Email no puede estar vacío</string>
+
+
+    /Pantalla educativa/
+    <string name="txt_data_ones">¡Bienvenido a Pet Friend!</string>
+    <string name="txt_data_two">Estamos emocionados de tenerte con nosotros.</string>
+    <string name="txt_data_three">Por favor, completa los siguientes campos para comenzar:</string>
+    <string name="txt_input_name">Ingresa tu nombre</string>
+    <string name="txt_input_lastname">Ingresa tu apellido</string>
+    <string name="txt_btn_avatar">Seleccionar Foto</string>
+    <string name="txt_btn_data">Enviar datos</string>
 </resources>

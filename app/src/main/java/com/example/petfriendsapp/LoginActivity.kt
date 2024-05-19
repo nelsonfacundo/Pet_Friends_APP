@@ -1,5 +1,6 @@
 package com.example.petfriendsapp
 
+
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -13,6 +14,8 @@ import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
+import com.google.firebase.firestore.firestore
+
 
 class LoginActivity : AppCompatActivity() {
     lateinit var txt_registro: TextView
@@ -73,7 +76,7 @@ class LoginActivity : AppCompatActivity() {
                     if (task.isSuccessful) {
                         // Inicio de sesión exitoso
                         Toast.makeText(this, R.string.login_success, Toast.LENGTH_SHORT).show()
-                        navigateToHome()
+                        checkUserDataAndNavigate()
                     } else {
                         // Error en el inicio de sesión
                         Toast.makeText(this, R.string.login_error, Toast.LENGTH_SHORT).show()
@@ -88,6 +91,25 @@ class LoginActivity : AppCompatActivity() {
             return false
         }
         return true
+    }
+
+    private fun checkUserDataAndNavigate() {
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            val uid = currentUser.uid
+            val userRef = Firebase.firestore.collection("users").document(uid)
+            userRef.get().addOnSuccessListener { document ->
+                if (document.exists()) {
+                    // Datos del usuario presentes, navegar al fragmento del botón de navegación
+                    navigateToHome()
+                } else {
+                    // Datos del usuario no presentes, navegar al formulario
+                    navigateToDataForm()
+                }
+            }.addOnFailureListener { exception ->
+                Toast.makeText(this, "error", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun navigateToForgotPassword() {
@@ -105,7 +127,13 @@ class LoginActivity : AppCompatActivity() {
 
 
     private fun navigateToHome() {
-        val intent = Intent(this, MainActivity::class.java) // Asegúrate de tener una HomeActivity
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    private fun navigateToDataForm() {
+        val intent = Intent(this, DataFormActivity::class.java)
         startActivity(intent)
         finish()
     }
