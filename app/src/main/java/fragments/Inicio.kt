@@ -5,22 +5,25 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.petfriendsapp.R
+import com.example.petfriendsapp.entities.Mascota
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [Inicio.newInstance] factory method to
- * create an instance of this fragment.
- */
+
 class Inicio : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    lateinit var view1:View
+    lateinit var recMascotas: RecyclerView
+    //aca debo conectar la BD de las mascotas
+    private var mascotas : MutableList<Mascota> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,8 +38,17 @@ class Inicio : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        view1 = inflater.inflate(R.layout.fragment_inicio, container, false)
+        recMascotas = view1.findViewById(R.id.rec_mascotas)
         return inflater.inflate(R.layout.fragment_inicio, container, false)
     }
+
+    override fun onStart() {
+        super.onStart()
+        recMascotas.setHasFixedSize(true)
+        val linearLayoutManager = LinearLayoutManager(context)
+    }
+
 
     companion object {
         /**
