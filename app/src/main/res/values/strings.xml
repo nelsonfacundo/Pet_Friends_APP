@@ -1,12 +1,16 @@
 <resources>
     <string name="app_name">Pet Friends APP</string>
 
-
     /PlaceHolder inputs//
     <string name="place_holder_input_user">Ingrese email</string>
+    <string name="place_holder_input_new_email">Ingrese nuevo email</string>
     <string name="place_holder_input_password">Ingrese contraseña</string>
+    <string name="place_holder_input_new_password">Ingrese nueva contraseña</string>
+    <string name="place_holder_input_confirm_new_password">Repita nueva contraseña</string>
+    <string name="place_holder_input_repassword">Confirme contraseña</string>
     <string name="place_holder_input_nombre">Ingrese su nombre</string>
     <string name="place_holder_input_apellido">Ingrese su apellido</string>
+
 
 
     /Register/
@@ -14,6 +18,19 @@
     <string name="txt_name">Nombre</string>
     <string name="txt_last_name">Apellido</string>
     <string name="txt_forgot_password">Forgot password</string>
+    <string name="txt_pass_confirmar">Confirme contraseña</string>
+    <string name="register_success">Registro exitoso</string>
+    <string name="msj_email_registrado">Email ya registrado</string>
+    <string name="msj_campos_vacios">Por favor, complete todos los campos</string>
+    <string name="msj_email_formato_bad">Formato de email no válido</string>
+    <string name="msj_pass_no_coinciden">Las contraseñas no coinciden</string>
+    <string name="msj_pass_falta_caracteres">La contraseña debe tener al menos 6 caracteres</string>
+    <string name="msj_error_consulta_bd">Error en la consulta de la base de datos</string>
+    <string name="msj_error_register">Error al registrar.</string>
+
+
+
+
     <string name="hello_blank_fragment">Hello Blank Fragment</string>
 
 
@@ -25,5 +42,51 @@
     <string name="login_success">Inicio de sesión exitoso</string>
     <string name="login_error">El email o contraseña no corresponde al usuario</string>
     <string name="login_empty_error">Email y contraseña no pueden estar vacíos</string>
+
+
+    /Forgot passowrd/
+    <string name="forgot_succes">Email enviado con exito</string>
+    <string name="forgot_error">Email no existe </string>
+    <string name="forgot_empty_error">Email no puede estar vacío</string>
+    <string name="txt_btn_forgot_password">Enviar email</string>
+
+    /Perfil/
+    <string name="txt_notificacion">Notificaciones</string>
+    <string name="txt_btn_cambiar_ft">Editar Perfil</string>
+    <string name="txt_btn_cambiar_email">Cambiar Email</string>
+    <string name="txt_btn_cambiar_password">Cambiar Contraseña</string>
+
+    /Cambiar Email/
+    <string name="email_changed_successfully">Email cambiado con éxito, verfique su nuevo email</string>
+    <string name="email_change_failed">No se pudo cambiar el email</string>
+    <string name="user_not_logged_in">Inicia sesión para cambiar el email</string>
+    <string name="reauthentication_failed">No se pudo verificar tu identidad. Por favor, revisa tus credenciales.</string>
+
+    /Cambiar Password/
+    <string name="password_changed_successfully">Contraseña cambiada exitosamente</string>
+    <string name="password_change_failed">No se pudo cambiar la contraseña</string>
+    <string name="user_not_logged_in_password">Inicia sesión para cambiar el contraseña</string>
+
+    /Editar Perfil/
+    <string name="edit_txt_name">Ingrese su nuevo nombre</string>
+    <string name="edit_txt_last_name">Ingrese su nuevo apellido</string>
+    <string name="btn_edit_perfil_guardar">Guardar</string>
+    <string name="perfil_changed_successfully">Perfil actualizado</string>
+    <string name="perfil_changed_failed">Error al actualizar perfil</string>
+    <string name="photo_changed_failed">Error al seleccionar una imagen</string>
+    <string name="photo_changed_successfully">Carga de foto exitosa</string>
+    <string name="url_changed_failed">Error al guardar la URL de la imagen en Firestore</string>
+    <string name="error_carga_image">Error al cargar la imagen</string>
+
+
+
+    /Pantalla educativa/
+    <string name="txt_data_ones">¡Bienvenido a Pet Friend!</string>
+    <string name="txt_data_two">Estamos emocionados de tenerte con nosotros.</string>
+    <string name="txt_data_three">Por favor, completa los siguientes campos para comenzar:</string>
+    <string name="txt_input_name">Ingresa tu nombre</string>
+    <string name="txt_input_lastname">Ingresa tu apellido</string>
+    <string name="txt_btn_avatar">Seleccionar Foto</string>
+    <string name="txt_btn_data">Enviar datos</string>
 
 </resources>
