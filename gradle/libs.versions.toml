@@ -18,6 +18,8 @@ navigationSafeArgsGradlePluginVersion = "2.8.0-beta01"
 androidNavigationSafeArgsGradlePlugin = "1.0.0-alpha10"
 firebaseDatabaseKtx = "21.0.0"
 firebaseAuthKtx = "23.0.0"
+firebaseStorageKtx = "21.0.0"
+material3Android = "1.2.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -38,6 +40,8 @@ android-navigation-safe-args-gradle-plugin = { group = "android.arch.navigation"
 
 firebase-database-ktx = { group = "com.google.firebase", name = "firebase-database-ktx", version.ref = "firebaseDatabaseKtx" }
 firebase-auth-ktx = { group = "com.google.firebase", name = "firebase-auth-ktx", version.ref = "firebaseAuthKtx" }
+firebase-storage-ktx = { group = "com.google.firebase", name = "firebase-storage-ktx", version.ref = "firebaseStorageKtx" }
+androidx-material3-android = { group = "androidx.compose.material3", name = "material3-android", version.ref = "material3Android" }
 
 
 [plugins]
