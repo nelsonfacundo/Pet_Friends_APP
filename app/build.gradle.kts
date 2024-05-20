@@ -39,6 +39,7 @@ android {
 
 dependencies {
     implementation(libs.firebase.storage.ktx)
+    implementation(libs.androidx.material3.android)
     var navVersion = "2.8.0-beta01"
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -52,6 +53,10 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    //OTRA FORMA DE IMPLEMENTAR LAS DEPENDECIAS PARA QUE NO GENERE ERROR
+    implementation(libs.firebase.database.ktx)
+    implementation(libs.firebase.auth.ktx)
 
     //FIREBASE DEPENDENCIAS
     implementation(platform("com.google.firebase:firebase-bom:33.0.0"))
