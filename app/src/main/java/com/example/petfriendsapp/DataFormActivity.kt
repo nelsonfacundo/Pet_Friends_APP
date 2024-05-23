@@ -20,19 +20,18 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 
 class DataFormActivity : AppCompatActivity() {
-
     private lateinit var inputNombre: EditText
     private lateinit var inputApellido: EditText
+    private lateinit var inputTelefono: EditText
     private lateinit var buttonSeleccionarAvatar: Button
     private lateinit var imageViewAvatar: ImageView
     private lateinit var buttonGuardar: Button
-
     private var imageUri: Uri? = null
+
 
     private val PICK_IMAGE_REQUEST = 1
     private val db = FirebaseFirestore.getInstance()
     private val auth = FirebaseAuth.getInstance()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_data_form)
@@ -44,8 +43,9 @@ class DataFormActivity : AppCompatActivity() {
     private fun initViews() {
         inputNombre = findViewById(R.id.input_nombre)
         inputApellido = findViewById(R.id.input_apellido)
-        buttonSeleccionarAvatar = findViewById(R.id.buttonSeleccionarAvatar)
+        inputTelefono = findViewById(R.id.input_telefono)
         imageViewAvatar = findViewById(R.id.imageViewAvatar)
+        buttonSeleccionarAvatar = findViewById(R.id.buttonSeleccionarAvatar)
         buttonGuardar = findViewById(R.id.buttonGuardar)
     }
 
@@ -77,40 +77,66 @@ class DataFormActivity : AppCompatActivity() {
     }
 
     private fun guardarDatos() {
-        val nombre = inputNombre.text.toString().trim()
-        val apellido = inputApellido.text.toString().trim()
-        val user = auth.currentUser
+        val validationResult = validarDatos()
 
-        if (user != null) {
-            user.getIdToken(true).addOnCompleteListener { task ->
+        if (validationResult.first) {
+            val nombre = inputNombre.text.toString().trim()
+            val apellido = inputApellido.text.toString().trim()
+            val telefono = inputTelefono.text.toString().trim()
+            val user = auth.currentUser
+
+            user?.getIdToken(true)?.addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     val idToken = task.result?.token
+                    val storageRef = FirebaseStorage.getInstance().reference.child("avatars/${user.uid}.jpg")
 
-                    val userMap = hashMapOf(
-                        "nombre" to nombre,
-                        "apellido" to apellido,
-                        "token" to idToken
-                    )
+                    storageRef.putFile(imageUri!!).addOnSuccessListener {
+                        storageRef.downloadUrl.addOnSuccessListener { uri ->
+                            val avatarUrl = uri.toString()
+                            val userMap = hashMapOf(
+                                "nombre" to nombre,
+                                "apellido" to apellido,
+                                "telefono" to telefono,
+                                "token" to idToken,
+                                "avatarUrl" to avatarUrl
+                            )
 
-                    db.collection("users").document(user.uid)
-                        .set(userMap)
-                        .addOnSuccessListener {
-                            Toast.makeText(this, "Datos guardados correctamente", Toast.LENGTH_SHORT).show()
-                            navigateToHome()
+                            db.collection("users").document(user.uid)
+                                .set(userMap)
+                                .addOnSuccessListener {
+                                    Toast.makeText(this, R.string.txt_exitoso, Toast.LENGTH_SHORT).show()
+                                    navigateToHome()
+                                }
+                                .addOnFailureListener { e ->
+                                    Toast.makeText(this, R.string.txt_error_datos , Toast.LENGTH_SHORT).show()
+                                }
+                        }.addOnFailureListener { e ->
+                            Toast.makeText(this, R.string.txt_error_url , Toast.LENGTH_SHORT).show()
                         }
-                        .addOnFailureListener { e ->
-                            Toast.makeText(this, "Error al guardar datos: ${e.message}", Toast.LENGTH_SHORT).show()
-                        }
-                } else {
-                    Log.e("DataFormActivity", "Error al obtener token: ${task.exception?.message}", task.exception)
-                    Toast.makeText(this, "Error al obtener token: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         } else {
-            Toast.makeText(this, "Usuario no autenticado", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, validationResult.second, Toast.LENGTH_SHORT).show()
         }
     }
 
+    private fun validarDatos(): Pair<Boolean, String> {
+        val nombre = inputNombre.text.toString().trim()
+        val apellido = inputApellido.text.toString().trim()
+        val telefono = inputTelefono.text.toString().trim()
+
+        if (nombre.isEmpty()) return Pair(false, getString(R.string.txt_empty_nombre))
+        if (nombre.length < 3 || nombre.length > 25) return Pair(false, getString(R.string.txt_cantC_nombre))
+        if (apellido.isEmpty()) return Pair(false, getString(R.string.txt_empty_apellido))
+        if (apellido.length < 3 || apellido.length > 25) return Pair(false, getString(R.string.txt_cantC_apellido))
+        if (telefono.isEmpty()) return Pair(false, getString(R.string.txt_empty_telefono))
+        if (telefono.length != 10) return Pair(false, getString(R.string.txt_cantC_telefono))
+        if (imageUri == null) return Pair(false, getString(R.string.txt_empty_imagen))
+        if (auth.currentUser == null) return Pair(false, getString(R.string.txt_validate_auth))
+
+        return Pair(true, "")
+    }
 
     private fun navigateToHome() {
         val intent = Intent(this, MainActivity::class.java)
@@ -121,71 +147,3 @@ class DataFormActivity : AppCompatActivity() {
 
 }
 
-
-    /*private fun guardarDatos2() {
-        val nombre = inputNombre.text.toString().trim()
-        val apellido = inputApellido.text.toString().trim()
-        val user = auth.currentUser
-
-        if (user != null) {
-            user.getIdToken(true).addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    val idToken = task.result?.token
-
-                    if (imageUri != null) {
-                        val storageRef = FirebaseStorage.getInstance().reference.child("avatars/${user.uid}.jpg")
-                        val uploadTask = storageRef.putFile(imageUri!!)
-
-                        uploadTask.addOnSuccessListener { taskSnapshot ->
-                            storageRef.downloadUrl.addOnSuccessListener { uri ->
-                                val userMap = hashMapOf(
-                                    "nombre" to nombre,
-                                    "apellido" to apellido,
-                                    "avatarUri" to uri.toString(),
-                                    "token" to idToken
-                                )
-
-                                db.collection("users").document(user.uid)
-                                    .set(userMap)
-                                    .addOnSuccessListener {
-                                        Toast.makeText(this, "Datos guardados correctamente", Toast.LENGTH_SHORT).show()
-                                    }
-                                    .addOnFailureListener { e ->
-                                        Toast.makeText(this, "Error al guardar datos: ${e.message}", Toast.LENGTH_SHORT).show()
-                                    }
-                            }.addOnFailureListener { e ->
-                                Log.e("DataFormActivity", "Error al obtener URL de descarga: ${e.message}", e)
-                                Toast.makeText(this, "Error al obtener URL de descarga: ${e.message}", Toast.LENGTH_SHORT).show()
-                            }
-                        }.addOnFailureListener { e ->
-                            Log.e("DataFormActivity", "Error al subir imagen: ${imageUri}", e)
-                            Toast.makeText(this, "Error al subir imagen: ${e.message}", Toast.LENGTH_SHORT).show()
-                        }
-                    } else {
-                        val userMap = hashMapOf(
-                            "nombre" to nombre,
-                            "apellido" to apellido,
-                            "token" to idToken
-                        )
-
-                        db.collection("users").document(user.uid)
-                            .set(userMap)
-                            .addOnSuccessListener {
-                                Toast.makeText(this, "Datos guardados correctamente", Toast.LENGTH_SHORT).show()
-                            }
-                            .addOnFailureListener { e ->
-                                Toast.makeText(this, "Error al guardar datos: ${e.message}", Toast.LENGTH_SHORT).show()
-                            }
-                    }
-                } else {
-                    Log.e("DataFormActivity", "Error al obtener token: ${task.exception?.message}", task.exception)
-                    Toast.makeText(this, "Error al obtener token: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
-                }
-            }
-        } else {
-            Toast.makeText(this, "Usuario no autenticado", Toast.LENGTH_SHORT).show()
-        }
-    }
-
-
-}*/

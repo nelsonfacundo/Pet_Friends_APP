@@ -5,6 +5,8 @@
     android:layout_height="match_parent"
     android:background="@color/primary">
 
+
+
     <TextView
         android:id="@+id/txt_data_one"
         style="@style/textViewEdit"
@@ -18,7 +20,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.088" />
+        app:layout_constraintVertical_bias="0.01" />
 
     <TextView
         android:id="@+id/txt_data_two"
@@ -31,9 +33,10 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.157" />
+        app:layout_constraintVertical_bias="0.079" />
 
     <TextView
         android:id="@+id/txt_data_three"
@@ -49,7 +52,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_data_two"
-        app:layout_constraintVertical_bias="0.043" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/imageViewAvatar"
@@ -60,8 +63,10 @@
         android:src="@drawable/avatar"
         app:layout_constraintBottom_toTopOf="@+id/input_nombre"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.476"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_data_three" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_data_three"
+        app:layout_constraintVertical_bias="0.079" />
 
     <EditText
         android:id="@+id/input_nombre"
@@ -74,26 +79,45 @@
         android:inputType="text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.596" />
+        app:layout_constraintVertical_bias="0.499" />
 
     <EditText
         android:id="@+id/input_apellido"
         style="@style/textViewEditTitle"
         android:layout_width="236dp"
         android:layout_height="52dp"
-        android:layout_marginBottom="212dp"
+        android:layout_marginTop="7dp"
         android:background="@drawable/border_inputs"
         android:ems="10"
         android:hint="@string/txt_input_lastname"
         android:inputType="text"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/buttonGuardar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.485"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/input_nombre"
+        app:layout_constraintVertical_bias="0.039" />
+
+    <EditText
+        android:id="@+id/input_telefono"
+        style="@style/textViewEditTitle"
+        android:layout_width="236dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="9dp"
+        android:background="@drawable/border_inputs"
+        android:ems="10"
+        android:hint="@string/txt_input_telefono"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/buttonGuardar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_nombre" />
+        app:layout_constraintTop_toBottomOf="@+id/input_apellido"
+        app:layout_constraintVertical_bias="0.075"
+        tools:ignore="DuplicateIds" />
 
     <Button
         android:id="@+id/buttonSeleccionarAvatar"
@@ -105,7 +129,7 @@
         app:layout_constraintBottom_toTopOf="@+id/buttonGuardar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_apellido"
+        app:layout_constraintTop_toBottomOf="@+id/input_telefono"
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
@@ -114,7 +138,7 @@
         android:layout_width="354dp"
         android:layout_height="58dp"
         android:layout_marginBottom="52dp"
-        android:text="@string/txt_btn_data"
+        android:text="@string/txt_btn_datos"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
