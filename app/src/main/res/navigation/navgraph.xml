@@ -20,4 +20,48 @@
         android:name="fragments.Chats"
         android:label="fragment_chats"
         tools:layout="@layout/fragment_chats" />
+    <fragment
+        android:id="@+id/cambiarEmail"
+        android:name="com.example.petfriendsapp.fragments.CambiarEmailFragment"
+        android:label="CambiarEmail"
+        tools:layout="@layout/fragment_cambiar_email">
+        <action
+            android:id="@+id/action_cambiarEmail_to_perfil"
+            app:destination="@id/perfil" />
+    </fragment>
+    <fragment
+        android:id="@+id/perfil"
+        android:name="com.example.petfriendsapp.fragments.PerfilFragment"
+        android:label="fragment_perfil"
+        tools:layout="@layout/fragment_perfil" >
+        <action
+            android:id="@+id/action_perfil_to_cambiarPassword"
+            app:destination="@id/cambiarPassword" />
+        <action
+            android:id="@+id/action_perfil_to_cambiarEmail"
+            app:destination="@id/cambiarEmail" />
+        <action
+            android:id="@+id/action_perfil_to_editarPerfilFragment"
+            app:destination="@id/editarPerfilFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/cambiarPassword"
+        android:name="com.example.petfriendsapp.fragments.CambiarPasswordFragment"
+        android:label="CambiarPassword"
+        tools:layout="@layout/fragment_cambiar_password">
+    <action
+            android:id="@+id/action_cambiarPassword_to_perfil"
+            app:destination="@id/perfil" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/editarPerfilFragment"
+        android:name="com.example.petfriendsapp.fragments.EditarPerfilFragment"
+        android:label="fragment_editar_perfil"
+        tools:layout="@layout/fragment_editar_perfil" >
+        <action
+            android:id="@+id/action_editarPerfilFragment_to_perfil"
+            app:destination="@id/perfil" />
+    </fragment>
 </navigation>
