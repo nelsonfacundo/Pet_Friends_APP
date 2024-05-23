@@ -12,7 +12,6 @@
     <string name="place_holder_input_apellido">Ingrese su apellido</string>
 
 
-
     /Register/
     <string name="txt_registro">Registrarse</string>
     <string name="txt_name">Nombre</string>
@@ -27,8 +26,6 @@
     <string name="msj_pass_falta_caracteres">La contraseña debe tener al menos 6 caracteres</string>
     <string name="msj_error_consulta_bd">Error en la consulta de la base de datos</string>
     <string name="msj_error_register">Error al registrar.</string>
-
-
 
 
     <string name="hello_blank_fragment">Hello Blank Fragment</string>
@@ -81,8 +78,6 @@
     <string name="error_carga_image">Error al cargar la imagen</string>
 
 
-
-
     /Pantalla educativa/
     <string name="txt_data_ones">¡Bienvenido a Pet Friend!</string>
     <string name="txt_data_two">Estamos emocionados de tenerte con nosotros.</string>
@@ -103,4 +98,22 @@
     <string name="txt_exitoso">Datos guardados correctamente</string>
     <string name="txt_error_url">Error al obtener URL de descarga </string>
     <string name="txt_error_datos">Error al guardar datos </string>
+
+    /Details Perro Adoptar/
+    <string name="txt_nombreMascota_details">Nombre</string>
+    <string name="txt_edadMascota_details">Edad</string>
+    <string name="txt_raza_details">Raza</string>
+    <string name="txt_sexoMascota_details">Sexo</string>
+    <string name="txt_descripcionMascota_details">Descripcion de la Mascota</string>
+    <string name="txt_dueño_details">Dueño</string>
+    <string name="txt_dueñoNombre_details">Nombre del dueño</string>
+    <string name="whatsapp_button_description">Abrir WhatsApp</string>
+    <string name="botonAdoptar">Adoptar</string>
+
+
+
+
+
+
+
 </resources>
