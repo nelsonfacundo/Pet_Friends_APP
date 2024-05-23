@@ -3,6 +3,7 @@
     <style name="Base.Theme.PetFriendsAPP" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
          <item name="colorPrimary">@color/primary</item>
+         <item name="colorSecondary">@color/secundary</item>
          <item name="colorAccent">@color/accent</item>
 
     </style>
@@ -38,4 +39,28 @@
         <item name="android:scaleType">centerCrop</item> <!-- Escala y recorta la imagen -->
         <item name="android:background">@drawable/round_background_profile</item> <!-- Fondo redondeado -->
     </style>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/design_default_color_primary_dark</item>
+        <item name="colorAccent">@color/accent</item>
+    </style>
+
+
+    <style name="RatingBar" parent="Theme.MaterialComponents.DayNight">
+    <item name="ratingBarStyle">@style/Controls.RatingBar</item>
+    <item name="colorControlActivated">@color/yellow</item>
+    <item name="colorControlNormal">@color/orange</item>
+</style>
+
+    <style name="Controls.RatingBar" parent="Widget.AppCompat.RatingBar.Small">
+        <item name="android:isIndicator">false</item>
+    </style>
+
+     <style name="colorBakgroundMenu" >
+        <item name="android:background">@color/white</item>
+    </style>
+
+
 </resources>

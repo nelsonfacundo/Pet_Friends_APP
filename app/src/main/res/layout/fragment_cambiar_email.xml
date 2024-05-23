@@ -6,8 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/primary"
-    tools:context=".ForgotPasswordActivity">
-
+    tools:context=".fragments.CambiarEmailFragment"
+    tools:layout_editor_absoluteX="-1dp"
+    tools:layout_editor_absoluteY="70dp">
 
 
     <ImageView
@@ -25,7 +26,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.18" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <EditText
         android:id="@+id/text_viejo_email"
@@ -41,9 +42,10 @@
         android:padding="12dp"
         app:layout_constraintBottom_toBottomOf="@+id/fragmento_cambiar_email"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/fragmento_cambiar_email"
-        app:layout_constraintTop_toTopOf="@+id/fragmento_cambiar_email" />
+        app:layout_constraintTop_toTopOf="@+id/fragmento_cambiar_email"
+        app:layout_constraintVertical_bias="0.719" />
 
     <EditText
         android:id="@+id/text_nuevo_email"
@@ -58,10 +60,10 @@
         android:padding="12dp"
         app:layout_constraintBottom_toTopOf="@+id/text_cambiar_email_password"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_viejo_email"
-        app:layout_constraintVertical_bias="0.684" />
+        app:layout_constraintVertical_bias="0.435" />
 
     <EditText
         android:id="@+id/text_cambiar_email_password"
@@ -70,14 +72,14 @@
         android:layout_height="50dp"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
-        android:layout_marginBottom="70dp"
+        android:layout_marginBottom="68dp"
         android:background="@drawable/border_inputs"
         android:hint="@string/place_holder_input_password"
         android:inputType="textPassword"
         android:padding="12dp"
         app:layout_constraintBottom_toTopOf="@+id/button_reset_email"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
@@ -88,9 +90,9 @@
         android:text="@string/txt_btn_cambiar_email"
         app:layout_constraintBottom_toBottomOf="@+id/fragmento_cambiar_email"
         app:layout_constraintEnd_toEndOf="@+id/fragmento_cambiar_email"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="@+id/fragmento_cambiar_email"
         app:layout_constraintTop_toTopOf="@+id/fragmento_cambiar_email"
-        app:layout_constraintVertical_bias="0.594" />
+        app:layout_constraintVertical_bias="0.696" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

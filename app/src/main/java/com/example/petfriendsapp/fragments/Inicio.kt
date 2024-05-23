@@ -11,7 +11,6 @@ import com.example.petfriendsapp.R
 
 class Inicio : Fragment() {
     lateinit var viewInicio: View
-    private lateinit var buttonCambiarPerfil: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,24 +23,16 @@ class Inicio : Fragment() {
         // Inflate the layout for this fragment
         viewInicio = inflater.inflate(R.layout.fragment_inicio, container, false)
 
-        buttonCambiarPerfil=viewInicio.findViewById(R.id.button)
+
 
         return viewInicio
     }
 
     override fun onStart() {
         super.onStart()
-        initListeners()
 
     }
-    private fun initListeners() {
-        buttonCambiarPerfil.setOnClickListener { navigateToProfile() }
 
-    }
-    private fun navigateToProfile() {
-        val action1 = InicioDirections.actionInicioToPerfil()
-        viewInicio.findNavController().navigate(action1)
-    }
 
 }
 

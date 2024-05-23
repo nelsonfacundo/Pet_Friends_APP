@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/perfil"
+        android:icon="@drawable/perfil"
+        android:title="Perfil" />
+    <item
+        android:id="@+id/servicio"
+        android:icon="@drawable/servicio"
+        android:title="Servicios para la mascota" />
+    <item
+        android:id="@+id/blog"
+        android:icon="@drawable/blog"
+        android:title="Artículos y Recursos educativos" />
+    <item
+        android:id="@+id/icono_reseñas_drawer"
+        android:icon="@drawable/reviews"
+        android:title="Valoraciones y Reseñas" />
+    <item
+        android:id="@+id/logout_drawer"
+        android:icon="@drawable/salida"
+        android:title="Cerrar Sesion" />
+
+
+</menu>
+<!--
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_nav">
+
+
+
+    <item
+        android:id="@+id/icono_perfil_drawer"
+        android:icon="@drawable/perfil"
+        android:title="Perfil" />
+    <item
+        android:id="@+id/icono_reseñas_drawer"
+        android:icon="@drawable/reseñas"
+        android:title="Valoraciones y reseñas" />
+    <item
+        android:id="@+id/icono_logout_drawer"
+        android:icon="@drawable/logout"
+        android:title="Cerrar sesion" />
+-->
+
+    <!-- <group >
+         <item
+             android:id="@+id/marvel"
+             android:title="Marvel">
+             <menu>
+                 <item
+                     android:id="@+id/wolverine"
+                     android:icon="@drawable/wolverine"
+                     android:title="Wolverine" />
+             </menu>
+         </item>
+     </group>
+</menu>-->
