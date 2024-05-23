@@ -110,7 +110,7 @@ class PerfilFragment : Fragment() {
     }
     private fun navigateToHome() {
         val navController = findNavController()
-        navController.navigate(R.id.main)
+        navController.navigate(R.id.drawer_layout)
     }
 
     private fun navigateToChangeEmail() {

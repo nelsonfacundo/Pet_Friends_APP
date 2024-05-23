@@ -14,11 +14,7 @@
         android:id="@+id/inicio"
         android:name="fragments.Inicio"
         android:label="fragment_inicio"
-        tools:layout="@layout/fragment_inicio" >
-        <action
-            android:id="@+id/action_inicio_to_perfil"
-            app:destination="@id/perfil" />
-    </fragment>
+        tools:layout="@layout/fragment_inicio" />
     <fragment
         android:id="@+id/chats"
         android:name="fragments.Chats"

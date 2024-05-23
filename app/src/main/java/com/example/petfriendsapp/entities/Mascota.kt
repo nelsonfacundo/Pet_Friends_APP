@@ -1,15 +1,16 @@
 package com.example.petfriendsapp.entities
+
 import android.os.Parcel
 import android.os.Parcelable
-class Mascota(raza: String, edad: Int, nombre: String, ubicacion: String, descripcion:String,sexo:String) :
-    Parcelable {
-    var raza: String
-    var edad: Int
-    var nombre: String
-    var ubicacion: String
-    var descripcion:String
-    var sexo:String;
 
+data class Mascota(
+    var raza: String,
+    var edad: Int,
+    var nombre: String,
+    var ubicacion: String,
+    var descripcion: String,
+    var sexo: String,
+) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString().toString(),
         parcel.readInt(),
@@ -17,19 +18,7 @@ class Mascota(raza: String, edad: Int, nombre: String, ubicacion: String, descri
         parcel.readString().toString(),
         parcel.readString().toString(),
         parcel.readString().toString(),
-
-        )
-
-    init {
-        this.raza=raza
-        this.edad=edad
-        this.nombre=nombre
-        this.ubicacion = ubicacion
-        this.descripcion = descripcion
-        this.sexo = sexo
-    }
-
-
+    )
     override fun toString(): String {
         return "Mascota(raza='$raza', edad=$edad, nombre='$nombre', ubicacion='$ubicacion', descripcion='$descripcion', sexo = '$sexo')"
     }

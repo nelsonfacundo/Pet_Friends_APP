@@ -1,47 +1,74 @@
 package fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.navigation.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.petfriendsapp.R
+import com.example.petfriendsapp.adapter.MascotaAdapter
+import com.example.petfriendsapp.entities.Mascota
 
 class Inicio : Fragment() {
-    lateinit var viewInicio: View
+    private lateinit var viewInicio: View
     private lateinit var buttonCambiarPerfil: Button
+    lateinit var recMascotas: RecyclerView
 
+    /**En este caso voy a dejar la Lista de mascotas asi hasta conectarla con Firebase */
+    var mascotas : MutableList<Mascota> = ArrayList()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
+        savedInstanceState: Bundle?): View? {
         viewInicio = inflater.inflate(R.layout.fragment_inicio, container, false)
-
-        buttonCambiarPerfil=viewInicio.findViewById(R.id.button)
-
+        recMascotas = viewInicio.findViewById(R.id.rec_mascota)
+        val linearLayoutManager = LinearLayoutManager(context)
+        // Inflate the layout for this fragment
         return viewInicio
     }
 
     override fun onStart() {
         super.onStart()
-        initListeners()
+        for(i in 1 .. 10) {
+            Log.e("Example", "Error al cargar pokemones")
+            mascotas.add(Mascota(
+                "Coli",
+                5,
+                "choco",
+                "Padua",
+                "Le falta una mano",
+                "Macho"
+            ))
+            mascotas.add(Mascota(
+                "Coli2",
+                5,
+                "choco0",
+                "Padua1",
+                "Le falta una oreja",
+                "Macho"
+            ))
+            mascotas.add(Mascota(
+                "Coli3",
+                5,
+                "choco1",
+                "Padua2",
+                "Le falta un ojo",
+                "Hembra"
+            ))
 
-    }
-    private fun initListeners() {
-        buttonCambiarPerfil.setOnClickListener { navigateToProfile() }
+        }
+        recMascotas.setHasFixedSize(true)
+        val linearLayoutManager = LinearLayoutManager(context)
+        val mascotaAdapter = MascotaAdapter(mascotas)
 
+        recMascotas.layoutManager = linearLayoutManager
+        recMascotas.adapter = mascotaAdapter
     }
-    private fun navigateToProfile() {
-        val action1 = InicioDirections.actionInicioToPerfil()
-        viewInicio.findNavController().navigate(action1)
-    }
-
 }
 

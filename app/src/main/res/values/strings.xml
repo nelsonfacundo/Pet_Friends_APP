@@ -12,7 +12,6 @@
     <string name="place_holder_input_apellido">Ingrese su apellido</string>
 
 
-
     /Register/
     <string name="txt_registro">Registrarse</string>
     <string name="txt_name">Nombre</string>
@@ -27,8 +26,6 @@
     <string name="msj_pass_falta_caracteres">La contraseña debe tener al menos 6 caracteres</string>
     <string name="msj_error_consulta_bd">Error en la consulta de la base de datos</string>
     <string name="msj_error_register">Error al registrar.</string>
-
-
 
 
     <string name="hello_blank_fragment">Hello Blank Fragment</string>
@@ -77,7 +74,6 @@
     <string name="photo_changed_successfully">Carga de foto exitosa</string>
     <string name="url_changed_failed">Error al guardar la URL de la imagen en Firestore</string>
     <string name="error_carga_image">Error al cargar la imagen</string>
-
 
 
     /Pantalla educativa/
