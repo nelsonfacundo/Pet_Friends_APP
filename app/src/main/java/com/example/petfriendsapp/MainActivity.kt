@@ -11,7 +11,10 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
@@ -28,75 +31,83 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navigationView: NavigationView
     private lateinit var navHostFragment: NavHostFragment
     private lateinit var bottomNavView: BottomNavigationView
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.drawer_layout)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
 
         initViews()
         configToolbar()
 
         setupDrawerLayout()
-        NavigationUI.setupWithNavController(bottomNavView,navHostFragment.navController)
-
-        //Observador de cambios de destino, se activa cada vez que cambia el destino de navegación
-        navHostFragment.navController.addOnDestinationChangedListener { _, destination, _ ->
-            invalidateOptionsMenu() // Cambia de fragment se llama a onPrepareOptionsMenu
-        }
-        // Configurar ActionBar
-        supportActionBar?.setDisplayHomeAsUpEnabled(true) //Mostrar icono hamburguesa
-    }
-
-    private fun initViews() {
-        drawerLayout = findViewById(R.id.drawer_layout)
-        navigationView = findViewById(R.id.drawer_nav)
-        navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
-        bottomNavView = findViewById(R.id.bottom_var)
-    }
-
-    private fun configToolbar() {
-        val toolbar: Toolbar = findViewById(R.id.toolbar)
-        setSupportActionBar(toolbar)
-        // Oculto el título de la Toolbar
-        supportActionBar?.setDisplayShowTitleEnabled(false)
-    }
-
-    private fun setupDrawerLayout() {
-        val navController = navHostFragment.navController
-
-        // Vinculo la navegación del drawer con la del graph
-        navigationView.setupWithNavController(navController)
-
-        navController.addOnDestinationChangedListener { _, _, _ ->
-            supportActionBar?.setHomeAsUpIndicator(R.drawable.hamburguesa)
-        }
+        NavigationUI.setupWithNavController(bottomNavView, navHostFragment.navController)
 
         // Obtener y mostrar la información del usuario
         fetchUserProfile()
 
-        // cerrar sesión en el menú
+        // Observador de cambios de destino, se activa cada vez que cambia el destino de navegación
+        navHostFragment.navController.addOnDestinationChangedListener { _, destination, _ ->
+            invalidateOptionsMenu() // Cambia de fragment se llama a onPrepareOptionsMenu
+        }
+
+        // Configurar ActionBar
+        supportActionBar?.setDisplayHomeAsUpEnabled(true) //Mostrar icono hamburguesa
+
+        // Cerrar sesión en el menú
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.logout_drawer -> {
                     alertCerrarSesion()
-                    drawerLayout.closeDrawer(GravityCompat.START) //Cierra el menu despues de seleccionar un elemento
+                    drawerLayout.closeDrawer(GravityCompat.START) // Cierra el menu despues de seleccionar un elemento
                     true
                 }
+
                 R.id.perfil -> {
                     // Navega al fragmento de perfil
                     navController.navigate(R.id.perfil)
                     drawerLayout.closeDrawer(GravityCompat.START)
                     true
                 }
+
                 else -> {
-                val handled = NavigationUI.onNavDestinationSelected(menuItem, navController)
-                if (handled) {
-                    drawerLayout.closeDrawer(GravityCompat.START)
+                    val handled = NavigationUI.onNavDestinationSelected(menuItem, navController)
+                    if (handled) {
+                        drawerLayout.closeDrawer(GravityCompat.START)
+                    }
+                    handled // Indica si fue manejado por NavigationUI
                 }
-                handled // Indica si fue manejado por NavigationUI
             }
-            }
+        }
+    }
+
+    fun initViews() {
+        drawerLayout = findViewById(R.id.drawer_layout)
+        navigationView = findViewById(R.id.drawer_nav)
+        navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+        navController = navHostFragment.navController
+        bottomNavView = findViewById(R.id.bottom_var)
+    }
+
+    private fun configToolbar() {
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        // Ocultar el título de la Toolbar
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+    }
+
+    private fun setupDrawerLayout() {
+        // Vincular la navegación del drawer con la del graph
+        navigationView.setupWithNavController(navController)
+
+        navController.addOnDestinationChangedListener { _, _, _ ->
+            supportActionBar?.setHomeAsUpIndicator(R.drawable.hamburguesa)
         }
     }
 
@@ -105,7 +116,7 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-    //Metodo que se utiliza para realizar modificaciones del menú antes de que se muestre en la pantalla.
+    // Método que se utiliza para realizar modificaciones del menú antes de que se muestre en la pantalla.
     override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
         val deleteItem = menu?.findItem(R.id.delete_account)
         val currentFragment = navHostFragment.childFragmentManager.fragments[0]
@@ -113,14 +124,14 @@ class MainActivity : AppCompatActivity() {
         return super.onPrepareOptionsMenu(menu)
     }
 
-
-    //Maneja los eventos del click en los elementos del menu
+    // Maneja los eventos del click en los elementos del menú
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.delete_account -> {
                 alertEliminarCuenta()
                 true
             }
+
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -148,7 +159,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    //ELIMINA
     private fun eliminarUsuarioFirebaseAuth(user: FirebaseUser) {
         user.delete().addOnCompleteListener { task ->
             if (task.isSuccessful) {
@@ -159,7 +169,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    //NO ELIMINA
     private fun eliminarUsuarioFirestore(uid: String) {
         val db = FirebaseFirestore.getInstance()
         val userDocRef = db.collection("users").document(uid)
@@ -172,6 +181,7 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Error al eliminar la cuenta", Toast.LENGTH_SHORT).show()
             }
     }
+
     private fun alertCerrarSesion() {
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Cerrar sesión")
@@ -179,8 +189,8 @@ class MainActivity : AppCompatActivity() {
         builder.setPositiveButton("OK") { dialog, _ ->
             // Cerrar sesión
             FirebaseAuth.getInstance().signOut()
-            Toast.makeText(this, "Sesion Cerrada", Toast.LENGTH_SHORT).show()
-            // sale de la app
+            Toast.makeText(this, "Sesión cerrada", Toast.LENGTH_SHORT).show()
+            // Salir de la app
             finishAffinity()
             dialog.dismiss()
         }
@@ -213,27 +223,23 @@ class MainActivity : AppCompatActivity() {
                 .addOnFailureListener { exception ->
                     Log.d("Perfil", "La obtención de datos falló con ", exception)
                 }
-
         }
     }
+
     private fun updateHeader(nombre: String) {
         val headerView = navigationView.getHeaderView(0)
-
         val userNameTextView: TextView = headerView.findViewById(R.id.username)
         userNameTextView.text = nombre
-
     }
 
-    //Maneja el evento de la navegacion hacia arriba
+    // Maneja el evento de la navegación hacia arriba
     override fun onSupportNavigateUp(): Boolean {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START)
         } else {
             drawerLayout.openDrawer(GravityCompat.START)
         }
-
         return false
     }
-
-
 }
+

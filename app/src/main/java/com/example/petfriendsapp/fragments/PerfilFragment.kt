@@ -25,6 +25,7 @@ import android.widget.RatingBar
 import android.widget.Switch
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.petfriendsapp.LoginActivity
 
@@ -131,7 +132,10 @@ class PerfilFragment : Fragment() {
                 }
         }
     }
-
+    private fun navigateToHome() {
+        val navController = findNavController()
+        navController.navigate(R.id.drawer_layout)
+    }
 
     private fun navigateToChangeEmail() {
         val action1 = PerfilFragmentDirections.actionPerfilToCambiarEmail()

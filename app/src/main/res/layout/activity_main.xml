@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
-    style="@style/colorBakgroundMenu"
+    android:backgroundTint="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
@@ -64,7 +64,6 @@
             app:menu="@menu/main_menu" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/drawer_nav"
         android:layout_width="wrap_content"
@@ -73,5 +72,5 @@
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/header_nav"
         app:menu="@menu/drawer_menu" />
-
 </androidx.drawerlayout.widget.DrawerLayout>
+
