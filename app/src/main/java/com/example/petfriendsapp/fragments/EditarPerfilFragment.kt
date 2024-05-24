@@ -96,6 +96,7 @@ class EditarPerfilFragment : Fragment() {
                         if (imageUrl != null) {
                             Glide.with(requireContext())
                                 .load(imageUrl)
+                                .transform(MultiTransformation(CenterCrop(), RoundedCorners(250)))
                                 .placeholder(R.drawable.avatar)
                                 .error(R.drawable.avatar)
                                 .into(cambiarFoto)

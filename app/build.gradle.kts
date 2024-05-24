@@ -41,6 +41,7 @@ dependencies {
     implementation(libs.firebase.storage.ktx)
     implementation(libs.androidx.material3.android)
     implementation(libs.glide.transformations)
+    implementation(libs.androidx.recyclerview)
     var navVersion = "2.8.0-beta01"
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
