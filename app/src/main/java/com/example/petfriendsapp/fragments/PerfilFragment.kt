@@ -27,7 +27,11 @@ import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
 import com.example.petfriendsapp.LoginActivity
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 
 
 class PerfilFragment : Fragment() {
@@ -40,7 +44,8 @@ class PerfilFragment : Fragment() {
     private lateinit var btnNotficaciones: Switch
    // private lateinit var ratingBar: RatingBar
 
-
+    private val db = FirebaseFirestore.getInstance()
+    private val auth = FirebaseAuth.getInstance()
     companion object {
         val BUTTON_CAMBIAR_EMAIL = R.id.btn_cambiar_email
         val BUTTON_CAMBIAR_PASSWORD = R.id.btn_cambiar_password
@@ -96,12 +101,10 @@ class PerfilFragment : Fragment() {
     }
 
     private fun fetchUserProfile() {
-        val firebaseAuth = FirebaseAuth.getInstance()
-        val user = firebaseAuth.currentUser
+        val user = auth.currentUser
         val uid = user?.uid
 
         if (uid != null) {
-            val db = FirebaseFirestore.getInstance()
             val userDocRef = db.collection("users").document(uid)
 
             userDocRef.get()
@@ -119,6 +122,7 @@ class PerfilFragment : Fragment() {
                         // Carga imagen
                         Glide.with(requireContext())
                             .load(urlImagenPerfil)
+                            .transform(CenterCrop(), RoundedCorners(250))
                             .placeholder(R.drawable.avatar)
                             .error(R.drawable.avatar)
                             .into(urlImageView)
@@ -131,6 +135,7 @@ class PerfilFragment : Fragment() {
                     Log.d("Perfil", "La obtención de datos falló con ", exception)
                 }
         }
+
     }
     private fun navigateToHome() {
         val navController = findNavController()
@@ -203,12 +208,11 @@ class PerfilFragment : Fragment() {
     }
 
     private fun deleteAccount() {
-        val user = FirebaseAuth.getInstance().currentUser
+        val user = auth.currentUser
         user?.let {
             val uid = user.uid
 
             // eliminar el documento del usuario en Firestore
-            val db = FirebaseFirestore.getInstance()
             val userDocRef = db.collection("users").document(uid)
 
             userDocRef.delete()
@@ -256,8 +260,7 @@ class PerfilFragment : Fragment() {
 */
 
     /* private fun fetchUserRatings() {
-         val db = FirebaseFirestore.getInstance()
-         val userId = FirebaseAuth.getInstance().currentUser?.uid
+         val userId = auth.currentUser?.uid
 
          if (userId != null) {
              // Referencia a la subcolección de valoraciones del usuario
