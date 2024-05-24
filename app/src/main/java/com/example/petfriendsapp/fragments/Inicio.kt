@@ -27,6 +27,7 @@ class Inicio : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
         viewInicio = inflater.inflate(R.layout.fragment_inicio, container, false)
+
         recMascotas = viewInicio.findViewById(R.id.rec_mascota)
         val linearLayoutManager = LinearLayoutManager(context)
         // Inflate the layout for this fragment
@@ -70,5 +71,7 @@ class Inicio : Fragment() {
         recMascotas.layoutManager = linearLayoutManager
         recMascotas.adapter = mascotaAdapter
     }
+
 }
+
 

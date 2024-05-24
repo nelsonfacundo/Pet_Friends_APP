@@ -21,5 +21,6 @@ class MascotaAdapter(
         holder.setRaza(mascota.raza)
         holder.setUbicacion(mascota.ubicacion)
         holder.setEdad(mascota.edad)
+//        holder.getCardLayout().setOnClickListener()
     }
 }

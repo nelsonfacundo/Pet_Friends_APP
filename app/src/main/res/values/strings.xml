@@ -67,6 +67,8 @@
     /Editar Perfil/
     <string name="edit_txt_name">Ingrese su nuevo nombre</string>
     <string name="edit_txt_last_name">Ingrese su nuevo apellido</string>
+    <string name="edit_txt_telefono">Ingrese su nuevo telefono</string>
+    <string name="txt_telefono">Telefono</string>
     <string name="btn_edit_perfil_guardar">Guardar</string>
     <string name="perfil_changed_successfully">Perfil actualizado</string>
     <string name="perfil_changed_failed">Error al actualizar perfil</string>
@@ -82,7 +84,18 @@
     <string name="txt_data_three">Por favor, completa los siguientes campos para comenzar:</string>
     <string name="txt_input_name">Ingresa tu nombre</string>
     <string name="txt_input_lastname">Ingresa tu apellido</string>
+    <string name="txt_input_telefono">Ingresa tu telefono</string>
     <string name="txt_btn_avatar">Seleccionar Foto</string>
-    <string name="txt_btn_data">Enviar datos</string>
-
+    <string name="txt_btn_datos">Enviar datos</string>
+    <string name="txt_empty_nombre">El nombre no puede estar vacío</string>
+    <string name="txt_cantC_nombre">El nombre debe tener entre 6 y 25 caracteres</string>
+    <string name="txt_empty_apellido">El apellido no puede estar vacío</string>
+    <string name="txt_cantC_apellido">El apellido debe tener entre 3 y 25 caracteres</string>
+    <string name="txt_empty_telefono">El teléfono no puede estar vacío</string>
+    <string name="txt_cantC_telefono">El teléfono debe tener exactamente 10 caracteres</string>
+    <string name="txt_empty_imagen">Selecciona una imagen</string>
+    <string name="txt_validate_auth">Usuario no autenticado</string>
+    <string name="txt_exitoso">Datos guardados correctamente</string>
+    <string name="txt_error_url">Error al obtener URL de descarga </string>
+    <string name="txt_error_datos">Error al guardar datos </string>
 </resources>

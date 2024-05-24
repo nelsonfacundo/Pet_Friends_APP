@@ -131,7 +131,7 @@ class RegistroActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     // Registro exitoso, redirigir a la pantalla de inicio
                     Toast.makeText(this, R.string.register_success, Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this, MainActivity::class.java)
+                    val intent = Intent(this, DataFormActivity::class.java)
                     startActivity(intent)
                     finish()
 

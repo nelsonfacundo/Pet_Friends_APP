@@ -1,6 +1,7 @@
 package com.example.petfriendsapp.fragments
 
 import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,32 +11,37 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import com.example.petfriendsapp.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.content.ContentValues.TAG
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.os.Build
+import android.widget.RatingBar
 import android.widget.Switch
+import android.widget.Toast
 import androidx.core.app.NotificationCompat
+import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
+import com.example.petfriendsapp.LoginActivity
 
 
 class PerfilFragment : Fragment() {
     lateinit var viewPerfil: View
-    private lateinit var backButton: ImageView
     private lateinit var buttonEditarPerfil: Button
     private lateinit var buttonCambiarEmail: Button
     private lateinit var buttonCambiarPassword: Button
     private lateinit var nombreAvatar: TextView
+    private lateinit var urlImageView: ImageView
+    private lateinit var btnNotficaciones: Switch
+   // private lateinit var ratingBar: RatingBar
 
-
-    private lateinit var btn_notficaciones: Switch
 
     companion object {
-        val BACK_BUTTON_ID = R.id.ic_back_perfil
         val BUTTON_CAMBIAR_EMAIL = R.id.btn_cambiar_email
         val BUTTON_CAMBIAR_PASSWORD = R.id.btn_cambiar_password
         val BUTTON_EDITAR_PERFIL = R.id.btn_editar_perfil
@@ -54,7 +60,13 @@ class PerfilFragment : Fragment() {
         viewPerfil=inflater.inflate(R.layout.fragment_perfil, container, false)
 
         initViews()
+
         fetchUserProfile()
+
+      //  ratingBar = viewPerfil.findViewById(R.id.rating_bar_perfil)
+
+        // Obtener y mostrar las valoraciones del usuario
+        //fetchUserRatings()
 
         return viewPerfil
     }
@@ -65,22 +77,22 @@ class PerfilFragment : Fragment() {
 
     }
     private fun initViews() {
-        backButton = viewPerfil.findViewById(BACK_BUTTON_ID)
         buttonEditarPerfil = viewPerfil.findViewById(BUTTON_EDITAR_PERFIL)
         buttonCambiarEmail = viewPerfil.findViewById(BUTTON_CAMBIAR_EMAIL)
         buttonCambiarPassword = viewPerfil.findViewById(BUTTON_CAMBIAR_PASSWORD)
         nombreAvatar = viewPerfil.findViewById(NOMBRE_AVATAR)
-        btn_notficaciones = viewPerfil.findViewById(BUTTON_NOTIFICACIONES)
+        btnNotficaciones = viewPerfil.findViewById(BUTTON_NOTIFICACIONES)
+        urlImageView = viewPerfil.findViewById(R.id.id_avatar)
+      //  btnDeleteAccount = viewPerfil.findViewById(DELETE_CUENTA)
     }
 
 
 
     private fun initListeners() {
-        backButton.setOnClickListener { navigateToHome() }
         buttonEditarPerfil.setOnClickListener { navigateToEditProfile() }
         buttonCambiarEmail.setOnClickListener { navigateToChangeEmail() }
         buttonCambiarPassword.setOnClickListener { navigateToChangePassword() }
-        btn_notficaciones.setOnClickListener{showNotification(requireContext())}
+        btnNotficaciones.setOnClickListener{showNotification(requireContext())}
     }
 
     private fun fetchUserProfile() {
@@ -98,7 +110,19 @@ class PerfilFragment : Fragment() {
                         val nombre = document.getString("nombre")
                         val apellido = document.getString("apellido")
                         val nombreCompleto = "$nombre $apellido"
-                        nombreAvatar.setText(nombreCompleto)
+                        nombreCompleto.also { nombreAvatar.text = it }
+
+                        //  URL de la imagen de perfil
+                        val urlImagenPerfil = document.getString("avatarUrl")
+
+
+                        // Carga imagen
+                        Glide.with(requireContext())
+                            .load(urlImagenPerfil)
+                            .placeholder(R.drawable.avatar)
+                            .error(R.drawable.avatar)
+                            .into(urlImageView)
+
                     } else {
                         Log.d("Perfil", "No existe el documento")
                     }
@@ -128,40 +152,149 @@ class PerfilFragment : Fragment() {
         viewPerfil.findNavController().navigate(action)
     }
 
-
     // Función para mostrar una notificación
     fun showNotification(context: Context) {
         val title = "¡Adopta una mascota!"
         val message = "Hay muchas mascotas esperando por un hogar. ¡Visita nuestra app y encuentra a tu nuevo compañero peludo!"
 
-        // Crear un NotificationManager
+        // Se crea un NotificationManager
         val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-        // ID de canal para Android Oreo y versiones posteriores
         val channelId = "default_channel_id"
         val channelName = "Default Channel"
 
-        // Crear un NotificationCompat.Builder
+        // Se crea NotificationCompat.Builder
         val builder = NotificationCompat.Builder(context, channelId)
             .setContentTitle(title)
             .setContentText(message)
             .setSmallIcon(R.drawable.logo)
             .setAutoCancel(true)
 
-        // Comprobar si la versión del dispositivo es mayor o igual a Oreo (API 26)
+        // Se comprueban las versiones del celular
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            // Crear el canal de notificación para Android Oreo y versiones posteriores
+            // Se crea el canal de notificación para Android Oreo y versiones anteriores
             val channel = NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_DEFAULT).apply {
-                // Configurar la importancia y el color de las luces del canal
                 importance = NotificationManager.IMPORTANCE_DEFAULT
                 lightColor = Color.GREEN
             }
 
-            // Registrar el canal en el NotificationManager
+            // Registra el canal en el NotificationManager
             notificationManager.createNotificationChannel(channel)
         }
 
-        // Construir la notificación y mostrarla
+        // Se construye la notificación y la muestra
         notificationManager.notify(1, builder.build())
     }
+
+
+    /*
+
+    private fun alertDeleteAccount() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("Eliminar cuenta")
+        builder.setMessage("¿Estás seguro que quieres eliminar tu cuenta? Esta acción no se puede deshacer.")
+        builder.setPositiveButton("Aceptar") { _, _ ->
+            deleteAccount()
+        }
+        builder.setNegativeButton("Cancelar") { dialog, _ ->
+            dialog.dismiss()
+        }
+        builder.create().show()
+    }
+
+    private fun deleteAccount() {
+        val user = FirebaseAuth.getInstance().currentUser
+        user?.let {
+            val uid = user.uid
+
+            // eliminar el documento del usuario en Firestore
+            val db = FirebaseFirestore.getInstance()
+            val userDocRef = db.collection("users").document(uid)
+
+            userDocRef.delete()
+                .addOnSuccessListener {
+                    // Si la eliminación en Firestore es exitosa, elimina la cuenta de autenticación
+                    user.delete()
+                        .addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                Toast.makeText(
+                                    requireContext(),
+                                    "Cuenta eliminada exitosamente",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                startActivity(Intent(requireContext(), LoginActivity::class.java))
+                                requireActivity().finish()
+                            } else {
+                                Log.w(
+                                    "PerfilFragment",
+                                    "Error al eliminar la cuenta de autenticación",
+                                    task.exception
+                                )
+                                Toast.makeText(
+                                    requireContext(),
+                                    "Error al eliminar la cuenta de autenticación",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        }
+                }
+                .addOnFailureListener { e ->
+                    Log.w(
+                        "PerfilFragment",
+                        "Error al eliminar el documento del usuario en Firestore",
+                        e
+                    )
+                    Toast.makeText(
+                        requireContext(),
+                        "Error al eliminar el documento del usuario",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+        }
+
+    }
+*/
+
+    /* private fun fetchUserRatings() {
+         val db = FirebaseFirestore.getInstance()
+         val userId = FirebaseAuth.getInstance().currentUser?.uid
+
+         if (userId != null) {
+             // Referencia a la subcolección de valoraciones del usuario
+             val ratingsRef = db.collection("users").document(userId).collection("valoraciones")
+
+             // Obtener los documentos de la subcolección de valoraciones
+             ratingsRef.get()
+                 .addOnSuccessListener { documents ->
+                     if (!documents.isEmpty) {
+                         var sum = 0.0
+                         var count = 0
+
+                         // Iterar sobre los documentos y sumar las valoraciones
+                         for (document in documents) {
+                             val rating = document.getDouble("rating")
+                             if (rating != null) {
+                                 sum += rating
+                                 count++
+                             }
+                         }
+
+                         // Calcular el promedio de las valoraciones
+                         val averageRating = if (count > 0) sum / count else 0.0
+
+                         // Establecer el promedio en el RatingBar
+                         ratingBar.rating = averageRating.toFloat()
+                     } else {
+                         Log.d("PerfilFragment", "No ratings found")
+                     }
+                 }
+                 .addOnFailureListener { exception ->
+                     Log.w("PerfilFragment", "Error getting ratings: ", exception)
+                 }
+         }
+     }
+
+ */
+
 }
+

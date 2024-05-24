@@ -89,7 +89,17 @@ class EditarPerfilFragment : Fragment() {
                         val apellido = document.getString("apellido")
                         editTextNombre.setText(nombre)
                         editTextApellido.setText(apellido)
-                    } else {
+
+                        val imageUrl = document.getString("avatarUrl")
+                        // Cargar la imagen utilizando Glide
+                        if (imageUrl != null) {
+                            Glide.with(requireContext())
+                                .load(imageUrl)
+                                .placeholder(R.drawable.avatar) // Placeholder opcional
+                                .error(R.drawable.avatar) // Imagen de error opcional
+                                .into(cambiarFoto)
+
+                    }} else {
                         Log.d("EditarPerfilFragment", "No exite documento")
                     }
                 }
@@ -164,14 +174,12 @@ class EditarPerfilFragment : Fragment() {
         ref.putFile(filePath)
             .addOnSuccessListener { taskSnapshot ->
                 // La imagen se cargó exitosamente a Firebase Storage
-                // Obtenemos la URL de la imagen
                 ref.downloadUrl.addOnSuccessListener { uri ->
-                    // Guardar la URL de la imagen en Firestore
+                    // Guarda la URL de la imagen en Firestore
                     saveImageUrlToFirestore(uri.toString())
                 }
             }
             .addOnFailureListener { e ->
-                // Manejar errores al cargar la imagen
                 Log.e("EditarPerfilFragment", "Error al cargar la imagen", e)
                 Toast.makeText(context, R.string.error_carga_image, Toast.LENGTH_SHORT).show()
             }
@@ -188,14 +196,13 @@ class EditarPerfilFragment : Fragment() {
             val userDocRef = db.collection("users").document(uid)
 
             // Actualizar la URL de la imagen de perfil en Firestore
-            userDocRef.update("profileImageUrl", imageUrl)
+            userDocRef.update("avatarUrl", imageUrl)
                 .addOnSuccessListener {
                     // La URL de la imagen se guardó exitosamente en Firestore
                     Toast.makeText(context, R.string.photo_changed_successfully, Toast.LENGTH_SHORT).show()
                     navigateToProfile()
                 }
                 .addOnFailureListener { exception ->
-                    // Manejar errores al guardar la URL de la imagen en Firestore
                     Log.e("EditarPerfilFragment", "Error al guardar la URL de la imagen en Firestore", exception)
                     Toast.makeText(context, R.string.url_changed_failed, Toast.LENGTH_SHORT).show()
                 }
