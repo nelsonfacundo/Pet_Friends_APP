@@ -104,10 +104,12 @@
     <string name="txt_edadMascota_details">Edad</string>
     <string name="txt_raza_details">Raza</string>
     <string name="txt_sexoMascota_details">Sexo</string>
+    <string name="txt_ubicacionMascota_details">Ubicacion</string>
     <string name="txt_descripcionMascota_details">Descripcion de la Mascota</string>
     <string name="txt_dueño_details">Dueño</string>
     <string name="txt_dueñoNombre_details">Nombre del dueño</string>
     <string name="whatsapp_button_description">Abrir WhatsApp</string>
+    <string name="favoritos_button_description">Agregar mascota a favoritos</string>
     <string name="botonAdoptar">Adoptar</string>
 
 

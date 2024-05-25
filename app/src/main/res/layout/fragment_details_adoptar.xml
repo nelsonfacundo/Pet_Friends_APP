@@ -26,7 +26,8 @@
             android:layout_width="24dp"
             android:layout_height="47dp"
             android:layout_weight="1"
-            android:text="@string/txt_descripcionMascota_details" />
+            android:text="@string/txt_descripcionMascota_details"
+            android:gravity="center" />
 
     </LinearLayout>
 
@@ -103,14 +104,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/txt_raza_details" />
+            android:text="@string/txt_raza_details"
+            android:gravity="center" />
 
         <TextView
             android:id="@+id/sexoMascota"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/txt_sexoMascota_details" />
+            android:text="@string/txt_sexoMascota_details"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/ubicacionMascotaDetalle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/txt_ubicacionMascota_details"
+            android:gravity="center" />
     </LinearLayout>
 
     <ImageView
@@ -142,14 +153,18 @@
             android:layout_width="24dp"
             android:layout_height="47dp"
             android:layout_weight="1"
-            android:text="@string/txt_nombreMascota_details" />
+            android:text="@string/txt_nombreMascota_details"
+            android:gravity="center"
+            android:textSize="18sp"/>
 
         <TextView
             android:id="@+id/edadMascota"
             android:layout_width="wrap_content"
             android:layout_height="47dp"
             android:layout_weight="1"
-            android:text="@string/txt_edadMascota_details" />
+            android:text="@string/txt_edadMascota_details"
+            android:gravity="center"
+            android:textSize="18sp"/>
     </LinearLayout>
 
     <Button
@@ -162,4 +177,19 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/botonFavoritoDetalle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/favoritos_button_description"
+        android:src="@drawable/img_2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.955"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.262"
+        app:tint="@android:color/white" />
 </androidx.constraintlayout.widget.ConstraintLayout>
