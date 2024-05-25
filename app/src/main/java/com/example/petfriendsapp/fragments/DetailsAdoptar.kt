@@ -29,6 +29,7 @@ class DetailsAdoptar : Fragment() {
         val txtEdad: TextView = view.findViewById(R.id.edadMascota)
         val txtNombre: TextView = view.findViewById(R.id.nombreMascota)
         val txtSexo: TextView = view.findViewById(R.id.sexoMascota)
+        val txtUbicacion: TextView = view.findViewById(R.id.ubicacionMascotaDetalle)
         val imagen : ImageView = view.findViewById(R.id.imagenPerro)
 
         val mascota: Mascota = args.Mascota
@@ -38,6 +39,8 @@ class DetailsAdoptar : Fragment() {
         txtEdad.text = mascota.edad.toString()
         txtNombre.text = mascota.nombre
         txtSexo.text = mascota.sexo
+        txtUbicacion.text = mascota.ubicacion
+
         return view
     }
 }
