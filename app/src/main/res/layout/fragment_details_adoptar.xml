@@ -75,8 +75,8 @@
 
         <ImageButton
             android:id="@+id/botonWpp"
-            android:layout_width="85dp"
-            android:layout_height="match_parent"
+            android:layout_width="82dp"
+            android:layout_height="73dp"
             android:background="@drawable/round_background_profile"
             android:contentDescription="@string/whatsapp_button_description"
             android:src="@drawable/baseline_whatsapp_24"
