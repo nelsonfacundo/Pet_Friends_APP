@@ -5,10 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.petfriendsapp.R
 import com.example.petfriendsapp.entities.Mascota
+import com.example.petfriendsapp.fragments.DetailsAdoptar
 import com.example.petfriendsapp.holders.MascotaHolder
 
 class MascotaAdapter(
-    private val mascotas: MutableList<Mascota>
+    private val mascotas: MutableList<Mascota>,
+    private val clickListener: (Mascota) -> Unit
 ): RecyclerView.Adapter<MascotaHolder>(){
     override fun getItemCount() = mascotas.size
 
@@ -21,6 +23,6 @@ class MascotaAdapter(
         holder.setRaza(mascota.raza)
         holder.setUbicacion(mascota.ubicacion)
         holder.setEdad(mascota.edad)
-//        holder.getCardLayout().setOnClickListener()
+        holder.getCardLayout().setOnClickListener { clickListener(mascota) }
     }
 }
