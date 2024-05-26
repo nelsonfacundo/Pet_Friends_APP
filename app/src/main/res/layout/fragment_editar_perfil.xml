@@ -14,23 +14,38 @@
         android:id="@+id/ic_back_editar_perfil"
         android:layout_width="wrap_content"
         android:layout_height="80dp"
+        android:layout_marginTop="0dp"
         android:layout_marginEnd="40dp"
-        android:layout_marginBottom="660dp"
         android:clickable="true"
         android:focusable="true"
-        android:padding="28dp"
+        android:padding="24dp"
         android:src="@drawable/icon_back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.19" />
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/ic_delete_editar_perfil"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="24dp"
+        android:src="@drawable/eliminar_cuenta"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/editar_foto"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="126dp"
+        android:layout_height="122dp"
         android:layout_marginTop="100dp"
         android:background="@drawable/round_background_profile"
         android:src="@drawable/avatar"
@@ -76,11 +91,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="68dp"
+        android:layout_marginBottom="84dp"
         android:text="@string/btn_edit_perfil_guardar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
