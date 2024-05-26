@@ -1,6 +1,7 @@
 package com.example.petfriendsapp.fragments
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -18,9 +19,11 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.MultiTransformation
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.example.petfriendsapp.LoginActivity
 import com.example.petfriendsapp.MainActivity
 import com.example.petfriendsapp.R
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 
@@ -32,6 +35,7 @@ class EditarPerfilFragment : Fragment() {
     private lateinit var editTextApellido: EditText
     private lateinit var editTextTelefono: EditText
     private lateinit var cambiarFoto: ImageView
+    private lateinit var eliminarCuenta: ImageView
     private lateinit var buttonGuardarPerfil: Button
     private var imageUri: Uri? = null
     private val PICK_IMAGE_REQUEST = 1
@@ -46,6 +50,7 @@ class EditarPerfilFragment : Fragment() {
         val EDIT_TELEFONO = R.id.editar_perfil_telefono
         val CAMBIAR_FOTO_PERFIL = R.id.editar_foto
         val BUTTON_GUARDAR_PERFIL = R.id.btn_guardar_perfil
+        val BUTTON_ELIMINAR_CUENTA = R.id.ic_delete_editar_perfil
     }
 
     override fun onCreateView(
@@ -58,7 +63,6 @@ class EditarPerfilFragment : Fragment() {
         fetchUserProfile()
         return viewEditarPerfil
     }
-
     override fun onStart() {
         super.onStart()
         initListeners()
@@ -71,12 +75,14 @@ class EditarPerfilFragment : Fragment() {
         editTextTelefono = viewEditarPerfil.findViewById(EDIT_TELEFONO)
         cambiarFoto = viewEditarPerfil.findViewById(CAMBIAR_FOTO_PERFIL)
         buttonGuardarPerfil = viewEditarPerfil.findViewById(BUTTON_GUARDAR_PERFIL)
+        eliminarCuenta = viewEditarPerfil.findViewById(BUTTON_ELIMINAR_CUENTA)
     }
 
     private fun initListeners() {
         backButton.setOnClickListener { navigateToProfile() }
         buttonGuardarPerfil.setOnClickListener { saveUserProfile() }
         cambiarFoto.setOnClickListener { abrirGaleria() }
+        eliminarCuenta.setOnClickListener { alertEliminarCuenta() }
     }
 
     private fun fetchUserProfile() {
@@ -208,7 +214,6 @@ class EditarPerfilFragment : Fragment() {
              userDocRef.update("avatarUrl", imageUrl)
                  .addOnSuccessListener {
                      // La URL de la imagen se guardó exitosamente en Firestore
-
                      Toast.makeText(context, R.string.photo_changed_successfully, Toast.LENGTH_SHORT).show()
                      navigateToProfile()
                  }
@@ -218,8 +223,57 @@ class EditarPerfilFragment : Fragment() {
                  }
          }
      }
+
+    private fun alertEliminarCuenta() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle(R.string.txt_eliminar_cuenta)
+        builder.setMessage(R.string.txt_pregunta_eliminar_cuenta)
+        builder.setPositiveButton(R.string.eliminar) { dialog, _ ->
+            eliminarCuenta()
+            dialog.dismiss()
+        }
+        builder.setNegativeButton(R.string.cancelar) { dialog, _ ->
+            dialog.dismiss()
+        }
+        builder.create().show()
+    }
+
+    private fun eliminarCuenta() {
+        val user = auth.currentUser
+        user?.let {
+            eliminarUsuarioFirebaseAuth(it)
+        } ?: run {
+            Toast.makeText(requireContext(), R.string.txt_error_eliminar_cuenta, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    //ELIMINA
+    private fun eliminarUsuarioFirebaseAuth(user: FirebaseUser) {
+        user.delete().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                Toast.makeText(requireContext(), R.string.txt_cuenta_eliminada, Toast.LENGTH_SHORT).show()
+                requireActivity().finish()
+            } else {
+                Toast.makeText(requireContext(), R.string.txt_error_eliminar_cuenta, Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
     private fun navigateToProfile() {
         val action = EditarPerfilFragmentDirections.actionEditarPerfilFragmentToPerfil()
         viewEditarPerfil.findNavController().navigate(action)
     }
+    //NO ELIMINA
+    /*private fun eliminarUsuarioFirestore(uid: String) {
+        db.collection("users").document(uid)
+            .delete()
+            .addOnSuccessListener {
+                Toast.makeText(requireContext(), R.string.txt_cuenta_eliminada, Toast.LENGTH_SHORT).show()
+                startActivity(Intent(requireContext(), LoginActivity::class.java))
+                requireActivity().finish()
+            }
+            .addOnFailureListener {
+                Toast.makeText(requireContext(), R.string.txt_error_eliminar_cuenta, Toast.LENGTH_SHORT).show()
+            }
+    }*/
+
 }
