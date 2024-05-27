@@ -78,5 +78,8 @@
         <argument
             android:name="Mascota"
             app:argType="com.example.petfriendsapp.entities.Mascota" />
+        <action
+            android:id="@+id/action_detailsAdoptar_to_inicio"
+            app:destination="@id/inicio" />
     </fragment>
 </navigation>
