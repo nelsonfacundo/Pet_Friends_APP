@@ -99,6 +99,13 @@
     <string name="txt_error_url">Error al obtener URL de descarga </string>
     <string name="txt_error_datos">Error al guardar datos </string>
 
-    /Adoptar mascota/
-    <string name="txt_btn_adoptar">Adoptar</string>
+    /Dar en adopcion mascota/
+    <string name="txt_btn_dar_adopcion_mascota">Agregar mascota</string>
+    <string name="txt_input_raza">Ingrese raza</string>
+    <string name="txt_input_edad">Ingrese edad</string>
+    <string name="txt_input_ubicacion">Ubicacion</string>
+    <string name="txt_input_descripcion">Descripcion</string>
+    <string name="txt_input_sexo">Seleccione sexo</string>
+    <string name="txt_input_especie">Ingrese especie</string>
+
 </resources>

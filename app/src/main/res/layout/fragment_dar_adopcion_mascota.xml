@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/primary"
+    android:id="@+id/frameLayout3"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.DarAdopcionMascotaFragment">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="241dp"
+        android:layout_height="164dp"
+        android:layout_marginTop="16dp"
+        android:src="@tools:sample/avatars"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button_dar_adopcion_mascota"
+        style="@style/colorBtn"
+        android:layout_width="239dp"
+        android:layout_height="51dp"
+        android:text="@string/txt_btn_dar_adopcion_mascota"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.976" />
+
+    <ImageView
+        android:id="@+id/ic_back_dar_adopcion_mascota"
+        android:layout_width="47dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="650dp"
+        android:src="@drawable/icon_back"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.049"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.625" />
+
+    <EditText
+        android:id="@+id/nombreMascota"
+        style="@style/inputsTextEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/border_inputs"
+        android:ems="10"
+        android:inputType="text"
+        android:text="@string/txt_name"
+        app:layout_constraintBottom_toTopOf="@+id/edadMascota"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/razaMascota" />
+
+    <EditText
+        android:id="@+id/edadMascota"
+        style="@style/inputsTextEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/border_inputs"
+        android:ems="10"
+        android:inputType="numberSigned"
+        android:text="@string/txt_input_edad"
+        app:layout_constraintBottom_toTopOf="@+id/direccionMascota"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nombreMascota" />
+
+    <EditText
+        android:id="@+id/direccionMascota"
+        style="@style/inputsTextEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="150dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/border_inputs"
+        android:ems="10"
+        android:inputType="textPostalAddress"
+        android:text="@string/txt_input_ubicacion"
+        app:layout_constraintBottom_toTopOf="@+id/sexoMascota"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edadMascota" />
+
+    <EditText
+        android:id="@+id/especieMascota"
+        style="@style/inputsTextEdit"
+        android:layout_width="263dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/border_inputs"
+        android:ems="10"
+        android:inputType="text"
+        android:text="@string/txt_input_especie"
+        app:layout_constraintBottom_toTopOf="@+id/razaMascota"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+    <EditText
+        android:id="@+id/razaMascota"
+        style="@style/inputsTextEdit"
+        android:layout_width="261dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/border_inputs"
+        android:ems="10"
+        android:inputType="text"
+        android:text="@string/txt_input_raza"
+        app:layout_constraintBottom_toTopOf="@+id/nombreMascota"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/especieMascota" />
+
+    <Button
+        android:id="@+id/button"
+        style="@style/colorBtn"
+        android:layout_width="238dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="15dp"
+        android:text="@string/txt_btn_avatar"
+        app:layout_constraintBottom_toTopOf="@+id/button_dar_adopcion_mascota"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/sexoMascota"
+        style="@style/inputsTextEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="150dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/border_inputs"
+        android:ems="10"
+        android:inputType="text"
+        android:text="@string/txt_input_sexo"
+        app:layout_constraintBottom_toTopOf="@+id/descripcionMascota"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/direccionMascota" />
+
+    <EditText
+        android:id="@+id/descripcionMascota"
+        style="@style/inputsTextEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="150dp"
+        android:layout_marginBottom="10dp"
+        android:ems="10"
+        android:background="@drawable/border_inputs"
+        android:inputType="text"
+        android:text="@string/txt_input_descripcion"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sexoMascota" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
