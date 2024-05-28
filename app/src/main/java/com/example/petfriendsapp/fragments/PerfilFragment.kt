@@ -18,23 +18,22 @@ import android.app.NotificationManager
 import android.content.Context
 import android.graphics.Color
 import android.os.Build
-import android.widget.RatingBar
 import android.widget.Switch
 import androidx.core.app.NotificationCompat
-import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 
 class PerfilFragment : Fragment() {
-    lateinit var viewPerfil: View
+    private lateinit var viewPerfil: View
     private lateinit var buttonEditarPerfil: Button
     private lateinit var buttonCambiarEmail: Button
     private lateinit var buttonCambiarPassword: Button
     private lateinit var nombreAvatar: TextView
-    private lateinit var urlImageView: ImageView
+    private lateinit var urlImageAvatar: ImageView
     private lateinit var btnNotficaciones: Switch
-   // private lateinit var ratingBar: RatingBar
+    private lateinit var buttonBack: ImageView
+    // private lateinit var ratingBar: RatingBar
 
     private val db = FirebaseFirestore.getInstance()
     private val auth = FirebaseAuth.getInstance()
@@ -44,6 +43,8 @@ class PerfilFragment : Fragment() {
         val BUTTON_EDITAR_PERFIL = R.id.btn_editar_perfil
         val NOMBRE_AVATAR = R.id.id_name_avatar
         val BUTTON_NOTIFICACIONES = R.id.switch_notificaciones
+        val IMAGE_AVATAR = R.id.id_avatar
+        val BUTTON_BACK = R.id.ic_back_fragment_perfil
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,7 +80,8 @@ class PerfilFragment : Fragment() {
         buttonCambiarPassword = viewPerfil.findViewById(BUTTON_CAMBIAR_PASSWORD)
         nombreAvatar = viewPerfil.findViewById(NOMBRE_AVATAR)
         btnNotficaciones = viewPerfil.findViewById(BUTTON_NOTIFICACIONES)
-        urlImageView = viewPerfil.findViewById(R.id.id_avatar)
+        urlImageAvatar = viewPerfil.findViewById(IMAGE_AVATAR)
+        buttonBack = viewPerfil.findViewById(BUTTON_BACK)
     }
 
     private fun initListeners() {
@@ -87,6 +89,8 @@ class PerfilFragment : Fragment() {
         buttonCambiarEmail.setOnClickListener { navigateToChangeEmail() }
         buttonCambiarPassword.setOnClickListener { navigateToChangePassword() }
         btnNotficaciones.setOnClickListener{showNotification(requireContext())}
+        buttonBack.setOnClickListener { navigateToHome() }
+
     }
 
     private fun fetchUserProfile() {
@@ -114,7 +118,7 @@ class PerfilFragment : Fragment() {
                             .transform(CenterCrop(), RoundedCorners(250))
                             .placeholder(R.drawable.avatar)
                             .error(R.drawable.avatar)
-                            .into(urlImageView)
+                            .into(urlImageAvatar)
 
                     } else {
                         Log.d("Perfil", "No existe el documento")
@@ -127,6 +131,10 @@ class PerfilFragment : Fragment() {
 
     }
 
+    private fun navigateToHome() {
+        val action1 = PerfilFragmentDirections.actionPerfilToInicio()
+        viewPerfil.findNavController().navigate(action1)
+    }
     private fun navigateToChangeEmail() {
         val action1 = PerfilFragmentDirections.actionPerfilToCambiarEmail()
         viewPerfil.findNavController().navigate(action1)
