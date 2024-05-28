@@ -15,7 +15,7 @@ import com.example.petfriendsapp.entities.Mascota
 
 class DetailsAdoptar : Fragment() {
 
-
+    private lateinit var buttonBackDetails: ImageView
    private val args: DetailsAdoptarArgs by navArgs()
 
     override fun onCreateView(
@@ -24,7 +24,11 @@ class DetailsAdoptar : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_details_adoptar, container, false)
 
+        buttonBackDetails = view.findViewById(R.id.ic_back_fragment_detail)
 
+        buttonBackDetails.setOnClickListener {
+            findNavController().navigateUp()
+        }
 
         // Bind the details to the views
         val txtRaza: TextView = view.findViewById(R.id.razaMascota)
