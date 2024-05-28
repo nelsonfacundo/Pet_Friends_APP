@@ -113,6 +113,13 @@
     <string name="txt_sesion_cerrada">Sesion Cerrada</string>
 
 
+    /Blog/
+    <string name="txt_blog">Artículos y recursos educativos</string>
+
+
+    /Review/
+    <string name="txt_review">Reseñas</string>
+
     /Details Perro Adoptar/
     <string name="txt_nombreMascota_details">Nombre</string>
     <string name="txt_edadMascota_details">Edad</string>
