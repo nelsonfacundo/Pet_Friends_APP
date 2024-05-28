@@ -14,8 +14,8 @@
         android:icon="@drawable/blog"
         android:title="Artículos y Recursos educativos" />
     <item
-        android:id="@+id/icono_reseñas_drawer"
-        android:icon="@drawable/reviews"
+        android:id="@+id/review"
+        android:icon="@drawable/review"
         android:title="Valoraciones y Reseñas" />
     <item
         android:id="@+id/logout_drawer"

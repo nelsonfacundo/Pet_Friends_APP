@@ -7,36 +7,37 @@
     android:layout_height="match_parent"
     android:background="@color/primary"
     tools:context=".fragments.EditarPerfilFragment"
-    tools:layout_editor_absoluteX="0dp"
-    tools:layout_editor_absoluteY="46dp">
+    tools:layout_editor_absoluteX="1dp"
+    tools:layout_editor_absoluteY="18dp">
 
     <ImageView
         android:id="@+id/ic_back_editar_perfil"
         android:layout_width="wrap_content"
         android:layout_height="80dp"
+        android:layout_marginTop="0dp"
         android:layout_marginEnd="40dp"
-        android:layout_marginBottom="660dp"
         android:clickable="true"
         android:focusable="true"
-        android:padding="28dp"
+        android:padding="24dp"
         android:src="@drawable/icon_back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.19" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/editar_foto"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="100dp"
-        android:background="@drawable/round_background_profile"
-        android:src="@drawable/avatar"
-        app:layout_constraintBottom_toTopOf="@+id/editar_perfil_nombre"
+        android:id="@+id/ic_delete_editar_perfil"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="24dp"
+        android:src="@drawable/eliminar_cuenta"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
@@ -46,42 +47,13 @@
         style="@style/inputsTextEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="76dp"
         android:background="@drawable/border_inputs"
         android:text="@string/edit_txt_last_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editar_perfil_nombre" />
-
-    <TextView
-        android:id="@+id/text_apellido_editar_perfil"
-        style="@style/textViewEdit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="250dp"
-        android:text="@string/txt_last_name"
-        app:layout_constraintBottom_toTopOf="@+id/editar_perfil_apellido"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editar_perfil_nombre"
-        app:layout_constraintVertical_bias="0.659" />
-
-    <Button
-        android:id="@+id/btn_guardar_perfil"
-        style="@style/colorBtn"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="68dp"
-        android:text="@string/btn_edit_perfil_guardar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.454"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/text_nombre_editar_perfil"
@@ -97,7 +69,21 @@
         app:layout_constraintHorizontal_bias="0.978"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editar_foto"
-        app:layout_constraintVertical_bias="0.511" />
+        app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
+        android:id="@+id/editar_perfil_nombre"
+        style="@style/inputsTextEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border_inputs"
+        android:text="@string/edit_txt_name"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.464" />
 
     <TextView
         android:id="@+id/text_tel_editar_perfil"
@@ -112,14 +98,27 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editar_perfil_apellido"
-        app:layout_constraintVertical_bias="0.545" />
+        app:layout_constraintVertical_bias="0.477" />
+
+    <ImageView
+        android:id="@+id/editar_foto"
+        android:layout_width="185dp"
+        android:layout_height="187dp"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/round_background_profile"
+        android:src="@drawable/avatar"
+        app:layout_constraintBottom_toTopOf="@+id/editar_perfil_nombre"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/editar_perfil_telefono"
         style="@style/inputsTextEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="68dp"
         android:background="@drawable/border_inputs"
         android:text="@string/edit_txt_telefono"
         app:layout_constraintEnd_toEndOf="parent"
@@ -127,18 +126,35 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editar_perfil_apellido" />
 
-    <EditText
-        android:id="@+id/editar_perfil_nombre"
-        style="@style/inputsTextEdit"
+    <TextView
+        android:id="@+id/text_apellido_editar_perfil"
+        style="@style/textViewEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/border_inputs"
-        android:text="@string/edit_txt_name"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="250dp"
+        android:text="@string/txt_last_name"
+        app:layout_constraintBottom_toTopOf="@+id/editar_perfil_apellido"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editar_perfil_nombre"
+        app:layout_constraintVertical_bias="0.557" />
+
+    <Button
+        android:id="@+id/btn_guardar_perfil"
+        style="@style/colorBtn"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="61dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="84dp"
+        android:text="@string/btn_edit_perfil_guardar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.396" />
+        app:layout_constraintTop_toBottomOf="@+id/editar_perfil_telefono" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

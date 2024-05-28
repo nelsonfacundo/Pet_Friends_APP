@@ -7,10 +7,10 @@
     android:padding="25dp">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/image_menu_header"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@drawable/avatar_user"
+        android:src="@drawable/avatar"
         android:layout_gravity="center"/>
 
     <LinearLayout
@@ -24,16 +24,14 @@
         style="@style/textViewEditTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hola!"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+        android:text="Hola!" />
 
     <TextView
         android:id="@+id/username"
         style="@style/textViewEditTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/txt_name"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        android:text="@string/txt_name" />
     </LinearLayout>
 
 </LinearLayout>
