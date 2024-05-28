@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Pet Friends APP</string>
 
+
     /PlaceHolder inputs//
     <string name="place_holder_input_user">Ingrese email</string>
     <string name="place_holder_input_new_email">Ingrese nuevo email</string>
