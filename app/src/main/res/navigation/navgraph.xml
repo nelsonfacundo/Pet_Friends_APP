@@ -6,20 +6,26 @@
     app:startDestination="@id/inicio">
 
     <fragment
-        android:id="@+id/menu"
-        android:name="fragments.Menu"
-        android:label="fragment_menu"
-        tools:layout="@layout/fragment_menu" />
+        android:id="@+id/favorito"
+        android:name="fragments.Favorito"
+        android:label="fragment_favorito"
+        tools:layout="@layout/fragment_favorito" />
     <fragment
         android:id="@+id/inicio"
         android:name="fragments.Inicio"
         android:label="fragment_inicio"
-        tools:layout="@layout/fragment_inicio" />
+        tools:layout="@layout/fragment_inicio" >
+        <action
+            android:id="@+id/action_inicio_to_detailsAdoptar"
+            app:destination="@id/detailsAdoptar"
+            app:argType="com.example.petfriendsapp.entities.Mascota">
+        </action>
+    </fragment>
     <fragment
-        android:id="@+id/chats"
-        android:name="fragments.Chats"
-        android:label="fragment_chats"
-        tools:layout="@layout/fragment_chats" />
+        android:id="@+id/actividad"
+        android:name="fragments.Actividad"
+        android:label="fragment_actividad"
+        tools:layout="@layout/fragment_actividad" />
     <fragment
         android:id="@+id/cambiarEmail"
         android:name="com.example.petfriendsapp.fragments.CambiarEmailFragment"
@@ -43,6 +49,9 @@
         <action
             android:id="@+id/action_perfil_to_editarPerfilFragment"
             app:destination="@id/editarPerfilFragment" />
+        <action
+            android:id="@+id/action_perfil_to_inicio"
+            app:destination="@id/inicio" />
     </fragment>
 
     <fragment
@@ -50,7 +59,7 @@
         android:name="com.example.petfriendsapp.fragments.CambiarPasswordFragment"
         android:label="CambiarPassword"
         tools:layout="@layout/fragment_cambiar_password">
-    <action
+        <action
             android:id="@+id/action_cambiarPassword_to_perfil"
             app:destination="@id/perfil" />
     </fragment>
@@ -63,5 +72,36 @@
         <action
             android:id="@+id/action_editarPerfilFragment_to_perfil"
             app:destination="@id/perfil" />
+    </fragment>
+    <fragment
+        android:id="@+id/blog"
+        android:name="com.example.petfriendsapp.fragments.BlogFragment"
+        android:label="fragment_blog"
+        tools:layout="@layout/fragment_blog" >
+        <action
+            android:id="@+id/action_blogFragment_to_inicio"
+            app:destination="@id/inicio" />
+    </fragment>
+    <fragment
+        android:id="@+id/review"
+        android:name="com.example.petfriendsapp.fragments.ReviewFragment"
+        android:label="fragment_review"
+        tools:layout="@layout/fragment_review">
+        <action
+            android:id="@+id/action_reviewFragment_to_inicio"
+            app:destination="@id/inicio" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailsAdoptar"
+        android:name="com.example.petfriendsapp.fragments.DetailsAdoptar"
+        android:label="fragment_details_adoptar"
+        tools:layout="@layout/fragment_details_adoptar" >
+        <argument
+            android:name="Mascota"
+            app:argType="com.example.petfriendsapp.entities.Mascota" />
+        <action
+            android:id="@+id/action_detailsAdoptar_to_inicio"
+            app:destination="@id/inicio" />
     </fragment>
 </navigation>
