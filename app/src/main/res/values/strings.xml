@@ -99,6 +99,27 @@
     <string name="txt_error_url">Error al obtener URL de descarga </string>
     <string name="txt_error_datos">Error al guardar datos </string>
 
+
+
+    /Main/
+    <string name="txt_eliminar_cuenta">Eliminar cuenta</string>
+    <string name="txt_pregunta_eliminar_cuenta">¿Estás seguro que quieres eliminar tu cuenta?</string>
+    <string name="eliminar">Eliminar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="txt_error_eliminar_cuenta">Error al eliminar la cuenta</string>
+    <string name="txt_cuenta_eliminada">Cuenta eliminada</string>
+    <string name="txt_pregunta_cerrar_sesion">¿Estás seguro que quieres cerrar sesión?</string>
+    <string name="txt_cerrar_sesion">Cerrar Sesion</string>
+    <string name="txt_sesion_cerrada">Sesion Cerrada</string>
+
+
+    /Blog/
+    <string name="txt_blog">Artículos y recursos educativos</string>
+
+
+    /Review/
+    <string name="txt_review">Reseñas</string>
+
     /Details Perro Adoptar/
     <string name="txt_nombreMascota_details">Nombre</string>
     <string name="txt_edadMascota_details">Edad</string>
@@ -112,9 +133,6 @@
     <string name="favoritos_button_description">Agregar mascota a favoritos</string>
     <string name="botonAdoptar">Adoptar</string>
     <string name="botonBackDetails">Volver atras</string>
-
-
-
 
 
 
