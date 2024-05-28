@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.DarEnAdopcion">
+
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline3"
+        tools:src="@tools:sample/avatars" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="1dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24sp"
+        android:text="@string/adopcion_mascota"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+    <EditText
+        android:id="@+id/text_nombre_mascota"
+        style="@style/inputsTextEdit"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="96dp"
+        android:layout_marginEnd="50dp"
+        android:background="@drawable/border_inputs"
+        android:hint="@string/place_holder_input_nombre_mascota"
+        android:inputType="text"
+        android:padding="10dp"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <EditText
+        android:id="@+id/text_raza_mascota"
+        style="@style/inputsTextEdit"
+        android:layout_width="312dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/border_inputs"
+        android:hint="@string/place_holder_input_raza_mascota"
+        android:inputType="text"
+        android:padding="10dp"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_nombre_mascota" />
+
+    <EditText
+        android:id="@+id/text_edad_mascota"
+        style="@style/inputsTextEdit"
+        android:layout_width="312dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/border_inputs"
+        android:hint="@string/place_holder_input_edad_mascota"
+        android:inputType="text"
+        android:padding="10dp"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_raza_mascota" />
+
+    <EditText
+        android:id="@+id/text_descripcion_mascota"
+        style="@style/inputsTextEdit"
+        android:layout_width="312dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/border_inputs"
+        android:hint="@string/place_holder_input_descripcion_mascota"
+        android:inputType="text"
+        android:padding="10dp"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_edad_mascota" />
+
+    <EditText
+        android:id="@+id/text_tipo_mascota"
+        style="@style/inputsTextEdit"
+        android:layout_width="312dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="28dp"
+        android:background="@drawable/border_inputs"
+        android:hint="@string/place_holder_input_tipo_mascota"
+        android:inputType="text"
+        android:padding="10dp"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/text_nombre_mascota"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupSexo"
+        android:layout_width="171dp"
+        android:layout_height="101dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.552"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_descripcion_mascota">
+
+
+        <RadioButton
+            android:id="@+id/radioFemenino"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:text="@string/btn_femenino"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.652"
+            app:layout_constraintStart_toEndOf="@+id/radioMasculino"
+            app:layout_constraintTop_toBottomOf="@+id/text_descripcion_mascota" />
+
+        <RadioButton
+            android:id="@+id/radioMasculino"
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:text="@string/btn_masculino"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_descripcion_mascota" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_dar_en_adopcion"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.513"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_descripcion_mascota"
+        app:layout_constraintVertical_bias="0.809" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

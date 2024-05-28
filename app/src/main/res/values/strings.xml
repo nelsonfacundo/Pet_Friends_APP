@@ -100,7 +100,6 @@
     <string name="txt_error_datos">Error al guardar datos </string>
 
 
-
     /Main/
     <string name="txt_eliminar_cuenta">Eliminar cuenta</string>
     <string name="txt_pregunta_eliminar_cuenta">¿Estás seguro que quieres eliminar tu cuenta?</string>
@@ -126,7 +125,14 @@
     <string name="favoritos_button_description">Agregar mascota a favoritos</string>
     <string name="botonAdoptar">Adoptar</string>
 
-
-
-
+    /Dar en adopcion/
+    <string name="adopcion_mascota">Dar en adopcion</string>
+    <string name="place_holder_input_nombre_mascota">Introduzca el nombre</string>
+    <string name="place_holder_input_raza_mascota">Introduzca la raza</string>
+    <string name="place_holder_input_edad_mascota">Introduzca la edad</string>
+    <string name="place_holder_input_descripcion_mascota">Introduzca una descripcion</string>
+    <string name="place_holder_input_tipo_mascota">Introduzca el tipo de mascota</string>
+    <string name="btn_dar_en_adopcion">Dar en Adopcion</string>
+    <string name="btn_masculino">Masculino</string>
+    <string name="btn_femenino">Femenino</string>
 </resources>
