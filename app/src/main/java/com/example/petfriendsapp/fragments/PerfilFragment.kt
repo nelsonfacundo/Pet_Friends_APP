@@ -1,7 +1,6 @@
 package com.example.petfriendsapp.fragments
 
 import android.os.Bundle
-import androidx.appcompat.app.AlertDialog
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -16,18 +15,16 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.content.ContentValues.TAG
 import android.content.Context
-import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.widget.RatingBar
 import android.widget.Switch
-import android.widget.Toast
 import androidx.core.app.NotificationCompat
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
-import com.example.petfriendsapp.LoginActivity
-
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 
 class PerfilFragment : Fragment() {
     lateinit var viewPerfil: View
@@ -39,7 +36,8 @@ class PerfilFragment : Fragment() {
     private lateinit var btnNotficaciones: Switch
    // private lateinit var ratingBar: RatingBar
 
-
+    private val db = FirebaseFirestore.getInstance()
+    private val auth = FirebaseAuth.getInstance()
     companion object {
         val BUTTON_CAMBIAR_EMAIL = R.id.btn_cambiar_email
         val BUTTON_CAMBIAR_PASSWORD = R.id.btn_cambiar_password
@@ -82,10 +80,7 @@ class PerfilFragment : Fragment() {
         nombreAvatar = viewPerfil.findViewById(NOMBRE_AVATAR)
         btnNotficaciones = viewPerfil.findViewById(BUTTON_NOTIFICACIONES)
         urlImageView = viewPerfil.findViewById(R.id.id_avatar)
-      //  btnDeleteAccount = viewPerfil.findViewById(DELETE_CUENTA)
     }
-
-
 
     private fun initListeners() {
         buttonEditarPerfil.setOnClickListener { navigateToEditProfile() }
@@ -95,12 +90,10 @@ class PerfilFragment : Fragment() {
     }
 
     private fun fetchUserProfile() {
-        val firebaseAuth = FirebaseAuth.getInstance()
-        val user = firebaseAuth.currentUser
+        val user = auth.currentUser
         val uid = user?.uid
 
         if (uid != null) {
-            val db = FirebaseFirestore.getInstance()
             val userDocRef = db.collection("users").document(uid)
 
             userDocRef.get()
@@ -118,6 +111,7 @@ class PerfilFragment : Fragment() {
                         // Carga imagen
                         Glide.with(requireContext())
                             .load(urlImagenPerfil)
+                            .transform(CenterCrop(), RoundedCorners(250))
                             .placeholder(R.drawable.avatar)
                             .error(R.drawable.avatar)
                             .into(urlImageView)
@@ -130,8 +124,8 @@ class PerfilFragment : Fragment() {
                     Log.d("Perfil", "La obtención de datos falló con ", exception)
                 }
         }
-    }
 
+    }
 
     private fun navigateToChangeEmail() {
         val action1 = PerfilFragmentDirections.actionPerfilToCambiarEmail()
@@ -181,79 +175,8 @@ class PerfilFragment : Fragment() {
         // Se construye la notificación y la muestra
         notificationManager.notify(1, builder.build())
     }
-
-
-    /*
-
-    private fun alertDeleteAccount() {
-        val builder = AlertDialog.Builder(requireContext())
-        builder.setTitle("Eliminar cuenta")
-        builder.setMessage("¿Estás seguro que quieres eliminar tu cuenta? Esta acción no se puede deshacer.")
-        builder.setPositiveButton("Aceptar") { _, _ ->
-            deleteAccount()
-        }
-        builder.setNegativeButton("Cancelar") { dialog, _ ->
-            dialog.dismiss()
-        }
-        builder.create().show()
-    }
-
-    private fun deleteAccount() {
-        val user = FirebaseAuth.getInstance().currentUser
-        user?.let {
-            val uid = user.uid
-
-            // eliminar el documento del usuario en Firestore
-            val db = FirebaseFirestore.getInstance()
-            val userDocRef = db.collection("users").document(uid)
-
-            userDocRef.delete()
-                .addOnSuccessListener {
-                    // Si la eliminación en Firestore es exitosa, elimina la cuenta de autenticación
-                    user.delete()
-                        .addOnCompleteListener { task ->
-                            if (task.isSuccessful) {
-                                Toast.makeText(
-                                    requireContext(),
-                                    "Cuenta eliminada exitosamente",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                                startActivity(Intent(requireContext(), LoginActivity::class.java))
-                                requireActivity().finish()
-                            } else {
-                                Log.w(
-                                    "PerfilFragment",
-                                    "Error al eliminar la cuenta de autenticación",
-                                    task.exception
-                                )
-                                Toast.makeText(
-                                    requireContext(),
-                                    "Error al eliminar la cuenta de autenticación",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }
-                        }
-                }
-                .addOnFailureListener { e ->
-                    Log.w(
-                        "PerfilFragment",
-                        "Error al eliminar el documento del usuario en Firestore",
-                        e
-                    )
-                    Toast.makeText(
-                        requireContext(),
-                        "Error al eliminar el documento del usuario",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-        }
-
-    }
-*/
-
     /* private fun fetchUserRatings() {
-         val db = FirebaseFirestore.getInstance()
-         val userId = FirebaseAuth.getInstance().currentUser?.uid
+         val userId = auth.currentUser?.uid
 
          if (userId != null) {
              // Referencia a la subcolección de valoraciones del usuario

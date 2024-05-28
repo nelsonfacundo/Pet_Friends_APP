@@ -1,9 +1,10 @@
 package com.example.petfriendsapp
 
+
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
+import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import android.widget.Toast
@@ -15,19 +16,23 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
-import com.example.petfriendsapp.fragments.PerfilFragment
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
-
 class MainActivity : AppCompatActivity() {
 
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navigationView: NavigationView
     private lateinit var navHostFragment: NavHostFragment
     private lateinit var bottomNavView: BottomNavigationView
+
+
+    private val db = FirebaseFirestore.getInstance()
+    private val auth = FirebaseAuth.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,9 +48,15 @@ class MainActivity : AppCompatActivity() {
         //Observador de cambios de destino, se activa cada vez que cambia el destino de navegación
         navHostFragment.navController.addOnDestinationChangedListener { _, destination, _ ->
             invalidateOptionsMenu() // Cambia de fragment se llama a onPrepareOptionsMenu
+
+            // Oculta la actionBar en los fragmentos requeridos
+            if (destination.id == R.id.editarPerfilFragment || destination.id == R.id.cambiarEmail || destination.id == R.id.cambiarPassword) {
+                supportActionBar?.hide()
+            } else {
+                supportActionBar?.show()
+            }
         }
-        // Configurar ActionBar
-        supportActionBar?.setDisplayHomeAsUpEnabled(true) //Mostrar icono hamburguesa
+        fetchUserProfile()
     }
 
     private fun initViews() {
@@ -53,11 +64,13 @@ class MainActivity : AppCompatActivity() {
         navigationView = findViewById(R.id.drawer_nav)
         navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         bottomNavView = findViewById(R.id.bottom_var)
+
     }
 
     private fun configToolbar() {
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true) //Mostrar icono hamburguesa
         // Oculto el título de la Toolbar
         supportActionBar?.setDisplayShowTitleEnabled(false)
     }
@@ -82,130 +95,52 @@ class MainActivity : AppCompatActivity() {
                     alertCerrarSesion()
                     drawerLayout.closeDrawer(GravityCompat.START) //Cierra el menu despues de seleccionar un elemento
                     true
+                }else -> {
+                    val handled = NavigationUI.onNavDestinationSelected(menuItem, navController)
+                    if (handled) {
+                        drawerLayout.closeDrawer(GravityCompat.START)
+                    }
+                    handled // Indica si fue manejado por NavigationUI
                 }
-                R.id.perfil -> {
-                    // Navega al fragmento de perfil
-                    navController.navigate(R.id.perfil)
-                    drawerLayout.closeDrawer(GravityCompat.START)
-                    true
-                }
-                else -> {
-                val handled = NavigationUI.onNavDestinationSelected(menuItem, navController)
-                if (handled) {
-                    drawerLayout.closeDrawer(GravityCompat.START)
-                }
-                handled // Indica si fue manejado por NavigationUI
-            }
             }
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_toolbar, menu)
-        return true
-    }
-
-    //Metodo que se utiliza para realizar modificaciones del menú antes de que se muestre en la pantalla.
-    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
-        val deleteItem = menu?.findItem(R.id.delete_account)
-        val currentFragment = navHostFragment.childFragmentManager.fragments[0]
-        deleteItem?.isVisible = currentFragment is PerfilFragment
-        return super.onPrepareOptionsMenu(menu)
-    }
-
-
-    //Maneja los eventos del click en los elementos del menu
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.delete_account -> {
-                alertEliminarCuenta()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-
-    private fun alertEliminarCuenta() {
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle("Eliminar cuenta")
-        builder.setMessage("¿Estás seguro que quieres eliminar tu cuenta?")
-        builder.setPositiveButton("Eliminar") { dialog, _ ->
-            eliminarCuenta()
-            dialog.dismiss()
-        }
-        builder.setNegativeButton("Cancelar") { dialog, _ ->
-            dialog.dismiss()
-        }
-        builder.create().show()
-    }
-
-    private fun eliminarCuenta() {
-        val user = FirebaseAuth.getInstance().currentUser
-        user?.let {
-            eliminarUsuarioFirebaseAuth(it)
-        } ?: run {
-            Toast.makeText(this, "Error al eliminar la cuenta", Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    //ELIMINA
-    private fun eliminarUsuarioFirebaseAuth(user: FirebaseUser) {
-        user.delete().addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                eliminarUsuarioFirestore(user.uid)
-            } else {
-                Toast.makeText(this, "Error al eliminar la cuenta", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-
-    //NO ELIMINA
-    private fun eliminarUsuarioFirestore(uid: String) {
-        val db = FirebaseFirestore.getInstance()
-        val userDocRef = db.collection("users").document(uid)
-        userDocRef.delete()
-            .addOnSuccessListener {
-                Toast.makeText(this, "Cuenta eliminada", Toast.LENGTH_SHORT).show()
-                finishAffinity()
-            }
-            .addOnFailureListener {
-                Toast.makeText(this, "Error al eliminar la cuenta", Toast.LENGTH_SHORT).show()
-            }
-    }
-    private fun alertCerrarSesion() {
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle("Cerrar sesión")
-        builder.setMessage("¿Estás seguro que quieres cerrar sesión?")
-        builder.setPositiveButton("OK") { dialog, _ ->
-            // Cerrar sesión
-            FirebaseAuth.getInstance().signOut()
-            Toast.makeText(this, "Sesion Cerrada", Toast.LENGTH_SHORT).show()
-            // sale de la app
-            finishAffinity()
-            dialog.dismiss()
-        }
-        builder.setNegativeButton("Cancelar") { dialog, _ ->
-            dialog.dismiss()
-        }
-        builder.create().show()
-    }
-
+   private fun alertCerrarSesion() {
+       val builder = AlertDialog.Builder(this)
+       builder.setTitle(R.string.txt_cerrar_sesion)
+       builder.setMessage(R.string.txt_pregunta_cerrar_sesion)
+       builder.setPositiveButton(R.string.txt_cerrar_sesion) { dialog, _ ->
+           // Cerrar sesión
+           auth.signOut()
+           Toast.makeText(this, R.string.txt_sesion_cerrada, Toast.LENGTH_SHORT).show()
+           // sale de la app
+           finishAffinity()
+           dialog.dismiss()
+       }
+       builder.setNegativeButton(R.string.cancelar) { dialog, _ ->
+           dialog.dismiss()
+       }
+       builder.create().show()
+   }
     private fun fetchUserProfile() {
-        val firebaseAuth = FirebaseAuth.getInstance()
-        val user = firebaseAuth.currentUser
+        val user = auth.currentUser
         val uid = user?.uid
 
         if (uid != null) {
-            val db = FirebaseFirestore.getInstance()
             val userDocRef = db.collection("users").document(uid)
 
             userDocRef.get()
                 .addOnSuccessListener { document ->
-                    if (document != null) {
+                    if (document != null && document.exists()) {
                         val nombre = document.getString("nombre")
                         val apellido = document.getString("apellido")
                         val nombreCompleto = "$nombre $apellido"
-                        updateHeader(nombreCompleto)
+                        val urlImage = document.getString("avatarUrl")
+
+                        if (urlImage != null) {
+                            updateHeader(nombreCompleto, urlImage)
+                        }
                     } else {
                         Log.d("Perfil", "No existe el documento")
                     }
@@ -216,12 +151,45 @@ class MainActivity : AppCompatActivity() {
 
         }
     }
-    private fun updateHeader(nombre: String) {
+    public fun updateHeader(nombre: String, urlImagen: String) {
         val headerView = navigationView.getHeaderView(0)
-
         val userNameTextView: TextView = headerView.findViewById(R.id.username)
+        val urlImageView: ImageView = headerView.findViewById(R.id.image_menu_header)
+
+        //carga nombre completo
         userNameTextView.text = nombre
 
+        //Imagen
+        if (urlImagen != null.toString()) {
+            // Carga la nueva imagen
+            Glide.with(this)
+                .load(urlImagen)
+                .transform(CenterCrop(), RoundedCorners(250))
+                .placeholder(R.drawable.avatar)
+                .error(R.drawable.avatar)
+                .into(urlImageView)
+        } else {
+            // Recupera la URL de la imagen actual de la base de datos
+            val user = auth.currentUser
+            val uid = user?.uid
+            if (uid != null) {
+                db.collection("users").document(uid).get()
+                    .addOnSuccessListener { document ->
+                        if ( document.exists()) {
+                            val urlImagenActual = document.getString("avatarUrl")
+                            if (urlImagenActual != null) {
+                                // Carga la imagen actual de la base de datos
+                                Glide.with(this)
+                                    .load(urlImagenActual)
+                                    .transform(CenterCrop(), RoundedCorners(250))
+                                    .placeholder(R.drawable.avatar)
+                                    .error(R.drawable.avatar)
+                                    .into(urlImageView)
+                            }
+                        }
+                    }
+            }
+        }
     }
 
     //Maneja el evento de la navegacion hacia arriba
@@ -234,6 +202,7 @@ class MainActivity : AppCompatActivity() {
 
         return false
     }
+
 
 
 }

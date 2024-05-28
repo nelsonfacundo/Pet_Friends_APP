@@ -99,6 +99,33 @@
     <string name="txt_error_url">Error al obtener URL de descarga </string>
     <string name="txt_error_datos">Error al guardar datos </string>
 
+
+
+    /Main/
+    <string name="txt_eliminar_cuenta">Eliminar cuenta</string>
+    <string name="txt_pregunta_eliminar_cuenta">¿Estás seguro que quieres eliminar tu cuenta?</string>
+    <string name="eliminar">Eliminar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="txt_error_eliminar_cuenta">Error al eliminar la cuenta</string>
+    <string name="txt_cuenta_eliminada">Cuenta eliminada</string>
+    <string name="txt_pregunta_cerrar_sesion">¿Estás seguro que quieres cerrar sesión?</string>
+    <string name="txt_cerrar_sesion">Cerrar Sesion</string>
+    <string name="txt_sesion_cerrada">Sesion Cerrada</string>
+
+
+    /Details Perro Adoptar/
+    <string name="txt_nombreMascota_details">Nombre</string>
+    <string name="txt_edadMascota_details">Edad</string>
+    <string name="txt_raza_details">Raza</string>
+    <string name="txt_sexoMascota_details">Sexo</string>
+    <string name="txt_ubicacionMascota_details">Ubicacion</string>
+    <string name="txt_descripcionMascota_details">Descripcion de la Mascota</string>
+    <string name="txt_dueño_details">Dueño</string>
+    <string name="txt_dueñoNombre_details">Nombre del dueño</string>
+    <string name="whatsapp_button_description">Abrir WhatsApp</string>
+    <string name="favoritos_button_description">Agregar mascota a favoritos</string>
+    <string name="botonAdoptar">Adoptar</string>
+
     /Dar en adopcion mascota/
     <string name="txt_btn_dar_adopcion_mascota">Agregar mascota</string>
     <string name="txt_input_raza">Ingrese raza</string>
@@ -107,5 +134,15 @@
     <string name="txt_input_descripcion">Descripcion</string>
     <string name="txt_input_sexo">Seleccione sexo</string>
     <string name="txt_input_especie">Ingrese especie</string>
+    <string name="txt_btn_dar_en_adopcion">Dar en adopcion</string>
+    <string name="txt_cantC_nombre_mascota">El nombre debe tener entre 3 y 25 caracteres</string>
+    <string name="txt_empty_descripcion">La descripcion no puede estar vacía</string>
+    <string name="txt_empty_ubicacion">La ubicacion no puede estar vacía</string>
+    <string name="txt_empty_edad">La edad no puede estar vacía</string>
+    <string name="txt_empty_especie">La especie no puede estar vacía</string>
+    <string name="txt_empty_raza">La raza no puede estar vacía</string>
+    <string name="txt_empty_sexo">El sexo no puede estar vacío</string>
+
+
 
 </resources>
