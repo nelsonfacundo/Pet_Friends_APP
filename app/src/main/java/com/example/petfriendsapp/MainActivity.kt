@@ -42,7 +42,8 @@ class MainActivity : AppCompatActivity() {
         R.id.cambiarEmail,
         R.id.cambiarPassword,
         R.id.blog,
-        R.id.review
+        R.id.review,
+       // R.id.detailsAdoptar, -> Descomentar cuando se haga un back para volver atras
     )
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -14,7 +14,13 @@
         android:id="@+id/inicio"
         android:name="fragments.Inicio"
         android:label="fragment_inicio"
-        tools:layout="@layout/fragment_inicio" />
+        tools:layout="@layout/fragment_inicio" >
+        <action
+            android:id="@+id/action_inicio_to_detailsAdoptar"
+            app:destination="@id/detailsAdoptar"
+            app:argType="com.example.petfriendsapp.entities.Mascota">
+        </action>
+    </fragment>
     <fragment
         android:id="@+id/actividad"
         android:name="fragments.Actividad"
@@ -84,5 +90,15 @@
         <action
             android:id="@+id/action_reviewFragment_to_inicio"
             app:destination="@id/inicio" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailsAdoptar"
+        android:name="com.example.petfriendsapp.fragments.DetailsAdoptar"
+        android:label="fragment_details_adoptar"
+        tools:layout="@layout/fragment_details_adoptar" >
+        <argument
+            android:name="Mascota"
+            app:argType="com.example.petfriendsapp.entities.Mascota" />
     </fragment>
 </navigation>

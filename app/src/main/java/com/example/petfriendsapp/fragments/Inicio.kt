@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.petfriendsapp.R
@@ -66,9 +67,13 @@ class Inicio : Fragment() {
         }
         recMascotas.setHasFixedSize(true)
         val linearLayoutManager = LinearLayoutManager(context)
-        val mascotaAdapter = MascotaAdapter(mascotas)
-
         recMascotas.layoutManager = linearLayoutManager
+
+        val mascotaAdapter = MascotaAdapter(mascotas) { mascota ->
+            val action = InicioDirections.actionInicioToDetailsAdoptar(mascota)
+            findNavController().navigate(action)
+        }
+
         recMascotas.adapter = mascotaAdapter
     }
 
