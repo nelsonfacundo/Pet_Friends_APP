@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,6 +19,7 @@ class Inicio : Fragment() {
     private lateinit var viewInicio: View
     private lateinit var buttonCambiarPerfil: Button
     lateinit var recMascotas: RecyclerView
+    private lateinit var buttonDarEnAdopcion : Button
 
     /**En este caso voy a dejar la Lista de mascotas asi hasta conectarla con Firebase */
     var mascotas : MutableList<Mascota> = ArrayList()
@@ -29,6 +31,8 @@ class Inicio : Fragment() {
         savedInstanceState: Bundle?): View? {
         viewInicio = inflater.inflate(R.layout.fragment_inicio, container, false)
 
+        buttonDarEnAdopcion=viewInicio.findViewById(R.id.button_dar_en_adopcion)
+
         recMascotas = viewInicio.findViewById(R.id.rec_mascota)
         val linearLayoutManager = LinearLayoutManager(context)
         // Inflate the layout for this fragment
@@ -37,6 +41,8 @@ class Inicio : Fragment() {
 
     override fun onStart() {
         super.onStart()
+        initListeners()
+
         for(i in 1 .. 10) {
             Log.e("Example", "Error al cargar pokemones")
             mascotas.add(Mascota(
@@ -75,6 +81,15 @@ class Inicio : Fragment() {
         }
 
         recMascotas.adapter = mascotaAdapter
+    }
+
+    private fun initListeners(){
+        buttonDarEnAdopcion.setOnClickListener{navigateToDarAdopcionMascota()}
+    }
+
+    private fun navigateToDarAdopcionMascota(){
+        val action = InicioDirections.actionInicioToDarAdopcionMascotaFragment()
+        viewInicio.findNavController().navigate(action)
     }
 
 }
