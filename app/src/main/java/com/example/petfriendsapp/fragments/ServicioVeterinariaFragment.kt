@@ -52,7 +52,7 @@ class ServicioVeterinariaFragment : Fragment() {
     }
 
     private fun navigateToHome() {
-        val action1 = ServicioVeterinariaFragmentDirections.actionServicioToInicio()
+        val action1 = ServicioVeterinariaFragmentDirections.actionServicioVeterinariaFragmentToInicio()
         viewVeterinaria.findNavController().navigate(action1)
     }
 
