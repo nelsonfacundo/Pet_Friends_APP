@@ -24,32 +24,33 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.petfriendsapp.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 
 
 class DarAdopcionMascotaFragment : Fragment() {
 
-
+    private lateinit var buttonBack: ImageView
     private lateinit var buttonDarAdopcionMascota: Button
     private lateinit var viewDarAdopcionMascota: View
     private lateinit var buttonSeleccionarFoto: Button
     private lateinit var editTextEspecie: Spinner
-    private lateinit var editTextRaza: EditText
     private lateinit var editTextNombre: EditText
     private lateinit var editTextEdad: EditText
     private lateinit var editTextUbicacion: EditText
     private lateinit var editTextSexo: Spinner
     private lateinit var editTextDescripcion: EditText
     private lateinit var imageViewFotoMascota: ImageView
+
+    private val db = FirebaseFirestore.getInstance()
+    private val auth = FirebaseAuth.getInstance()
     private var imageUri: Uri? = null
 
     private val PICK_IMAGE_REQUEST = 1
-    private val db = FirebaseFirestore.getInstance()
-    private val auth = FirebaseAuth.getInstance()
+
     companion object {
 
         val BUTTON_DAR_ADOPCION_MASCOTA = R.id.button_dar_adopcion_mascota
         val EDIT_TEXT_ESPECIE = R.id.especieMascota
-        val EDIT_TEXT_RAZA = R.id.razaMascota
         val EDIT_TEXT_NOMBRE = R.id.nombreMascota
         val EDIT_TEXT_EDAD = R.id.edadMascota
         val EDIT_TEXT_UBICACION = R.id.direccionMascota
@@ -57,6 +58,7 @@ class DarAdopcionMascotaFragment : Fragment() {
         val EDIT_TEXT_DESCRIPCION = R.id.descripcionMascota
         val BUTTON_SELECCIONAR_FOTO = R.id.button_seleccionar_foto_mascota
         val IMAGE_VIEW_FOTO_MASCOTA =R.id.imageView_foto_mascota
+        val BUTTON_BACK = R.id.id_back_fragment_veterinaria
     }
 
 
@@ -64,7 +66,6 @@ class DarAdopcionMascotaFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         viewDarAdopcionMascota = inflater.inflate(R.layout.fragment_dar_adopcion_mascota, container, false)
         initViews()
         initListeners()
@@ -79,38 +80,74 @@ private fun initViews(){
     buttonDarAdopcionMascota= viewDarAdopcionMascota.findViewById(BUTTON_DAR_ADOPCION_MASCOTA)
     buttonSeleccionarFoto= viewDarAdopcionMascota.findViewById(BUTTON_SELECCIONAR_FOTO)
     editTextEspecie= viewDarAdopcionMascota.findViewById(EDIT_TEXT_ESPECIE)
-    editTextRaza= viewDarAdopcionMascota.findViewById(EDIT_TEXT_RAZA)
     editTextNombre= viewDarAdopcionMascota.findViewById(EDIT_TEXT_NOMBRE)
     editTextEdad= viewDarAdopcionMascota.findViewById(EDIT_TEXT_EDAD)
     editTextUbicacion= viewDarAdopcionMascota.findViewById(EDIT_TEXT_UBICACION)
     editTextSexo= viewDarAdopcionMascota.findViewById(EDIT_TEXT_SEXO)
     editTextDescripcion= viewDarAdopcionMascota.findViewById(EDIT_TEXT_DESCRIPCION)
     imageViewFotoMascota= viewDarAdopcionMascota.findViewById(IMAGE_VIEW_FOTO_MASCOTA)
+    buttonBack = viewDarAdopcionMascota.findViewById(BUTTON_BACK)
 }
     private fun initListeners(){
-buttonSeleccionarFoto.setOnClickListener{abrirGaleria()}
+        buttonBack.setOnClickListener { navigateToHome() }
+        buttonSeleccionarFoto.setOnClickListener{abrirGaleria()}
         buttonDarAdopcionMascota.setOnClickListener { enviarForm() }
-
     }
-private fun enviarForm(){
-    val validationResult = validarDatos()
-    if(validationResult.first){
-        val nombre = editTextNombre.text.toString().trim()
-        val ubicacion = editTextUbicacion.text.toString().trim()
-        val descripcion = editTextDescripcion.text.toString().trim()
-        val edadText = editTextEdad.text.toString().trim()
-        val edad = edadText.toInt()
-        val raza = editTextRaza.text.toString().trim()
-        val especie = editTextEspecie.toString()
-        val sexo = editTextSexo.toString()
-        val userId = auth.currentUser
+    private fun enviarForm() {
+        val validationResult = validarDatos()
+        if (validationResult.first) {
+            val nombre = editTextNombre.text.toString().trim()
+            val ubicacion = editTextUbicacion.text.toString().trim()
+            val descripcion = editTextDescripcion.text.toString().trim()
+            val edadText = editTextEdad.text.toString().trim()
+            val edad = edadText.toInt()
+            val especie = editTextEspecie.selectedItem.toString()
+            val sexo = editTextSexo.selectedItem.toString()
+            val userId = auth.currentUser?.uid
 
+            if (userId != null && imageUri != null) {
+                // Subir imagen a Firebase Storage
+                val storageRef = FirebaseStorage.getInstance().reference.child("mascotas/${System.currentTimeMillis()}_${userId}.jpg")
+                storageRef.putFile(imageUri!!)
+                    .addOnSuccessListener { taskSnapshot ->
+                        // Obtener URL de descarga
+                        storageRef.downloadUrl.addOnSuccessListener { uri ->
+                            val imageUrl = uri.toString()
 
+                            // Crear un mapa de datos
+                            val mascotaData = hashMapOf(
+                                "nombre" to nombre,
+                                "ubicacion" to ubicacion,
+                                "descripcion" to descripcion,
+                                "edad" to edad,
+                                "especie" to especie,
+                                "sexo" to sexo,
+                                "userId" to userId,
+                                "imageUrl" to imageUrl // Guardar URL de la imagen
+                            )
+
+                            // Guardar datos en Firestore
+                            db.collection("mascotas").add(mascotaData)
+                                .addOnSuccessListener { documentReference ->
+                                    Toast.makeText(requireContext(), "Mascota registrada con éxito!", Toast.LENGTH_SHORT).show()
+                                    navigateToInicio()
+                                }
+                                .addOnFailureListener { e ->
+                                    Toast.makeText(requireContext(), "Error al registrar la mascota: ${e.message}", Toast.LENGTH_SHORT).show()
+                                }
+                        }
+                    }
+                    .addOnFailureListener { e ->
+                        Toast.makeText(requireContext(), "Error al subir la imagen: ${e.message}", Toast.LENGTH_SHORT).show()
+                    }
+            } else {
+                Toast.makeText(requireContext(), "Usuario no autenticado o imagen no seleccionada", Toast.LENGTH_SHORT).show()
+            }
+        } else {
+            Toast.makeText(requireContext(), validationResult.second, Toast.LENGTH_SHORT).show()
+        }
     }
-    else{
-        Toast.makeText(requireContext(), validationResult.second, Toast.LENGTH_SHORT).show()
-    }
-}
+
     private fun initSpinners(){
         val optionsSexo = resources.getStringArray(R.array.spinner_sexo)
         val adapterSexo = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, optionsSexo)
@@ -128,7 +165,6 @@ private fun enviarForm(){
         val ubicacion = editTextUbicacion.text.toString().trim()
         val descripcion = editTextDescripcion.text.toString().trim()
         val edad = editTextEdad.text.toString().trim()
-        val raza = editTextRaza.text.toString().trim()
         val especie = editTextEspecie.toString()
         val sexo = editTextSexo.toString()
 
@@ -141,8 +177,6 @@ private fun enviarForm(){
         val number = edad.toInt()
         if(number < 0 || number > 100) return Pair(false, getString(R.string.txt_empty_edad_incorrecta))
         if (imageUri == null) return Pair(false, getString(R.string.txt_empty_imagen))
-        if(raza.isEmpty()) return Pair(false, getString(R.string.txt_empty_raza))
-        if (raza.length < 3 || raza.length > 25) return Pair(false, getString(R.string.txt_cantC_raza))
         if(especie == "Seleccionar especie") return Pair(false, getString(R.string.txt_opcion_valida_especie))
         if(sexo == "Seleccionar sexo") return Pair(false, getString(R.string.txt_opcion_valida_sexo))
 
@@ -174,8 +208,14 @@ private fun enviarForm(){
             }
         }
     }
-private fun navigateToInicio(){
+
+    private fun navigateToInicio(){
     val action = DarAdopcionMascotaFragmentDirections.actionDarAdopcionMascotaFragmentToInicio()
     viewDarAdopcionMascota.findNavController().navigate(action)
-}
+    }
+
+    private fun navigateToHome() {
+        val action1 = DarAdopcionMascotaFragmentDirections.actionDarAdopcionMascotaFragmentToInicio()
+        viewDarAdopcionMascota.findNavController().navigate(action1)
+    }
 }
