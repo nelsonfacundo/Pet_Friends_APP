@@ -139,9 +139,28 @@
     <string name="txt_empty_descripcion">La descripcion no puede estar vacía</string>
     <string name="txt_empty_ubicacion">La ubicacion no puede estar vacía</string>
     <string name="txt_empty_edad">La edad no puede estar vacía</string>
+    <string name="txt_empty_edad_incorrecta">La edad no puede ser menor a 0 o mayor a 100</string>
     <string name="txt_empty_especie">La especie no puede estar vacía</string>
     <string name="txt_empty_raza">La raza no puede estar vacía</string>
+    <string name="txt_cantC_raza">La raza debe tener entre 3 y 25 caracteres</string>
     <string name="txt_empty_sexo">El sexo no puede estar vacío</string>
+    <string name="txt_opcion_valida_sexo">Selecciona una opcion valida del campo sexo</string>
+    <string name="txt_opcion_valida_especie">Selecciona una opcion valida del campo especie</string>
+
+    <string-array name="spinner_sexo">
+        <item>Seleccionar sexo</item>
+        <item>Macho</item>
+        <item>Hembra</item>
+    </string-array>
+
+    <string-array name="spinner_especie">
+        <item>Seleccionar especie</item>
+        <item>Perro</item>
+        <item>Gato</item>
+        <item>Ave</item>
+        <item>Tortuga</item>
+    </string-array>
+
 
 
 
