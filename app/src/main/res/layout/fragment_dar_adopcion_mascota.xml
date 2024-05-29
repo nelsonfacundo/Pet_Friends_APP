@@ -3,10 +3,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/primary"
-    android:id="@+id/frameLayout3"
+    android:id="@+id/dar_Adopcion_Mascota_Fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.DarAdopcionMascotaFragment">
+
+    <ImageView
+        android:id="@+id/ic_back_fragment_dar_en_adopcion"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="40dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="24dp"
+        android:src="@drawable/icon_back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/imageView_foto_mascota"

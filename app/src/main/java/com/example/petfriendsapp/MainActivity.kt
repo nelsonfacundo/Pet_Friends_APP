@@ -43,7 +43,8 @@ class MainActivity : AppCompatActivity() {
         R.id.cambiarPassword,
         R.id.blog,
         R.id.review,
-        R.id.detailsAdoptar
+        R.id.detailsAdoptar,
+        R.id.darAdopcionMascotaFragment
     )
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

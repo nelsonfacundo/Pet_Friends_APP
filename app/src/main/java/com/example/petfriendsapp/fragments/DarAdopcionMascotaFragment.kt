@@ -28,7 +28,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 class DarAdopcionMascotaFragment : Fragment() {
 
-
+    private lateinit var buttonBack : ImageView
     private lateinit var buttonDarAdopcionMascota: Button
     private lateinit var viewDarAdopcionMascota: View
     private lateinit var buttonSeleccionarFoto: Button
@@ -46,7 +46,7 @@ class DarAdopcionMascotaFragment : Fragment() {
     private val db = FirebaseFirestore.getInstance()
     private val auth = FirebaseAuth.getInstance()
     companion object {
-
+        val BUTTON_BACK = R.id.ic_back_fragment_dar_en_adopcion
         val BUTTON_DAR_ADOPCION_MASCOTA = R.id.button_dar_adopcion_mascota
         val EDIT_TEXT_ESPECIE = R.id.especieMascota
         val EDIT_TEXT_RAZA = R.id.razaMascota
@@ -76,6 +76,7 @@ class DarAdopcionMascotaFragment : Fragment() {
         initListeners()
     }
 private fun initViews(){
+    buttonBack = viewDarAdopcionMascota.findViewById(BUTTON_BACK)
     buttonDarAdopcionMascota= viewDarAdopcionMascota.findViewById(BUTTON_DAR_ADOPCION_MASCOTA)
     buttonSeleccionarFoto= viewDarAdopcionMascota.findViewById(BUTTON_SELECCIONAR_FOTO)
     editTextEspecie= viewDarAdopcionMascota.findViewById(EDIT_TEXT_ESPECIE)
@@ -90,6 +91,7 @@ private fun initViews(){
     private fun initListeners(){
 buttonSeleccionarFoto.setOnClickListener{abrirGaleria()}
         buttonDarAdopcionMascota.setOnClickListener { enviarForm() }
+        buttonBack.setOnClickListener { navigateToInicio() }
 
     }
 private fun enviarForm(){
