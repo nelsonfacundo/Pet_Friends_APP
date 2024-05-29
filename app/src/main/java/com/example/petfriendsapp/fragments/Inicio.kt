@@ -33,6 +33,8 @@ class Inicio : Fragment() {
     private lateinit var viewModel: ListViewModel
     val db = Firebase.firestore
 
+    private lateinit var mascotaClickListener: (Mascota) -> Unit
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
@@ -53,6 +55,7 @@ class Inicio : Fragment() {
         recMascotas = viewInicio.findViewById(R.id.rec_mascota)
 
         prepareFragment()
+        mascotaClickListener = ::redirigir
 
         return viewInicio
 
@@ -87,10 +90,15 @@ class Inicio : Fragment() {
             .setQuery(query, Mascota::class.java)
             .build()
 
-        val adapter = MascotaFirestoreRecyclerAdapter(options)
+        val adapter = MascotaFirestoreRecyclerAdapter(options,mascotaClickListener)
         adapter.startListening()
         recMascotas.adapter = adapter
     }
+
+ private fun redirigir(mascota:Mascota){
+         val action = InicioDirections.actionInicioToDetailsAdoptar(mascota)
+         findNavController().navigate(action)
+     }
 
 
 
@@ -100,6 +108,7 @@ class Inicio : Fragment() {
                 if (task.isSuccessful) {
                         for (mascota in viewModel.mascotas) {
                             db.collection("mascotas").document().get()
+
                         }
                     }
 
@@ -110,7 +119,7 @@ class Inicio : Fragment() {
         buttonDarEnAdopcion.setOnClickListener{navigateToDarAdopcionMascota()}
     }
 
-    private fun navigateToDarAdopcionMascota(){
+    private fun navigateToDarAdopcionMascota() {
         val action = InicioDirections.actionInicioToDarAdopcionMascotaFragment()
         viewInicio.findNavController().navigate(action)
     }
