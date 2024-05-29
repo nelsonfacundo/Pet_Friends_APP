@@ -57,10 +57,9 @@ class DetailsAdoptar : Fragment() {
         val mascota: Mascota = args.Mascota
 
 
-        txtRaza.text = mascota.raza
+        txtRaza.text = mascota.especie
         txtEdad.text = mascota.edad.toString()
         txtNombre.text = mascota.nombre
-        txtSexo.text = mascota.sexo
         txtUbicacion.text = mascota.ubicacion
 
         /*buttonAdoptar.setOnClickListener {
