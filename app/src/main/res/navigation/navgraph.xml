@@ -104,4 +104,13 @@
             android:id="@+id/action_detailsAdoptar_to_inicio"
             app:destination="@id/inicio" />
     </fragment>
+    <fragment
+        android:id="@+id/servicio"
+        android:name="com.example.petfriendsapp.fragments.ServicioVeterinariaFragment"
+        android:label="fragment_servicio_veterinaria"
+        tools:layout="@layout/fragment_servicio_veterinaria" >
+        <action
+            android:id="@+id/action_servicio_to_inicio"
+            app:destination="@id/inicio" />
+    </fragment>
 </navigation>
