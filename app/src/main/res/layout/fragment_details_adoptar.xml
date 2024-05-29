@@ -14,20 +14,23 @@
         android:layout_height="83dp"
         android:background="@drawable/borderlayout"
         android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imagenPerro"
-        app:layout_constraintVertical_bias="0.704">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.827">
 
         <TextView
             android:id="@+id/descripcionMascota"
             android:layout_width="24dp"
             android:layout_height="47dp"
             android:layout_weight="1"
-            android:text="@string/txt_descripcionMascota_details"
-            android:gravity="center" />
+            android:gravity="center"
+            android:text="@string/txt_descripcionMascota_details" />
 
     </LinearLayout>
 
@@ -37,12 +40,15 @@
         android:layout_height="83dp"
         android:background="@drawable/borderlayout"
         android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imagenPerro"
-        app:layout_constraintVertical_bias="0.46">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.655">
 
         <ImageView
             android:id="@+id/imagenDueño"
@@ -77,6 +83,7 @@
             android:id="@+id/botonWpp"
             android:layout_width="82dp"
             android:layout_height="73dp"
+            android:layout_marginEnd="8dp"
             android:background="@drawable/round_background_profile"
             android:contentDescription="@string/whatsapp_button_description"
             android:src="@drawable/baseline_whatsapp_24"
@@ -92,42 +99,47 @@
         android:layout_height="53dp"
         android:background="@drawable/borderlayout"
         android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imagenPerro"
-        app:layout_constraintVertical_bias="0.261">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.525">
 
         <TextView
             android:id="@+id/razaMascota"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/txt_raza_details"
-            android:gravity="center" />
+            android:gravity="center"
+            android:text="@string/txt_raza_details" />
 
         <TextView
             android:id="@+id/sexoMascota"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/txt_sexoMascota_details"
-            android:gravity="center" />
+            android:gravity="center"
+            android:text="@string/txt_sexoMascota_details" />
 
         <TextView
             android:id="@+id/ubicacionMascotaDetalle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/txt_ubicacionMascota_details"
-            android:gravity="center" />
+            android:gravity="center"
+            android:text="@string/txt_ubicacionMascota_details" />
     </LinearLayout>
 
     <ImageView
         android:id="@+id/imagenPerro"
         android:layout_width="match_parent"
         android:layout_height="235dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -142,36 +154,41 @@
         android:layout_height="83dp"
         android:background="@drawable/borderlayout"
         android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imagenPerro"
-        app:layout_constraintVertical_bias="0.031">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.387">
 
         <TextView
             android:id="@+id/nombreMascota"
             android:layout_width="24dp"
             android:layout_height="47dp"
             android:layout_weight="1"
-            android:text="@string/txt_nombreMascota_details"
             android:gravity="center"
-            android:textSize="18sp"/>
+            android:text="@string/txt_nombreMascota_details"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/edadMascota"
             android:layout_width="wrap_content"
             android:layout_height="47dp"
             android:layout_weight="1"
-            android:text="@string/txt_edadMascota_details"
             android:gravity="center"
-            android:textSize="18sp"/>
+            android:text="@string/txt_edadMascota_details"
+            android:textSize="18sp" />
     </LinearLayout>
 
     <Button
         android:id="@+id/buttonAdoptar"
         android:layout_width="125dp"
         android:layout_height="58dp"
-        android:layout_marginBottom="36dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="12dp"
         android:backgroundTint="#4CAF50"
         android:text="@string/botonAdoptar"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -192,4 +209,19 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.262"
         app:tint="@android:color/white" />
+    <ImageView
+        android:id="@+id/ic_back_fragment_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="24dp"
+        android:src="@drawable/icon_back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        android:contentDescription="@string/botonBackDetails"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

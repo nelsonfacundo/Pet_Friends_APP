@@ -3,7 +3,7 @@ package com.example.petfriendsapp
 
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
@@ -30,10 +31,20 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navHostFragment: NavHostFragment
     private lateinit var bottomNavView: BottomNavigationView
 
-
     private val db = FirebaseFirestore.getInstance()
     private val auth = FirebaseAuth.getInstance()
 
+    //Lista de fragmentos se ocultar la bottom bar y action bar
+    private val fragmentsWithoutBottomNavAndActionBar = setOf(
+        //Llamo a los id de navigation
+        R.id.perfil,
+        R.id.editarPerfilFragment,
+        R.id.cambiarEmail,
+        R.id.cambiarPassword,
+        R.id.blog,
+        R.id.review,
+        R.id.detailsAdoptar
+    )
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -48,13 +59,7 @@ class MainActivity : AppCompatActivity() {
         //Observador de cambios de destino, se activa cada vez que cambia el destino de navegación
         navHostFragment.navController.addOnDestinationChangedListener { _, destination, _ ->
             invalidateOptionsMenu() // Cambia de fragment se llama a onPrepareOptionsMenu
-
-            // Oculta la actionBar en los fragmentos requeridos
-            if (destination.id == R.id.editarPerfilFragment || destination.id == R.id.cambiarEmail || destination.id == R.id.cambiarPassword) {
-                supportActionBar?.hide()
-            } else {
-                supportActionBar?.show()
-            }
+            hidenActionBarAndBottomBarFragments(destination)// Oculta la actionBar y la bottom navigation en los fragmentos requeridos
         }
         fetchUserProfile()
     }
@@ -204,5 +209,14 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    private fun hidenActionBarAndBottomBarFragments(destination: NavDestination) {
+        if (destination.id in fragmentsWithoutBottomNavAndActionBar) {
+            bottomNavView.visibility = View.GONE
+            supportActionBar?.hide()
+        } else {
+            bottomNavView.visibility = View.VISIBLE
+            supportActionBar?.show()
+        }
+    }
 
 }

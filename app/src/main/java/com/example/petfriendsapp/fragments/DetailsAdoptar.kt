@@ -4,16 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.petfriendsapp.R
 import com.example.petfriendsapp.entities.Mascota
 
 class DetailsAdoptar : Fragment() {
 
-
+    private lateinit var buttonBackDetails: ImageView
    private val args: DetailsAdoptarArgs by navArgs()
 
     override fun onCreateView(
@@ -22,7 +24,11 @@ class DetailsAdoptar : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_details_adoptar, container, false)
 
+        buttonBackDetails = view.findViewById(R.id.ic_back_fragment_detail)
 
+        buttonBackDetails.setOnClickListener {
+            findNavController().navigateUp()
+        }
 
         // Bind the details to the views
         val txtRaza: TextView = view.findViewById(R.id.razaMascota)
@@ -43,4 +49,5 @@ class DetailsAdoptar : Fragment() {
 
         return view
     }
+
 }
