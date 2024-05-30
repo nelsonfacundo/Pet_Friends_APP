@@ -105,7 +105,7 @@ class DetailsAdoptar : Fragment() {
     }
 
     private fun fetchUserDetails(userId: String, txtNombreDueño: TextView, imagenDueño: ImageView, buttonNumero: ImageButton) {
-        db.collection("usuarios").document(userId).get()
+        db.collection("users").document(userId).get()
             .addOnSuccessListener { userDocument ->
                 val nombreDueño = userDocument.getString("nombre") ?: "Nombre no disponible"
                 val avatarUrl = userDocument.getString("avatarUrl") ?: ""
