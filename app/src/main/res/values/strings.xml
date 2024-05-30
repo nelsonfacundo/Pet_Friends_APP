@@ -80,7 +80,7 @@
 
 
     /Pantalla educativa/
-    <string name="txt_data_ones">¡Bienvenido a Pet Friend!</string>
+    <string name="txt_data_ones">¡Bienvenido!</string>
     <string name="txt_data_two">Estamos emocionados de tenerte con nosotros.</string>
     <string name="txt_data_three">Por favor, completa los siguientes campos para comenzar:</string>
     <string name="txt_input_name">Ingresa tu nombre</string>
