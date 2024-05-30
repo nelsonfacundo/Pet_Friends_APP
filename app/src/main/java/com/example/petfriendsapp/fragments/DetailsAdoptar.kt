@@ -1,5 +1,7 @@
 package com.example.petfriendsapp.fragments
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +14,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
 import com.example.petfriendsapp.R
 import com.example.petfriendsapp.entities.Mascota
 import com.google.firebase.auth.FirebaseAuth
@@ -26,6 +29,7 @@ class DetailsAdoptar : Fragment() {
 
     private val db = FirebaseFirestore.getInstance()
     private val auth = FirebaseAuth.getInstance()
+    private var isButtonEnabled = true
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,17 +59,22 @@ class DetailsAdoptar : Fragment() {
 
 
         val mascota: Mascota = args.Mascota
+        val idMascota: String = args.mascotaId
 
 
         txtRaza.text = mascota.especie
         txtEdad.text = mascota.edad.toString()
         txtNombre.text = mascota.nombre
         txtUbicacion.text = mascota.ubicacion
+        txtSexo.text = mascota.sexo
 
-        /*buttonAdoptar.setOnClickListener {
-            crearPeticionAdopcion(mascota)
-        }*/
-        /*val userIdDueño = mascota.userId
+        if (mascota.imageUrl.isNotEmpty()) {
+            Glide.with(this)
+                .load(mascota.imageUrl)
+                .into(imagenPerro)
+        }
+
+        val userIdDueño = mascota.userId
         db.collection("usuarios").document(userIdDueño).get()
             .addOnSuccessListener { userDocument ->
                 val nombreDueño = userDocument.getString("nombre") ?: "Nombre no disponible"
@@ -73,11 +82,12 @@ class DetailsAdoptar : Fragment() {
                 val telefonoDueño = userDocument.getString("telefono") ?: "Teléfono no disponible"
 
                 txtNombreDueño.text = nombreDueño
-                if (avatarUrl.isNotEmpty()) {
-                    Glide.with(this)
-                        .load(avatarUrl)
-                        .into(imagenDueño)
-                }
+
+                // Cargar la imagen del dueño si la URL no está vacía
+                Glide.with(this)
+                    .load(avatarUrl)
+                    .placeholder(R.drawable.avatar)
+                    .into(imagenDueño)
 
                 // Configurar el botón para abrir WhatsApp
                 buttonNumero.setOnClickListener {
@@ -89,34 +99,47 @@ class DetailsAdoptar : Fragment() {
             }
             .addOnFailureListener { e ->
                 Toast.makeText(requireContext(), "Error al obtener los detalles del dueño: ${e.message}", Toast.LENGTH_SHORT).show()
-            }*/
+            }
+
+        buttonAdoptar.setOnClickListener {
+            if (isButtonEnabled) {
+                crearPeticionAdopcion(mascota, idMascota)
+                // Deshabilitar el botón después de que se presione
+                isButtonEnabled = false
+                buttonAdoptar.isEnabled = false
+            } else {
+                Toast.makeText(requireContext(), "Ya has realizado una solicitud de adopción", Toast.LENGTH_LONG).show()
+            }
+        }
 
         return view
     }
 
- /*   private fun crearPeticionAdopcion(mascota: Mascota) {
+
+    private fun crearPeticionAdopcion(mascota: Mascota, idMascota : String) {
+
         val userIdAdopta = auth.currentUser?.uid
-//        val userIdDueño = mascota.userId
+        val userIdDueño = mascota.userId
 
         if (userIdAdopta != null && userIdDueño != null) {
             val peticion = hashMapOf(
                 "estado" to "pendiente",
-                "idMascota" to mascota.id,
+                "idMascota" to idMascota,
                 "idUsuarioAdopta" to userIdAdopta,
                 "idUsuarioDueño" to userIdDueño
             )
             db.collection("peticiones")
                 .add(peticion)
                 .addOnSuccessListener {
-                    Toast.makeText(requireContext(), "Petición de adopción creada!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Petición de adopción creada!", Toast.LENGTH_LONG).show()
                 }
                 .addOnFailureListener { e ->
-                    Toast.makeText(requireContext(), "Error al crear petición: ${e.message}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Error al crear petición: ${e.message}", Toast.LENGTH_LONG).show()
                 }
         } else {
-            Toast.makeText(requireContext(), "Error: Usuario no autenticado o ID de dueño no disponible", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Error: Usuario no autenticado o ID de dueño no disponible", Toast.LENGTH_LONG).show()
         }
-    }*/
+    }
     }
 
 
