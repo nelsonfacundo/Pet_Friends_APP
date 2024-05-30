@@ -32,7 +32,8 @@
     </style>
    <style name="colorBtnVerde" parent="colorBtn">
         <item name="android:backgroundTint">@color/secundary</item>
-    </style>
+       <item name="android:textSize">18sp</item>
+   </style>
 
     <style name="profileImageRound">
         <item name="android:layout_width">150dp</item>

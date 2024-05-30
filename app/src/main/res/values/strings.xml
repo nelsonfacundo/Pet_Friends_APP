@@ -137,10 +137,11 @@
 
     /Dar en adopcion mascota/
     <string name="txt_btn_dar_adopcion_mascota">Agregar mascota</string>
-    <string name="txt_input_raza">Ingrese raza</string>
+    <string name="txt_input_nombre_adop">Ingrese nombre</string>
+    <string name="txt_input_raza">Ingrese especie</string>
     <string name="txt_input_edad">Ingrese edad</string>
-    <string name="txt_input_ubicacion">Ubicacion</string>
-    <string name="txt_input_descripcion">Descripcion</string>
+    <string name="txt_input_ubicacion">Ingrese una ubicacion</string>
+    <string name="txt_input_descripcion">Ingrese una descripcion</string>
     <string name="txt_input_sexo">Seleccione sexo</string>
     <string name="txt_input_especie">Ingrese especie</string>
     <string name="txt_btn_dar_en_adopcion">Dar en adopcion</string>
@@ -150,8 +151,8 @@
     <string name="txt_empty_edad">La edad no puede estar vacía</string>
     <string name="txt_empty_edad_incorrecta">La edad no puede ser menor a 0 o mayor a 100</string>
     <string name="txt_empty_especie">La especie no puede estar vacía</string>
-    <string name="txt_empty_raza">La raza no puede estar vacía</string>
-    <string name="txt_cantC_raza">La raza debe tener entre 3 y 25 caracteres</string>
+    <string name="txt_empty_raza">La especie no puede estar vacía</string>
+    <string name="txt_cantC_raza">La especie debe tener entre 3 y 25 caracteres</string>
     <string name="txt_empty_sexo">El sexo no puede estar vacío</string>
     <string name="txt_opcion_valida_sexo">Selecciona una opcion valida del campo sexo</string>
     <string name="txt_opcion_valida_especie">Selecciona una opcion valida del campo especie</string>
