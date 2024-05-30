@@ -52,9 +52,9 @@ class ForgotPasswordActivity : AppCompatActivity() {
             auth.sendPasswordResetEmail(email)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        Toast.makeText(this, R.string.forgot_succes, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, R.string.forgot_succes, Toast.LENGTH_LONG).show()
                     } else {
-                        Toast.makeText(this, R.string.forgot_error, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, R.string.forgot_error, Toast.LENGTH_LONG).show()
                     }
                 }
         }
@@ -62,7 +62,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
 
     private fun validateInputsForgotPassword(email: String): Boolean {
         if (email.isEmpty()) {
-            Toast.makeText(this, R.string.forgot_empty_error, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.forgot_empty_error, Toast.LENGTH_LONG).show()
             return false
         }
         return true

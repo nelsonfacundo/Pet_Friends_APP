@@ -15,7 +15,7 @@
 
     <Button
         android:id="@+id/button_dar_en_adopcion"
-        style="@style/colorBtn"
+        style="@style/colorBtnVerde"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="425dp"

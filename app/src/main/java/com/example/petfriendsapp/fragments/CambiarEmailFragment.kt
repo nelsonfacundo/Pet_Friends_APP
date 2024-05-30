@@ -89,25 +89,25 @@ class CambiarEmailFragment : Fragment() {
                             user. verifyBeforeUpdateEmail(nuevoEmail)
                                 .addOnCompleteListener { updateTask ->
                                     if (updateTask.isSuccessful) {
-                                        Toast.makeText(requireContext(), R.string.email_changed_successfully, Toast.LENGTH_SHORT).show()
+                                        Toast.makeText(requireContext(), R.string.email_changed_successfully, Toast.LENGTH_LONG).show()
                                         navigateToProfile()
                                     } else {
-                                        Toast.makeText(requireContext(), R.string.email_change_failed, Toast.LENGTH_SHORT).show()
+                                        Toast.makeText(requireContext(), R.string.email_change_failed, Toast.LENGTH_LONG).show()
                                     }
                                 }
                         } else {
-                            Toast.makeText(requireContext(), R.string.reauthentication_failed, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireContext(), R.string.reauthentication_failed, Toast.LENGTH_LONG).show()
                         }
                     }
             } else {
-                Toast.makeText(requireContext(), R.string.user_not_logged_in, Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), R.string.user_not_logged_in, Toast.LENGTH_LONG).show()
             }
         }
     }
 
     private fun validateInputs(viejoEmail: String, nuevoEmail: String, password: String): Boolean {
         if (viejoEmail.isEmpty() || nuevoEmail.isEmpty() || password.isEmpty()) {
-            Toast.makeText(requireContext(), R.string.msj_campos_vacios, Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), R.string.msj_campos_vacios, Toast.LENGTH_LONG).show()
             return false
         }
         return true

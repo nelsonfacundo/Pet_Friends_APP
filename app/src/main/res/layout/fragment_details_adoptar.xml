@@ -115,7 +115,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/txt_raza_details" />
+            android:text="@string/txt_especie_details" />
 
         <TextView
             android:id="@+id/sexoMascota"
