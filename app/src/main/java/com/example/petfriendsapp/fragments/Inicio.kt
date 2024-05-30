@@ -33,7 +33,7 @@ class Inicio : Fragment() {
     private lateinit var viewModel: ListViewModel
     val db = Firebase.firestore
 
-    private lateinit var mascotaClickListener: (Mascota) -> Unit
+    private lateinit var mascotaClickListener: (Mascota, String) -> Unit
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -55,7 +55,9 @@ class Inicio : Fragment() {
         recMascotas = viewInicio.findViewById(R.id.rec_mascota)
 
         prepareFragment()
-        mascotaClickListener = ::redirigir
+        mascotaClickListener = { mascota, mascotaId ->
+            redirigir(mascota, mascotaId)
+        }
 
         return viewInicio
 
@@ -95,10 +97,10 @@ class Inicio : Fragment() {
         recMascotas.adapter = adapter
     }
 
- private fun redirigir(mascota:Mascota){
-         val action = InicioDirections.actionInicioToDetailsAdoptar(mascota)
-         findNavController().navigate(action)
-     }
+    private fun redirigir(mascota: Mascota, mascotaId: String) {
+        val action = InicioDirections.actionInicioToDetailsAdoptar(mascota, mascotaId) // Pasar el id a DetailsAdoptar
+        findNavController().navigate(action)
+    }
 
 
 
