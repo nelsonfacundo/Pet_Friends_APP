@@ -43,7 +43,9 @@ class MainActivity : AppCompatActivity() {
         R.id.cambiarPassword,
         R.id.blog,
         R.id.review,
-       // R.id.detailsAdoptar, -> Descomentar cuando se haga un back para volver atras
+        R.id.detailsAdoptar,
+        R.id.servicio,
+        R.id.darAdopcionMascotaFragment
     )
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -118,7 +120,7 @@ class MainActivity : AppCompatActivity() {
        builder.setPositiveButton(R.string.txt_cerrar_sesion) { dialog, _ ->
            // Cerrar sesión
            auth.signOut()
-           Toast.makeText(this, R.string.txt_sesion_cerrada, Toast.LENGTH_SHORT).show()
+           Toast.makeText(this, R.string.txt_sesion_cerrada, Toast.LENGTH_LONG).show()
            // sale de la app
            finishAffinity()
            dialog.dismiss()
