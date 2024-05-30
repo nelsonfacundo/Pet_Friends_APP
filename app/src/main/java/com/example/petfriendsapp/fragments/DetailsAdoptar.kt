@@ -51,55 +51,32 @@ class DetailsAdoptar : Fragment() {
         val txtNombre: TextView = view.findViewById(R.id.nombreMascota)
         val txtSexo: TextView = view.findViewById(R.id.sexoMascota)
         val txtUbicacion: TextView = view.findViewById(R.id.ubicacionMascotaDetalle)
-        val imagenPerro : ImageView = view.findViewById(R.id.imagenPerro)
+        val imagenMascota : ImageView = view.findViewById(R.id.imagenPerro)
+        val descripcionMascota: TextView = view.findViewById(R.id.descripcionMascota)
 
         val txtNombreDueño: TextView = view.findViewById(R.id.nombreDueño)
         val imagenDueño : ImageView = view.findViewById(R.id.imagenDueño)
 
-
-
         val mascota: Mascota = args.Mascota
         val idMascota: String = args.mascotaId
-
 
         txtRaza.text = mascota.especie
         txtEdad.text = mascota.edad.toString()
         txtNombre.text = mascota.nombre
         txtUbicacion.text = mascota.ubicacion
         txtSexo.text = mascota.sexo
+        descripcionMascota.text = mascota.descripcion
+
 
         if (mascota.imageUrl.isNotEmpty()) {
             Glide.with(this)
                 .load(mascota.imageUrl)
-                .into(imagenPerro)
+                .into(imagenMascota)
         }
 
+        // Obtener los detalles del dueño
         val userIdDueño = mascota.userId
-        db.collection("usuarios").document(userIdDueño).get()
-            .addOnSuccessListener { userDocument ->
-                val nombreDueño = userDocument.getString("nombre") ?: "Nombre no disponible"
-                val avatarUrl = userDocument.getString("avatarUrl") ?: ""
-                val telefonoDueño = userDocument.getString("telefono") ?: "Teléfono no disponible"
-
-                txtNombreDueño.text = nombreDueño
-
-                // Cargar la imagen del dueño si la URL no está vacía
-                Glide.with(this)
-                    .load(avatarUrl)
-                    .placeholder(R.drawable.avatar)
-                    .into(imagenDueño)
-
-                // Configurar el botón para abrir WhatsApp
-                buttonNumero.setOnClickListener {
-                    val url = "https://wa.me/$telefonoDueño"
-                    val intent = Intent(Intent.ACTION_VIEW)
-                    intent.data = Uri.parse(url)
-                    startActivity(intent)
-                }
-            }
-            .addOnFailureListener { e ->
-                Toast.makeText(requireContext(), "Error al obtener los detalles del dueño: ${e.message}", Toast.LENGTH_SHORT).show()
-            }
+        fetchUserDetails(userIdDueño, txtNombreDueño, imagenDueño, buttonNumero)
 
         buttonAdoptar.setOnClickListener {
             if (isButtonEnabled) {
@@ -115,9 +92,49 @@ class DetailsAdoptar : Fragment() {
         return view
     }
 
+    private fun fetchUserDetails(userId: String, txtNombreDueño: TextView, imagenDueño: ImageView, buttonNumero: ImageButton) {
+        db.collection("users").document(userId).get()
+            .addOnSuccessListener { userDocument ->
+                val nombreDueño = userDocument.getString("nombre") ?: "Nombre no disponible"
+                val avatarUrl = userDocument.getString("avatarUrl") ?: ""
+                val telefonoDueño = userDocument.getString("telefono") ?: "Teléfono no disponible"
+
+                txtNombreDueño.text = nombreDueño
+
+                // Cargar la imagen del dueño si la URL no está vacía
+                Glide.with(this)
+                    .load(avatarUrl)
+                    .placeholder(R.drawable.avatar)
+                    .into(imagenDueño)
+
+                // Configurar el botón para abrir WhatsApp con el prefijo del país (+54)
+                buttonNumero.setOnClickListener {
+                    val formattedPhoneNumber = formatPhoneNumber(telefonoDueño)
+                    val url = "https://wa.me/$formattedPhoneNumber"
+                    val intent = Intent(Intent.ACTION_VIEW)
+                    intent.data = Uri.parse(url)
+                    startActivity(intent)
+                }
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(requireContext(), "Error al obtener los detalles del dueño: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    // Función para formatear el número de teléfono con el prefijo del país (+54)
+    private fun formatPhoneNumber(phoneNumber: String): String {
+        // Elimina espacios en blanco y caracteres no numéricos
+        val cleanedPhoneNumber = phoneNumber.replace(Regex("[^\\d]"), "")
+
+        // Añadir prefijo +54 si no está presente
+        return if (!cleanedPhoneNumber.startsWith("54")) {
+            "+54$cleanedPhoneNumber"
+        } else {
+            "+$cleanedPhoneNumber"
+        }
+    }
 
     private fun crearPeticionAdopcion(mascota: Mascota, idMascota : String) {
-
         val userIdAdopta = auth.currentUser?.uid
         val userIdDueño = mascota.userId
 
@@ -140,6 +157,4 @@ class DetailsAdoptar : Fragment() {
             Toast.makeText(requireContext(), "Error: Usuario no autenticado o ID de dueño no disponible", Toast.LENGTH_LONG).show()
         }
     }
-    }
-
-
+}
