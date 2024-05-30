@@ -75,11 +75,11 @@ class LoginActivity : AppCompatActivity() {
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                         // Inicio de sesión exitoso
-                        Toast.makeText(this, R.string.login_success, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, R.string.login_success, Toast.LENGTH_LONG).show()
                         checkUserDataAndNavigate()
                     } else {
                         // Error en el inicio de sesión
-                        Toast.makeText(this, R.string.login_error, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, R.string.login_error, Toast.LENGTH_LONG).show()
                     }
                 }
         }
@@ -87,7 +87,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun validateInputsLogin(email: String, password: String): Boolean {
         if (email.isEmpty() || password.isEmpty()) {
-            Toast.makeText(this, R.string.login_empty_error, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.login_empty_error, Toast.LENGTH_LONG).show()
             return false
         }
         return true
@@ -107,7 +107,7 @@ class LoginActivity : AppCompatActivity() {
                     navigateToDataForm()
                 }
             }.addOnFailureListener { exception ->
-                Toast.makeText(this, "error", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "error", Toast.LENGTH_LONG).show()
             }
         }
     }
