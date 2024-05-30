@@ -44,6 +44,7 @@ class MainActivity : AppCompatActivity() {
         R.id.blog,
         R.id.review,
         R.id.detailsAdoptar,
+        R.id.servicio,
         R.id.darAdopcionMascotaFragment
     )
     override fun onCreate(savedInstanceState: Bundle?) {
