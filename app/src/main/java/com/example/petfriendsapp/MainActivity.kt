@@ -1,6 +1,7 @@
 package com.example.petfriendsapp
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -113,23 +114,30 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-   private fun alertCerrarSesion() {
-       val builder = AlertDialog.Builder(this)
-       builder.setTitle(R.string.txt_cerrar_sesion)
-       builder.setMessage(R.string.txt_pregunta_cerrar_sesion)
-       builder.setPositiveButton(R.string.txt_cerrar_sesion) { dialog, _ ->
-           // Cerrar sesión
-           auth.signOut()
-           Toast.makeText(this, R.string.txt_sesion_cerrada, Toast.LENGTH_LONG).show()
-           // sale de la app
-           finishAffinity()
-           dialog.dismiss()
-       }
-       builder.setNegativeButton(R.string.cancelar) { dialog, _ ->
-           dialog.dismiss()
-       }
-       builder.create().show()
-   }
+    private fun alertCerrarSesion() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle(R.string.txt_cerrar_sesion)
+        builder.setMessage(R.string.txt_pregunta_cerrar_sesion)
+        builder.setPositiveButton(R.string.txt_cerrar_sesion) { dialog, _ ->
+            // Cerrar sesión
+            auth.signOut()
+            Toast.makeText(this, R.string.txt_sesion_cerrada, Toast.LENGTH_SHORT).show()
+
+            // Iniciar LoginActivity
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+
+            // Finalizar todas las actividades actuales
+            finishAffinity()
+
+            dialog.dismiss()
+        }
+        builder.setNegativeButton(R.string.cancelar) { dialog, _ ->
+            dialog.dismiss()
+        }
+        builder.create().show()
+    }
+
     private fun fetchUserProfile() {
         val user = auth.currentUser
         val uid = user?.uid
