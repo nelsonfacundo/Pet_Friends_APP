@@ -1,5 +1,6 @@
 package com.example.petfriendsapp.fragments
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -45,14 +46,12 @@ class DetailsAdoptar : Fragment() {
             findNavController().navigateUp()
         }
 
-        // Bind the details to the views
         val txtRaza: TextView = view.findViewById(R.id.razaMascota)
         val txtEdad: TextView = view.findViewById(R.id.edadMascota)
         val txtNombre: TextView = view.findViewById(R.id.nombreMascota)
         val txtSexo: TextView = view.findViewById(R.id.sexoMascota)
         val txtUbicacion: TextView = view.findViewById(R.id.ubicacionMascotaDetalle)
-        val imagenMascota : ImageView = view.findViewById(R.id.imagenPerro)
-        val descripcionMascota: TextView = view.findViewById(R.id.descripcionMascota)
+        val imagenPerro : ImageView = view.findViewById(R.id.imagenPerro)
 
         val txtNombreDueño: TextView = view.findViewById(R.id.nombreDueño)
         val imagenDueño : ImageView = view.findViewById(R.id.imagenDueño)
@@ -65,25 +64,38 @@ class DetailsAdoptar : Fragment() {
         txtNombre.text = mascota.nombre
         txtUbicacion.text = mascota.ubicacion
         txtSexo.text = mascota.sexo
-        descripcionMascota.text = mascota.descripcion
-
 
         if (mascota.imageUrl.isNotEmpty()) {
             Glide.with(this)
                 .load(mascota.imageUrl)
-                .into(imagenMascota)
+                .into(imagenPerro)
         }
 
-        // Obtener los detalles del dueño
+
         val userIdDueño = mascota.userId
         fetchUserDetails(userIdDueño, txtNombreDueño, imagenDueño, buttonNumero)
+
+
+        val userIdAdopta = auth.currentUser?.uid
+        if (userIdAdopta != null) {
+            val sharedPreferences = requireContext().getSharedPreferences("PetFriendsPrefs", Context.MODE_PRIVATE)
+            isButtonEnabled = sharedPreferences.getBoolean("isButtonEnabled_${userIdAdopta}_$idMascota", true)
+            buttonAdoptar.isEnabled = isButtonEnabled
+        }
 
         buttonAdoptar.setOnClickListener {
             if (isButtonEnabled) {
                 crearPeticionAdopcion(mascota, idMascota)
-                // Deshabilitar el botón después de que se presione
+                // Deshabilitar el botón después de que se presione y guardar el estado
                 isButtonEnabled = false
                 buttonAdoptar.isEnabled = false
+                if (userIdAdopta != null) {
+                    val sharedPreferences = requireContext().getSharedPreferences("PetFriendsPrefs", Context.MODE_PRIVATE)
+                    with(sharedPreferences.edit()) {
+                        putBoolean("isButtonEnabled_${userIdAdopta}_$idMascota", false)
+                        apply()
+                    }
+                }
             } else {
                 Toast.makeText(requireContext(), "Ya has realizado una solicitud de adopción", Toast.LENGTH_LONG).show()
             }
@@ -93,7 +105,7 @@ class DetailsAdoptar : Fragment() {
     }
 
     private fun fetchUserDetails(userId: String, txtNombreDueño: TextView, imagenDueño: ImageView, buttonNumero: ImageButton) {
-        db.collection("users").document(userId).get()
+        db.collection("usuarios").document(userId).get()
             .addOnSuccessListener { userDocument ->
                 val nombreDueño = userDocument.getString("nombre") ?: "Nombre no disponible"
                 val avatarUrl = userDocument.getString("avatarUrl") ?: ""
