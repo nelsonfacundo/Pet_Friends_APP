@@ -71,7 +71,7 @@ class DataFormActivity : AppCompatActivity() {
                     .into(imageViewAvatar)
             } else {
                 Log.e("DataFormActivity", "Image URI is null")
-                Toast.makeText(this, "Error al seleccionar imagen", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Error al seleccionar imagen", Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -104,20 +104,20 @@ class DataFormActivity : AppCompatActivity() {
                             db.collection("users").document(user.uid)
                                 .set(userMap)
                                 .addOnSuccessListener {
-                                    Toast.makeText(this, R.string.txt_exitoso, Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(this, R.string.txt_exitoso, Toast.LENGTH_LONG).show()
                                     navigateToHome()
                                 }
                                 .addOnFailureListener { e ->
-                                    Toast.makeText(this, R.string.txt_error_datos , Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(this, R.string.txt_error_datos , Toast.LENGTH_LONG).show()
                                 }
                         }.addOnFailureListener { e ->
-                            Toast.makeText(this, R.string.txt_error_url , Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, R.string.txt_error_url , Toast.LENGTH_LONG).show()
                         }
                     }
                 }
             }
         } else {
-            Toast.makeText(this, validationResult.second, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, validationResult.second, Toast.LENGTH_LONG).show()
         }
     }
 

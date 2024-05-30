@@ -1,8 +1,10 @@
 package com.example.petfriendsapp
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
@@ -12,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
@@ -32,6 +35,19 @@ class MainActivity : AppCompatActivity() {
     private val db = FirebaseFirestore.getInstance()
     private val auth = FirebaseAuth.getInstance()
 
+    //Lista de fragmentos se ocultar la bottom bar y action bar
+    private val fragmentsWithoutBottomNavAndActionBar = setOf(
+        //Llamo a los id de navigation
+        R.id.perfil,
+        R.id.editarPerfilFragment,
+        R.id.cambiarEmail,
+        R.id.cambiarPassword,
+        R.id.blog,
+        R.id.review,
+        R.id.detailsAdoptar,
+        R.id.servicio,
+        R.id.darAdopcionMascotaFragment
+    )
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -46,13 +62,7 @@ class MainActivity : AppCompatActivity() {
         //Observador de cambios de destino, se activa cada vez que cambia el destino de navegación
         navHostFragment.navController.addOnDestinationChangedListener { _, destination, _ ->
             invalidateOptionsMenu() // Cambia de fragment se llama a onPrepareOptionsMenu
-
-            // Oculta la actionBar en los fragmentos requeridos
-            if (destination.id == R.id.editarPerfilFragment || destination.id == R.id.cambiarEmail || destination.id == R.id.cambiarPassword) {
-                supportActionBar?.hide()
-            } else {
-                supportActionBar?.show()
-            }
+            hidenActionBarAndBottomBarFragments(destination)// Oculta la actionBar y la bottom navigation en los fragmentos requeridos
         }
         fetchUserProfile()
     }
@@ -104,23 +114,30 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-   private fun alertCerrarSesion() {
-       val builder = AlertDialog.Builder(this)
-       builder.setTitle(R.string.txt_cerrar_sesion)
-       builder.setMessage(R.string.txt_pregunta_cerrar_sesion)
-       builder.setPositiveButton(R.string.txt_cerrar_sesion) { dialog, _ ->
-           // Cerrar sesión
-           auth.signOut()
-           Toast.makeText(this, R.string.txt_sesion_cerrada, Toast.LENGTH_SHORT).show()
-           // sale de la app
-           finishAffinity()
-           dialog.dismiss()
-       }
-       builder.setNegativeButton(R.string.cancelar) { dialog, _ ->
-           dialog.dismiss()
-       }
-       builder.create().show()
-   }
+    private fun alertCerrarSesion() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle(R.string.txt_cerrar_sesion)
+        builder.setMessage(R.string.txt_pregunta_cerrar_sesion)
+        builder.setPositiveButton(R.string.txt_cerrar_sesion) { dialog, _ ->
+            // Cerrar sesión
+            auth.signOut()
+            Toast.makeText(this, R.string.txt_sesion_cerrada, Toast.LENGTH_SHORT).show()
+
+            // Iniciar LoginActivity
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+
+            // Finalizar todas las actividades actuales
+            finishAffinity()
+
+            dialog.dismiss()
+        }
+        builder.setNegativeButton(R.string.cancelar) { dialog, _ ->
+            dialog.dismiss()
+        }
+        builder.create().show()
+    }
+
     private fun fetchUserProfile() {
         val user = auth.currentUser
         val uid = user?.uid
@@ -202,5 +219,14 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    private fun hidenActionBarAndBottomBarFragments(destination: NavDestination) {
+        if (destination.id in fragmentsWithoutBottomNavAndActionBar) {
+            bottomNavView.visibility = View.GONE
+            supportActionBar?.hide()
+        } else {
+            bottomNavView.visibility = View.VISIBLE
+            supportActionBar?.show()
+        }
+    }
 
 }

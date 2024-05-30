@@ -13,20 +13,28 @@
         <item name="android:textSize">18sp</item>
         <item name="android:textStyle">bold</item>
     </style>
+
     <style name="textViewEditTitle" parent="textViewEdit">
         <item name="android:textSize">26sp</item>
     </style>
+
     <style name="inputsTextEdit" parent="textViewEdit">
         <item name="android:textSize">18sp</item>
         <item name="android:textStyle">normal</item>
     </style>
+
     <style name="textEditSub" parent="inputsTextEdit">
         <item name="android:textSize">16sp</item>
     </style>
+
     <style name="colorBtn" parent="inputsTextEdit">
         <item name="android:textColor">@color/white</item>
         <item name="android:backgroundTint">@color/accent</item>
         <item name="android:radius">5dp</item>
+    </style>
+
+    <style name="colorBtnVerde" parent="colorBtn">
+        <item name="android:backgroundTint">@color/secundary</item>
     </style>
     <style name="profileImageRound">
         <item name="android:layout_width">150dp</item>
