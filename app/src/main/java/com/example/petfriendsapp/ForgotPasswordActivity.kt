@@ -54,7 +54,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
                     if (task.isSuccessful) {
                         Toast.makeText(this, R.string.forgot_succes, Toast.LENGTH_LONG).show()
                     } else {
-                        Toast.makeText(this, R.string.forgot_error, Toast.LENGTH_LONG).show()
+                        Toast.makeText(this, R.string.forgot_invalid_email_error, Toast.LENGTH_LONG).show()
                     }
                 }
         }
