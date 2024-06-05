@@ -80,24 +80,24 @@ class CambiarPasswordFragment : Fragment() {
                 user.updatePassword(nuevaPass)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            Toast.makeText(requireContext(), R.string.password_changed_successfully, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireContext(), R.string.password_changed_successfully, Toast.LENGTH_LONG).show()
                             navigateToProfile()
                         } else {
-                            Toast.makeText(requireContext(), R.string.password_change_failed, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireContext(), R.string.password_change_failed, Toast.LENGTH_LONG).show()
                         }
                     }
             } else {
-                Toast.makeText(requireContext(), R.string.user_not_logged_in_password, Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), R.string.user_not_logged_in_password, Toast.LENGTH_LONG).show()
             }
         }
     }
 
     private fun validateInputs(viejaPass: String, nuevaPass: String, confirmPass: String): Boolean {
         if (viejaPass.isEmpty() || nuevaPass.isEmpty()|| confirmPass.isEmpty()) {
-            Toast.makeText(requireContext(), R.string.msj_campos_vacios, Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), R.string.msj_campos_vacios, Toast.LENGTH_LONG).show()
             return false
         }else if (nuevaPass != confirmPass) {
-            Toast.makeText(requireContext(), R.string.msj_pass_no_coinciden, Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), R.string.msj_pass_no_coinciden, Toast.LENGTH_LONG).show()
             return false
         }
         return true

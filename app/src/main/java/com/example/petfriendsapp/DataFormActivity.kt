@@ -71,7 +71,7 @@ class DataFormActivity : AppCompatActivity() {
                     .into(imageViewAvatar)
             } else {
                 Log.e("DataFormActivity", "Image URI is null")
-                Toast.makeText(this, "Error al seleccionar imagen", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Error al seleccionar imagen", Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -104,20 +104,20 @@ class DataFormActivity : AppCompatActivity() {
                             db.collection("users").document(user.uid)
                                 .set(userMap)
                                 .addOnSuccessListener {
-                                    Toast.makeText(this, R.string.txt_exitoso, Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(this, R.string.txt_exitoso, Toast.LENGTH_LONG).show()
                                     navigateToHome()
                                 }
                                 .addOnFailureListener { e ->
-                                    Toast.makeText(this, R.string.txt_error_datos , Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(this, R.string.txt_error_datos , Toast.LENGTH_LONG).show()
                                 }
                         }.addOnFailureListener { e ->
-                            Toast.makeText(this, R.string.txt_error_url , Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, R.string.txt_error_url , Toast.LENGTH_LONG).show()
                         }
                     }
                 }
             }
         } else {
-            Toast.makeText(this, validationResult.second, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, validationResult.second, Toast.LENGTH_LONG).show()
         }
     }
 
@@ -126,12 +126,14 @@ class DataFormActivity : AppCompatActivity() {
         val apellido = inputApellido.text.toString().trim()
         val telefono = inputTelefono.text.toString().trim()
 
+        val telefonoPattern = "\\d+".toRegex() // Expresión regular para aceptar solo dígitos
+
         if (nombre.isEmpty()) return Pair(false, getString(R.string.txt_empty_nombre))
-        if (nombre.length < 3 || nombre.length > 25) return Pair(false, getString(R.string.txt_cantC_nombre))
+        if (nombre.length < 2 || nombre.length >= 25) return Pair(false, getString(R.string.txt_cantC_nombre))
         if (apellido.isEmpty()) return Pair(false, getString(R.string.txt_empty_apellido))
-        if (apellido.length < 3 || apellido.length > 25) return Pair(false, getString(R.string.txt_cantC_apellido))
+        if (apellido.length < 2 || apellido.length >= 25) return Pair(false, getString(R.string.txt_cantC_apellido))
         if (telefono.isEmpty()) return Pair(false, getString(R.string.txt_empty_telefono))
-        if (telefono.length != 10) return Pair(false, getString(R.string.txt_cantC_telefono))
+        if (telefono.length != 10 || !telefono.matches(telefonoPattern)) return Pair(false, getString(R.string.txt_formato_telefono))
         if (imageUri == null) return Pair(false, getString(R.string.txt_empty_imagen))
         if (auth.currentUser == null) return Pair(false, getString(R.string.txt_validate_auth))
 
