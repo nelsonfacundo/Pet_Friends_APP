@@ -195,4 +195,10 @@
     <string name="permission_required_toast">Permiso requerido</string>
     <string name="title_activity_maps2">MapsActivity2</string>
 
+    /Solicitud Recibida/
+    <string name="nombre_solicitante">Nombre Solicitante</string>
+    <string name="quiere_adoptar">Quiere adoptar a: </string>
+    <string name="nombre_mascota">Nombre Mascota</string>
+
+
 </resources>
