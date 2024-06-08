@@ -1,104 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_registrar"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primary"
-    tools:layout_editor_absoluteX="0dp"
-    tools:layout_editor_absoluteY="-2dp">
-
-    <FrameLayout
-        android:id="@+id/fragmentContainerRegistro"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="-16dp"
-        tools:layout_editor_absoluteY="221dp" />
+    android:background="@color/primary">
 
     <ImageView
         android:id="@+id/ic_back"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginEnd="340dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="660dp"
         android:clickable="true"
         android:focusable="true"
         android:padding="24dp"
         android:src="@drawable/icon_back"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/text_nombre"
-        style="@style/textViewEdit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="250dp"
-        android:hint="@string/txt_name"
-        android:text="Nombre"
-        app:layout_constraintBottom_toTopOf="@+id/text_registro_name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.106"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.657" />
+        app:layout_constraintVertical_bias="0.19" />
 
     <EditText
-        android:id="@+id/text_registro_name"
+        android:id="@+id/text_registro_email"
+        style="@style/inputsTextEdit"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="150dp"
         android:layout_marginEnd="50dp"
         android:background="@drawable/border_inputs"
-        android:inputType="textPersonName"
+        android:hint="@string/place_holder_input_user"
+        android:inputType="textEmailAddress"
         android:padding="12dp"
-        app:layout_constraintBottom_toTopOf="@+id/text_registro_apellido"
+        app:layout_constraintBottom_toTopOf="@+id/text_registro_password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/text_apellido"
-        style="@style/textViewEdit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="250dp"
-        android:layout_marginBottom="10dp"
-        android:hint="@string/txt_last_name"
-        android:text="Apellido"
-        app:layout_constraintBottom_toTopOf="@+id/text_registro_apellido"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_registro_name"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <EditText
-        android:id="@+id/text_registro_apellido"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="200dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginBottom="40dp"
-        android:background="@drawable/border_inputs"
-        android:inputType="textPersonName"
-        android:padding="12dp"
-        app:layout_constraintBottom_toTopOf="@+id/text_registro_email"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.68" />
+        app:layout_constraintVertical_bias="0.277" />
 
     <TextView
         android:id="@+id/text_email"
@@ -107,30 +49,14 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="250dp"
-        android:hint="@string/txt_email"
-        android:text="Correo Electronico"
+        android:layout_marginBottom="10dp"
+        android:text="@string/txt_email"
         app:layout_constraintBottom_toTopOf="@+id/text_registro_email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_registro_apellido"
-        app:layout_constraintVertical_bias="0.607" />
-
-
-    <EditText
-        android:id="@+id/text_registro_email"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="296dp"
-        android:layout_marginEnd="50dp"
-        android:background="@drawable/border_inputs"
-        android:inputType="textEmailAddress"
-        android:padding="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.986" />
 
     <TextView
         android:id="@+id/text_contraseña"
@@ -138,45 +64,84 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="250dp"
-        android:hint="@string/txt_pass"
-        android:text="Contraseña"
-        app:layout_constraintBottom_toTopOf="@+id/text_registro_contraseña"
+        android:text="@string/txt_pass"
+        app:layout_constraintBottom_toTopOf="@+id/text_registro_password"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.263"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_registro_email"
-        app:layout_constraintVertical_bias="0.38" />
+        app:layout_constraintVertical_bias="0.375" />
 
     <EditText
-        android:id="@+id/text_registro_contraseña"
+        android:id="@+id/text_registro_password"
+        style="@style/inputsTextEdit"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
-        android:layout_marginBottom="200dp"
         android:background="@drawable/border_inputs"
+        android:hint="@string/place_holder_input_password"
+        android:inputType="textPassword"
+        android:padding="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.424" />
+
+    <TextView
+        android:id="@+id/text_confrim_contraseña"
+        style="@style/textViewEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="250dp"
+        android:layout_marginBottom="15dp"
+        android:text="@string/txt_pass_confirmar"
+        app:layout_constraintBottom_toTopOf="@+id/text_registro_confrim_contraseña"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_registro_password"
+        app:layout_constraintVertical_bias="0.692" />
+
+    <EditText
+        android:id="@+id/text_registro_confrim_contraseña"
+        style="@style/inputsTextEdit"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="220dp"
+        android:background="@drawable/border_inputs"
+        android:hint="@string/place_holder_input_repassword"
         android:inputType="textPassword"
         android:padding="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_registro_email"
-        app:layout_constraintVertical_bias="0.34" />
+        app:layout_constraintTop_toBottomOf="@+id/text_registro_password"
+        app:layout_constraintVertical_bias="0.418" />
 
     <Button
         android:id="@+id/btnRegistrar"
+        style="@style/colorBtn"
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/border_btn"
+        android:layout_height="60dp"
+        android:layout_marginBottom="124dp"
         android:text="@string/txt_registro"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_registro_contraseña"
-        app:layout_constraintVertical_bias="0.488" />
+        app:layout_constraintTop_toBottomOf="@+id/text_registro_confrim_contraseña"
+        app:layout_constraintVertical_bias="1.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+

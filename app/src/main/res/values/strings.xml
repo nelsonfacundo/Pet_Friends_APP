@@ -1,13 +1,183 @@
 <resources>
     <string name="app_name">Pet Friends APP</string>
-    <string name="titulo_login">Inicio de sesion</string>
-    <string name="txt_email">Email</string>
-    <string name="txt_pass">Contraseña</string>
+
+
+    /PlaceHolder inputs//
     <string name="place_holder_input_user">Ingrese email</string>
+    <string name="place_holder_input_new_email">Ingrese nuevo email</string>
     <string name="place_holder_input_password">Ingrese contraseña</string>
-    <string name="txt_btn_login">Ingresar</string>
+    <string name="place_holder_input_new_password">Ingrese nueva contraseña</string>
+    <string name="place_holder_input_confirm_new_password">Repita nueva contraseña</string>
+    <string name="place_holder_input_repassword">Confirme contraseña</string>
+    <string name="place_holder_input_nombre">Ingrese su nombre</string>
+    <string name="place_holder_input_apellido">Ingrese su apellido</string>
+
+
+    /Register/
     <string name="txt_registro">Registrarse</string>
     <string name="txt_name">Nombre</string>
     <string name="txt_last_name">Apellido</string>
+    <string name="txt_forgot_password">Forgot password</string>
+    <string name="txt_pass_confirmar">Confirme contraseña</string>
+    <string name="register_success">Registro exitoso</string>
+    <string name="msj_email_registrado">Email ya registrado</string>
+    <string name="msj_campos_vacios">Por favor, complete todos los campos</string>
+    <string name="msj_email_formato_bad">Formato de email no válido</string>
+    <string name="msj_pass_no_coinciden">Las contraseñas no coinciden</string>
+    <string name="msj_pass_falta_caracteres">La contraseña debe tener al menos 6 caracteres</string>
+    <string name="msj_error_consulta_bd">Error en la consulta de la base de datos</string>
+    <string name="msj_error_register">Error al registrar.</string>
+
+
     <string name="hello_blank_fragment">Hello Blank Fragment</string>
+
+
+    /Login/
+    <string name="titulo_login">Inicio de sesion</string>
+    <string name="txt_email">Email</string>
+    <string name="txt_pass">Contraseña</string>
+    <string name="txt_btn_login">Ingresar</string>
+    <string name="login_success">Inicio de sesión exitoso</string>
+    <string name="login_error">El email o contraseña no corresponde al usuario</string>
+    <string name="login_empty_error">Email y contraseña no pueden estar vacíos</string>
+
+
+    /Forgot passowrd/
+    <string name="forgot_succes">Email enviado con exito</string>
+    <string name="forgot_error">Email no existe </string>
+    <string name="forgot_empty_error">Email no puede estar vacío</string>
+    <string name="txt_btn_forgot_password">Enviar email</string>
+
+    /Perfil/
+    <string name="txt_notificacion">Notificaciones</string>
+    <string name="txt_btn_cambiar_ft">Editar Perfil</string>
+    <string name="txt_btn_cambiar_email">Cambiar Email</string>
+    <string name="txt_btn_cambiar_password">Cambiar Contraseña</string>
+
+    /Cambiar Email/
+    <string name="email_changed_successfully">Email cambiado con éxito, verfique su nuevo email</string>
+    <string name="email_change_failed">No se pudo cambiar el email</string>
+    <string name="user_not_logged_in">Inicia sesión para cambiar el email</string>
+    <string name="reauthentication_failed">No se pudo verificar tu identidad. Por favor, revisa tus credenciales.</string>
+
+    /Cambiar Password/
+    <string name="password_changed_successfully">Contraseña cambiada exitosamente</string>
+    <string name="password_change_failed">No se pudo cambiar la contraseña</string>
+    <string name="user_not_logged_in_password">Inicia sesión para cambiar el contraseña</string>
+
+    /Editar Perfil/
+    <string name="edit_txt_name">Ingrese su nuevo nombre</string>
+    <string name="edit_txt_last_name">Ingrese su nuevo apellido</string>
+    <string name="edit_txt_telefono">Ingrese su nuevo telefono</string>
+    <string name="txt_telefono">Telefono</string>
+    <string name="btn_edit_perfil_guardar">Guardar</string>
+    <string name="perfil_changed_successfully">Perfil actualizado</string>
+    <string name="perfil_changed_failed">Error al actualizar perfil</string>
+    <string name="photo_changed_failed">Error al seleccionar una imagen</string>
+    <string name="photo_changed_successfully">Carga de foto exitosa</string>
+    <string name="url_changed_failed">Error al guardar la URL de la imagen en Firestore</string>
+    <string name="error_carga_image">Error al cargar la imagen</string>
+
+
+    /Pantalla educativa/
+    <string name="txt_data_ones">¡Bienvenido!</string>
+    <string name="txt_data_two">Estamos emocionados de tenerte con nosotros.</string>
+    <string name="txt_data_three">Por favor, completa los siguientes campos para comenzar:</string>
+    <string name="txt_input_name">Ingresa tu nombre</string>
+    <string name="txt_input_lastname">Ingresa tu apellido</string>
+    <string name="txt_input_telefono">Ingresa tu telefono</string>
+    <string name="txt_btn_avatar">Seleccionar Foto</string>
+    <string name="txt_btn_datos">Enviar datos</string>
+    <string name="txt_empty_nombre">El nombre no puede estar vacío</string>
+    <string name="txt_cantC_nombre">El nombre debe tener entre 3 y 25 caracteres</string>
+    <string name="txt_empty_apellido">El apellido no puede estar vacío</string>
+    <string name="txt_cantC_apellido">El apellido debe tener entre 3 y 25 caracteres</string>
+    <string name="txt_empty_telefono">El teléfono no puede estar vacío</string>
+    <string name="txt_cantC_telefono">El teléfono debe tener exactamente 10 caracteres</string>
+    <string name="txt_empty_imagen">Selecciona una imagen</string>
+    <string name="txt_validate_auth">Usuario no autenticado</string>
+    <string name="txt_exitoso">Datos guardados correctamente</string>
+    <string name="txt_error_url">Error al obtener URL de descarga </string>
+    <string name="txt_error_datos">Error al guardar datos </string>
+
+
+    /Main/
+    <string name="txt_eliminar_cuenta">Eliminar cuenta</string>
+    <string name="txt_pregunta_eliminar_cuenta">¿Estás seguro que quieres eliminar tu cuenta?</string>
+    <string name="eliminar">Eliminar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="txt_error_eliminar_cuenta">Error al eliminar la cuenta</string>
+    <string name="txt_cuenta_eliminada">Cuenta eliminada</string>
+    <string name="txt_pregunta_cerrar_sesion">¿Estás seguro que quieres cerrar sesión?</string>
+    <string name="txt_cerrar_sesion">Cerrar Sesion</string>
+    <string name="txt_sesion_cerrada">Sesion Cerrada</string>
+
+
+    /Blog/
+    <string name="txt_blog">Artículos y recursos educativos</string>
+
+
+    /Review/
+    <string name="txt_review">Reseñas</string>
+
+    /Details Perro Adoptar/
+    <string name="txt_nombreMascota_details">Nombre</string>
+    <string name="txt_edadMascota_details">Edad</string>
+    <string name="txt_especie_details">Especie</string>
+    <string name="txt_sexoMascota_details">Sexo</string>
+    <string name="txt_ubicacionMascota_details">Ubicacion</string>
+    <string name="txt_descripcionMascota_details">Descripcion de la Mascota</string>
+    <string name="txt_dueño_details">Dueño</string>
+    <string name="txt_dueñoNombre_details">Nombre del dueño</string>
+    <string name="whatsapp_button_description">Abrir WhatsApp</string>
+    <string name="favoritos_button_description">Agregar mascota a favoritos</string>
+    <string name="botonAdoptar">Adoptar</string>
+    <string name="botonBackDetails">Volver atras</string>
+
+    /Dar en adopcion mascota/
+    <string name="txt_btn_dar_adopcion_mascota">Agregar mascota</string>
+    <string name="txt_input_nombre_adop">Ingrese nombre</string>
+    <string name="txt_input_raza">Ingrese especie</string>
+    <string name="txt_input_edad">Ingrese edad</string>
+    <string name="txt_input_ubicacion">Ingrese una ubicacion</string>
+    <string name="txt_input_descripcion">Ingrese una descripcion</string>
+    <string name="txt_input_sexo">Seleccione sexo</string>
+    <string name="txt_input_especie">Ingrese especie</string>
+    <string name="txt_btn_dar_en_adopcion">Dar en adopcion</string>
+    <string name="txt_cantC_nombre_mascota">El nombre debe tener entre 3 y 25 caracteres</string>
+    <string name="txt_empty_descripcion">La descripcion no puede estar vacía</string>
+    <string name="txt_empty_ubicacion">La ubicacion no puede estar vacía</string>
+    <string name="txt_empty_edad">La edad no puede estar vacía</string>
+    <string name="txt_empty_edad_incorrecta">La edad no puede ser menor a 0 o mayor a 100</string>
+    <string name="txt_empty_especie">La especie no puede estar vacía</string>
+    <string name="txt_empty_raza">La especie no puede estar vacía</string>
+    <string name="txt_cantC_raza">La especie debe tener entre 3 y 25 caracteres</string>
+    <string name="txt_empty_sexo">El sexo no puede estar vacío</string>
+    <string name="txt_opcion_valida_sexo">Selecciona una opcion valida del campo sexo</string>
+    <string name="txt_opcion_valida_especie">Selecciona una opcion valida del campo especie</string>
+
+    <string-array name="spinner_sexo">
+        <item>Seleccionar sexo</item>
+        <item>Macho</item>
+        <item>Hembra</item>
+    </string-array>
+
+    <string-array name="spinner_especie">
+        <item>Seleccionar especie</item>
+        <item>Perro</item>
+        <item>Gato</item>
+        <item>Ave</item>
+        <item>Tortuga</item>
+    </string-array>
+
+    /Dar en adopcion/
+    <string name="adopcion_mascota">Dar en adopcion</string>
+    <string name="place_holder_input_nombre_mascota">Introduzca el nombre</string>
+    <string name="place_holder_input_raza_mascota">Introduzca la raza</string>
+    <string name="place_holder_input_edad_mascota">Introduzca la edad</string>
+    <string name="place_holder_input_descripcion_mascota">Introduzca una descripcion</string>
+    <string name="place_holder_input_tipo_mascota">Introduzca el tipo de mascota</string>
+    <string name="btn_dar_en_adopcion">Dar en Adopcion</string>
+    <string name="btn_masculino">Masculino</string>
+    <string name="btn_femenino">Femenino</string>
 </resources>

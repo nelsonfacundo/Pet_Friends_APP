@@ -2,12 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:title="Inicio"
-        android:icon="@drawable/inicio_icon"
-        android:id="@+id/inicio" />
-    <item android:title="Chats"
-        android:icon="@drawable/chat"
-        android:id="@+id/chats" />
-    <item android:title="Menu"
-        android:icon="@drawable/menu"
-        android:id="@+id/menu"/>
+        android:icon="@drawable/inicio"
+        android:id="@+id/inicio"/>
+    <item android:title="Actividad"
+        android:icon="@drawable/actividad"
+        android:id="@+id/actividad"/>
+    <item android:title="Favoritos"
+        android:icon="@drawable/favorito"
+        android:id="@+id/favorito"/>
 </menu>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_review"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary"
+    tools:context=".fragments.ReviewFragment"
+    tools:layout_editor_absoluteX="1dp"
+    tools:layout_editor_absoluteY="18dp">
+
+    <ImageView
+        android:id="@+id/ic_back_resenia"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="40dp"
+        android:contentDescription="@string/botonAdoptar"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="24dp"
+        android:src="@drawable/icon_back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/txt_title_review"
+        style="@style/textViewEditTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="60dp"
+        android:text="@string/txt_review"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+
+    <ImageView
+        android:id="@+id/reseniaPicture"
+        style="@style/profileImageRound"
+        android:layout_width="185dp"
+        android:layout_height="187dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="80dp"
+        android:background="@drawable/round_background_profile"
+        android:src="@drawable/avatar"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/dueñoNombre"
+        style="@style/textViewEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="68dp"
+        android:text="@string/txt_dueñoNombre_details"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/reseniaPicture" />
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="-20dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="30dp"
+        android:rating="5"
+        android:theme="@style/ratingBarNormal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+
+    <TextView
+        android:id="@+id/valoration"
+        style="@style/textViewEditTitle"
+        android:layout_width="34dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginBottom="30dp"
+        android:text="0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="409dp"
+        android:layout_height="353dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/resenia_list"
+            android:layout_width="match_parent"
+            android:layout_height="328dp"
+            android:layout_marginTop="12dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_trendings_flights" />
+
+
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
