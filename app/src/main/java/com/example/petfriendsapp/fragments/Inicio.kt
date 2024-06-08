@@ -1,5 +1,6 @@
 package fragments
 
+import android.app.Activity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.petfriendsapp.R
 import com.example.petfriendsapp.adapter.MascotaFirestoreRecyclerAdapter
 import com.example.petfriendsapp.entities.Mascota
+import com.example.petfriendsapp.fragments.FiltrosFragment
 import com.example.petfriendsapp.viewmodels.ListViewModel
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.Firebase
@@ -32,6 +34,7 @@ class Inicio : Fragment() {
     private lateinit var buttonDarEnAdopcion : Button
     private lateinit var viewModel: ListViewModel
     val db = Firebase.firestore
+    private lateinit var btnFiltros: Button
 
     private lateinit var mascotaClickListener: (Mascota, String) -> Unit
 
@@ -57,6 +60,11 @@ class Inicio : Fragment() {
         prepareFragment()
         mascotaClickListener = { mascota, mascotaId ->
             redirigir(mascota, mascotaId)
+        }
+
+        btnFiltros = viewInicio.findViewById(R.id.btn_filtros)
+        btnFiltros.setOnClickListener{
+            showFiltrosBottomSheet()
         }
 
         return viewInicio
@@ -124,6 +132,11 @@ class Inicio : Fragment() {
     private fun navigateToDarAdopcionMascota() {
         val action = InicioDirections.actionInicioToDarAdopcionMascotaFragment()
         viewInicio.findNavController().navigate(action)
+    }
+
+    private fun showFiltrosBottomSheet(){
+        val filtrosBottomSheet = FiltrosFragment()
+        filtrosBottomSheet.show(parentFragmentManager, "FiltrosFragment")
     }
 
 }
