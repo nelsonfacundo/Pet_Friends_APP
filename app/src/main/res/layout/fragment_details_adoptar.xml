@@ -81,10 +81,10 @@
 
         <ImageButton
             android:id="@+id/botonWpp"
-            android:layout_width="82dp"
-            android:layout_height="73dp"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/round_background_profile"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/round_background_wpp"
             android:contentDescription="@string/whatsapp_button_description"
             android:src="@drawable/baseline_whatsapp_24"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -207,7 +207,7 @@
         app:layout_constraintHorizontal_bias="0.955"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.346"
+        app:layout_constraintVertical_bias="0.325"
         app:tint="@android:color/white" />
 
     <ImageView

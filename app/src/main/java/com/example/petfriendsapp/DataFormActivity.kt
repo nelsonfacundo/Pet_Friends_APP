@@ -126,12 +126,14 @@ class DataFormActivity : AppCompatActivity() {
         val apellido = inputApellido.text.toString().trim()
         val telefono = inputTelefono.text.toString().trim()
 
+        val telefonoPattern = "\\d+".toRegex() // Expresión regular para aceptar solo dígitos
+
         if (nombre.isEmpty()) return Pair(false, getString(R.string.txt_empty_nombre))
-        if (nombre.length < 3 || nombre.length > 25) return Pair(false, getString(R.string.txt_cantC_nombre))
+        if (nombre.length < 2 || nombre.length >= 25) return Pair(false, getString(R.string.txt_cantC_nombre))
         if (apellido.isEmpty()) return Pair(false, getString(R.string.txt_empty_apellido))
-        if (apellido.length < 3 || apellido.length > 25) return Pair(false, getString(R.string.txt_cantC_apellido))
+        if (apellido.length < 2 || apellido.length >= 25) return Pair(false, getString(R.string.txt_cantC_apellido))
         if (telefono.isEmpty()) return Pair(false, getString(R.string.txt_empty_telefono))
-        if (telefono.length != 10) return Pair(false, getString(R.string.txt_cantC_telefono))
+        if (telefono.length != 10 || !telefono.matches(telefonoPattern)) return Pair(false, getString(R.string.txt_formato_telefono))
         if (imageUri == null) return Pair(false, getString(R.string.txt_empty_imagen))
         if (auth.currentUser == null) return Pair(false, getString(R.string.txt_validate_auth))
 
