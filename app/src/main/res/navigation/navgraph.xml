@@ -129,4 +129,13 @@
             android:id="@+id/action_servicioVeterinariaFragment_to_inicio"
             app:destination="@id/inicio" />
     </fragment>
+    <fragment
+        android:id="@+id/darReviewFragment"
+        android:name="com.example.petfriendsapp.fragments.DarReviewFragment"
+        android:label="fragment_dar_review"
+        tools:layout="@layout/fragment_dar_review" >
+        <action
+            android:id="@+id/action_darReviewFragment_to_inicio"
+            app:destination="@id/inicio" />
+    </fragment>
 </navigation>

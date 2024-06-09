@@ -9,6 +9,9 @@ android {
     namespace = "com.example.petfriendsapp"
     compileSdk = 34
 
+    buildFeatures {
+        viewBinding = true
+    }
     defaultConfig {
         applicationId = "com.example.petfriendsapp"
         minSdk = 24
@@ -35,6 +38,8 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+
 }
 
 dependencies {
@@ -43,6 +48,7 @@ dependencies {
     implementation(libs.glide.transformations)
     implementation(libs.androidx.recyclerview)
     implementation(libs.firebase.ui)
+    implementation(libs.places)
     var navVersion = "2.8.0-beta01"
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
