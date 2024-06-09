@@ -188,6 +188,7 @@
     <string name="btn_dar_en_adopcion">Dar en Adopcion</string>
     <string name="btn_masculino">Masculino</string>
     <string name="btn_femenino">Femenino</string>
+    <string name="anios_card">años</string>
 
 
     /Dar Reseña/
@@ -221,6 +222,5 @@
     <string name="permission_rationale_location">Permiso de ubicacion racional</string>
     <string name="permission_required_toast">Permiso requerido</string>
     <string name="title_activity_maps2">MapsActivity2</string>
-    <string name="anios_card">años</string>
 
 </resources>
