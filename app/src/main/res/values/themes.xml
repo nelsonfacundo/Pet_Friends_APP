@@ -64,6 +64,9 @@
      <style name="colorBakgroundMenu" >
         <item name="android:background">@color/white</item>
     </style>
-
+    <style name="ratingBarNormal" parent="Theme.MaterialComponents.DayNight">
+        <item name="colorControlActivated">@color/yellow</item>
+        <item name="colorControlNormal">@color/orange</item>
+    </style>
 
 </resources>
