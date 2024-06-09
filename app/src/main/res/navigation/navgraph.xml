@@ -120,13 +120,9 @@
             android:id="@+id/action_darAdopcionMascotaFragment_to_inicio"
             app:destination="@id/inicio" />
     </fragment>
-    <fragment
+    <activity
         android:id="@+id/servicio"
-        android:name="com.example.petfriendsapp.fragments.ServicioVeterinariaFragment"
-        android:label="fragment_servicio_veterinaria"
-        tools:layout="@layout/fragment_servicio_veterinaria" >
-        <action
-            android:id="@+id/action_servicioVeterinariaFragment_to_inicio"
-            app:destination="@id/inicio" />
-    </fragment>
+        android:name="com.example.petfriendsapp.MapsActivity"
+        android:label="activity_maps"
+        tools:layout="@layout/activity_maps" />
 </navigation>
