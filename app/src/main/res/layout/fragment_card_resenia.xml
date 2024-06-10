@@ -20,7 +20,6 @@
             android:layout_height="wrap_content"
             android:importantForAccessibility="no"
             android:scaleType="centerCrop"
-            android:src="@drawable/fondo_card"
             tools:ignore="MissingConstraints" />
 
         <LinearLayout
@@ -83,7 +82,8 @@
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="72dp">
+            tools:layout_editor_absoluteY="72dp"
+            tools:ignore="MissingConstraints">
 
             <TextView
                 android:id="@+id/resenia_text"
