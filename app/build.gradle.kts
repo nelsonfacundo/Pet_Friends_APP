@@ -46,6 +46,7 @@ dependencies {
     implementation(libs.androidx.material3.android)
     implementation(libs.glide.transformations)
     implementation(libs.androidx.recyclerview)
+    implementation(libs.androidx.lifecycle.viewmodel.android)
     var navVersion = "2.8.0-beta01"
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

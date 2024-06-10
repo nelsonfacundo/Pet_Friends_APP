@@ -121,8 +121,17 @@
     <string name="txt_blog">Artículos y recursos educativos</string>
 
 
-    /Review/
+    /Reseña /Reseña Card/
     <string name="txt_review">Reseñas</string>
+    <string name="title_exp_gral">Experiencia general</string>
+    <string name="title_cond_animal">Condiciones del Animal</string>
+    <string name="title_com_duenio">Comunicación con el Dueño</string>
+    <string name="average_rating_text">(%s)</string>
+
+
+    /Favorito/
+    <string name="txt_favorito">Favorito</string>
+
 
     /Details Perro Adoptar/
     <string name="txt_nombreMascota_details">Nombre</string>

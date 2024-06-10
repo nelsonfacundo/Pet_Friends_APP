@@ -7,9 +7,19 @@
 
     <fragment
         android:id="@+id/favorito"
-        android:name="fragments.Favorito"
+        android:name="com.example.petfriendsapp.fragments.Favorito"
         android:label="fragment_favorito"
-        tools:layout="@layout/fragment_favorito" />
+        tools:layout="@layout/fragment_favorito" >
+        <action
+            android:id="@+id/action_favorito_to_inicio"
+            app:destination="@id/inicio" />
+        <action
+            android:id="@+id/action_favorito_to_inicio2"
+            app:destination="@id/inicio" />
+        <action
+            android:id="@+id/action_favorito_to_detailsAdoptar"
+            app:destination="@id/detailsAdoptar" />
+    </fragment>
     <fragment
         android:id="@+id/inicio"
         android:name="fragments.Inicio"
@@ -23,6 +33,9 @@
         <action
             android:id="@+id/action_inicio_to_darAdopcionMascotaFragment"
             app:destination="@id/darAdopcionMascotaFragment" />
+        <action
+            android:id="@+id/action_inicio_to_favorito"
+            app:destination="@id/favorito" />
     </fragment>
     <fragment
         android:id="@+id/actividad"
@@ -87,9 +100,9 @@
     </fragment>
     <fragment
         android:id="@+id/review"
-        android:name="com.example.petfriendsapp.fragments.ReviewFragment"
+        android:name="com.example.petfriendsapp.fragments.VerReseniaUsuario"
         android:label="fragment_review"
-        tools:layout="@layout/fragment_review">
+        tools:layout="@layout/fragment_ver_resenia_usuario">
         <action
             android:id="@+id/action_reviewFragment_to_inicio"
             app:destination="@id/inicio" />
