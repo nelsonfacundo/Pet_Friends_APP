@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    android:backgroundTint="@color/white"
+    android:background="@color/white"
     app:cardCornerRadius="8dp"
     app:cardElevation="4dp">
 
@@ -41,7 +41,7 @@
                 android:layout_marginEnd="50dp"
                 android:layout_marginBottom="30dp"
                 android:rating="5"
-                android:theme="@style/ratingBarNormal" />
+                android:theme="@style/ratingBarVisual" />
 
             <TextView
                 android:id="@+id/exp_gral"

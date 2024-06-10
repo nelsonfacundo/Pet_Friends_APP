@@ -7,8 +7,8 @@
     android:layout_height="match_parent"
     android:background="@color/primary"
     tools:context=".fragments.PerfilFragment"
-    tools:layout_editor_absoluteX="0dp"
-    tools:layout_editor_absoluteY="42dp">
+    tools:layout_editor_absoluteX="8dp"
+    tools:layout_editor_absoluteY="0dp">
 
     <ImageView
         android:id="@+id/ic_back_fragment_perfil"
@@ -17,6 +17,7 @@
         android:layout_marginTop="0dp"
         android:layout_marginEnd="40dp"
         android:clickable="true"
+        android:contentDescription="TODO"
         android:focusable="true"
         android:padding="24dp"
         android:src="@drawable/icon_back"
@@ -107,28 +108,39 @@
         android:layout_marginTop="79dp"
         android:layout_marginEnd="114dp"
         android:checked="false"
-        android:text="Recibir Notificaciones"
+        android:text="@string/recibir_notificaciones"
         app:layout_constraintBottom_toTopOf="@+id/btn_cambiar_email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/id_avatar"
-        app:layout_constraintVertical_bias="0.208" />
+        app:layout_constraintVertical_bias="0.208"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
 
     <RatingBar
         android:id="@+id/rating_bar_perfil"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="85dp"
-        android:layout_marginTop="9dp"
-        android:layout_marginEnd="86dp"
-        android:layout_marginBottom="9dp"
-        android:numStars="5"
-        android:rating="2.5"
-        android:theme="@style/RatingBar"
+        style="@style/RatingBarCustomSize"
+        android:layout_marginTop="20dp"
         app:layout_constraintBottom_toTopOf="@+id/id_name_avatar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/id_avatar" />
+        app:layout_constraintTop_toBottomOf="@+id/id_avatar"
+        app:layout_constraintVertical_bias="0.678" />
+
+    <TextView
+        android:id="@+id/tv_rating_bar_perfil"
+        style="@style/textViewEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-10dp"
+        android:layout_marginEnd="-25dp"
+        android:layout_marginBottom="420dp"
+        android:text="@string/txt_tv_ranting"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.674"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/id_avatar"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
