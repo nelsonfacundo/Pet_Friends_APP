@@ -16,6 +16,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.MultiTransformation
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.petfriendsapp.R
 import com.example.petfriendsapp.entities.Mascota
 import com.google.firebase.auth.FirebaseAuth
@@ -68,6 +71,7 @@ class DetailsAdoptar : Fragment() {
         if (mascota.imageUrl.isNotEmpty()) {
             Glide.with(this)
                 .load(mascota.imageUrl)
+                .transform(MultiTransformation(CenterCrop()))
                 .into(imagenPerro)
         }
 
@@ -116,6 +120,7 @@ class DetailsAdoptar : Fragment() {
                 // Cargar la imagen del dueño si la URL no está vacía
                 Glide.with(this)
                     .load(avatarUrl)
+                    .transform(CenterCrop(), RoundedCorners(250))
                     .placeholder(R.drawable.avatar)
                     .into(imagenDueño)
 

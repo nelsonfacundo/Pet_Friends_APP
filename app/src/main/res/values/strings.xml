@@ -45,7 +45,7 @@
     /Forgot passowrd/
     <string name="forgot_succes">Email enviado con exito</string>
     <string name="forgot_empty_error">Email no puede estar vacío</string>
-    <string name="txt_btn_forgot_password">Enviar email</string>
+    <string name="txt_btn_forgot_password">Enviar</string>
     <string name="forgot_user_not_found_error">No se encontró una cuenta con esta dirección de correo electrónico.</string>
     <string name="forgot_invalid_email_error">Dirección de correo electrónico inválida.</string>
 
@@ -55,6 +55,10 @@
     <string name="txt_btn_cambiar_ft">Editar Perfil</string>
     <string name="txt_btn_cambiar_email">Cambiar Email</string>
     <string name="txt_btn_cambiar_password">Cambiar Contraseña</string>
+    <string name="recibir_notificaciones">Recibir Notificaciones</string>
+    <string name="average_rating_text">(%s)</string>
+    <string name="txt_tv_ranting">0</string>
+
 
     /Cambiar Email/
     <string name="email_changed_successfully">Email cambiado con éxito, verfique su nuevo email</string>
@@ -193,8 +197,32 @@
     <string name="btn_dar_en_adopcion">Dar en Adopcion</string>
     <string name="btn_masculino">Masculino</string>
     <string name="btn_femenino">Femenino</string>
+    <string name="anios_card">años</string>
 
 
+    /Dar Reseña/
+    <string name="txt_title_dar_review">Deja tu Reseña sobre la Adopción</string>
+    <string name="califica_la_experiencia_de_adop">Califica la experiencia de adopción</string>
+    <string name="experiencia_general">Experiencia General</string>
+    <string name="condiciones_del_animal">Condiciones del Animal</string>
+    <string name="comuni_con_el_due">Comunicación con el Dueño</string>
+    <string name="queremos_saber_tu_opinion">Queremos saber tu opinion</string>
+    <string name="place_holder_input_opinion_review">
+        ¿Cómo describirías el estado de salud del animal cuando lo adoptaste?
+        ¿Recomendarías adoptar de este dueño  a otros usuarios?</string>
+    <string name="txt_0_500_caracteres">(0/500 caracteres)</string>
+    <string name="title_cancel_review">Cancelar Reseña</string>
+    <string name="txt_pregunta_cancelar_review">¿Estás seguro de que deseas cancelar tu reseña?</string>
+    <string name="txt_aceptar_review">Aceptar</string>
+    <string name="txt_review_success">Su reseña fue guardada con exito</string>
+    <string name="txt_review_error">Error al agregar la reseña.</string>
+    <string name="txt_review_error_user">No puedes dejar una reseña a ti mismo</string>
+    <string name="txt_opinion_length_error">La opinión no puede tener más de 500 caracteres.</string>
+    <string name="txt_review_rating_error">Por favor, selecciona una calificación para todas las categorías.</string>
+    <string name="txt_opinion_length_min_error">La opinión debe tener al menos 5 caracteres.</string>
+
+
+    /Mapa/
     <string name="title_activity_maps">MapsActivity</string>
 
     //permisos//

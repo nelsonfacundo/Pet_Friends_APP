@@ -13,6 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <ImageView
             android:id="@+id/fondo_card_resenia"
             android:layout_width="match_parent"
@@ -39,7 +40,7 @@
                 android:layout_marginEnd="50dp"
                 android:layout_marginBottom="30dp"
                 android:rating="5"
-                android:theme="@style/ratingBarNormal" />
+                android:theme="@style/ratingBarVisual" />
 
             <TextView
                 android:id="@+id/exp_gral"
@@ -127,6 +128,8 @@
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="72dp"
+            tools:ignore="MissingConstraints">
             tools:layout_editor_absoluteY="60dp"
             tools:ignore="MissingConstraints">
 
