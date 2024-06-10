@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid)
     id("androidx.navigation.safeargs.kotlin")
     id("com.google.gms.google-services")
+    alias(libs.plugins.googleAndroidLibrariesMapsplatformSecretsGradlePlugin)
 }
 
 android {
@@ -35,6 +36,10 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        viewBinding = true
+    }
+
 }
 
 dependencies {
@@ -43,6 +48,8 @@ dependencies {
     implementation(libs.glide.transformations)
     implementation(libs.androidx.recyclerview)
     implementation(libs.firebase.ui)
+    implementation(libs.places)
+    implementation(libs.androidx.viewpager2)
     var navVersion = "2.8.0-beta01"
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -78,4 +85,9 @@ dependencies {
     implementation ("com.google.firebase:firebase-firestore:24.3.1")
     implementation ("com.firebaseui:firebase-ui-firestore:8.0.0")
 
+
+    //localizacion google maps
+    implementation ("com.google.android.gms:play-services-location:21.0.1")
+    implementation ("com.google.android.gms:play-services-maps:18.1.0")
+    implementation ("com.google.android.libraries.places:places:3.1.0")
 }
