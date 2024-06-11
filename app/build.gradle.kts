@@ -80,7 +80,6 @@ dependencies {
     //Notificaciones push
     implementation ("com.google.firebase:firebase-messaging-ktx")
 
-    //Permiso para notificaciones
-    implementation("com.google.accompanist:acompanist-permissions: 0.29.1-alpha")
+
 
 }

@@ -1,6 +1,8 @@
 package com.example.petfriendsapp
 
 
+import android.content.Intent
+import android.provider.Settings
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -11,6 +13,7 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.app.NotificationManagerCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavDestination
@@ -24,6 +27,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.messaging.FirebaseMessaging
 import io.reactivex.rxjava3.core.Notification
 
 class MainActivity : AppCompatActivity() {
@@ -67,8 +71,44 @@ class MainActivity : AppCompatActivity() {
         }
         fetchUserProfile()
 
+        //creando permiso
+        checkNotificationPermission()
+    }
+    private fun checkNotificationPermission() {
+        if (!NotificationManagerCompat.from(this).areNotificationsEnabled()) {
+
+            requestNotificationPermission()
+        } else {
+
+            subscribeToNotificationTopic()
+        }
     }
 
+    private fun requestNotificationPermission() {
+        AlertDialog.Builder(this)
+            .setTitle("Permiso de notificaciones")
+            .setMessage("Para recibir notificaciones, por favor habilita las notificaciones en la configuración.")
+            .setPositiveButton("Configurar") { _, _ ->
+                val intent = Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS)
+                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    .putExtra(Settings.EXTRA_APP_PACKAGE, packageName)
+                startActivity(intent)
+            }
+            .setNegativeButton("Cancelar", null)
+            .show()
+    }
+
+    private fun subscribeToNotificationTopic() {
+        FirebaseMessaging.getInstance().subscribeToTopic("your_topic")
+            .addOnCompleteListener { task ->
+                var msg = "Suscripción exitosa"
+                if (!task.isSuccessful) {
+                    msg = "Suscripción fallida"
+                }
+
+                println(msg)
+            }
+    }
     private fun initViews() {
         drawerLayout = findViewById(R.id.drawer_layout)
         navigationView = findViewById(R.id.drawer_nav)
