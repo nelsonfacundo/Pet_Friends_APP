@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@drawable/rounded_bottom_sheet">
 
 
     <TextView
@@ -15,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="221dp"
-        android:text="Filtros avanzados"
+        android:text="@string/txt_filtros"
         android:textAppearance="?android:attr/textAppearanceLarge"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -40,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="331dp"
-        android:text="Animal"
+        android:text="@string/txt_animal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@id/guideline3"
@@ -63,7 +64,7 @@
             style="@style/chipFilter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Perro"
+            android:text="@string/txt_perro"
             android:textColor="@color/black"
             android:textSize="11sp" />
 
@@ -72,7 +73,7 @@
             style="@style/chipFilter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Gato"
+            android:text="@string/txt_gato"
             android:textSize="11sp" />
 
         <com.google.android.material.chip.Chip
@@ -80,7 +81,7 @@
             style="@style/chipFilter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ave"
+            android:text="@string/txt_ave"
             android:textSize="11sp" />
 
         <com.google.android.material.chip.Chip
@@ -88,7 +89,7 @@
             style="@style/chipFilter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tortuga"
+            android:text="@string/txt_tortuga"
             android:textSize="11sp" />
 
     </com.google.android.material.chip.ChipGroup>
@@ -99,7 +100,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="331dp"
-        android:text="Edad"
+        android:text="@string/txt_edad"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
@@ -117,54 +118,33 @@
         app:layout_constraintTop_toBottomOf="@+id/txt_filtros_edad"
         app:singleSelection="true">
 
-        <!--<com.google.android.material.chip.Chip
-            android:id="@+id/chip_edad_1"
-            style="@style/chipFilter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0-3 meses" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chip_edad_2"
-            style="@style/chipFilter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="3-6 mesess" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chip_edad_3"
-            style="@style/chipFilter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="6-12 mesess" />-->
-
         <com.google.android.material.chip.Chip
             android:id="@+id/chip_edad_1_3"
             style="@style/chipFilter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1-3 años" />
+            android:text="@string/txt_edad_1_3" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip_edad_3_6"
             style="@style/chipFilter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="3-6 años" />
+            android:text="@string/txt_edad_3_6" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip_edad_6_9"
             style="@style/chipFilter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="6-9 años" />
+            android:text="@string/txt_edad_6_9" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip_edad_mas_9"
             style="@style/chipFilter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Más de 9 años" />
+            android:text="@string/txt_edad_mas_9" />
 
     </com.google.android.material.chip.ChipGroup>
 
@@ -174,7 +154,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="331dp"
-        android:text="Sexo"
+        android:text="@string/txt_sexo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
@@ -197,54 +177,42 @@
             style="@style/chipFilter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hembra" />
+            android:text="@string/txt_hembra" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip_macho"
             style="@style/chipFilter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Macho" />
+            android:text="@string/txt_macho" />
 
     </com.google.android.material.chip.ChipGroup>
 
-    <TextView
-        android:id="@+id/txt_ubicacion_filtros"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="331dp"
-        android:text="Ubicación"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toBottomOf="@+id/chips_sexo" />
-
     <Button
         android:id="@+id/btn_aplicar_filtros"
-        style="@style/colorBtn"
+        style="@style/colorBtnVerde"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="10dp"
-        android:text="Aplicar filtros"
+        android:text="@string/txt_aplicar_filtros"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toBottomOf="@+id/txt_ubicacion_filtros" />
+        app:layout_constraintTop_toBottomOf="@+id/chips_sexo" />
 
     <Button
         android:id="@+id/btn_limpiar_filtros"
-        style="@style/colorBtn"
+        style="@style/colorBtnVerde"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="5dp"
-        android:text="Limpiar filtros"
+        android:text="@string/txt_limpiar_filtros"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_ubicacion_filtros" />
+        app:layout_constraintTop_toBottomOf="@+id/chips_sexo" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"

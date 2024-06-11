@@ -1,6 +1,5 @@
 package fragments
 
-import android.app.Activity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -23,7 +22,6 @@ import com.example.petfriendsapp.fragments.FiltrosFragment
 import com.example.petfriendsapp.viewmodels.ListViewModel
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.Firebase
-import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.firestore
@@ -36,12 +34,12 @@ class Inicio : Fragment() {
     private lateinit var buttonDarEnAdopcion: Button
     private lateinit var viewModel: ListViewModel
     val db = Firebase.firestore
-    private lateinit var btnFiltros: Button
+    private lateinit var btnFilters: Button
     private lateinit var mascotaClickListener: (Mascota, String) -> Unit
-    private var especieSeleccionada: String? = null
-    private var sexoSeleccionado: String? = null
-    private var edadMin: Int = 0
-    private var edadMax: Int = Int.MAX_VALUE
+    private var selectedSpecies: String? = null
+    private var selectedSex: String? = null
+    private var minAge: Int = 0
+    private var maxAge: Int = Int.MAX_VALUE
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -69,8 +67,8 @@ class Inicio : Fragment() {
         }
 
         //Abro bottomSheet de filtros
-        btnFiltros = viewInicio.findViewById(R.id.btn_filtros)
-        btnFiltros.setOnClickListener { showFiltrosBottomSheet() }
+        btnFilters = viewInicio.findViewById(R.id.btn_filters)
+        btnFilters.setOnClickListener { showFiltrosBottomSheet() }
 
         return viewInicio
 
@@ -86,10 +84,10 @@ class Inicio : Fragment() {
 
         //Recibo filtros de FiltrosFragment y actualizo el recycler
         setFragmentResultListener("requestKey") { _, bundle ->
-            especieSeleccionada = bundle.getString("especieSeleccionada")
-            sexoSeleccionado = bundle.getString("sexoSeleccionado")
-            edadMin = bundle.getInt("edadMin")
-            edadMax = bundle.getInt("edadMax")
+            selectedSpecies = bundle.getString("selectedSpecies")
+            selectedSex = bundle.getString("selectedSex")
+            minAge = bundle.getInt("minAge")
+            maxAge = bundle.getInt("maxAge")
             fillRecycler()
         }
 
@@ -106,16 +104,16 @@ class Inicio : Fragment() {
 
         var query: Query = rootRef.collection("mascotas")
 
-        especieSeleccionada?.let {
+        selectedSpecies?.let {
             if (!it.isNullOrEmpty()) query = query.whereEqualTo("especie", it)
         }
 
-        sexoSeleccionado?.let {
+        selectedSex?.let {
             if (!it.isNullOrEmpty()) query = query.whereEqualTo("sexo", it)
         }
 
-        query = query.whereGreaterThanOrEqualTo("edad", edadMin)
-            .whereLessThanOrEqualTo("edad", edadMax)
+        query = query.whereGreaterThanOrEqualTo("edad", minAge)
+            .whereLessThanOrEqualTo("edad", maxAge)
 
         val options = FirestoreRecyclerOptions.Builder<Mascota>()
             .setQuery(query, Mascota::class.java)
