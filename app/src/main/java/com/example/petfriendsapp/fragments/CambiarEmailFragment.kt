@@ -13,6 +13,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.navigation.findNavController
 import com.example.petfriendsapp.R
+import com.example.petfriendsapp.components.LoadingDialog
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.EmailAuthProvider
 
@@ -24,6 +25,7 @@ class CambiarEmailFragment : Fragment() {
     private lateinit var buttonCambiarEmail: Button
     private lateinit var auth: FirebaseAuth
     private lateinit var backButton: ImageView
+    private lateinit var loadingDialog: LoadingDialog
 
     companion object {
         val BACK_BUTTON_ID = R.id.ic_back_cambiar_email
@@ -46,6 +48,7 @@ class CambiarEmailFragment : Fragment() {
 
         initViews()
         initFirebase()
+        loadingDialog = LoadingDialog(requireContext())
 
         return viewCambiarEmail
     }
@@ -76,6 +79,7 @@ class CambiarEmailFragment : Fragment() {
         val password = passwordEmailEditText.text.toString().trim()
 
         if (validateInputs(viejoEmail, nuevoEmail, password)) {
+            loadingDialog.show()
             val user = auth.currentUser
             if (user != null) {
                 // Reauthenticate the user
@@ -88,6 +92,7 @@ class CambiarEmailFragment : Fragment() {
                             Log.e("ReauthError", "Error during reauthentication: $errorMessage")
                             user. verifyBeforeUpdateEmail(nuevoEmail)
                                 .addOnCompleteListener { updateTask ->
+                                    loadingDialog.dismiss()
                                     if (updateTask.isSuccessful) {
                                         Toast.makeText(requireContext(), R.string.email_changed_successfully, Toast.LENGTH_LONG).show()
                                         navigateToProfile()
@@ -96,10 +101,12 @@ class CambiarEmailFragment : Fragment() {
                                     }
                                 }
                         } else {
+                            loadingDialog.dismiss()
                             Toast.makeText(requireContext(), R.string.reauthentication_failed, Toast.LENGTH_LONG).show()
                         }
                     }
             } else {
+                loadingDialog.dismiss()
                 Toast.makeText(requireContext(), R.string.user_not_logged_in, Toast.LENGTH_LONG).show()
             }
         }
