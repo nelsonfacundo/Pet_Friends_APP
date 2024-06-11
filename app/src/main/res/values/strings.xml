@@ -107,6 +107,8 @@
     <string name="txt_exitoso">Datos guardados correctamente</string>
     <string name="txt_error_url">Error al obtener URL de descarga </string>
     <string name="txt_error_datos">Error al guardar datos </string>
+    <string name="txt_error_upload">Error al subir la imagen. Por favor, intenta nuevamente.</string>
+    <string name="txt_error_token">Error al obtener el token de autenticación. Por favor, intenta nuevamente.</string>
 
 
     /Main/
@@ -125,8 +127,16 @@
     <string name="txt_blog">Artículos y recursos educativos</string>
 
 
-    /Review/
+    /Reseña /Reseña Card/
     <string name="txt_review">Reseñas</string>
+    <string name="title_exp_gral">Experiencia general</string>
+    <string name="title_cond_animal">Condiciones del Animal</string>
+    <string name="title_com_duenio">Comunicación con el Dueño</string>
+    <string name="opinion_txt_title">Opinion del Cliente</string>
+
+    /Favorito/
+    <string name="txt_favorito">Favorito</string>
+
 
     /Details Perro Adoptar/
     <string name="txt_nombreMascota_details">Nombre</string>
@@ -208,7 +218,7 @@
     <string name="txt_review_success">Su reseña fue guardada con exito</string>
     <string name="txt_review_error">Error al agregar la reseña.</string>
     <string name="txt_review_error_user">No puedes dejar una reseña a ti mismo</string>
-    <string name="txt_opinion_length_error">La opinión no puede tener más de 500 caracteres.</string>
+    <string name="txt_opinion_length_error">La opinión no puede tener más de 150 caracteres.</string>
     <string name="txt_review_rating_error">Por favor, selecciona una calificación para todas las categorías.</string>
     <string name="txt_opinion_length_min_error">La opinión debe tener al menos 5 caracteres.</string>
 
@@ -222,5 +232,6 @@
     <string name="permission_rationale_location">Permiso de ubicacion racional</string>
     <string name="permission_required_toast">Permiso requerido</string>
     <string name="title_activity_maps2">MapsActivity2</string>
+
 
 </resources>

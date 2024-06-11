@@ -50,6 +50,7 @@ dependencies {
     implementation(libs.firebase.ui)
     implementation(libs.places)
     implementation(libs.androidx.viewpager2)
+    implementation(libs.androidx.lifecycle.viewmodel.android)
     var navVersion = "2.8.0-beta01"
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
