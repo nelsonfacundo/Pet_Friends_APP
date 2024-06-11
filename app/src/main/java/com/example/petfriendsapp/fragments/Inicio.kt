@@ -44,7 +44,7 @@ class Inicio : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        viewModel = ViewModelProvider(this).get(ListViewModel::class.java)
+        viewModel = ViewModelProvider(this)[ListViewModel::class.java]
 
         checkRecords()
     }

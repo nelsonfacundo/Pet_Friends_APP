@@ -7,6 +7,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.petfriendsapp.components.LoadingDialog
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
@@ -22,6 +23,7 @@ class RegistroActivity : AppCompatActivity() {
 
     private lateinit var registrationEmail: String
     private lateinit var registrationPassword: String
+    private lateinit var loadingDialog: LoadingDialog
 
 
     companion object {
@@ -39,6 +41,7 @@ class RegistroActivity : AppCompatActivity() {
         initViews()
         initFirebase()
         initListeners()
+        loadingDialog = LoadingDialog(this)
     }
 
     private fun initViews() {
@@ -126,8 +129,11 @@ class RegistroActivity : AppCompatActivity() {
     }
 
     private fun registerUser() {
+
+        loadingDialog.show()
         auth.createUserWithEmailAndPassword(registrationEmail, registrationPassword)
             .addOnCompleteListener(this) { task ->
+                loadingDialog.dismiss()
                 if (task.isSuccessful) {
                     // Registro exitoso, redirigir a la pantalla de inicio
                     Toast.makeText(this, R.string.register_success, Toast.LENGTH_LONG).show()

@@ -51,16 +51,37 @@
         <item name="colorAccent">@color/accent</item>
     </style>
 
+    <style name="colorBakgroundMenu" >
+        <item name="android:background">@color/white</item>
+    </style>
 
-    <style name="RatingBar" parent="Theme.MaterialComponents.DayNight">
+    <style name="ratingBarSeleccionar" parent="Theme.MaterialComponents.DayNight">
         <item name="ratingBarStyle">@style/Controls.RatingBar</item>
-        <item name="colorControlActivated">@color/yellow</item>
-        <item name="colorControlNormal">@color/orange</item>
+        <item name="android:theme">@style/ratingBarVisual</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:numStars">5</item>
+        <item name="android:stepSize">1</item>
     </style>
 
     <style name="Controls.RatingBar" parent="Widget.AppCompat.RatingBar.Small">
         <item name="android:isIndicator">false</item>
     </style>
 
+    <style name="ratingBarVisual" parent="Theme.MaterialComponents.DayNight">
+        <item name="colorControlActivated">@color/yellow</item>
+        <item name="colorControlNormal">@color/orange</item>
+    </style>
+
+    <style name="RatingBarCustomSize">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:numStars">5</item>
+        <item name="android:stepSize">1</item>
+        <item name="android:isIndicator">true</item>
+        <item name="android:theme">@style/ratingBarVisual</item>
+        <item name="android:scaleX">0.7</item>
+        <item name="android:scaleY">0.7</item>
+    </style>
 
 </resources>
