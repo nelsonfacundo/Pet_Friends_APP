@@ -7,9 +7,16 @@
 
     <fragment
         android:id="@+id/favorito"
-        android:name="fragments.Favorito"
+        android:name="com.example.petfriendsapp.fragments.Favorito"
         android:label="fragment_favorito"
-        tools:layout="@layout/fragment_favorito" />
+        tools:layout="@layout/fragment_favorito" >
+        <action
+            android:id="@+id/action_favorito_to_inicio"
+            app:destination="@id/inicio" />
+        <action
+            android:id="@+id/action_favorito_to_detailsAdoptar"
+            app:destination="@id/detailsAdoptar" />
+    </fragment>
     <fragment
         android:id="@+id/inicio"
         android:name="fragments.Inicio"
@@ -23,6 +30,9 @@
         <action
             android:id="@+id/action_inicio_to_darAdopcionMascotaFragment"
             app:destination="@id/darAdopcionMascotaFragment" />
+        <action
+            android:id="@+id/action_inicio_to_favorito"
+            app:destination="@id/favorito" />
     </fragment>
     <fragment
         android:id="@+id/actividad"
@@ -87,9 +97,9 @@
     </fragment>
     <fragment
         android:id="@+id/review"
-        android:name="com.example.petfriendsapp.fragments.ReviewFragment"
+        android:name="com.example.petfriendsapp.fragments.VerReseniaUsuario"
         android:label="fragment_review"
-        tools:layout="@layout/fragment_review">
+        tools:layout="@layout/fragment_ver_resenia_usuario">
         <action
             android:id="@+id/action_reviewFragment_to_inicio"
             app:destination="@id/inicio" />
@@ -103,12 +113,14 @@
         <argument
             android:name="Mascota"
             app:argType="com.example.petfriendsapp.entities.Mascota" />
+        <argument
+            android:name="mascotaId"
+            app:argType="string" />
         <action
             android:id="@+id/action_detailsAdoptar_to_inicio"
             app:destination="@id/inicio" />
     </fragment>
     <fragment
-
         android:id="@+id/darAdopcionMascotaFragment"
         android:name="com.example.petfriendsapp.fragments.DarAdopcionMascotaFragment"
         android:label="fragment_dar_adopcion_mascota"
@@ -117,13 +129,20 @@
             android:id="@+id/action_darAdopcionMascotaFragment_to_inicio"
             app:destination="@id/inicio" />
     </fragment>
-    <fragment
+
+    <activity
         android:id="@+id/servicio"
-        android:name="com.example.petfriendsapp.fragments.ServicioVeterinariaFragment"
-        android:label="fragment_servicio_veterinaria"
-        tools:layout="@layout/fragment_servicio_veterinaria" >
+        android:name="com.example.petfriendsapp.MapsActivity"
+        android:label="activity_maps"
+        tools:layout="@layout/activity_maps" />
+
+    <fragment
+        android:id="@+id/darReviewFragment"
+        android:name="com.example.petfriendsapp.fragments.DarReviewFragment"
+        android:label="fragment_dar_review"
+        tools:layout="@layout/fragment_dar_review" >
         <action
-            android:id="@+id/action_servicioVeterinariaFragment_to_inicio"
+            android:id="@+id/action_darReviewFragment_to_inicio"
             app:destination="@id/inicio" />
     </fragment>
 </navigation>

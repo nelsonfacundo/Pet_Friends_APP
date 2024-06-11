@@ -15,7 +15,7 @@
         android:background="@drawable/borderlayout"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="100dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -41,7 +41,7 @@
         android:background="@drawable/borderlayout"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="100dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -81,10 +81,10 @@
 
         <ImageButton
             android:id="@+id/botonWpp"
-            android:layout_width="82dp"
-            android:layout_height="73dp"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/round_background_profile"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/round_background_wpp"
             android:contentDescription="@string/whatsapp_button_description"
             android:src="@drawable/baseline_whatsapp_24"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -100,7 +100,7 @@
         android:background="@drawable/borderlayout"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="85dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -115,7 +115,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/txt_raza_details" />
+            android:text="@string/txt_especie_details" />
 
         <TextView
             android:id="@+id/sexoMascota"
@@ -138,7 +138,7 @@
         android:id="@+id/imagenPerro"
         android:layout_width="match_parent"
         android:layout_height="235dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="55dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -155,7 +155,7 @@
         android:background="@drawable/borderlayout"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="80dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -207,8 +207,9 @@
         app:layout_constraintHorizontal_bias="0.955"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.262"
+        app:layout_constraintVertical_bias="0.325"
         app:tint="@android:color/white" />
+
     <ImageView
         android:id="@+id/ic_back_fragment_detail"
         android:layout_width="wrap_content"

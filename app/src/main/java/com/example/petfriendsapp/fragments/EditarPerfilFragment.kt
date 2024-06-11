@@ -21,6 +21,7 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.petfriendsapp.MainActivity
 import com.example.petfriendsapp.R
+import com.example.petfriendsapp.components.LoadingDialog
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
@@ -38,6 +39,7 @@ class EditarPerfilFragment : Fragment() {
     private lateinit var buttonGuardarPerfil: Button
     private var imageUri: Uri? = null
     private val PICK_IMAGE_REQUEST = 1
+    private lateinit var loadingDialog: LoadingDialog
 
     private val db = FirebaseFirestore.getInstance()
     private val auth = FirebaseAuth.getInstance()
@@ -60,6 +62,8 @@ class EditarPerfilFragment : Fragment() {
         viewEditarPerfil = inflater.inflate(R.layout.fragment_editar_perfil, container, false)
         initViews()
         fetchUserProfile()
+        loadingDialog = LoadingDialog(requireContext())
+
         return viewEditarPerfil
     }
     override fun onStart() {
@@ -138,7 +142,7 @@ class EditarPerfilFragment : Fragment() {
                     .into(cambiarFoto)
             } else {
                 Log.e("EditarPerfilFragment", "La imagen URI es nulo")
-                Toast.makeText(requireContext(), R.string.photo_changed_failed, Toast.LENGTH_SHORT)
+                Toast.makeText(requireContext(), R.string.photo_changed_failed, Toast.LENGTH_LONG)
                     .show()
             }
         }
@@ -149,6 +153,7 @@ class EditarPerfilFragment : Fragment() {
         val telefono = editTextTelefono.text.toString()
 
        if( validateInputs(nombre, apellido,telefono )){
+           loadingDialog.show()
            val nombreCompleto = "$nombre $apellido"
            val user = auth.currentUser
            val uid = user?.uid
@@ -163,6 +168,7 @@ class EditarPerfilFragment : Fragment() {
 
                ))
                    .addOnSuccessListener {
+                       loadingDialog.dismiss()
                        // Si la actualización del nombre y apellido fue exitosa, procede a actualizar la foto de perfil
                        if (imageUri != null) {
                            // Subir la imagen a Firebase Storage
@@ -173,13 +179,14 @@ class EditarPerfilFragment : Fragment() {
                            // Actualiza el header del menu si no hay imagen nueva, la url se carga en null pq no se actualizo la foto
                            (activity as MainActivity).updateHeader(nombreCompleto, null.toString()) //casting de activity al MainActivity
                            // No se seleccionó una nueva imagen, mostrar un mensaje de éxito y volver al perfil
-                           Toast.makeText(context, R.string.perfil_changed_successfully, Toast.LENGTH_SHORT).show()
+                           Toast.makeText(context, R.string.perfil_changed_successfully, Toast.LENGTH_LONG).show()
                            navigateToProfile()
                        }
                    }
                    .addOnFailureListener { exception ->
+                       loadingDialog.dismiss()
                        Log.d("EditarPerfilFragment", "Error al actualizar el documento", exception)
-                       Toast.makeText(context, R.string.perfil_changed_failed, Toast.LENGTH_SHORT).show()
+                       Toast.makeText(context, R.string.perfil_changed_failed, Toast.LENGTH_LONG).show()
                    }
            }
        }
@@ -200,7 +207,7 @@ class EditarPerfilFragment : Fragment() {
             }
             .addOnFailureListener { e ->
                 Log.e("EditarPerfilFragment", "Error al cargar la imagen", e)
-                Toast.makeText(context, R.string.error_carga_image, Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, R.string.error_carga_image, Toast.LENGTH_LONG).show()
             }
     }
 
@@ -217,12 +224,12 @@ class EditarPerfilFragment : Fragment() {
              userDocRef.update("avatarUrl", imageUrl)
                  .addOnSuccessListener {
                      // La URL de la imagen se guardó exitosamente en Firestore
-                     Toast.makeText(context, R.string.photo_changed_successfully, Toast.LENGTH_SHORT).show()
+                     Toast.makeText(context, R.string.photo_changed_successfully, Toast.LENGTH_LONG).show()
                      navigateToProfile()
                  }
                  .addOnFailureListener { exception ->
                      Log.e("EditarPerfilFragment", "Error al guardar la URL de la imagen en Firestore", exception)
-                     Toast.makeText(context, R.string.url_changed_failed, Toast.LENGTH_SHORT).show()
+                     Toast.makeText(context, R.string.url_changed_failed, Toast.LENGTH_LONG).show()
                  }
          }
      }
@@ -246,7 +253,7 @@ class EditarPerfilFragment : Fragment() {
         user?.let {
             eliminarUsuarioFirebaseAuth(it)
         } ?: run {
-            Toast.makeText(requireContext(), R.string.txt_error_eliminar_cuenta, Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), R.string.txt_error_eliminar_cuenta, Toast.LENGTH_LONG).show()
         }
     }
 
@@ -254,10 +261,10 @@ class EditarPerfilFragment : Fragment() {
     private fun eliminarUsuarioFirebaseAuth(user: FirebaseUser) {
         user.delete().addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                Toast.makeText(requireContext(), R.string.txt_cuenta_eliminada, Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), R.string.txt_cuenta_eliminada, Toast.LENGTH_LONG).show()
                 requireActivity().finish()
             } else {
-                Toast.makeText(requireContext(), R.string.txt_error_eliminar_cuenta, Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), R.string.txt_error_eliminar_cuenta, Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -281,19 +288,19 @@ class EditarPerfilFragment : Fragment() {
     private fun validateInputs(nombre: String, apellido: String, telefono: String): Boolean {
         // Verifica si algún campo está vacío
         if (nombre.isEmpty() || apellido.isEmpty() || telefono.isEmpty()) {
-            Toast.makeText(context, R.string.msj_campos_vacios, Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, R.string.msj_campos_vacios, Toast.LENGTH_LONG).show()
             return false
         }
         if (nombre.length < 3 || nombre.length > 25 ){
-            Toast.makeText(context, R.string.txt_cantC_nombre, Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, R.string.txt_cantC_nombre, Toast.LENGTH_LONG).show()
             return false
         }
         if (apellido.length < 3 || apellido.length > 25){
-            Toast.makeText(context, R.string.txt_cantC_apellido, Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, R.string.txt_cantC_apellido, Toast.LENGTH_LONG).show()
             return false
         }
         if (telefono.length != 10){
-            Toast.makeText(context, R.string.txt_cantC_telefono, Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, R.string.txt_cantC_telefono, Toast.LENGTH_LONG).show()
             return false
         }
         // todo ok, devuelve true

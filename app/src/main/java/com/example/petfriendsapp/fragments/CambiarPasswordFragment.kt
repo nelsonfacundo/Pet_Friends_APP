@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.navigation.findNavController
 import com.example.petfriendsapp.R
+import com.example.petfriendsapp.components.LoadingDialog
 import com.google.firebase.auth.FirebaseAuth
 
 
@@ -22,6 +23,8 @@ class CambiarPasswordFragment : Fragment() {
     private lateinit var buttonCambiarPassword: Button
     private lateinit var auth: FirebaseAuth
     private lateinit var backButton: ImageView
+    private lateinit var loadingDialog: LoadingDialog
+
 
     companion object {
         val BACK_BUTTON_ID = R.id.ic_back_cambiar_password
@@ -44,7 +47,7 @@ class CambiarPasswordFragment : Fragment() {
 
         initViews()
         initFirebase()
-
+        loadingDialog = LoadingDialog(requireContext())
         return viewCambiarPassword
     }
     override fun onStart() {
@@ -75,29 +78,32 @@ class CambiarPasswordFragment : Fragment() {
         val confirmNuevaPass = confirmarNuevaPassowrd.text.toString().trim()
 
         if (validateInputs(viejaPass, nuevaPass, confirmNuevaPass)) {
+            loadingDialog.show()
             val user = auth.currentUser //auth.currentUser -> recupera el usuario autenticado
             if (user != null) {
                 user.updatePassword(nuevaPass)
                     .addOnCompleteListener { task ->
+                        loadingDialog.dismiss()
                         if (task.isSuccessful) {
-                            Toast.makeText(requireContext(), R.string.password_changed_successfully, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireContext(), R.string.password_changed_successfully, Toast.LENGTH_LONG).show()
                             navigateToProfile()
                         } else {
-                            Toast.makeText(requireContext(), R.string.password_change_failed, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireContext(), R.string.password_change_failed, Toast.LENGTH_LONG).show()
                         }
                     }
             } else {
-                Toast.makeText(requireContext(), R.string.user_not_logged_in_password, Toast.LENGTH_SHORT).show()
+                loadingDialog.dismiss()
+                Toast.makeText(requireContext(), R.string.user_not_logged_in_password, Toast.LENGTH_LONG).show()
             }
         }
     }
 
     private fun validateInputs(viejaPass: String, nuevaPass: String, confirmPass: String): Boolean {
         if (viejaPass.isEmpty() || nuevaPass.isEmpty()|| confirmPass.isEmpty()) {
-            Toast.makeText(requireContext(), R.string.msj_campos_vacios, Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), R.string.msj_campos_vacios, Toast.LENGTH_LONG).show()
             return false
         }else if (nuevaPass != confirmPass) {
-            Toast.makeText(requireContext(), R.string.msj_pass_no_coinciden, Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), R.string.msj_pass_no_coinciden, Toast.LENGTH_LONG).show()
             return false
         }
         return true

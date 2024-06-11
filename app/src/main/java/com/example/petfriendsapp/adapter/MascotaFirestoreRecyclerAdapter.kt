@@ -8,7 +8,7 @@ import com.example.petfriendsapp.holders.MascotaHolder
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 
-class MascotaFirestoreRecyclerAdapter(private val options: FirestoreRecyclerOptions<Mascota>, private val clickListener: (Mascota) -> Unit) :
+class MascotaFirestoreRecyclerAdapter(private val options: FirestoreRecyclerOptions<Mascota>, private val clickListener: (Mascota, String) -> Unit) :
     FirestoreRecyclerAdapter<Mascota, MascotaHolder>(options) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MascotaHolder {
@@ -24,7 +24,10 @@ class MascotaFirestoreRecyclerAdapter(private val options: FirestoreRecyclerOpti
         holder.setSexo(model.sexo)
         holder.setImageUrl(model.imageUrl)
 
-        holder.getCardLayout().setOnClickListener { clickListener(model) }
+        val mascotaId = snapshots.getSnapshot(position).id
+
+        holder.getCardLayout().setOnClickListener { clickListener(model, mascotaId) }
+
 
     }
 }

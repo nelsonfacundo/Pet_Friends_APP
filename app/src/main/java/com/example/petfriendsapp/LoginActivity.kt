@@ -11,6 +11,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.petfriendsapp.components.LoadingDialog
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
@@ -24,6 +25,9 @@ class LoginActivity : AppCompatActivity() {
     lateinit var input_password: EditText
     lateinit var loginButton: Button
     private lateinit var auth: FirebaseAuth
+    private lateinit var loadingDialog: LoadingDialog
+
+
     companion object {
         val TXT_REGISTRO = R.id.registro
         val TXT_FORGOT_PASS = R.id.txt_forgot_pass
@@ -43,6 +47,9 @@ class LoginActivity : AppCompatActivity() {
         initViews()
         initFirebase()
         initListeners()
+
+        loadingDialog = LoadingDialog(this)
+
     }
 
 
@@ -71,15 +78,17 @@ class LoginActivity : AppCompatActivity() {
         val password = input_password.text.toString()
 
         if (validateInputsLogin(email, password)) {
+            loadingDialog.show()
             auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
+                    loadingDialog.dismiss()
                     if (task.isSuccessful) {
                         // Inicio de sesión exitoso
-                        Toast.makeText(this, R.string.login_success, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, R.string.login_success, Toast.LENGTH_LONG).show()
                         checkUserDataAndNavigate()
                     } else {
                         // Error en el inicio de sesión
-                        Toast.makeText(this, R.string.login_error, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, R.string.login_error, Toast.LENGTH_LONG).show()
                     }
                 }
         }
@@ -87,7 +96,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun validateInputsLogin(email: String, password: String): Boolean {
         if (email.isEmpty() || password.isEmpty()) {
-            Toast.makeText(this, R.string.login_empty_error, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.login_empty_error, Toast.LENGTH_LONG).show()
             return false
         }
         return true
@@ -107,7 +116,7 @@ class LoginActivity : AppCompatActivity() {
                     navigateToDataForm()
                 }
             }.addOnFailureListener { exception ->
-                Toast.makeText(this, "error", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "error", Toast.LENGTH_LONG).show()
             }
         }
     }

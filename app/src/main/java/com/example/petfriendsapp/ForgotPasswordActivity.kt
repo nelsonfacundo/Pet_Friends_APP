@@ -7,6 +7,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.petfriendsapp.components.LoadingDialog
 import com.google.firebase.auth.FirebaseAuth
 
 class ForgotPasswordActivity : AppCompatActivity() {
@@ -14,7 +15,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
     private lateinit var backButton: ImageView
     private lateinit var emailEditText: EditText
     private lateinit var resetButton: Button
-
+    private lateinit var loadingDialog: LoadingDialog
     companion object {
         val BACK_BUTTON_ID = R.id.ic_back_pass
         val EMAIL_EDIT_TEXT_ID = R.id.text_registro_email_pass
@@ -28,6 +29,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
         initViews()
         initFirebase()
         initListeners()
+        loadingDialog = LoadingDialog(this)
     }
 
     private fun initViews() {
@@ -47,14 +49,15 @@ class ForgotPasswordActivity : AppCompatActivity() {
 
     private fun sendPasswordResetEmail() {
         val email = emailEditText.text.toString().trim()
-
+        loadingDialog.show()
         if (validateInputsForgotPassword(email)){
             auth.sendPasswordResetEmail(email)
                 .addOnCompleteListener { task ->
+                    loadingDialog.dismiss()
                     if (task.isSuccessful) {
-                        Toast.makeText(this, R.string.forgot_succes, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, R.string.forgot_succes, Toast.LENGTH_LONG).show()
                     } else {
-                        Toast.makeText(this, R.string.forgot_error, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, R.string.forgot_invalid_email_error, Toast.LENGTH_LONG).show()
                     }
                 }
         }
@@ -62,7 +65,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
 
     private fun validateInputsForgotPassword(email: String): Boolean {
         if (email.isEmpty()) {
-            Toast.makeText(this, R.string.forgot_empty_error, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.forgot_empty_error, Toast.LENGTH_LONG).show()
             return false
         }
         return true
