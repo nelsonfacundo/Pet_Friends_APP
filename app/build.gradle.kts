@@ -77,4 +77,10 @@ dependencies {
     implementation ("com.google.firebase:firebase-firestore:24.3.1")
     implementation ("com.firebaseui:firebase-ui-firestore:8.0.0")
 
+    //Notificaciones push
+    implementation ("com.google.firebase:firebase-messaging-ktx")
+
+    //Permiso para notificaciones
+    implementation("com.google.accompanist:acompanist-permissions: 0.29.1-alpha")
+
 }

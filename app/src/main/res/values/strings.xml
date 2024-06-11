@@ -101,7 +101,6 @@
     <string name="txt_error_datos">Error al guardar datos </string>
 
 
-
     /Main/
     <string name="txt_eliminar_cuenta">Eliminar cuenta</string>
     <string name="txt_pregunta_eliminar_cuenta">¿Estás seguro que quieres eliminar tu cuenta?</string>
@@ -170,7 +169,6 @@
         <item>Tortuga</item>
     </string-array>
 
-
-
-
+<!-- Idenficador de la notificacion push -->
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
 </resources>

@@ -24,6 +24,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import io.reactivex.rxjava3.core.Notification
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var drawerLayout: DrawerLayout
@@ -64,6 +66,7 @@ class MainActivity : AppCompatActivity() {
             hidenActionBarAndBottomBarFragments(destination)// Oculta la actionBar y la bottom navigation en los fragmentos requeridos
         }
         fetchUserProfile()
+
     }
 
     private fun initViews() {
@@ -220,5 +223,6 @@ class MainActivity : AppCompatActivity() {
             supportActionBar?.show()
         }
     }
+
 
 }
