@@ -54,6 +54,7 @@ class DetailsAdoptar : Fragment() {
         val txtNombre: TextView = view.findViewById(R.id.nombreMascota)
         val txtSexo: TextView = view.findViewById(R.id.sexoMascota)
         val txtUbicacion: TextView = view.findViewById(R.id.ubicacionMascotaDetalle)
+        val txtDescripcion: TextView = view.findViewById(R.id.descripcionMascota)
         val imagenPerro : ImageView = view.findViewById(R.id.imagenPerro)
 
         val txtNombreDueño: TextView = view.findViewById(R.id.nombreDueño)
@@ -67,6 +68,7 @@ class DetailsAdoptar : Fragment() {
         txtNombre.text = mascota.nombre
         txtUbicacion.text = mascota.ubicacion
         txtSexo.text = mascota.sexo
+        txtDescripcion.text = mascota.descripcion
 
         if (mascota.imageUrl.isNotEmpty()) {
             Glide.with(this)
@@ -155,7 +157,10 @@ class DetailsAdoptar : Fragment() {
         val userIdAdopta = auth.currentUser?.uid
         val userIdDueño = mascota.userId
 
-        if (userIdAdopta != null && userIdDueño != null) {
+        if ( userIdAdopta ==  userIdDueño){
+            Toast.makeText(requireContext(), "No podes adoptar a tu propia mascota", Toast.LENGTH_LONG).show()
+
+        }else if (userIdAdopta != null && userIdDueño != null) {
             val peticion = hashMapOf(
                 "estado" to "pendiente",
                 "idMascota" to idMascota,
