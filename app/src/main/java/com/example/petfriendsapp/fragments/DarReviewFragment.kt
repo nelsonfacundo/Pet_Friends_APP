@@ -35,7 +35,7 @@ class DarReviewFragment : Fragment() {
         db = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
 
-        binding.textOpinionReview.filters = arrayOf(InputFilter.LengthFilter(500))
+        binding.textOpinionReview.filters = arrayOf(InputFilter.LengthFilter(150))
 
         return view
     }
