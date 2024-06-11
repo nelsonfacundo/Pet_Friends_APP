@@ -28,6 +28,15 @@
     <style name="textEditSub2" parent="inputsTextEdit">
         <item name="android:textSize">12sp</item>
     </style>
+
+    <style name="textEditSub3" parent="inputsTextEdit">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="textEditSub4" parent="inputsTextEdit">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
     <style name="colorBtn" parent="inputsTextEdit">
         <item name="android:textColor">@color/white</item>
         <item name="android:backgroundTint">@color/accent</item>

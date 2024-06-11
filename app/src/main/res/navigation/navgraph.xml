@@ -14,9 +14,6 @@
             android:id="@+id/action_favorito_to_inicio"
             app:destination="@id/inicio" />
         <action
-            android:id="@+id/action_favorito_to_inicio2"
-            app:destination="@id/inicio" />
-        <action
             android:id="@+id/action_favorito_to_detailsAdoptar"
             app:destination="@id/detailsAdoptar" />
     </fragment>

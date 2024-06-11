@@ -36,6 +36,4 @@ class ReseniaHolder (v: View): RecyclerView.ViewHolder(v){
         return view.findViewById(R.id.card_resenia)
     }
 
-
-
 }

@@ -6,79 +6,70 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    android:backgroundTint="@color/white"
+    android:background="@color/white"
     app:cardCornerRadius="8dp"
     app:cardElevation="4dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/fondo_card_resenia"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:importantForAccessibility="no"
-            android:scaleType="centerCrop"
-            android:src="@drawable/fondo_card"
-            tools:ignore="MissingConstraints" />
+        android:layout_height="160dp"
+        android:background="@color/white"
+        android:orientation="vertical">
 
         <LinearLayout
             android:id="@+id/linearLayout3"
-            android:layout_width="386dp"
-            android:layout_height="46dp"
-            android:orientation="horizontal"
-            tools:layout_editor_absoluteX="9dp"
-            tools:layout_editor_absoluteY="15dp"
-            tools:ignore="MissingConstraints">
+            android:layout_width="370dp"
+            android:layout_height="65dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
 
             <RatingBar
                 android:id="@+id/ratingBar"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="5dp"
-                android:layout_marginEnd="50dp"
-                android:layout_marginBottom="30dp"
+                android:layout_marginEnd="35dp"
                 android:rating="5"
                 android:theme="@style/ratingBarVisual" />
 
             <TextView
                 android:id="@+id/exp_gral"
                 android:layout_width="100dp"
-                android:layout_height="30dp"
-                android:theme="@style/textEditSub2"
+                android:layout_height="45dp"
                 android:layout_marginStart="-50dp"
                 android:layout_marginTop="-5dp"
                 android:gravity="center"
-                android:text="@string/title_exp_gral" />
+                android:text="@string/title_exp_gral"
+                android:theme="@style/textEditSub3" />
 
 
             <TextView
                 android:id="@+id/cond_animal"
                 android:layout_width="90dp"
                 android:layout_height="30dp"
-                android:theme="@style/textEditSub2"
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="-5dp"
                 android:gravity="center"
-                android:text="@string/title_cond_animal" />
+                android:text="@string/title_cond_animal"
+                android:theme="@style/textEditSub3" />
 
             <TextView
                 android:id="@+id/com_duenio"
                 android:layout_width="125dp"
                 android:layout_height="30dp"
-                android:theme="@style/textEditSub2"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="-5dp"
                 android:gravity="center"
-                android:text="@string/title_com_duenio" />
+                android:text="@string/title_com_duenio"
+                android:theme="@style/textEditSub3" />
 
             <LinearLayout
                 android:layout_width="377dp"
                 android:layout_height="25dp"
-                android:orientation="horizontal"
-                android:layout_marginTop="25dp"
                 android:layout_marginStart="-375dp"
+                android:layout_marginTop="30dp"
+                android:orientation="horizontal"
                 app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -88,59 +79,61 @@
                 <TextView
                     android:id="@+id/val_exp_gral"
                     android:layout_width="100dp"
-                    android:layout_height="20dp"
-                    android:gravity="center"
-                    android:theme="@style/textEditSub2"
+                    android:layout_height="30dp"
                     android:layout_marginStart="45dp"
-                    android:text="TextView" />
+                    android:gravity="center"
+                    android:text="TextView"
+                    android:theme="@style/textEditSub2" />
 
                 <TextView
                     android:id="@+id/val_cond_pets"
                     android:layout_width="100dp"
                     android:layout_height="20dp"
                     android:gravity="center"
-                    android:theme="@style/textEditSub2"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:theme="@style/textEditSub2" />
 
                 <TextView
                     android:id="@+id/val_com_duenio"
                     android:layout_width="0dp"
                     android:layout_height="20dp"
-                    android:gravity="center"
-                    android:theme="@style/textEditSub2"
                     android:layout_weight="1"
-                    android:text="TextView"  />
+                    android:gravity="center"
+                    android:text="TextView"
+                    android:theme="@style/textEditSub2" />
 
             </LinearLayout>
 
 
-
         </LinearLayout>
 
-
+        <TextView
+            android:id="@+id/txt_title_opinion"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_marginStart="15dp"
+            android:gravity="center"
+            android:text="@string/opinion_txt_title"
+            android:theme="@style/textEditSub4" />
 
         <LinearLayout
             android:id="@+id/linearLayout2"
-            android:layout_width="375dp"
-            android:layout_height="150dp"
-            android:layout_marginStart="-15dp"
-            android:layout_marginEnd="-15dp"
+            android:layout_width="370dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="72dp"
-            tools:ignore="MissingConstraints">
+            app:layout_constraintStart_toStartOf="parent">
 
             <TextView
                 android:id="@+id/resenia_text"
                 style="@style/Base.CardView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="TextView" />
+                android:layout_marginStart="5dp"
+                android:text="TextView"
+                android:theme="@style/textEditSub" />
         </LinearLayout>
 
-
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 </androidx.cardview.widget.CardView>

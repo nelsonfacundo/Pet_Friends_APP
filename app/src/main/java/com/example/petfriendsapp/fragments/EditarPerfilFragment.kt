@@ -21,6 +21,7 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.petfriendsapp.MainActivity
 import com.example.petfriendsapp.R
+import com.example.petfriendsapp.components.LoadingDialog
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
@@ -38,6 +39,7 @@ class EditarPerfilFragment : Fragment() {
     private lateinit var buttonGuardarPerfil: Button
     private var imageUri: Uri? = null
     private val PICK_IMAGE_REQUEST = 1
+    private lateinit var loadingDialog: LoadingDialog
 
     private val db = FirebaseFirestore.getInstance()
     private val auth = FirebaseAuth.getInstance()
@@ -60,6 +62,8 @@ class EditarPerfilFragment : Fragment() {
         viewEditarPerfil = inflater.inflate(R.layout.fragment_editar_perfil, container, false)
         initViews()
         fetchUserProfile()
+        loadingDialog = LoadingDialog(requireContext())
+
         return viewEditarPerfil
     }
     override fun onStart() {
@@ -149,6 +153,7 @@ class EditarPerfilFragment : Fragment() {
         val telefono = editTextTelefono.text.toString()
 
        if( validateInputs(nombre, apellido,telefono )){
+           loadingDialog.show()
            val nombreCompleto = "$nombre $apellido"
            val user = auth.currentUser
            val uid = user?.uid
@@ -163,6 +168,7 @@ class EditarPerfilFragment : Fragment() {
 
                ))
                    .addOnSuccessListener {
+                       loadingDialog.dismiss()
                        // Si la actualización del nombre y apellido fue exitosa, procede a actualizar la foto de perfil
                        if (imageUri != null) {
                            // Subir la imagen a Firebase Storage
@@ -178,6 +184,7 @@ class EditarPerfilFragment : Fragment() {
                        }
                    }
                    .addOnFailureListener { exception ->
+                       loadingDialog.dismiss()
                        Log.d("EditarPerfilFragment", "Error al actualizar el documento", exception)
                        Toast.makeText(context, R.string.perfil_changed_failed, Toast.LENGTH_LONG).show()
                    }

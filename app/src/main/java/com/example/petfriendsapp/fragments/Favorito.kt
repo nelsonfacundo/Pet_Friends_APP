@@ -59,8 +59,8 @@ class Favorito : Fragment() {
 
     }
     private fun navigateToHome() {
-      //  val action1 = ReviewFragmentDirections.actionReviewFragmentToInicio()
-      //  viewFavorito.findNavController().navigate(action1)
+        val action1 = FavoritoDirections.actionFavoritoToInicio()
+        viewFavorito.findNavController().navigate(action1)
     }
 
 

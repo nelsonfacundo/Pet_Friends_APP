@@ -1,5 +1,6 @@
 package com.example.petfriendsapp.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.example.petfriendsapp.R
@@ -13,7 +14,7 @@ class ReviewFirestoreRecyclerAdpater (private val reviews: FirestoreRecyclerOpti
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReseniaHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.mascota, parent, false)
+            .inflate(R.layout.card_review, parent, false)
         return ReseniaHolder(view)
     }
 
@@ -23,6 +24,6 @@ class ReviewFirestoreRecyclerAdpater (private val reviews: FirestoreRecyclerOpti
         holder.setCondicionRating(model.condicionRating)
         holder.setComunicacionRating(model.comunicacionRating)
 
-        val reseniaId = snapshots.getSnapshot(position).id
-        }
+        Log.d("ReviewAdapter", "Binding review: $model")
+    }
 }

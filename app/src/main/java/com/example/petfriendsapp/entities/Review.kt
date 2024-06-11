@@ -2,20 +2,11 @@ package com.example.petfriendsapp.entities
 
 import android.os.Parcel
 import android.os.Parcelable
-
-
-
-
-
-data class Review (
-    val valoracion : Int = 0,
-    val comunicacionRating : Int = 0,
-    val condicionRating : Int = 0,
-    val opinion : String = "",
-
-
-
-
+data class Review(
+    val valoracion: Int = 0,
+    val comunicacionRating: Int = 0,
+    val condicionRating: Int = 0,
+    val opinion: String = "",
     ) : Parcelable {
     constructor(parcel: Parcel): this(
         parcel.readInt(),
