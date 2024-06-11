@@ -17,6 +17,8 @@ class SolicitudesRecibidas : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        //prueba
+
     }
 
     override fun onCreateView(
