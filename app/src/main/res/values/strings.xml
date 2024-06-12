@@ -45,7 +45,7 @@
     /Forgot passowrd/
     <string name="forgot_succes">Email enviado con exito</string>
     <string name="forgot_empty_error">Email no puede estar vacío</string>
-    <string name="txt_btn_forgot_password">Enviar</string>
+    <string name="txt_btn_forgot_password">Enviar email</string>
     <string name="forgot_user_not_found_error">No se encontró una cuenta con esta dirección de correo electrónico.</string>
     <string name="forgot_invalid_email_error">Dirección de correo electrónico inválida.</string>
 
@@ -233,5 +233,22 @@
     <string name="permission_required_toast">Permiso requerido</string>
     <string name="title_activity_maps2">MapsActivity2</string>
 
+    //Filtros
+    <string name="txt_filtros">Filtros de búsqueda</string>
+    <string name="txt_animal">Animal</string>
+    <string name="txt_perro">Perro</string>
+    <string name="txt_gato">Gato</string>
+    <string name="txt_ave">Ave</string>
+    <string name="txt_tortuga">Tortuga</string>
+    <string name="txt_edad">Edad</string>
+    <string name="txt_edad_1_3">1-3 años</string>
+    <string name="txt_edad_3_6">3-6 años</string>
+    <string name="txt_edad_6_9">6-9 años</string>
+    <string name="txt_edad_mas_9">Más de 9 años</string>
+    <string name="txt_sexo">Sexo</string>
+    <string name="txt_hembra">Hembra</string>
+    <string name="txt_macho">Macho</string>
+    <string name="txt_limpiar_filtros">Limpiar filtros</string>
+    <string name="txt_aplicar_filtros">Aplicar filtros</string>
 
 </resources>

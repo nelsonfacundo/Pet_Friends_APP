@@ -2,54 +2,30 @@ package com.example.petfriendsapp
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.petfriendsapp.components.LoadingDialog
-import com.google.firebase.Firebase
+import com.example.petfriendsapp.databinding.ActivityRegistroBinding
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.auth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class RegistroActivity : AppCompatActivity() {
 
-    private lateinit var registerButton: Button
-    private lateinit var backButton: ImageView
-    private lateinit var emailInput: EditText
-    private lateinit var passwordInput: EditText
-    private lateinit var confirmPasswordInput: EditText
+    private lateinit var binding: ActivityRegistroBinding
     private lateinit var auth: FirebaseAuth
-
     private lateinit var registrationEmail: String
     private lateinit var registrationPassword: String
     private lateinit var loadingDialog: LoadingDialog
 
-
-    companion object {
-        val REGISTER_BUTTON_ID: Int = R.id.btnRegistrar
-        val BACK_BUTTON_ID = R.id.ic_back
-        val EMAIL_INPUT_ID = R.id.text_registro_email
-        val PASSWORD_INPUT_ID = R.id.text_registro_password
-        val CONFIRM_PASSWORD_INPUT_ID = R.id.text_registro_confrim_contraseña
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_registro)
+        binding = ActivityRegistroBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        initViews()
         initFirebase()
         initListeners()
         loadingDialog = LoadingDialog(this)
-    }
-
-    private fun initViews() {
-        registerButton = findViewById(REGISTER_BUTTON_ID)
-        backButton = findViewById(BACK_BUTTON_ID)
-        emailInput = findViewById(EMAIL_INPUT_ID)
-        passwordInput = findViewById(PASSWORD_INPUT_ID)
-        confirmPasswordInput = findViewById(CONFIRM_PASSWORD_INPUT_ID)
     }
 
     private fun initFirebase() {
@@ -57,14 +33,14 @@ class RegistroActivity : AppCompatActivity() {
     }
 
     private fun initListeners() {
-        registerButton.setOnClickListener { validateAndRegisterUser() }
-        backButton.setOnClickListener { navigateToLogin() }
+        binding.btnRegistrar.setOnClickListener { validateAndRegisterUser() }
+        binding.icBack.setOnClickListener { navigateToLogin() }
     }
 
     private fun validateAndRegisterUser() {
-        val email = emailInput.text.toString()
-        val password = passwordInput.text.toString()
-        val confirmPassword = confirmPasswordInput.text.toString()
+        val email = binding.textRegistroEmail.text.toString()
+        val password = binding.textRegistroPassword.text.toString()
+        val confirmPassword = binding.textRegistroConfirmPassword.text.toString()
 
         // Valido entrada antes de registrar al usuario
         if (validateInputRegister(email, password, confirmPassword)) {
@@ -73,9 +49,11 @@ class RegistroActivity : AppCompatActivity() {
             emailExists(email)
         }
     }
+
     private fun isValidEmail(email: String): Boolean {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
+
     private fun validateInputRegister(
         email: String,
         password: String,
@@ -99,13 +77,13 @@ class RegistroActivity : AppCompatActivity() {
             return false
         }
 
-        // Verifica si las contraseñas tiene al menos 6 caracteres
+        // Verifica si las contraseñas tienen al menos 6 caracteres
         if (password.length <= 6) {
             Toast.makeText(this, R.string.msj_pass_falta_caracteres, Toast.LENGTH_LONG).show()
             return false
         }
 
-        // todo ok, devuelve true
+        // Todo ok, devuelve true
         return true
     }
 
@@ -129,7 +107,6 @@ class RegistroActivity : AppCompatActivity() {
     }
 
     private fun registerUser() {
-
         loadingDialog.show()
         auth.createUserWithEmailAndPassword(registrationEmail, registrationPassword)
             .addOnCompleteListener(this) { task ->
@@ -140,21 +117,18 @@ class RegistroActivity : AppCompatActivity() {
                     val intent = Intent(this, DataFormActivity::class.java)
                     startActivity(intent)
                     finish()
-
-                }else {
+                } else {
                     val errorMessage = task.exception?.localizedMessage
                     if (errorMessage == "The email address is already in use by another account.") {
                         // Sobre escribo el mensaje de error de firebase
                         Toast.makeText(this, R.string.msj_email_registrado, Toast.LENGTH_LONG).show()
                     } else {
                         // Error en el registro
-                        Toast.makeText(baseContext, "Error al registrar. ${task.exception?.message}",Toast.LENGTH_LONG).show()
+                        Toast.makeText(baseContext, "Error al registrar. ${task.exception?.message}", Toast.LENGTH_LONG).show()
                     }
                 }
             }
     }
-
-
 
     private fun navigateToLogin() {
         val intent = Intent(this, LoginActivity::class.java)
