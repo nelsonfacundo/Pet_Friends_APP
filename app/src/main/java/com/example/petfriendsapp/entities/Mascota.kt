@@ -11,7 +11,8 @@ data class Mascota(
     val descripcion: String = "",
     val imageUrl: String = "",
     val userId: String = "",
-    val sexo: String=""
+    val sexo: String="",
+    val estado: String = "pendiente"
 
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
@@ -22,7 +23,9 @@ data class Mascota(
         parcel.readString().toString(),
         parcel.readString().toString(),
         parcel.readString().toString(),
+        parcel.readString().toString(),
         parcel.readString().toString()
+
 
     )
     override fun toString(): String {
