@@ -46,6 +46,10 @@ class HistorialFirestoreRecyclerAdapter (
                 // Handle error
             }
         )
+
+        dataManager.loadEstadoSolicitud(solicitudId,
+            onSuccess = {estadoPeticion -> holder.bindEstadoPeticion(estadoPeticion) },
+            onError = { error -> })
     }
 
 

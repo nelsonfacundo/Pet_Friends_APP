@@ -11,7 +11,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 class HistorialHolder (view: View) : RecyclerView.ViewHolder(view) {
 
-    private val estadoTextView : TextView = view.findViewById(R.id.text_estado_historial)
+
     private val estadoSolicitudTextView : TextView = view.findViewById(R.id.estado_solicitud)
     private val nombreSolicitanteTextView: TextView = view.findViewById(R.id.person_name)
     private val nombreMascotaTextView: TextView = view.findViewById(R.id.pet_name)
@@ -23,6 +23,9 @@ class HistorialHolder (view: View) : RecyclerView.ViewHolder(view) {
 
     }
 
+    fun bindEstadoPeticion(estadoPeticion : String){
+        estadoSolicitudTextView.text = estadoPeticion
+    }
     fun bindSolicitanteData(nombreSolicitante: String, urlAvatarSolicitante: String) {
         nombreSolicitanteTextView.text = nombreSolicitante
         Glide.with(itemView.context).load(urlAvatarSolicitante).into(avatarImageView)
@@ -32,6 +35,7 @@ class HistorialHolder (view: View) : RecyclerView.ViewHolder(view) {
         nombreSolicitanteTextView.text = ""
         nombreMascotaTextView.text = ""
         avatarImageView.setImageDrawable(null)
+        estadoSolicitudTextView.text= ""
     }
 
 }

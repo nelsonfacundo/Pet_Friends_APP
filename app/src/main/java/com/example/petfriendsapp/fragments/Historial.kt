@@ -43,7 +43,9 @@ private lateinit var historialAdapter : HistorialFirestoreRecyclerAdapter
         if (uid != null) {
             val query = db.collection("peticiones")
                 .whereEqualTo("idUsuarioDueño", uid)
-         //       .whereEqualTo("estado", "pendiente")
+            //   .whereEqualTo("estado","rechazado")
+           //       .whereEqualTo("estado","aprobado")
+                .whereEqualTo("estado", "pendiente")
 
             val options = FirestoreRecyclerOptions.Builder<Solicitud>()
                 .setQuery(query, Solicitud::class.java)
