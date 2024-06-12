@@ -123,7 +123,8 @@ private fun initViews(){
                                 "especie" to especie,
                                 "sexo" to sexo,
                                 "userId" to userId,
-                                "imageUrl" to imageUrl // Guardar URL de la imagen
+                                "imageUrl" to imageUrl,
+                                "estado" to "pendiente" // Agregar el estado inicial
                             )
 
                             // Guardar datos en Firestore

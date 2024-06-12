@@ -86,7 +86,7 @@ class Inicio : Fragment() {
 
         val rootRef = FirebaseFirestore.getInstance()
 
-        val query = rootRef.collection("mascotas")
+        val query = rootRef.collection("mascotas").whereEqualTo("estado", "pendiente") // Filtrar por estado "pendiente"
 
         val options = FirestoreRecyclerOptions.Builder<Mascota>()
             .setQuery(query, Mascota::class.java)
