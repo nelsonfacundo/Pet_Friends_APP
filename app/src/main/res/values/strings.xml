@@ -270,4 +270,6 @@
     <string name="txt_dialog_delete_cancel">No</string>
 
 
+    //My pets//
+    <string name="txt_no_pets">No tienes mascotas agregadas</string>
 </resources>
