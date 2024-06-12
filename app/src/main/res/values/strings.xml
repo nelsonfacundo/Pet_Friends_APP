@@ -260,4 +260,14 @@
     <string name="txt_limpiar_filtros">Limpiar filtros</string>
     <string name="txt_aplicar_filtros">Aplicar filtros</string>
 
+
+    //Mascotauser adapter//
+    <string name="txt_delete_pet_success">Mascota eliminada correctamente</string>
+    <string name="txt_delete_pet_error">Ocurrió un error al intentar eliminar la mascota</string>
+    <string name="txt_dialog_delete_title">Eliminar mascota"</string>
+    <string name="txt_dialog_detele_message">¿Estás seguro de eliminar la mascota?</string>
+    <string name="txt_dialog_delete_confirm">Si</string>
+    <string name="txt_dialog_delete_cancel">No</string>
+
+
 </resources>

@@ -47,22 +47,22 @@ class MascotaUserFirestoreRecycletAdapter(
         val db = FirebaseFirestore.getInstance()
         db.collection("mascotas").document(mascotaId).delete()
             .addOnSuccessListener {
-                Toast.makeText(context, "Mascota eliminada correctamente", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, R.string.txt_delete_pet_success, Toast.LENGTH_SHORT).show()
             }
             .addOnFailureListener { exception ->
                 // Ocurrió un error al intentar eliminar la mascota
-                Toast.makeText(context, "Ocurrió un error al intentar eliminar la mascota", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, R.string.txt_delete_pet_error, Toast.LENGTH_SHORT).show()
             }
     }
 
     private fun showConfirmationDialog(mascotaId: String) {
         val builder = AlertDialog.Builder(context)
-        builder.setTitle("Eliminar mascota")
-            .setMessage("¿Estás seguro de eliminar la mascota?")
-            .setPositiveButton("Sí") { _, _ ->
+        builder.setTitle(R.string.txt_dialog_delete_title)
+            .setMessage(R.string.txt_dialog_detele_message)
+            .setPositiveButton(R.string.txt_dialog_delete_confirm) { _, _ ->
                 deleteMascota(mascotaId)
             }
-            .setNegativeButton("No") { dialog, _ ->
+            .setNegativeButton(R.string.txt_dialog_delete_cancel) { dialog, _ ->
                 dialog.dismiss()
             }
             .show()
