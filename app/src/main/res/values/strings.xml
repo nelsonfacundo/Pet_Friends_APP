@@ -45,7 +45,7 @@
     /Forgot passowrd/
     <string name="forgot_succes">Email enviado con exito</string>
     <string name="forgot_empty_error">Email no puede estar vacío</string>
-    <string name="txt_btn_forgot_password">Enviar</string>
+    <string name="txt_btn_forgot_password">Enviar email</string>
     <string name="forgot_user_not_found_error">No se encontró una cuenta con esta dirección de correo electrónico.</string>
     <string name="forgot_invalid_email_error">Dirección de correo electrónico inválida.</string>
 
@@ -107,6 +107,8 @@
     <string name="txt_exitoso">Datos guardados correctamente</string>
     <string name="txt_error_url">Error al obtener URL de descarga </string>
     <string name="txt_error_datos">Error al guardar datos </string>
+    <string name="txt_error_upload">Error al subir la imagen. Por favor, intenta nuevamente.</string>
+    <string name="txt_error_token">Error al obtener el token de autenticación. Por favor, intenta nuevamente.</string>
 
 
     /Main/
@@ -125,8 +127,16 @@
     <string name="txt_blog">Artículos y recursos educativos</string>
 
 
-    /Review/
+    /Reseña /Reseña Card/
     <string name="txt_review">Reseñas</string>
+    <string name="title_exp_gral">Experiencia general</string>
+    <string name="title_cond_animal">Condiciones del Animal</string>
+    <string name="title_com_duenio">Comunicación con el Dueño</string>
+    <string name="opinion_txt_title">Opinion del Cliente</string>
+
+    /Favorito/
+    <string name="txt_favorito">Favorito</string>
+
 
     /Details Perro Adoptar/
     <string name="txt_nombreMascota_details">Nombre</string>
@@ -208,7 +218,7 @@
     <string name="txt_review_success">Su reseña fue guardada con exito</string>
     <string name="txt_review_error">Error al agregar la reseña.</string>
     <string name="txt_review_error_user">No puedes dejar una reseña a ti mismo</string>
-    <string name="txt_opinion_length_error">La opinión no puede tener más de 500 caracteres.</string>
+    <string name="txt_opinion_length_error">La opinión no puede tener más de 150 caracteres.</string>
     <string name="txt_review_rating_error">Por favor, selecciona una calificación para todas las categorías.</string>
     <string name="txt_opinion_length_min_error">La opinión debe tener al menos 5 caracteres.</string>
 
@@ -231,5 +241,23 @@
     <string name="reject_button">Rechazar</string>
 
 
+
+    //Filtros
+    <string name="txt_filtros">Filtros de búsqueda</string>
+    <string name="txt_animal">Animal</string>
+    <string name="txt_perro">Perro</string>
+    <string name="txt_gato">Gato</string>
+    <string name="txt_ave">Ave</string>
+    <string name="txt_tortuga">Tortuga</string>
+    <string name="txt_edad">Edad</string>
+    <string name="txt_edad_1_3">1-3 años</string>
+    <string name="txt_edad_3_6">3-6 años</string>
+    <string name="txt_edad_6_9">6-9 años</string>
+    <string name="txt_edad_mas_9">Más de 9 años</string>
+    <string name="txt_sexo">Sexo</string>
+    <string name="txt_hembra">Hembra</string>
+    <string name="txt_macho">Macho</string>
+    <string name="txt_limpiar_filtros">Limpiar filtros</string>
+    <string name="txt_aplicar_filtros">Aplicar filtros</string>
 
 </resources>

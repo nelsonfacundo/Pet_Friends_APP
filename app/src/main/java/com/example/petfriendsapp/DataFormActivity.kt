@@ -6,52 +6,41 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.MultiTransformation
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.example.petfriendsapp.components.LoadingDialog
+import com.example.petfriendsapp.databinding.ActivityDataFormBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 
 class DataFormActivity : AppCompatActivity() {
-    private lateinit var inputNombre: EditText
-    private lateinit var inputApellido: EditText
-    private lateinit var inputTelefono: EditText
-    private lateinit var buttonSeleccionarAvatar: Button
-    private lateinit var imageViewAvatar: ImageView
-    private lateinit var buttonGuardar: Button
+    private lateinit var binding: ActivityDataFormBinding
     private var imageUri: Uri? = null
-
 
     private val PICK_IMAGE_REQUEST = 1
     private val db = FirebaseFirestore.getInstance()
     private val auth = FirebaseAuth.getInstance()
+    private lateinit var loadingDialog: LoadingDialog
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_data_form)
+        binding = ActivityDataFormBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        initViews()
         initListeners()
-    }
 
-    private fun initViews() {
-        inputNombre = findViewById(R.id.input_nombre)
-        inputApellido = findViewById(R.id.input_apellido)
-        inputTelefono = findViewById(R.id.input_telefono)
-        imageViewAvatar = findViewById(R.id.imageViewAvatar)
-        buttonSeleccionarAvatar = findViewById(R.id.buttonSeleccionarAvatar)
-        buttonGuardar = findViewById(R.id.buttonGuardar)
+        // Inicializa el ProgressDialog
+        loadingDialog = LoadingDialog(this)
     }
 
     private fun initListeners() {
-        buttonSeleccionarAvatar.setOnClickListener { abrirGaleria() }
-        buttonGuardar.setOnClickListener { guardarDatos() }
+        binding.buttonSeleccionarAvatar.setOnClickListener { abrirGaleria() }
+        binding.buttonGuardar.setOnClickListener { guardarDatos() }
     }
 
     private fun abrirGaleria() {
@@ -68,7 +57,7 @@ class DataFormActivity : AppCompatActivity() {
                 Glide.with(this)
                     .load(imageUri)
                     .transform(MultiTransformation(CenterCrop(), RoundedCorners(250)))
-                    .into(imageViewAvatar)
+                    .into(binding.imageViewAvatar)
             } else {
                 Log.e("DataFormActivity", "Image URI is null")
                 Toast.makeText(this, "Error al seleccionar imagen", Toast.LENGTH_LONG).show()
@@ -80,10 +69,13 @@ class DataFormActivity : AppCompatActivity() {
         val validationResult = validarDatos()
 
         if (validationResult.first) {
-            val nombre = inputNombre.text.toString().trim()
-            val apellido = inputApellido.text.toString().trim()
-            val telefono = inputTelefono.text.toString().trim()
+            val nombre = binding.inputNombre.text.toString().trim()
+            val apellido = binding.inputApellido.text.toString().trim()
+            val telefono = binding.inputTelefono.text.toString().trim()
             val user = auth.currentUser
+
+            // Muestra el ProgressDialog
+            loadingDialog.show()
 
             user?.getIdToken(true)?.addOnCompleteListener { task ->
                 if (task.isSuccessful) {
@@ -104,16 +96,30 @@ class DataFormActivity : AppCompatActivity() {
                             db.collection("users").document(user.uid)
                                 .set(userMap)
                                 .addOnSuccessListener {
+                                    // Oculta el ProgressDialog
+                                    loadingDialog.dismiss()
                                     Toast.makeText(this, R.string.txt_exitoso, Toast.LENGTH_LONG).show()
                                     navigateToHome()
                                 }
                                 .addOnFailureListener { e ->
-                                    Toast.makeText(this, R.string.txt_error_datos , Toast.LENGTH_LONG).show()
+                                    // Oculta el ProgressDialog
+                                    loadingDialog.dismiss()
+                                    Toast.makeText(this, R.string.txt_error_datos, Toast.LENGTH_LONG).show()
                                 }
                         }.addOnFailureListener { e ->
-                            Toast.makeText(this, R.string.txt_error_url , Toast.LENGTH_LONG).show()
+                            // Oculta el ProgressDialog
+                            loadingDialog.dismiss()
+                            Toast.makeText(this, R.string.txt_error_url, Toast.LENGTH_LONG).show()
                         }
+                    }.addOnFailureListener { e ->
+                        // Oculta el ProgressDialog
+                        loadingDialog.dismiss()
+                        Toast.makeText(this, R.string.txt_error_upload, Toast.LENGTH_LONG).show()
                     }
+                } else {
+                    // Oculta el ProgressDialog
+                    loadingDialog.dismiss()
+                    Toast.makeText(this, R.string.txt_error_token, Toast.LENGTH_LONG).show()
                 }
             }
         } else {
@@ -122,9 +128,9 @@ class DataFormActivity : AppCompatActivity() {
     }
 
     private fun validarDatos(): Pair<Boolean, String> {
-        val nombre = inputNombre.text.toString().trim()
-        val apellido = inputApellido.text.toString().trim()
-        val telefono = inputTelefono.text.toString().trim()
+        val nombre = binding.inputNombre.text.toString().trim()
+        val apellido = binding.inputApellido.text.toString().trim()
+        val telefono = binding.inputTelefono.text.toString().trim()
 
         val telefonoPattern = "\\d+".toRegex() // Expresión regular para aceptar solo dígitos
 
@@ -145,7 +151,4 @@ class DataFormActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
-
-
 }
-
