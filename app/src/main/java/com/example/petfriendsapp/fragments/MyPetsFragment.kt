@@ -60,6 +60,17 @@ class MyPetsFragment : Fragment() {
             adapter = MascotaUserFirestoreRecycletAdapter(requireContext(), options, mascotaClickListener)
             binding.recMisMascotas.adapter = adapter
             adapter.startListening()
+
+            query.addSnapshotListener { snapshot, error ->
+                if (error != null) {
+                    return@addSnapshotListener
+                }
+                if (snapshot != null && !snapshot.isEmpty) {
+                    binding.noPetsText.visibility = View.GONE
+                } else {
+                    binding.noPetsText.visibility = View.VISIBLE
+                }
+            }
         }
     }
 
