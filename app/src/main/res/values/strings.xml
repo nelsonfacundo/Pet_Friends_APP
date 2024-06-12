@@ -260,4 +260,7 @@
     <string name="txt_limpiar_filtros">Limpiar filtros</string>
     <string name="txt_aplicar_filtros">Aplicar filtros</string>
 
+    /Historial/
+    <string name="txt_estado">Estado:</string>
+    <string name="txt_estado_solicitud">Estado solicitud</string>
 </resources>
