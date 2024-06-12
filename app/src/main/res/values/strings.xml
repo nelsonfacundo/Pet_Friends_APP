@@ -92,7 +92,7 @@
     <string name="txt_data_three">Por favor, completa los siguientes campos para comenzar:</string>
     <string name="txt_input_name">Ingresa tu nombre</string>
     <string name="txt_input_lastname">Ingresa tu apellido</string>
-    <string name="txt_input_telefono">Ingresa tu telefono</string>
+    <string name="txt_input_telefono">Tel 15-2345-6789</string>
     <string name="txt_btn_avatar">Seleccionar Foto</string>
     <string name="txt_btn_datos">Enviar datos</string>
     <string name="txt_empty_nombre">El nombre no puede estar vacío</string>

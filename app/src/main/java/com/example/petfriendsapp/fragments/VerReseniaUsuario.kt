@@ -87,7 +87,6 @@ class VerReseniaUsuario : Fragment() {
         val options = FirestoreRecyclerOptions.Builder<Review>()
             .setQuery(query, Review::class.java)
             .build()
-
         val adapter = ReviewFirestoreRecyclerAdpater(options)
         adapter.startListening()
         recResenia.adapter = adapter
