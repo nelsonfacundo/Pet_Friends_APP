@@ -14,6 +14,7 @@ import com.example.petfriendsapp.entities.Solicitud
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import java.util.Arrays
 
 
 class Historial : Fragment() {
@@ -43,9 +44,8 @@ private lateinit var historialAdapter : HistorialFirestoreRecyclerAdapter
         if (uid != null) {
             val query = db.collection("peticiones")
                 .whereEqualTo("idUsuarioDueño", uid)
-            //   .whereEqualTo("estado","rechazado")
-           //       .whereEqualTo("estado","aprobado")
-                .whereEqualTo("estado", "pendiente")
+                .whereIn("estado", Arrays.asList("rechazado", "aprobado"))
+
 
             val options = FirestoreRecyclerOptions.Builder<Solicitud>()
                 .setQuery(query, Solicitud::class.java)
