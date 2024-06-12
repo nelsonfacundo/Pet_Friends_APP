@@ -28,6 +28,7 @@ import com.google.firebase.firestore.firestore
 
 class Inicio : Fragment() {
 
+
     private lateinit var viewInicio: View
     private lateinit var buttonCambiarPerfil: Button
     lateinit var recMascotas: RecyclerView
@@ -96,10 +97,10 @@ class Inicio : Fragment() {
         initListeners()
 
 
+
     }
 
     private fun fillRecycler() {
-
         val rootRef = FirebaseFirestore.getInstance()
 
         var query: Query = rootRef.collection("mascotas")
@@ -115,6 +116,9 @@ class Inicio : Fragment() {
         query = query.whereGreaterThanOrEqualTo("edad", minAge)
             .whereLessThanOrEqualTo("edad", maxAge)
 
+        // Add condition to filter by estado "pendiente"
+        query = query.whereEqualTo("estado", "pendiente")
+
         val options = FirestoreRecyclerOptions.Builder<Mascota>()
             .setQuery(query, Mascota::class.java)
             .build()
@@ -123,6 +127,7 @@ class Inicio : Fragment() {
         adapter.startListening()
         recMascotas.adapter = adapter
     }
+
 
     private fun redirigir(mascota: Mascota, mascotaId: String) {
         val action = InicioDirections.actionInicioToDetailsAdoptar(
