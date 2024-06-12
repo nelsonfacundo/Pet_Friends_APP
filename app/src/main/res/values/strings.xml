@@ -55,6 +55,7 @@
     <string name="txt_btn_cambiar_ft">Editar Perfil</string>
     <string name="txt_btn_cambiar_email">Cambiar Email</string>
     <string name="txt_btn_cambiar_password">Cambiar Contraseña</string>
+    <string name="txt_btn_mis_mascotas">Mis Mascotas</string>
     <string name="recibir_notificaciones">Recibir Notificaciones</string>
     <string name="average_rating_text">(%s)</string>
     <string name="txt_tv_ranting">0</string>
@@ -241,7 +242,6 @@
     <string name="reject_button">Rechazar</string>
 
 
-
     //Filtros
     <string name="txt_filtros">Filtros de búsqueda</string>
     <string name="txt_animal">Animal</string>
@@ -259,5 +259,15 @@
     <string name="txt_macho">Macho</string>
     <string name="txt_limpiar_filtros">Limpiar filtros</string>
     <string name="txt_aplicar_filtros">Aplicar filtros</string>
+
+
+    //Mascotauser adapter//
+    <string name="txt_delete_pet_success">Mascota eliminada correctamente</string>
+    <string name="txt_delete_pet_error">Ocurrió un error al intentar eliminar la mascota</string>
+    <string name="txt_dialog_delete_title">Eliminar mascota"</string>
+    <string name="txt_dialog_detele_message">¿Estás seguro de eliminar la mascota?</string>
+    <string name="txt_dialog_delete_confirm">Si</string>
+    <string name="txt_dialog_delete_cancel">No</string>
+
 
 </resources>
