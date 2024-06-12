@@ -125,17 +125,18 @@ private fun initViews(){
                     storageRef.downloadUrl.addOnSuccessListener { uri ->
                         val imageUrl = uri.toString()
 
-                        // Crear un mapa de datos
-                        val mascotaData = hashMapOf(
-                            "nombre" to nombre,
-                            "ubicacion" to ubicacion,
-                            "descripcion" to descripcion,
-                            "edad" to edad,
-                            "especie" to especie,
-                            "sexo" to sexo,
-                            "userId" to userId,
-                            "imageUrl" to imageUrl // Guardar URL de la imagen
-                        )
+                            // Crear un mapa de datos
+                            val mascotaData = hashMapOf(
+                                "nombre" to nombre,
+                                "ubicacion" to ubicacion,
+                                "descripcion" to descripcion,
+                                "edad" to edad,
+                                "especie" to especie,
+                                "sexo" to sexo,
+                                "userId" to userId,
+                                "imageUrl" to imageUrl,
+                                "estado" to "pendiente" // Agregar el estado inicial
+                            )
 
                         // Guardar datos en Firestore
                         db.collection("mascotas").add(mascotaData)
