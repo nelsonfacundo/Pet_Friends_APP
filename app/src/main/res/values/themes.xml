@@ -25,6 +25,18 @@
     <style name="textEditSub" parent="inputsTextEdit">
         <item name="android:textSize">16sp</item>
     </style>
+    <style name="textEditSub2" parent="inputsTextEdit">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="textEditSub3" parent="inputsTextEdit">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="textEditSub4" parent="inputsTextEdit">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
     <style name="colorBtn" parent="inputsTextEdit">
         <item name="android:textColor">@color/white</item>
         <item name="android:backgroundTint">@color/accent</item>
@@ -82,5 +94,13 @@
         <item name="android:scaleX">0.7</item>
         <item name="android:scaleY">0.7</item>
     </style>
+
+    <style name="chipFilter" parente="Widget.MaterialComponents.Chip">
+        <item name="chipBackgroundColor">@drawable/chip_filter_selector</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:checkable">true</item>
+    </style>
+
 
 </resources>
