@@ -6,22 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.petfriendsapp.R
 import com.example.petfriendsapp.adapter.ArticuloAdapter
 import com.example.petfriendsapp.entities.Articulo
-import com.example.petfriendsapp.viewmodels.ArticuloViewModel
 
 
 class BlogFragment : Fragment() {
     private lateinit var viewBlog: View
     private lateinit var buttonBack: ImageView
     private lateinit var articlesRV: RecyclerView
-    private lateinit var articleViewModel: ArticuloViewModel
     private var articlesList: MutableList<Articulo> = ArrayList()
 
     companion object {
@@ -36,7 +32,6 @@ class BlogFragment : Fragment() {
 
         initViews()
 
-        articleViewModel = ViewModelProvider(this).get(ArticuloViewModel::class.java)
         articlesRV = viewBlog.findViewById(R.id.articles_rv)
 
         return viewBlog
@@ -53,11 +48,6 @@ class BlogFragment : Fragment() {
         listArticles()
         val articleAdapter = ArticuloAdapter(articlesList)
         articlesRV.adapter = articleAdapter
-
-
-      /*  articleViewModel.articles.observe(viewLifecycleOwner, Observer { articles ->
-            articlesRV.adapter = ArticuloAdapter(articles)
-        })*/
     }
 
     private fun listArticles() {
