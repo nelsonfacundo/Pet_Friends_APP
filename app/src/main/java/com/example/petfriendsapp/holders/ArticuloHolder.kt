@@ -29,12 +29,8 @@ class ArticuloHolder(v: View): RecyclerView.ViewHolder(v) {
         txtText.text = text
     }*/
 
-    fun setImage(image: String){
-        val image: ImageView = view.findViewById(R.id.img_article)
-        Glide.with(view.context)
-            .load(image)
-            .placeholder(R.drawable.avatar)
-            .error(R.drawable.avatar)
-            .into(image)
+    fun setImage(image: Int){
+      val imageView: ImageView = view.findViewById(R.id.img_article)
+        imageView.setImageResource(image)
     }
 }

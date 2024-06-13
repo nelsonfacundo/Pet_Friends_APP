@@ -21,9 +21,10 @@ class ArticuloAdapter(
     override fun onBindViewHolder(holder: ArticuloHolder, position: Int) {
         val article = articles[position]
 
-        holder.setTitle(article.title)
-        holder.setDescription(article.description)
+        holder.setTitle(article.title.toString())
+        holder.setDescription(article.description.toString())
         holder.setImage(article.image)
     }
 
 }
+

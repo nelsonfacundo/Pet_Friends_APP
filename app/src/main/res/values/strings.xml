@@ -122,11 +122,6 @@
     <string name="txt_cerrar_sesion">Cerrar Sesion</string>
     <string name="txt_sesion_cerrada">Sesion Cerrada</string>
 
-
-    /Blog/
-    <string name="txt_blog">Artículos y recursos educativos</string>
-
-
     /Reseña /Reseña Card/
     <string name="txt_review">Reseñas</string>
     <string name="title_exp_gral">Experiencia general</string>
@@ -233,7 +228,7 @@
     <string name="permission_required_toast">Permiso requerido</string>
     <string name="title_activity_maps2">MapsActivity2</string>
 
-    //Filtros
+    /Filtros/
     <string name="txt_filtros">Filtros de búsqueda</string>
     <string name="txt_animal">Animal</string>
     <string name="txt_perro">Perro</string>
@@ -250,5 +245,45 @@
     <string name="txt_macho">Macho</string>
     <string name="txt_limpiar_filtros">Limpiar filtros</string>
     <string name="txt_aplicar_filtros">Aplicar filtros</string>
+
+    /Blog/
+    <string name="txt_blog">Artículos y recursos educativos</string>
+    <string name="txt_blog_title_1">¡Ideas para ejercitar con tu perro!</string>
+    <string name="txt_blog_desc_1">
+        1. Hacer caminatas \n
+        2. Elaborar juegos de ingenio \n
+        3. Visitar el parque para perros \n
+        4. Ir a nadar \n
+        5. Trotar o correr \n
+        6. El juego de "tira y afloja" \n
+        7. Jugar a atrapar un juguete o pelota \n
+        8. Subir y bajar escaleras \n
+    </string>
+    <string name="txt_blog_title_2">Alimentos prohibidos para perros</string>
+    <string name="txt_blog_desc_2">
+        Algunos alimentos son tóxicos, te contamos algunos: \n
+        - Chocolate \n
+        - Caramelos y chicle con xilitol \n
+        - Bebidas estimulantes \n
+        - Cebolla, ajo, puerro, entre otras verduras \n
+        - Uvas y pasas \n
+        - Aguacate \n
+        - Semillas de determinadas frutas \n
+        - Frutos secos \n
+    </string>
+    <string name="txt_blog_title_3">Consideraciones a la hora de adoptar una mascota</string>
+    <string name="txt_blog_desc_3">
+        Antes de adoptar una mascota debés tener ciertas consideraciones. \n
+        \n
+        - Asegurate de tener espacio y tiempo para darle una buena calidad de vida \n
+        - El primer paso siempre es visitar un veterinario para controlar su salud \n
+        - Realizá la desparasitación externa e interna \n
+        - Completar el calendario vacunatorio y tenerlo siempre al día con los refuerzos necesarios \n
+        - Consultar al veterinario qué tipo de alimento es recomendable \n
+        - Conseguir juguetes para entretener a tu mascota y ejercitarla \n
+\n
+        Muchos puntos pueden variar de acuerdo al tipo de animal, recordá siempre consultar con tu veterinario de confianza.
+    </string>
+
 
 </resources>

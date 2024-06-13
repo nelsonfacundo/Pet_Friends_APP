@@ -4,24 +4,21 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class Articulo (
-    val title: String,
-    val description: String,
-    //val text: String,
-    val image: String
+    val title: String?,
+    val description: String?,
+    val image: Int
 
 ) : Parcelable {
     constructor(parcel: Parcel) : this (
-        parcel.readString().toString(),
-        parcel.readString().toString(),
-        parcel.readString().toString(),
-       // parcel.readString().toString()
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readInt()
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(title)
         parcel.writeString(description)
-        //parcel.writeString(text)
-        parcel.writeString(image)
+        parcel.writeInt(image)
     }
 
     override fun describeContents(): Int {
