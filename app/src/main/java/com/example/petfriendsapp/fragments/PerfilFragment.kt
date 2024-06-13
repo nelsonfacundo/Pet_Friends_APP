@@ -54,6 +54,7 @@ class PerfilFragment : Fragment() {
         binding.btnCambiarPassword.setOnClickListener { navigateToChangePassword() }
         binding.switchNotificaciones.setOnClickListener { showNotification(requireContext()) }
         binding.icBackFragmentPerfil.setOnClickListener { navigateToHome() }
+        binding.btnMisMascotas.setOnClickListener{ navigateToMyPets() }
     }
 
     private fun fetchUserProfile() {
@@ -186,6 +187,11 @@ class PerfilFragment : Fragment() {
 
     private fun navigateToEditProfile() {
         val action = PerfilFragmentDirections.actionPerfilToEditarPerfilFragment()
+        binding.root.findNavController().navigate(action)
+    }
+
+    private fun navigateToMyPets()  {
+        val action = PerfilFragmentDirections.actionPerfilToMyPetsFragment()
         binding.root.findNavController().navigate(action)
     }
 
