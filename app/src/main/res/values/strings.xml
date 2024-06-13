@@ -93,7 +93,7 @@
     <string name="txt_data_three">Por favor, completa los siguientes campos para comenzar:</string>
     <string name="txt_input_name">Ingresa tu nombre</string>
     <string name="txt_input_lastname">Ingresa tu apellido</string>
-    <string name="txt_input_telefono">Ingresa tu telefono</string>
+    <string name="txt_input_telefono">Tel 15-2345-6789</string>
     <string name="txt_btn_avatar">Seleccionar Foto</string>
     <string name="txt_btn_datos">Enviar datos</string>
     <string name="txt_empty_nombre">El nombre no puede estar vacío</string>
@@ -123,7 +123,16 @@
     <string name="txt_cerrar_sesion">Cerrar Sesion</string>
     <string name="txt_sesion_cerrada">Sesion Cerrada</string>
 
+
+
+    /Blog/
+    <string name="txt_blog">Artículos y recursos educativos</string>
+
+
+   
+
     /Reseña /Reseña Card/
+
     <string name="txt_review">Reseñas</string>
     <string name="title_exp_gral">Experiencia general</string>
     <string name="title_cond_animal">Condiciones del Animal</string>
