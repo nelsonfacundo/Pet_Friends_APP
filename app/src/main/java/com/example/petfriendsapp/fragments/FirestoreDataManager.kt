@@ -4,6 +4,8 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 import android.util.Log
+import com.example.petfriendsapp.entities.Mascota
+import com.example.petfriendsapp.entities.Solicitud
 
 class FirestoreDataManager {
 
@@ -45,5 +47,6 @@ class FirestoreDataManager {
                 onError(exception)
             }
     }
+
 }
 
