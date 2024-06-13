@@ -16,7 +16,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 
 class MyPetsFragment : Fragment() {
-    private var _binding: FragmentMyPetsBinding? = null
+    private lateinit var _binding: FragmentMyPetsBinding
     private val binding get() = _binding!!
     private lateinit var adapter: MascotaUserFirestoreRecycletAdapter
     private val db = FirebaseFirestore.getInstance()
@@ -60,17 +60,6 @@ class MyPetsFragment : Fragment() {
             adapter = MascotaUserFirestoreRecycletAdapter(requireContext(), options, mascotaClickListener)
             binding.recMisMascotas.adapter = adapter
             adapter.startListening()
-
-            query.addSnapshotListener { snapshot, error ->
-                if (error != null) {
-                    return@addSnapshotListener
-                }
-                if (snapshot != null && !snapshot.isEmpty) {
-                    binding.noPetsText.visibility = View.GONE
-                } else {
-                    binding.noPetsText.visibility = View.VISIBLE
-                }
-            }
         }
     }
 
@@ -89,10 +78,7 @@ class MyPetsFragment : Fragment() {
         adapter.stopListening()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+
 
     private fun navigateToPerfil() {
         val action = MyPetsFragmentDirections.actionMyPetsFragmentToPerfil()
