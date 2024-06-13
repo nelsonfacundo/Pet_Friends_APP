@@ -65,6 +65,9 @@
         <action
             android:id="@+id/action_perfil_to_inicio"
             app:destination="@id/inicio" />
+        <action
+            android:id="@+id/action_perfil_to_myPetsFragment"
+            app:destination="@id/myPetsFragment" />
     </fragment>
 
     <fragment
@@ -144,5 +147,14 @@
         <action
             android:id="@+id/action_darReviewFragment_to_inicio"
             app:destination="@id/inicio" />
+    </fragment>
+    <fragment
+        android:id="@+id/myPetsFragment"
+        android:name="com.example.petfriendsapp.fragments.MyPetsFragment"
+        android:label="fragment_my_pets"
+        tools:layout="@layout/fragment_my_pets" >
+        <action
+            android:id="@+id/action_myPetsFragment_to_perfil"
+            app:destination="@id/perfil" />
     </fragment>
 </navigation>
