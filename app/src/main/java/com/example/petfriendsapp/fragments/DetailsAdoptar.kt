@@ -52,7 +52,7 @@ class DetailsAdoptar : Fragment() {
             findNavController().navigateUp()
         }
 
-        val txtRaza: TextView = view.findViewById(R.id.razaMascota)
+//        val txtRaza: TextView = view.findViewById(R.id.razaMascota)
         val txtEdad: TextView = view.findViewById(R.id.edadMascota)
         val txtNombre: TextView = view.findViewById(R.id.nombreMascota)
         val txtSexo: TextView = view.findViewById(R.id.sexoMascota)
@@ -66,7 +66,7 @@ class DetailsAdoptar : Fragment() {
         val mascota: Mascota = args.Mascota
         val idMascota: String = args.mascotaId
 
-        txtRaza.text = mascota.especie
+       // txtRaza.text = mascota.especie
         txtEdad.text = mascota.edad.toString()
         txtNombre.text = mascota.nombre
         txtUbicacion.text = mascota.ubicacion
@@ -189,6 +189,7 @@ class DetailsAdoptar : Fragment() {
             if (userIdAdopta != null && userIdDueño != null) {
                 val peticion = hashMapOf(
                     "estado" to "pendiente",
+                    "Review" to false,
                     "idMascota" to idMascota,
                     "idUsuarioAdopta" to userIdAdopta,
                     "idUsuarioDueño" to userIdDueño

@@ -8,6 +8,5 @@ class ListViewModel : ViewModel() {
 
     var mascotas : MutableList<Mascota> = ArrayList<Mascota>()
     var reviews : MutableList<Review> = ArrayList<Review>()
-
 }
 
