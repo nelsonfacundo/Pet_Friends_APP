@@ -43,14 +43,15 @@ class MascotaUserFirestoreRecycletAdapter(
         }
     }
 
-    private fun deleteMascota(mascotaId: String) {
+    private fun updateMascotaState(mascotaId: String) {
         val db = FirebaseFirestore.getInstance()
-        db.collection("mascotas").document(mascotaId).delete()
+        db.collection("mascotas").document(mascotaId)
+            .update("estado", "eliminado")
             .addOnSuccessListener {
                 Toast.makeText(context, R.string.txt_delete_pet_success, Toast.LENGTH_SHORT).show()
             }
             .addOnFailureListener { exception ->
-                // Ocurrió un error al intentar eliminar la mascota
+                // Ocurrió un error al intentar actualizar el estado de la mascota
                 Toast.makeText(context, R.string.txt_delete_pet_error, Toast.LENGTH_SHORT).show()
             }
     }
@@ -60,7 +61,7 @@ class MascotaUserFirestoreRecycletAdapter(
         builder.setTitle(R.string.txt_dialog_delete_title)
             .setMessage(R.string.txt_dialog_detele_message)
             .setPositiveButton(R.string.txt_dialog_delete_confirm) { _, _ ->
-                deleteMascota(mascotaId)
+                updateMascotaState(mascotaId)
             }
             .setNegativeButton(R.string.txt_dialog_delete_cancel) { dialog, _ ->
                 dialog.dismiss()
