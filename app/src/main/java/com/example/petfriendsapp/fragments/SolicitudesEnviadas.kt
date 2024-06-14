@@ -4,25 +4,31 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.petfriendsapp.R
 import com.example.petfriendsapp.adapter.SolicitudEnviadaFirestoreRecyclerAdapter
 import com.example.petfriendsapp.adapter.SolicitudRecibidaFirestoreRecyclerAdapter
+import com.example.petfriendsapp.entities.Mascota
 import com.example.petfriendsapp.entities.Solicitud
 import com.example.petfriendsapp.viewmodels.ListViewModel
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import fragments.InicioDirections
 
 class SolicitudesEnviadas : Fragment() {
 
     private lateinit var viewSolicitudes: View
     private lateinit var recSolicitudesEnviadas: RecyclerView
     private lateinit var solicitudAdapter: SolicitudEnviadaFirestoreRecyclerAdapter
+    private lateinit var reviewClickListener: (Solicitud, String) -> Unit
     private val db = FirebaseFirestore.getInstance()
     private val dataManager = FirestoreDataManager()
     private val auth = FirebaseAuth.getInstance()
@@ -34,8 +40,14 @@ class SolicitudesEnviadas : Fragment() {
     ): View? {
         viewSolicitudes = inflater.inflate(R.layout.fragment_solicitudes_enviadas, container, false)
 
+        reviewClickListener = { solicitud, solicitudId ->
+            navigateToDarReview(solicitud, solicitudId)
+        }
+
         initRecSolicitudes()
         setupRecyclerView()
+
+
 
         return viewSolicitudes
     }
@@ -59,7 +71,7 @@ class SolicitudesEnviadas : Fragment() {
                 .setQuery(query, Solicitud::class.java)
                 .build()
 
-            solicitudAdapter = SolicitudEnviadaFirestoreRecyclerAdapter(options, dataManager)
+            solicitudAdapter = SolicitudEnviadaFirestoreRecyclerAdapter(options, dataManager, reviewClickListener)
 
             recSolicitudesEnviadas.apply {
                 setHasFixedSize(true)
@@ -68,8 +80,14 @@ class SolicitudesEnviadas : Fragment() {
             }
     }
 
+    }
 
-
+    private fun navigateToDarReview(solicitud: Solicitud, solicitudId: String) {
+        val action = SolicitudesEnviadasDirections.actionSolicitudesEnviadasToDarReviewFragment(
+            solicitud,
+            solicitudId
+        )
+        findNavController().navigate(action)
     }
 
     override fun onStart() {

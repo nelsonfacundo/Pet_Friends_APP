@@ -4,6 +4,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.petfriendsapp.R
@@ -17,7 +18,7 @@ class SolicitudEnviadaHolder(v: View) : RecyclerView.ViewHolder(v) {
     private val nombreMascotaTextView: TextView = view.findViewById(R.id.txt_pet_name)
     private val estadoTextView: TextView = view.findViewById(R.id.txt_adopt_status)
     private val mascotaImageView: ImageView = view.findViewById(R.id.pet_img_request)
-    private val reviewButton: Button = view.findViewById(R.id.btn_leave_review)
+    private val reviewButton: Button = view.findViewById(R.id.btn_give_review)
     private val statusStaticText: TextView = view.findViewById(R.id.txt_adopt_status_static)
 
 
@@ -51,6 +52,15 @@ class SolicitudEnviadaHolder(v: View) : RecyclerView.ViewHolder(v) {
         mascotaImageView.setImageDrawable(null)
     }
 
+    /*fun setRedirectionReview(){
+        reviewButton.setOnClickListener {view ->
+            view.findNavController().navigate(R.id.action_solicitudesEnviadas_to_darReviewFragment)
+        }
+    }*/
+
+    fun getReviewButton(): Button {
+        return reviewButton
+    }
 
 }
 

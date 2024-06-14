@@ -144,6 +144,12 @@
         android:name="com.example.petfriendsapp.fragments.DarReviewFragment"
         android:label="fragment_dar_review"
         tools:layout="@layout/fragment_dar_review" >
+        <argument
+            android:name="Solicitud"
+            app:argType="com.example.petfriendsapp.entities.Solicitud" />
+        <argument
+            android:name="solicitudId"
+            app:argType="string" />
         <action
             android:id="@+id/action_darReviewFragment_to_inicio"
             app:destination="@id/inicio" />
@@ -156,5 +162,14 @@
         <action
             android:id="@+id/action_myPetsFragment_to_perfil"
             app:destination="@id/perfil" />
+    </fragment>
+    <fragment
+        android:id="@+id/solicitudesEnviadas"
+        android:name="com.example.petfriendsapp.fragments.SolicitudesEnviadas"
+        android:label="fragment_solicitudes_enviadas"
+        tools:layout="@layout/fragment_solicitudes_enviadas" >
+        <action
+            android:id="@+id/action_solicitudesEnviadas_to_darReviewFragment"
+            app:destination="@id/darReviewFragment" />
     </fragment>
 </navigation>

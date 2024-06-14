@@ -4,38 +4,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:cardCornerRadius="8dp"
+    android:layout_margin="10dp"
+    app:cardCornerRadius="10dp"
     app:cardElevation="4dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_margin="10dp">
 
         <ImageView
             android:id="@+id/pet_img_request"
-            style="@style/profileImageRound"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_gravity="center_vertical"
-            android:layout_margin="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/round_background_profile"
-            android:padding="2dp"
             android:src="@drawable/avatar"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
-            android:layout_width="120dp"
-            android:layout_height="55dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:gravity="center_vertical"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -44,9 +37,9 @@
 
             <TextView
                 android:id="@+id/txt_adopt_send"
-                android:layout_width="122dp"
+                android:layout_width="130dp"
                 android:layout_height="wrap_content"
-                android:text="Enviaste solicitud para adoptar a:"
+                android:text="@string/txt_sent_request"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -64,9 +57,9 @@
             android:id="@+id/linearLayout4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="35dp"
+            android:layout_marginBottom="10dp"
             android:gravity="center_vertical"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -77,27 +70,29 @@
                 android:id="@+id/txt_adopt_status_static"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Estado"
-                android:visibility="visible"/>
+                android:text="@string/txt_status_static"
+                android:textAlignment="center"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/txt_adopt_status"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Status"
-                android:visibility="visible"/>
+                android:textAlignment="center"
+                android:textSize="18sp" />
 
         </LinearLayout>
 
         <Button
-            android:id="@+id/btn_leave_review"
-            android:layout_width="wrap_content"
+            android:id="@+id/btn_give_review"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
-            android:text="Dejar reseña"
-            android:visibility="gone"
+            android:text="@string/btn_leave_review"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            style="@style/colorBtn" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
