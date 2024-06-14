@@ -1,5 +1,6 @@
 package com.example.petfriendsapp.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.example.petfriendsapp.R
@@ -12,7 +13,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions
 class SolicitudEnviadaFirestoreRecyclerAdapter(
     private val options: FirestoreRecyclerOptions<Solicitud>,
     private val dataManager: FirestoreDataManager
-    ) : FirestoreRecyclerAdapter<Solicitud, SolicitudEnviadaHolder>(options) {
+) : FirestoreRecyclerAdapter<Solicitud, SolicitudEnviadaHolder>(options) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SolicitudEnviadaHolder {
         val view = LayoutInflater.from(parent.context)
@@ -41,8 +42,21 @@ class SolicitudEnviadaFirestoreRecyclerAdapter(
         dataManager.loadEstadoSolicitud(solicitudId,
             onSuccess = { estadoSolicitud ->
                 holder.setEstado(estadoSolicitud)
+                if (estadoSolicitud == "aprobado") {
+                    dataManager.loadReview(solicitudId,
+                        onSuccess = { review ->
+                            Log.d("Review", review.toString())
+                            if (!review) {
+                                holder.showReviewButton()
+                            }
+                        },
+                        onError = { error -> })
+                } else {
+                    holder.showStatusText()
+                }
             },
             onError = { error -> })
 
+
     }
-    }
+}

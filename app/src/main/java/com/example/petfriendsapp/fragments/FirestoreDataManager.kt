@@ -81,5 +81,21 @@ class FirestoreDataManager {
                 onError(exception)
             }
     }
+
+    fun loadReview(idPeticion : String, onSuccess: (Boolean) -> Unit, onError: (Exception) -> Unit){
+        val peticionRef = db.collection("peticiones").document(idPeticion)
+        peticionRef.get().addOnSuccessListener { documentSnapshot ->
+            val reviewPeticion = documentSnapshot.getBoolean("review")
+            if(reviewPeticion != null){
+                onSuccess(reviewPeticion)
+            } else{
+                Log.e("FirestoreDataManager", "Datos de la peticion no encontrados")
+                onError(Exception("Datos de la peticion no encontrados"))
+            }
+        }
+            .addOnFailureListener{ exception ->
+                Log.e("FirestoreDataManager", "Error al cargar datos de la peticion", exception)
+                onError(exception) }
+    }
 }
 

@@ -52,7 +52,8 @@ class SolicitudesEnviadas : Fragment() {
         if(uid != null){
             val query = db.collection("peticiones")
                 .whereEqualTo("idUsuarioAdopta", uid)
-                .whereEqualTo("estado", "pendiente")
+                .whereIn("estado", listOf("pendiente", "aprobado"))
+                .whereEqualTo("Review", false)
 
             val options = FirestoreRecyclerOptions.Builder<Solicitud>()
                 .setQuery(query, Solicitud::class.java)
@@ -70,10 +71,6 @@ class SolicitudesEnviadas : Fragment() {
 
 
     }
-
-
-
-
 
     override fun onStart() {
         super.onStart()
