@@ -6,66 +6,53 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.petfriendsapp.R
 import com.example.petfriendsapp.adapter.ReviewFirestoreRecyclerAdpater
+import com.example.petfriendsapp.databinding.FragmentVerReseniaUsuarioBinding
 import com.example.petfriendsapp.entities.Review
 import com.example.petfriendsapp.viewmodels.ListViewModel
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
 import java.util.Locale
 
 class VerReseniaUsuario : Fragment() {
-    private lateinit var viewResenia: View
-    private lateinit var buttonBack: ImageView
-    private lateinit var txtValoracion : TextView
-    private lateinit var name : TextView
-    private lateinit var picture : ImageView
-    private lateinit var recResenia : RecyclerView
-    private lateinit var viewModel : ListViewModel
 
-   // private  var resenias: MutableList<Review> = ArrayList()
+
+    private lateinit var bindingFragment: FragmentVerReseniaUsuarioBinding
+    private val binding get() = bindingFragment
+
+    private lateinit var viewModel : ListViewModel
     private val db = FirebaseFirestore.getInstance()
     private val auth = FirebaseAuth.getInstance()
 
-    companion object {
-        val BUTTON_BACK = R.id.ic_back_resenia
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewResenia=inflater.inflate(R.layout.fragment_ver_resenia_usuario, container, false)
+        bindingFragment = FragmentVerReseniaUsuarioBinding.inflate(inflater, container, false)
+        val view = binding.root
 
-        initViews()
+        return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         setupRecyclerView()
         fetchUserProfile()
         fetchUserRatings()
-
-        return viewResenia
     }
-    private fun initViews() {
-        buttonBack = viewResenia.findViewById(BUTTON_BACK)
-        txtValoracion = viewResenia.findViewById(R.id.valoration)
-        name = viewResenia.findViewById(R.id.name_review)
-        picture = viewResenia.findViewById(R.id.picture_review)
-        recResenia=viewResenia.findViewById(R.id.review_list)
-    }
-
     private fun setupRecyclerView() {
-        recResenia.setHasFixedSize(true)
-        recResenia.layoutManager = LinearLayoutManager(context)
+        binding.reviewList.setHasFixedSize(true)
+        binding.reviewList.layoutManager = LinearLayoutManager(context)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -73,6 +60,7 @@ class VerReseniaUsuario : Fragment() {
         viewModel = ViewModelProvider(this)[ListViewModel::class.java]
         checkRecords()
     }
+
     override fun onStart() {
         super.onStart()
         initListeners()
@@ -81,41 +69,58 @@ class VerReseniaUsuario : Fragment() {
 
     private fun fillRecycler() {
         val userId = auth.currentUser?.uid
-        if(userId!= null){
-        val query = db.collection("users").document(userId).collection("ratings")
+        if (userId != null) {
+            val query = db.collection("users").document(userId).collection("ratings")
 
-        val options = FirestoreRecyclerOptions.Builder<Review>()
-            .setQuery(query, Review::class.java)
-            .build()
+            val options = FirestoreRecyclerOptions.Builder<Review>()
+                .setQuery(query, Review::class.java)
+                .build()
 
-        val adapter = ReviewFirestoreRecyclerAdpater(options)
-        adapter.startListening()
-        recResenia.adapter = adapter
+            val adapter = ReviewFirestoreRecyclerAdpater(options)
+            adapter.startListening()
+            binding.reviewList.adapter = adapter
+
+            query.get()
+                .addOnSuccessListener { documents ->
+                    if (documents.isEmpty) {
+                        binding.reviewList.visibility = View.GONE
+                        binding.emptyMessage.visibility = View.VISIBLE
+                    } else {
+                        binding.reviewList.visibility = View.VISIBLE
+                        binding.emptyMessage.visibility = View.GONE
+                    }
+                }
+                .addOnFailureListener { exception ->
+                    Log.w("VerReseniaUsuario", "Error al obtener las reseñas: ", exception)
+                }
         }
     }
 
     private fun checkRecords() {
-        val userRef = db.collection("users").document().collection("ratings").get()
-        userRef
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    for (review in viewModel.reviews) {
-                        db.collection("users").document().collection("ratings").get()
+        val userId = auth.currentUser?.uid
+        if (userId != null) {
+            db.collection("users").document(userId).collection("ratings").get()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        if (task.result.isEmpty) {
+                            binding.emptyMessage.visibility = View.VISIBLE
+                            binding.reviewList.visibility = View.GONE
+                        } else {
+                            binding.emptyMessage.visibility = View.GONE
+                            binding.reviewList.visibility = View.VISIBLE
+                        }
                     }
                 }
-
-            }
+        }
     }
-
-
 
     private fun initListeners() {
-        buttonBack.setOnClickListener { navigateToHome() }
-
+        binding.icBackResenia.setOnClickListener { navigateToHome() }
     }
+
     private fun navigateToHome() {
         val action1 = VerReseniaUsuarioDirections.actionReviewFragmentToInicio()
-        viewResenia.findNavController().navigate(action1)
+        view?.findNavController()?.navigate(action1)
     }
 
 
@@ -132,7 +137,7 @@ class VerReseniaUsuario : Fragment() {
                         val nombre = document.getString("nombre")
                         val apellido = document.getString("apellido")
                         val nombreCompleto = "$nombre $apellido"
-                        name.text = nombreCompleto
+                        binding.nameReview.text = nombreCompleto
 
                         val urlImagenPerfil = document.getString("avatarUrl")
 
@@ -141,19 +146,17 @@ class VerReseniaUsuario : Fragment() {
                             .transform(CenterCrop(), RoundedCorners(250))
                             .placeholder(R.drawable.avatar)
                             .error(R.drawable.avatar)
-                            .into(picture)
+                            .into(binding.pictureReview)
 
                     } else {
                         Log.d("Perfil", "No existe el documento")
                     }
                 }
                 .addOnFailureListener { exception ->
-                    Log.d("Perfil", "La obtención de datos falló con ", exception)
+                    Log.d("VerReseniaUsuario", "La obtención de datos falló con ", exception)
                 }
-           }
-
         }
-
+    }
 
     private fun fetchUserRatings() {
         val userId = auth.currentUser?.uid
@@ -180,20 +183,18 @@ class VerReseniaUsuario : Fragment() {
 
                         val averageRating = if (count > 0) sum / count else 0
 
-                        // Convierte el promedio a cadena de texto antes de mostrarlo
                         val averageRatingText = String.format(Locale.getDefault(), "%.0f", averageRating)
                         val ratingText = getString(R.string.average_rating_text, averageRatingText )
-                        txtValoracion.text = ratingText
-
+                        binding.valoration.text = ratingText
 
                     } else {
-                       // Log.d("PerfilFragment", "Valoraciones no encontradas")
+                         Log.d("VerReseniaUsuario", "Valoraciones no encontradas")
                     }
                 }
                 .addOnFailureListener { exception ->
-                    Log.w("PerfilFragment", "Error al obtener las valoraciones: ROMPIO TODO ACA!!! ", exception)
+                    Log.w("VerReseniaUsuario", "Error al obtener las valoraciones: ", exception)
                 }
-            }
+        }
     }
 
 }

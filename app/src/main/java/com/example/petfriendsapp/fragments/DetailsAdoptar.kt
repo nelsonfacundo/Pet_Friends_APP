@@ -13,6 +13,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
@@ -31,6 +32,8 @@ class DetailsAdoptar : Fragment() {
     private val args: DetailsAdoptarArgs by navArgs()
     private lateinit var buttonNumero: ImageButton
     private lateinit var buttonAdoptar: Button
+    private lateinit var mascota: Mascota
+    private lateinit var idMascota: String
 
     private val db = FirebaseFirestore.getInstance()
     private val auth = FirebaseAuth.getInstance()
@@ -49,7 +52,7 @@ class DetailsAdoptar : Fragment() {
         loadingDialog = LoadingDialog(requireContext())
 
         buttonBackDetails.setOnClickListener {
-            findNavController().navigateUp()
+            navigateToHome()
         }
 
         val txtRaza: TextView = view.findViewById(R.id.razaMascota)
@@ -63,8 +66,8 @@ class DetailsAdoptar : Fragment() {
         val txtNombreDueño: TextView = view.findViewById(R.id.nombreDueño)
         val imagenDueño: ImageView = view.findViewById(R.id.imagenDueño)
 
-        val mascota: Mascota = args.Mascota
-        val idMascota: String = args.mascotaId
+        mascota = args.Mascota
+        idMascota = args.mascotaId
 
         txtRaza.text = mascota.especie
         txtEdad.text = mascota.edad.toString()
@@ -83,6 +86,13 @@ class DetailsAdoptar : Fragment() {
 
         val userIdDueño = mascota.userId
         fetchUserDetails(userIdDueño, txtNombreDueño, imagenDueño, buttonNumero)
+
+        txtNombreDueño.setOnClickListener {
+            navigateToPetOwner(userIdDueño, mascota, idMascota)
+        }
+        imagenDueño.setOnClickListener {
+            navigateToPetOwner(userIdDueño, mascota, idMascota)
+        }
 
 
         val userIdAdopta = auth.currentUser?.uid
@@ -220,5 +230,14 @@ class DetailsAdoptar : Fragment() {
                 ).show()
             }
         }
+    }
+
+    private fun navigateToPetOwner(ownerId: String, mascota: Mascota, idMascota: String) {
+        val action = DetailsAdoptarDirections.actionDetailsAdoptarToPerfilPetOwner(ownerId, mascota, idMascota)
+        findNavController().navigate(action)
+    }
+    private fun navigateToHome() {
+        val action = DetailsAdoptarDirections.actionDetailsAdoptarToInicio()
+        findNavController().navigate(action)
     }
 }

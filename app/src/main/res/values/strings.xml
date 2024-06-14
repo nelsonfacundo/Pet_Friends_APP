@@ -129,6 +129,8 @@
     <string name="title_cond_animal">Condiciones del Animal</string>
     <string name="title_com_duenio">Comunicación con el Dueño</string>
     <string name="opinion_txt_title">Opinion del Cliente</string>
+    <string name="no_review">No tienes reseñas</string>
+    <string name="owner_no_review">El dueño no tiene reseñas</string>
 
     /Favorito/
     <string name="txt_favorito">Favorito</string>
@@ -291,7 +293,6 @@
 \n
         Muchos puntos pueden variar de acuerdo al tipo de animal, recordá siempre consultar con tu veterinario de confianza.
     </string>
-
 
 
     //Mascotauser adapter//

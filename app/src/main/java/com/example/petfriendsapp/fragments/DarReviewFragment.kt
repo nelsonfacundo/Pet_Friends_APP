@@ -20,8 +20,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 class DarReviewFragment : Fragment() {
 
-    private lateinit var _binding: FragmentDarReviewBinding
-    private val binding get() = _binding
+    private lateinit var bindingFragment: FragmentDarReviewBinding
+    private val binding get() = bindingFragment
 
     private lateinit var db: FirebaseFirestore
     private lateinit var auth: FirebaseAuth
@@ -29,15 +29,14 @@ class DarReviewFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentDarReviewBinding.inflate(inflater, container, false)
-        val view = binding.root
+        bindingFragment = FragmentDarReviewBinding.inflate(inflater, container, false)
 
         db = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
 
         binding.textOpinionReview.filters = arrayOf(InputFilter.LengthFilter(150))
 
-        return view
+        return binding.root
     }
     override fun onStart() {
         super.onStart()
@@ -139,6 +138,4 @@ class DarReviewFragment : Fragment() {
         val action1 = DarReviewFragmentDirections.actionDarReviewFragmentToInicio()
         binding.root.findNavController().navigate(action1)
     }
-
-
 }
