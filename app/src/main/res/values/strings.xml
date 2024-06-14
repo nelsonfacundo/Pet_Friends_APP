@@ -93,7 +93,7 @@
     <string name="txt_data_three">Por favor, completa los siguientes campos para comenzar:</string>
     <string name="txt_input_name">Ingresa tu nombre</string>
     <string name="txt_input_lastname">Ingresa tu apellido</string>
-    <string name="txt_input_telefono">Ingresa tu telefono</string>
+    <string name="txt_input_telefono">Tel 15-2345-6789</string>
     <string name="txt_btn_avatar">Seleccionar Foto</string>
     <string name="txt_btn_datos">Enviar datos</string>
     <string name="txt_empty_nombre">El nombre no puede estar vacío</string>
@@ -124,11 +124,8 @@
     <string name="txt_sesion_cerrada">Sesion Cerrada</string>
 
 
-    /Blog/
-    <string name="txt_blog">Artículos y recursos educativos</string>
+    /Reseña /Reseña Card/
 
-
-    /Review /Review Card/
     <string name="txt_review">Reseñas</string>
     <string name="title_exp_gral">Experiencia general</string>
     <string name="title_cond_animal">Condiciones del Animal</string>
@@ -141,17 +138,20 @@
 
     /Details Perro Adoptar/
     <string name="txt_nombreMascota_details">Nombre</string>
-    <string name="txt_edadMascota_details">Edad</string>
+    <string name="txt_edadMascota_details">Edad: </string>
+    <string name="txt_edadMascotaNumero_details"> 1 </string>
     <string name="txt_especie_details">Especie</string>
     <string name="txt_sexoMascota_details">Sexo</string>
     <string name="txt_ubicacionMascota_details">Ubicacion</string>
     <string name="txt_descripcionMascota_details">Descripcion de la Mascota</string>
-    <string name="txt_dueño_details">Dueño</string>
+    <string name="txt_dueño_details">Dueño:</string>
     <string name="txt_dueñoNombre_details">Nombre del dueño</string>
     <string name="whatsapp_button_description">Abrir WhatsApp</string>
     <string name="favoritos_button_description">Agregar mascota a favoritos</string>
     <string name="botonAdoptar">Adoptar</string>
     <string name="botonBackDetails">Volver atras</string>
+    <string name="favorite_button_description">Boton favorito</string>
+
 
     /Dar en adopcion mascota/
     <string name="txt_btn_dar_adopcion_mascota">Agregar mascota</string>
@@ -228,7 +228,6 @@
     <string name="title_activity_maps">MapsActivity</string>
 
     //permisos//
-
     <string name="location_permission_denied">Permiso denegado</string>
     <string name="permission_rationale_location">Permiso de ubicacion racional</string>
     <string name="permission_required_toast">Permiso requerido</string>
@@ -259,6 +258,50 @@
     <string name="txt_macho">Macho</string>
     <string name="txt_limpiar_filtros">Limpiar filtros</string>
     <string name="txt_aplicar_filtros">Aplicar filtros</string>
+
+    /Historial/
+    <string name="txt_estado">Estado:</string>
+    <string name="txt_estado_solicitud">Estado solicitud</string>
+
+    /Blog/
+    <string name="txt_blog">Artículos y recursos educativos</string>
+    <string name="txt_blog_title_1">¡Ideas para ejercitar con tu perro!</string>
+    <string name="txt_blog_desc_1">
+        1. Hacer caminatas \n
+        2. Elaborar juegos de ingenio \n
+        3. Visitar el parque para perros \n
+        4. Ir a nadar \n
+        5. Trotar o correr \n
+        6. El juego de "tira y afloja" \n
+        7. Jugar a atrapar un juguete o pelota \n
+        8. Subir y bajar escaleras \n
+    </string>
+    <string name="txt_blog_title_2">Alimentos prohibidos para perros</string>
+    <string name="txt_blog_desc_2">
+        Algunos alimentos son tóxicos, te contamos algunos: \n
+        - Chocolate \n
+        - Caramelos y chicle con xilitol \n
+        - Bebidas estimulantes \n
+        - Cebolla, ajo, puerro, entre otras verduras \n
+        - Uvas y pasas \n
+        - Aguacate \n
+        - Semillas de determinadas frutas \n
+        - Frutos secos \n
+    </string>
+    <string name="txt_blog_title_3">Consideraciones a la hora de adoptar una mascota</string>
+    <string name="txt_blog_desc_3">
+        Antes de adoptar una mascota debés tener ciertas consideraciones. \n
+        \n
+        - Asegurate de tener espacio y tiempo para darle una buena calidad de vida \n
+        - El primer paso siempre es visitar un veterinario para controlar su salud \n
+        - Realizá la desparasitación externa e interna \n
+        - Completar el calendario vacunatorio y tenerlo siempre al día con los refuerzos necesarios \n
+        - Consultar al veterinario qué tipo de alimento es recomendable \n
+        - Conseguir juguetes para entretener a tu mascota y ejercitarla \n
+\n
+        Muchos puntos pueden variar de acuerdo al tipo de animal, recordá siempre consultar con tu veterinario de confianza.
+    </string>
+
 
 
     //Mascotauser adapter//

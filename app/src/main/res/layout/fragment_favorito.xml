@@ -8,6 +8,7 @@
     tools:context=".fragments.Favorito">
 
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewFavorite"
         android:layout_width="409dp"
@@ -30,6 +31,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.038" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
