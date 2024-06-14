@@ -189,6 +189,7 @@ class DetailsAdoptar : Fragment() {
             if (userIdAdopta != null && userIdDueño != null) {
                 val peticion = hashMapOf(
                     "estado" to "pendiente",
+                    "Review" to false,
                     "idMascota" to idMascota,
                     "idUsuarioAdopta" to userIdAdopta,
                     "idUsuarioDueño" to userIdDueño
