@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.petfriendsapp.R
-import com.example.petfriendsapp.adapter.SolicitudEnviadaFIrestoreRecyclerAdapter
+import com.example.petfriendsapp.adapter.SolicitudEnviadaFirestoreRecyclerAdapter
 import com.example.petfriendsapp.adapter.SolicitudRecibidaFirestoreRecyclerAdapter
 import com.example.petfriendsapp.entities.Solicitud
 import com.example.petfriendsapp.viewmodels.ListViewModel
@@ -21,11 +21,11 @@ import com.google.firebase.firestore.Query
 class SolicitudesEnviadas : Fragment() {
 
     private lateinit var viewSolicitudes: View
-    private lateinit var recyclerSolicitudes: RecyclerView
-    private lateinit var adapter: SolicitudEnviadaFIrestoreRecyclerAdapter
+    private lateinit var recSolicitudesEnviadas: RecyclerView
+    private lateinit var solicitudAdapter: SolicitudEnviadaFirestoreRecyclerAdapter
     private val db = FirebaseFirestore.getInstance()
-    private val auth = FirebaseAuth.getInstance()
     private val dataManager = FirestoreDataManager()
+    private val auth = FirebaseAuth.getInstance()
 
 
     override fun onCreateView(
@@ -34,40 +34,40 @@ class SolicitudesEnviadas : Fragment() {
     ): View? {
         viewSolicitudes = inflater.inflate(R.layout.fragment_solicitudes_enviadas, container, false)
 
-        initViews()
+        initRecSolicitudes()
         setupRecyclerView()
-        observeSolicitudes()
 
         return viewSolicitudes
     }
 
-    private fun initViews() {
-        recyclerSolicitudes = viewSolicitudes.findViewById(R.id.rec_solicitudes_enviadas)
+    private fun initRecSolicitudes() {
+        recSolicitudesEnviadas = viewSolicitudes.findViewById(R.id.rec_solicitudes_enviadas)
     }
 
     private fun setupRecyclerView() {
-        recyclerSolicitudes.setHasFixedSize(true)
-        recyclerSolicitudes.layoutManager = LinearLayoutManager(context)
-    }
 
-    private fun observeSolicitudes() {
         val user = auth.currentUser
         val uid = user?.uid
 
-
-        if (uid != null) {
-
+        if(uid != null){
             val query = db.collection("peticiones")
-                .whereEqualTo("idUsuarioDueño", uid)
+                .whereEqualTo("idUsuarioAdopta", uid)
                 .whereEqualTo("estado", "pendiente")
 
             val options = FirestoreRecyclerOptions.Builder<Solicitud>()
                 .setQuery(query, Solicitud::class.java)
                 .build()
 
-            adapter = SolicitudEnviadaFIrestoreRecyclerAdapter(options, FirestoreDataManager())
-            recyclerSolicitudes.adapter = adapter
-        }
+            solicitudAdapter = SolicitudEnviadaFirestoreRecyclerAdapter(options, dataManager)
+
+            recSolicitudesEnviadas.apply {
+                setHasFixedSize(true)
+                layoutManager = LinearLayoutManager(context)
+                adapter = solicitudAdapter
+            }
+    }
+
+
 
     }
 
@@ -77,11 +77,11 @@ class SolicitudesEnviadas : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        adapter.startListening()
+        solicitudAdapter.startListening()
     }
 
     override fun onStop() {
         super.onStop()
-        adapter.stopListening()
+        solicitudAdapter.stopListening()
     }
 }

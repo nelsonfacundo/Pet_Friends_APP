@@ -48,5 +48,40 @@ class FirestoreDataManager {
             }
     }
 
+    fun loadEstadoSolicitud(idPeticion : String, onSuccess: (String) -> Unit, onError: (Exception) -> Unit){
+        val peticionRef = db.collection("peticiones").document(idPeticion)
+        peticionRef.get().addOnSuccessListener { documentSnapshot ->
+            val estadoPeticion = documentSnapshot.getString("estado")
+            if(estadoPeticion != null){
+                onSuccess(estadoPeticion)
+            } else{
+                Log.e("FirestoreDataManager", "Datos de la peticion no encontrados")
+                onError(Exception("Datos de la peticion no encontrados"))
+            }
+        }
+            .addOnFailureListener{ exception ->
+                Log.e("FirestoreDataManager", "Error al cargar datos de la peticion", exception)
+                onError(exception) }
+    }
+
+    fun loadImageMascota(idMascota: String, onSuccess: (String) -> Unit, onError: (Exception) -> Unit) {
+        val mascotaRef = db.collection("mascotas").document(idMascota)
+        mascotaRef.get()
+            .addOnSuccessListener { documentSnapshot ->
+                val urlMascotaImage = documentSnapshot.getString("imageUrl")
+                if (urlMascotaImage != null) {
+                    onSuccess(urlMascotaImage)
+                } else {
+                    Log.e("FirestoreDataManager", "Foto de la mascota no encontrada.")
+                    onError(Exception("Foto de la mascota no encontrada."))
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.e("FirestoreDataManager", "Error al cargar datos", exception)
+                onError(exception)
+            }
+    }
 }
+
+
 

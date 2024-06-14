@@ -9,7 +9,7 @@ import com.example.petfriendsapp.holders.SolicitudEnviadaHolder
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 
-class SolicitudEnviadaFIrestoreRecyclerAdapter(
+class SolicitudEnviadaFirestoreRecyclerAdapter(
     private val options: FirestoreRecyclerOptions<Solicitud>,
     private val dataManager: FirestoreDataManager
     ) : FirestoreRecyclerAdapter<Solicitud, SolicitudEnviadaHolder>(options) {
@@ -21,5 +21,28 @@ class SolicitudEnviadaFIrestoreRecyclerAdapter(
     }
 
     override fun onBindViewHolder(holder: SolicitudEnviadaHolder, position: Int, model: Solicitud) {
-}
+        holder.clear()
+
+        val solicitudId = snapshots.getSnapshot(position).id
+
+        dataManager.cargarNombreMascota(model.idMascota,
+            onSuccess = { nombreMascota ->
+                holder.setNombreMascota(nombreMascota)
+            },
+            onError = { error -> }
+        )
+
+        dataManager.loadImageMascota(model.idMascota,
+            onSuccess = { urlMascotaImage ->
+                holder.setMascotaImage(urlMascotaImage)
+            },
+            onError = { error -> })
+
+        dataManager.loadEstadoSolicitud(solicitudId,
+            onSuccess = { estadoSolicitud ->
+                holder.setEstado(estadoSolicitud)
+            },
+            onError = { error -> })
+
+    }
     }
