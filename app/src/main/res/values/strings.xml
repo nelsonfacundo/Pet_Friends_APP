@@ -316,4 +316,9 @@
 
     //My pets//
     <string name="txt_no_pets">No tienes mascotas agregadas</string>
+
+    /Solicitudes enviadas/
+    <string name="txt_sent_request">Enviaste solicitud para adoptar a:</string>
+    <string name="txt_status_static">Estado</string>
+    <string name="btn_leave_review">Dejar reseña</string>
 </resources>

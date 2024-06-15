@@ -33,6 +33,9 @@
         <action
             android:id="@+id/action_inicio_to_favorito"
             app:destination="@id/favorito" />
+        <action
+            android:id="@+id/action_inicio_to_actividad"
+            app:destination="@id/actividad" />
     </fragment>
     <fragment
         android:id="@+id/actividad"
@@ -148,9 +151,13 @@
         android:name="com.example.petfriendsapp.fragments.DarReviewFragment"
         android:label="fragment_dar_review"
         tools:layout="@layout/fragment_dar_review" >
+
         <action
             android:id="@+id/action_darReviewFragment_to_inicio"
             app:destination="@id/inicio" />
+        <action
+            android:id="@+id/action_darReviewFragment_to_solicitudesEnviadas"
+            app:destination="@id/solicitudesEnviadas" />
     </fragment>
     <fragment
         android:id="@+id/myPetsFragment"
@@ -183,4 +190,13 @@
     </fragment>
 
 
+    <fragment
+        android:id="@+id/solicitudesEnviadas"
+        android:name="com.example.petfriendsapp.fragments.SolicitudesEnviadas"
+        android:label="fragment_solicitudes_enviadas"
+        tools:layout="@layout/fragment_solicitudes_enviadas" >
+        <action
+            android:id="@+id/action_solicitudesEnviadas_to_darReviewFragment"
+            app:destination="@id/darReviewFragment" />
+    </fragment>
 </navigation>
