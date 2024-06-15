@@ -17,35 +17,41 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 
-
 class DarReviewFragment : Fragment() {
 
-    private lateinit var _binding: FragmentDarReviewBinding
-    private val binding get() = _binding
+    private lateinit var bindingFragment: FragmentDarReviewBinding
+    private val binding get() = bindingFragment
 
     private lateinit var db: FirebaseFirestore
     private lateinit var auth: FirebaseAuth
+    private lateinit var idUsuarioDueño: String
+    private lateinit var solicitudId: String
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentDarReviewBinding.inflate(inflater, container, false)
-        val view = binding.root
+        bindingFragment = FragmentDarReviewBinding.inflate(inflater, container, false)
 
         db = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
 
         binding.textOpinionReview.filters = arrayOf(InputFilter.LengthFilter(150))
 
-        return view
+        // Recupera el idUsuarioDueño del Bundle
+        idUsuarioDueño = arguments?.getString("idUsuarioDueño") ?: ""
+        solicitudId = arguments?.getString("solicitudId") ?: ""
+
+
+        return binding.root
     }
+
     override fun onStart() {
         super.onStart()
         initListeners()
-
     }
+
     private fun initListeners() {
-        binding.icBackDarReview.setOnClickListener { navigateToHome() }
         binding.btnEnviarReview.setOnClickListener { sendData() }
         binding.btnCancelarReview.setOnClickListener { btnCancel() }
     }
@@ -57,7 +63,7 @@ class DarReviewFragment : Fragment() {
         if (userId != null) {
             if (validationData(reviewData)) return
 
-            addReviewToDatabase(reviewData, userId)
+            addReviewToDatabase(reviewData, idUsuarioDueño,solicitudId )
         }
     }
 
@@ -77,7 +83,7 @@ class DarReviewFragment : Fragment() {
             return true
         }
 
-        if (opinion.length > 500) {
+        if (opinion.length > 150) {
             showToast(R.string.txt_opinion_length_error)
             return true
         }
@@ -99,20 +105,42 @@ class DarReviewFragment : Fragment() {
         )
     }
 
-    private fun addReviewToDatabase(review: Map<String, Any>, userId: String) {
-        val userRef = db.collection("users").document(userId).collection("ratings")
+    private fun addReviewToDatabase(review: Map<String, Any>, idUsuarioDueño: String, solicitudId : String) {
+        val userRef = db.collection("users").document(idUsuarioDueño).collection("ratings")
 
         userRef.add(review)
             .addOnSuccessListener {
                 Log.d(TAG, "Reseña agregada correctamente")
+                // Actualiza el estado de la solicitud después de agregar la reseña
+                updateSolicitudReviewStatus(solicitudId)
                 showToast(R.string.txt_review_success)
-                navigateToHome()
             }
             .addOnFailureListener { e ->
                 Log.w(TAG, "Error al agregar la reseña", e)
                 showToast(R.string.txt_review_error)
             }
     }
+
+
+    private fun updateSolicitudReviewStatus(solicitudId : String) {
+        if (solicitudId.isNotEmpty()) {
+            db.collection("peticiones").document(solicitudId)
+                .update("Review", true)
+                .addOnSuccessListener {
+                    Log.d(TAG, "Estado de la solicitud actualizado a completado")
+                    navigateToHome()
+                }
+                .addOnFailureListener { e ->
+                    Log.w(TAG, "Error al actualizar el estado de la solicitud", e)
+                    showToast(R.string.txt_review_error)
+                }
+        } else {
+            Log.w(TAG, "solicitudId está vacío o no proporcionado")
+            showToast(R.string.txt_review_error)
+        }
+    }
+
+
 
     private fun showToast(messageResId: Int) {
         Toast.makeText(requireContext(), messageResId, Toast.LENGTH_LONG).show()
@@ -135,10 +163,9 @@ class DarReviewFragment : Fragment() {
         }
         builder.create().show()
     }
+
     private fun navigateToHome() {
         val action1 = DarReviewFragmentDirections.actionDarReviewFragmentToInicio()
         binding.root.findNavController().navigate(action1)
     }
-
-
 }

@@ -131,6 +131,8 @@
     <string name="title_cond_animal">Condiciones del Animal</string>
     <string name="title_com_duenio">Comunicación con el Dueño</string>
     <string name="opinion_txt_title">Opinion del Cliente</string>
+    <string name="no_review">No tienes reseñas</string>
+    <string name="owner_no_review">El dueño no tiene reseñas</string>
 
     /Favorito/
     <string name="txt_favorito">Favorito</string>
@@ -303,7 +305,6 @@
     </string>
 
 
-
     //Mascotauser adapter//
     <string name="txt_delete_pet_success">Mascota eliminada correctamente</string>
     <string name="txt_delete_pet_error">Ocurrió un error al intentar eliminar la mascota</string>
@@ -315,4 +316,9 @@
 
     //My pets//
     <string name="txt_no_pets">No tienes mascotas agregadas</string>
+
+    /Solicitudes enviadas/
+    <string name="txt_sent_request">Enviaste solicitud para adoptar a:</string>
+    <string name="txt_status_static">Estado</string>
+    <string name="btn_leave_review">Dejar reseña</string>
 </resources>
