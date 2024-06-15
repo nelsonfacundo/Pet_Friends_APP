@@ -27,7 +27,10 @@ class SolicitudEnviadaHolder(v: View) : RecyclerView.ViewHolder(v) {
     }
 
     fun setMascotaImage(urlMascotaImage: String){
-        Glide.with(itemView.context).load(urlMascotaImage).into(mascotaImageView)
+        Glide.with(itemView.context)
+            .load(urlMascotaImage)
+            .circleCrop()
+            .into(mascotaImageView)
     }
 
     fun setEstado(estado: String){
@@ -51,12 +54,6 @@ class SolicitudEnviadaHolder(v: View) : RecyclerView.ViewHolder(v) {
         estadoTextView.text = ""
         mascotaImageView.setImageDrawable(null)
     }
-
-    /*fun setRedirectionReview(){
-        reviewButton.setOnClickListener {view ->
-            view.findNavController().navigate(R.id.action_solicitudesEnviadas_to_darReviewFragment)
-        }
-    }*/
 
     fun getReviewButton(): Button {
         return reviewButton
