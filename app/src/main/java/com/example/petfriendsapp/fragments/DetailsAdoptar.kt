@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,6 +26,7 @@ import com.example.petfriendsapp.components.LoadingDialog
 import com.example.petfriendsapp.entities.Mascota
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import java.util.Locale
 
 class DetailsAdoptar : Fragment() {
 
@@ -55,7 +57,7 @@ class DetailsAdoptar : Fragment() {
             navigateToHome()
         }
 
-        val txtRaza: TextView = view.findViewById(R.id.razaMascota)
+//        val txtRaza: TextView = view.findViewById(R.id.razaMascota)
         val txtEdad: TextView = view.findViewById(R.id.edadMascota)
         val txtNombre: TextView = view.findViewById(R.id.nombreMascota)
         val txtSexo: TextView = view.findViewById(R.id.sexoMascota)
@@ -69,7 +71,7 @@ class DetailsAdoptar : Fragment() {
         mascota = args.Mascota
         idMascota = args.mascotaId
 
-        txtRaza.text = mascota.especie
+       // txtRaza.text = mascota.especie
         txtEdad.text = mascota.edad.toString()
         txtNombre.text = mascota.nombre
         txtUbicacion.text = mascota.ubicacion
@@ -94,7 +96,7 @@ class DetailsAdoptar : Fragment() {
             navigateToPetOwner(userIdDueño, mascota, idMascota)
         }
 
-
+        promRating(userIdDueño)
         val userIdAdopta = auth.currentUser?.uid
         if (userIdAdopta != null) {
             val sharedPreferences =
@@ -199,6 +201,7 @@ class DetailsAdoptar : Fragment() {
             if (userIdAdopta != null && userIdDueño != null) {
                 val peticion = hashMapOf(
                     "estado" to "pendiente",
+                    "Review" to false,
                     "idMascota" to idMascota,
                     "idUsuarioAdopta" to userIdAdopta,
                     "idUsuarioDueño" to userIdDueño
@@ -239,5 +242,44 @@ class DetailsAdoptar : Fragment() {
     private fun navigateToHome() {
         val action = DetailsAdoptarDirections.actionDetailsAdoptarToInicio()
         findNavController().navigate(action)
+    }
+
+    private fun promRating(idOwner: String) {
+        val promStar = view?.findViewById<TextView>(R.id.numberText)
+
+        val ratingsRef = db.collection("users").document(idOwner).collection("ratings")
+
+        ratingsRef.get()
+            .addOnSuccessListener { documents ->
+                if (!documents.isEmpty) {
+                    var sum = 0.0
+                    var count = 0
+
+                    for (document in documents) {
+                        val ratingVal = document.getLong("valoracion")?.toInt()
+                        val ratingComu = document.getLong("comunicacionRating")?.toInt()
+                        val ratingCond = document.getLong("condicionRating")?.toInt()
+                        if (ratingVal != null && ratingComu != null && ratingCond != null) {
+                            val averageRatingForReview =
+                                (ratingVal + ratingComu + ratingCond) / 3
+                            sum += averageRatingForReview
+                            count++
+                        }
+                    }
+
+                    val averageRating = if (count > 0) sum / count else 0
+
+                    val averageRatingText = String.format(Locale.getDefault(), "%.0f", averageRating)
+                    val ratingText = getString(R.string.average_rating_text, averageRatingText)
+                    promStar?.text = ratingText
+
+
+                } else {
+                    Log.d("VerReseniaUsuario", "Valoraciones no encontradas")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.w("VerReseniaUsuario", "Error al obtener las valoraciones: ", exception)
+            }
     }
 }
