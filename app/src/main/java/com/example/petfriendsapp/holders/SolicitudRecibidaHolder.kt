@@ -10,8 +10,6 @@ import com.bumptech.glide.Glide
 import com.example.petfriendsapp.R
 import com.example.petfriendsapp.entities.Solicitud
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 
 class SolicitudRecibidaHolder(view: View) : RecyclerView.ViewHolder(view) {
 
@@ -32,15 +30,15 @@ class SolicitudRecibidaHolder(view: View) : RecyclerView.ViewHolder(view) {
 
             // Cambiar el estado de la mascota a "aprobada"
             updateMascotaStatus(mascotaId, "aprobada")
+
+            // Rechazar todas las demás solicitudes para la misma mascota
+            rejectOtherSolicitudes(mascotaId, solicitudId)
         }
 
         rejectButton.setOnClickListener {
             updateSolicitudStatus(solicitudId, "rechazado")
         }
     }
-
-
-
 
     fun bindSolicitanteData(nombreSolicitante: String, urlAvatarSolicitante: String) {
         nombreSolicitanteTextView.text = nombreSolicitante
@@ -64,6 +62,7 @@ class SolicitudRecibidaHolder(view: View) : RecyclerView.ViewHolder(view) {
                 // Manejar el error
             }
     }
+
     private fun updateMascotaStatus(mascotaId: String, status: String) {
         db.collection("mascotas").document(mascotaId)
             .update("estado", status)
@@ -75,5 +74,29 @@ class SolicitudRecibidaHolder(view: View) : RecyclerView.ViewHolder(view) {
                 // Manejar el error
             }
     }
-}
 
+    private fun rejectOtherSolicitudes(mascotaId: String, approvedSolicitudId: String) {
+        db.collection("peticiones")
+            .whereEqualTo("idMascota", mascotaId)
+            .whereEqualTo("estado", "pendiente")
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    if (document.id != approvedSolicitudId) {
+                        document.reference.update("estado", "rechazado")
+                            .addOnSuccessListener {
+                                // Podrías manejar la actualización de otra manera
+                            }
+                            .addOnFailureListener { exception ->
+                                Log.e("SolicitudRecibidaHolder", "Error al rechazar solicitud", exception)
+                                // Manejar el error
+                            }
+                    }
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.e("SolicitudRecibidaHolder", "Error al obtener otras solicitudes", exception)
+                // Manejar el error
+            }
+    }
+}
