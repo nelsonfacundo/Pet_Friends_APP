@@ -36,6 +36,8 @@ class DetailsAdoptar : Fragment() {
     private lateinit var buttonAdoptar: Button
     private lateinit var mascota: Mascota
     private lateinit var idMascota: String
+    private lateinit var promStar: TextView
+
 
     private val db = FirebaseFirestore.getInstance()
     private val auth = FirebaseAuth.getInstance()
@@ -52,6 +54,7 @@ class DetailsAdoptar : Fragment() {
         buttonAdoptar = view.findViewById(R.id.buttonAdoptar)
         buttonNumero = view.findViewById(R.id.botonWpp)
         loadingDialog = LoadingDialog(requireContext())
+        promStar = view.findViewById(R.id.numberText)
 
         buttonBackDetails.setOnClickListener {
             navigateToHome()
@@ -88,6 +91,7 @@ class DetailsAdoptar : Fragment() {
 
         val userIdDueño = mascota.userId
         fetchUserDetails(userIdDueño, txtNombreDueño, imagenDueño, buttonNumero)
+        promRating(userIdDueño)
 
         txtNombreDueño.setOnClickListener {
             navigateToPetOwner(userIdDueño, mascota, idMascota)
@@ -96,7 +100,6 @@ class DetailsAdoptar : Fragment() {
             navigateToPetOwner(userIdDueño, mascota, idMascota)
         }
 
-        promRating(userIdDueño)
         val userIdAdopta = auth.currentUser?.uid
         if (userIdAdopta != null) {
             val sharedPreferences =
@@ -244,7 +247,7 @@ class DetailsAdoptar : Fragment() {
         findNavController().navigate(action)
     }
 
-    private fun promRating(idOwner: String) {
+    private fun promRatingT(idOwner: String) {
         val promStar = view?.findViewById<TextView>(R.id.numberText)
 
         val ratingsRef = db.collection("users").document(idOwner).collection("ratings")
@@ -270,16 +273,57 @@ class DetailsAdoptar : Fragment() {
                     val averageRating = if (count > 0) sum / count else 0
 
                     val averageRatingText = String.format(Locale.getDefault(), "%.0f", averageRating)
-                    val ratingText = getString(R.string.average_rating_text, averageRatingText)
-                    promStar?.text = ratingText
+                    promStar?.text = averageRatingText
 
 
                 } else {
-                    Log.d("VerReseniaUsuario", "Valoraciones no encontradas")
+                    Log.d("DetailsAdoptar", "Valoraciones no encontradas")
                 }
             }
             .addOnFailureListener { exception ->
-                Log.w("VerReseniaUsuario", "Error al obtener las valoraciones: ", exception)
+                Log.w("DetailsAdoptar", "Error al obtener las valoraciones: ", exception)
+            }
+    }
+
+    private fun promRating(idOwner: String) {
+        val ratingsRef = db.collection("users").document(idOwner).collection("ratings")
+
+        ratingsRef.get()
+            .addOnSuccessListener { documents ->
+                if (!documents.isEmpty) {
+                    var sum = 0.0
+                    var count = 0
+
+                    for (document in documents) {
+                        val ratingVal = document.getLong("valoracion")?.toInt()
+                        val ratingComu = document.getLong("comunicacionRating")?.toInt()
+                        val ratingCond = document.getLong("condicionRating")?.toInt()
+                        if (ratingVal != null && ratingComu != null && ratingCond != null) {
+                            val averageRatingForReview =
+                                (ratingVal + ratingComu + ratingCond) / 3
+                            sum += averageRatingForReview
+                            count++
+                        }
+                    }
+
+                    if (count != 0) {
+                        val average = sum / count
+                        val averageRatingText = String.format(Locale.getDefault(), "%.0f", average)
+                        promStar.text = averageRatingText
+                    } else {
+                        promStar.text = "0"
+                    }
+                } else {
+                    promStar.text = "0"
+                }
+            }
+            .addOnFailureListener { exception ->
+                promStar.text = "0"
+                Toast.makeText(
+                    requireContext(),
+                    "Error al obtener las valoraciones: ${exception.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
     }
 }
