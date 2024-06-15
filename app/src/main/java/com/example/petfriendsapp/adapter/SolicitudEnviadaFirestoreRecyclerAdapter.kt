@@ -14,7 +14,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions
 class SolicitudEnviadaFirestoreRecyclerAdapter(
     private val options: FirestoreRecyclerOptions<Solicitud>,
     private val dataManager: FirestoreDataManager,
-    private val clickListener: (Solicitud, String) -> Unit
+    private val clickListener: () -> Unit
 ) : FirestoreRecyclerAdapter<Solicitud, SolicitudEnviadaHolder>(options) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SolicitudEnviadaHolder {
@@ -51,7 +51,7 @@ class SolicitudEnviadaFirestoreRecyclerAdapter(
                             if (!review) {
                                 holder.showReviewButton()
                                 holder.getReviewButton().setOnClickListener{
-                                    clickListener(model, solicitudId)
+                                    clickListener()
                                 }
                             }
                         },

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/primary"
-    tools:context=".fragments.EditarPerfilFragment"
+    tools:context=".fragments.EditarProfileFragment"
     tools:layout_editor_absoluteX="1dp"
     tools:layout_editor_absoluteY="18dp">
 

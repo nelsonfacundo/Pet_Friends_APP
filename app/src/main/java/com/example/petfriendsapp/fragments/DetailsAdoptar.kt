@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
@@ -24,6 +26,7 @@ import com.example.petfriendsapp.components.LoadingDialog
 import com.example.petfriendsapp.entities.Mascota
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import java.util.Locale
 
 class DetailsAdoptar : Fragment() {
 
@@ -31,6 +34,8 @@ class DetailsAdoptar : Fragment() {
     private val args: DetailsAdoptarArgs by navArgs()
     private lateinit var buttonNumero: ImageButton
     private lateinit var buttonAdoptar: Button
+    private lateinit var mascota: Mascota
+    private lateinit var idMascota: String
 
     private val db = FirebaseFirestore.getInstance()
     private val auth = FirebaseAuth.getInstance()
@@ -49,7 +54,7 @@ class DetailsAdoptar : Fragment() {
         loadingDialog = LoadingDialog(requireContext())
 
         buttonBackDetails.setOnClickListener {
-            findNavController().navigateUp()
+            navigateToHome()
         }
 
 //        val txtRaza: TextView = view.findViewById(R.id.razaMascota)
@@ -63,8 +68,8 @@ class DetailsAdoptar : Fragment() {
         val txtNombreDueño: TextView = view.findViewById(R.id.nombreDueño)
         val imagenDueño: ImageView = view.findViewById(R.id.imagenDueño)
 
-        val mascota: Mascota = args.Mascota
-        val idMascota: String = args.mascotaId
+        mascota = args.Mascota
+        idMascota = args.mascotaId
 
        // txtRaza.text = mascota.especie
         txtEdad.text = mascota.edad.toString()
@@ -84,7 +89,14 @@ class DetailsAdoptar : Fragment() {
         val userIdDueño = mascota.userId
         fetchUserDetails(userIdDueño, txtNombreDueño, imagenDueño, buttonNumero)
 
+        txtNombreDueño.setOnClickListener {
+            navigateToPetOwner(userIdDueño, mascota, idMascota)
+        }
+        imagenDueño.setOnClickListener {
+            navigateToPetOwner(userIdDueño, mascota, idMascota)
+        }
 
+        promRating(userIdDueño)
         val userIdAdopta = auth.currentUser?.uid
         if (userIdAdopta != null) {
             val sharedPreferences =
@@ -221,5 +233,53 @@ class DetailsAdoptar : Fragment() {
                 ).show()
             }
         }
+    }
+
+    private fun navigateToPetOwner(ownerId: String, mascota: Mascota, idMascota: String) {
+        val action = DetailsAdoptarDirections.actionDetailsAdoptarToPerfilPetOwner(ownerId, mascota, idMascota)
+        findNavController().navigate(action)
+    }
+    private fun navigateToHome() {
+        val action = DetailsAdoptarDirections.actionDetailsAdoptarToInicio()
+        findNavController().navigate(action)
+    }
+
+    private fun promRating(idOwner: String) {
+        val promStar = view?.findViewById<TextView>(R.id.numberText)
+
+        val ratingsRef = db.collection("users").document(idOwner).collection("ratings")
+
+        ratingsRef.get()
+            .addOnSuccessListener { documents ->
+                if (!documents.isEmpty) {
+                    var sum = 0.0
+                    var count = 0
+
+                    for (document in documents) {
+                        val ratingVal = document.getLong("valoracion")?.toInt()
+                        val ratingComu = document.getLong("comunicacionRating")?.toInt()
+                        val ratingCond = document.getLong("condicionRating")?.toInt()
+                        if (ratingVal != null && ratingComu != null && ratingCond != null) {
+                            val averageRatingForReview =
+                                (ratingVal + ratingComu + ratingCond) / 3
+                            sum += averageRatingForReview
+                            count++
+                        }
+                    }
+
+                    val averageRating = if (count > 0) sum / count else 0
+
+                    val averageRatingText = String.format(Locale.getDefault(), "%.0f", averageRating)
+                    val ratingText = getString(R.string.average_rating_text, averageRatingText)
+                    promStar?.text = ratingText
+
+
+                } else {
+                    Log.d("VerReseniaUsuario", "Valoraciones no encontradas")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.w("VerReseniaUsuario", "Error al obtener las valoraciones: ", exception)
+            }
     }
 }
