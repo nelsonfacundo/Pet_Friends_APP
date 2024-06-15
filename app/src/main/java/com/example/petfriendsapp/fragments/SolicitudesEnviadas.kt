@@ -1,7 +1,6 @@
 package com.example.petfriendsapp.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,38 +11,30 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.petfriendsapp.R
 import com.example.petfriendsapp.adapter.SolicitudEnviadaFirestoreRecyclerAdapter
 import com.example.petfriendsapp.entities.Solicitud
-import com.example.petfriendsapp.fragments.FiltrosFragment.Companion.TAG
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.DocumentChange
 
 class SolicitudesEnviadas : Fragment() {
 
     private lateinit var viewSolicitudes: View
     private lateinit var recSolicitudesEnviadas: RecyclerView
     private lateinit var solicitudAdapter: SolicitudEnviadaFirestoreRecyclerAdapter
-    private lateinit var reviewClickListener: () -> Unit
     private val db = FirebaseFirestore.getInstance()
     private val dataManager = FirestoreDataManager()
     private val auth = FirebaseAuth.getInstance()
 
+    private val reviewClickListener: (String, String) -> Unit = { idUsuarioDueño, solicitudId ->
+        navigateToDarReviewFragment(idUsuarioDueño, solicitudId)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         viewSolicitudes = inflater.inflate(R.layout.fragment_solicitudes_enviadas, container, false)
-
-        reviewClickListener = { ->
-            navigateToDarReviewFragment()
-        }
-
         initRecSolicitudes()
         setupRecyclerView()
-
-
-
         return viewSolicitudes
     }
 
@@ -75,8 +66,12 @@ class SolicitudesEnviadas : Fragment() {
         }
     }
 
-    private fun navigateToDarReviewFragment() {
-        findNavController().navigate(R.id.darReviewFragment)
+    private fun navigateToDarReviewFragment(idUsuarioDueño: String, solicitudId: String) {
+        val bundle = Bundle().apply {
+            putString("idUsuarioDueño", idUsuarioDueño)
+            putString("solicitudId", solicitudId)
+        }
+        findNavController().navigate(R.id.darReviewFragment, bundle)
     }
 
     override fun onStart() {
