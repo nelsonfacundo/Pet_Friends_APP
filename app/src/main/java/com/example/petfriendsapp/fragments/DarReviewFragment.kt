@@ -11,13 +11,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.navArgs
 import com.example.petfriendsapp.R
 import com.example.petfriendsapp.databinding.FragmentDarReviewBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
-
 
 class DarReviewFragment : Fragment() {
 
@@ -26,8 +24,8 @@ class DarReviewFragment : Fragment() {
 
     private lateinit var db: FirebaseFirestore
     private lateinit var auth: FirebaseAuth
-   // private lateinit var userIdOwner: String
-    //private lateinit var solicitedId: String
+    private lateinit var idUsuarioDueño: String
+    private lateinit var solicitudId: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,18 +38,19 @@ class DarReviewFragment : Fragment() {
 
         binding.textOpinionReview.filters = arrayOf(InputFilter.LengthFilter(150))
 
+        // Recupera el idUsuarioDueño del Bundle
+        idUsuarioDueño = arguments?.getString("idUsuarioDueño") ?: ""
+        solicitudId = arguments?.getString("solicitudId") ?: ""
 
-        //val args: DarReviewFragmentArgs by navArgs()
-        //userIdOwner = args.ownerId
-        //solicitedId = args.soliId
 
         return binding.root
     }
+
     override fun onStart() {
         super.onStart()
         initListeners()
-
     }
+
     private fun initListeners() {
         binding.btnEnviarReview.setOnClickListener { sendData() }
         binding.btnCancelarReview.setOnClickListener { btnCancel() }
@@ -64,7 +63,7 @@ class DarReviewFragment : Fragment() {
         if (userId != null) {
             if (validationData(reviewData)) return
 
-            addReviewToDatabase(reviewData, userId)
+            addReviewToDatabase(reviewData, idUsuarioDueño,solicitudId )
         }
     }
 
@@ -106,37 +105,42 @@ class DarReviewFragment : Fragment() {
         )
     }
 
-    private fun addReviewToDatabase(
-        review: Map<String, Any>,
-        userIdOwner: String
-    ) {
-        val userRef = db.collection("users").document(userIdOwner).collection("ratings")
+    private fun addReviewToDatabase(review: Map<String, Any>, idUsuarioDueño: String, solicitudId : String) {
+        val userRef = db.collection("users").document(idUsuarioDueño).collection("ratings")
 
         userRef.add(review)
             .addOnSuccessListener {
                 Log.d(TAG, "Reseña agregada correctamente")
+                // Actualiza el estado de la solicitud después de agregar la reseña
+                updateSolicitudReviewStatus(solicitudId)
                 showToast(R.string.txt_review_success)
-                navigateToHome()
             }
-
-        // Actualiza el estado de la solicitud
-        /*db.collection("peticiones").document(solicitudId)
-            .update("Review", "true")
-            .addOnSuccessListener {
-                Log.d(TAG, "Estado de la solicitud actualizado a completado")
-                navigateToHome()
-            }
-            .addOnFailureListener { e ->
-                Log.w(TAG, "Error al actualizar el estado de la solicitud", e)
-                showToast(R.string.txt_review_error)
-            }
-
-
             .addOnFailureListener { e ->
                 Log.w(TAG, "Error al agregar la reseña", e)
                 showToast(R.string.txt_review_error)
-            }*/
+            }
     }
+
+
+    private fun updateSolicitudReviewStatus(solicitudId : String) {
+        if (solicitudId.isNotEmpty()) {
+            db.collection("peticiones").document(solicitudId)
+                .update("Review", true)
+                .addOnSuccessListener {
+                    Log.d(TAG, "Estado de la solicitud actualizado a completado")
+                    navigateToHome()
+                }
+                .addOnFailureListener { e ->
+                    Log.w(TAG, "Error al actualizar el estado de la solicitud", e)
+                    showToast(R.string.txt_review_error)
+                }
+        } else {
+            Log.w(TAG, "solicitudId está vacío o no proporcionado")
+            showToast(R.string.txt_review_error)
+        }
+    }
+
+
 
     private fun showToast(messageResId: Int) {
         Toast.makeText(requireContext(), messageResId, Toast.LENGTH_LONG).show()
@@ -159,6 +163,7 @@ class DarReviewFragment : Fragment() {
         }
         builder.create().show()
     }
+
     private fun navigateToHome() {
         val action1 = DarReviewFragmentDirections.actionDarReviewFragmentToInicio()
         binding.root.findNavController().navigate(action1)

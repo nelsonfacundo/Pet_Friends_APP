@@ -1,9 +1,8 @@
 package com.example.petfriendsapp.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.navigation.findNavController
+import androidx.recyclerview.widget.RecyclerView
 import com.example.petfriendsapp.R
 import com.example.petfriendsapp.entities.Solicitud
 import com.example.petfriendsapp.fragments.FirestoreDataManager
@@ -14,7 +13,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions
 class SolicitudEnviadaFirestoreRecyclerAdapter(
     private val options: FirestoreRecyclerOptions<Solicitud>,
     private val dataManager: FirestoreDataManager,
-    private val clickListener: () -> Unit
+    private val clickListener: (String, String) -> Unit
 ) : FirestoreRecyclerAdapter<Solicitud, SolicitudEnviadaHolder>(options) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SolicitudEnviadaHolder {
@@ -47,11 +46,10 @@ class SolicitudEnviadaFirestoreRecyclerAdapter(
                 if (estadoSolicitud == "aprobado") {
                     dataManager.loadReview(solicitudId,
                         onSuccess = { review ->
-                            Log.d("Review", review.toString())
                             if (!review) {
                                 holder.showReviewButton()
                                 holder.getReviewButton().setOnClickListener{
-                                    clickListener()
+                                    clickListener(model.idUsuarioDueño, solicitudId)
                                 }
                             }
                         },
