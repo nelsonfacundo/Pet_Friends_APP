@@ -17,13 +17,12 @@
         <ImageView
             android:id="@+id/id_avatar"
             style="@style/profileImageRound"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
             android:layout_gravity="center_vertical"
             android:layout_marginEnd="8dp"
             android:background="@drawable/round_background_profile"
             android:src="@drawable/avatar"
-            android:padding="2dp"
             android:layout_margin="8dp" />
 
         <LinearLayout

@@ -24,13 +24,8 @@ class ArticuloHolder(v: View): RecyclerView.ViewHolder(v) {
         txtDescription.text = description
     }
 
-    /*fun setText(text: String){
-        val txtText: TextView = view.findViewById(R.id.txt_text_article)
-        txtText.text = text
-    }*/
-
     fun setImage(image: Int){
       val imageView: ImageView = view.findViewById(R.id.img_article)
-        imageView.setImageResource(image)
+      imageView.setImageResource(image)
     }
 }

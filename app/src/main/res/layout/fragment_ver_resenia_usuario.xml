@@ -72,7 +72,7 @@
         app:layout_constraintTop_toBottomOf="@+id/picture_review" />
 
     <RatingBar
-        android:id="@+id/ratingBar"
+        android:id="@+id/ratingBar_profile_pet_owner"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="-20dp"
@@ -100,6 +100,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
+
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="409dp"
@@ -108,6 +110,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
+        <TextView
+            android:id="@+id/empty_message"
+            style="@style/textViewEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="44dp"
+            android:layout_marginStart="20dp"
+            android:layout_gravity="center"
+            android:text="@string/no_review"
+            android:visibility="gone"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/review_list"
@@ -115,8 +127,5 @@
             android:layout_height="350dp"
             android:orientation="vertical"
             android:visibility="visible" />
-
     </LinearLayout>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
