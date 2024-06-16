@@ -43,7 +43,7 @@ class MascotaUserFirestoreRecycletAdapter(
         }
     }
 
-    private fun deleteMascota(mascotaId: String) {
+    private fun updateMascotaState(mascotaId: String) {
         val db = FirebaseFirestore.getInstance()
         db.collection("mascotas").document(mascotaId)
             .update("estado", "eliminado")
@@ -61,7 +61,7 @@ class MascotaUserFirestoreRecycletAdapter(
         builder.setTitle(R.string.txt_dialog_delete_title)
             .setMessage(R.string.txt_dialog_detele_message)
             .setPositiveButton(R.string.txt_dialog_delete_confirm) { _, _ ->
-                //updateMascotaState(mascotaId)
+                updateMascotaState(mascotaId)
             }
             .setNegativeButton(R.string.txt_dialog_delete_cancel) { dialog, _ ->
                 dialog.dismiss()
