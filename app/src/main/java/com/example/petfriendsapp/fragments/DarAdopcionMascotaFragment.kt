@@ -22,6 +22,7 @@ import com.bumptech.glide.load.MultiTransformation
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.petfriendsapp.R
+import com.example.petfriendsapp.components.LoadingDialog
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
@@ -44,6 +45,7 @@ class DarAdopcionMascotaFragment : Fragment() {
     private val db = FirebaseFirestore.getInstance()
     private val auth = FirebaseAuth.getInstance()
     private var imageUri: Uri? = null
+    private lateinit var loadingDialog: LoadingDialog
 
     private val PICK_IMAGE_REQUEST = 1
 
@@ -70,6 +72,7 @@ class DarAdopcionMascotaFragment : Fragment() {
         initViews()
         initListeners()
         initSpinners()
+        loadingDialog = LoadingDialog(requireContext())
         return viewDarAdopcionMascota
     }
     override fun onStart() {
@@ -93,26 +96,34 @@ private fun initViews(){
         buttonSeleccionarFoto.setOnClickListener{abrirGaleria()}
         buttonDarAdopcionMascota.setOnClickListener { enviarForm() }
     }
+
     private fun enviarForm() {
         val validationResult = validarDatos()
-        if (validationResult.first) {
-            val nombre = editTextNombre.text.toString().trim()
-            val ubicacion = editTextUbicacion.text.toString().trim()
-            val descripcion = editTextDescripcion.text.toString().trim()
-            val edadText = editTextEdad.text.toString().trim()
-            val edad = edadText.toInt()
-            val especie = editTextEspecie.selectedItem.toString()
-            val sexo = editTextSexo.selectedItem.toString()
-            val userId = auth.currentUser?.uid
+        if (!validationResult.first) {
+            val errorMessage = validationResult.second
+            Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
+            return
+        }
 
-            if (userId != null && imageUri != null) {
-                // Subir imagen a Firebase Storage
-                val storageRef = FirebaseStorage.getInstance().reference.child("mascotas/${System.currentTimeMillis()}_${userId}.jpg")
-                storageRef.putFile(imageUri!!)
-                    .addOnSuccessListener { taskSnapshot ->
-                        // Obtener URL de descarga
-                        storageRef.downloadUrl.addOnSuccessListener { uri ->
-                            val imageUrl = uri.toString()
+        loadingDialog.show() // Mostrar el diálogo de carga mientras se envía el formulario
+
+        val nombre = editTextNombre.text.toString().trim()
+        val ubicacion = editTextUbicacion.text.toString().trim()
+        val descripcion = editTextDescripcion.text.toString().trim()
+        val edadText = editTextEdad.text.toString().trim()
+        val edad = edadText.toInt()
+        val especie = editTextEspecie.selectedItem.toString()
+        val sexo = editTextSexo.selectedItem.toString()
+        val userId = auth.currentUser?.uid
+
+        if (userId != null && imageUri != null) {
+            // Subir imagen a Firebase Storage
+            val storageRef = FirebaseStorage.getInstance().reference.child("mascotas/${System.currentTimeMillis()}_${userId}.jpg")
+            storageRef.putFile(imageUri!!)
+                .addOnSuccessListener { taskSnapshot ->
+                    // Obtener URL de descarga
+                    storageRef.downloadUrl.addOnSuccessListener { uri ->
+                        val imageUrl = uri.toString()
 
                             // Crear un mapa de datos
                             val mascotaData = hashMapOf(
@@ -123,30 +134,33 @@ private fun initViews(){
                                 "especie" to especie,
                                 "sexo" to sexo,
                                 "userId" to userId,
-                                "imageUrl" to imageUrl // Guardar URL de la imagen
+                                "imageUrl" to imageUrl,
+                                "estado" to "pendiente" // Agregar el estado inicial
                             )
 
-                            // Guardar datos en Firestore
-                            db.collection("mascotas").add(mascotaData)
-                                .addOnSuccessListener { documentReference ->
-                                    Toast.makeText(requireContext(), "Mascota registrada con éxito!", Toast.LENGTH_SHORT).show()
-                                    navigateToInicio()
-                                }
-                                .addOnFailureListener { e ->
-                                    Toast.makeText(requireContext(), "Error al registrar la mascota: ${e.message}", Toast.LENGTH_SHORT).show()
-                                }
-                        }
+                        // Guardar datos en Firestore
+                        db.collection("mascotas").add(mascotaData)
+                            .addOnSuccessListener { documentReference ->
+                                loadingDialog.dismiss() // Ocultar el diálogo de carga después de completar el envío
+                                Toast.makeText(requireContext(), "Mascota registrada con éxito!", Toast.LENGTH_SHORT).show()
+                                navigateToInicio()
+                            }
+                            .addOnFailureListener { e ->
+                                loadingDialog.dismiss() // Ocultar el diálogo de carga en caso de error
+                                Toast.makeText(requireContext(), "Error al registrar la mascota: ${e.message}", Toast.LENGTH_SHORT).show()
+                            }
                     }
-                    .addOnFailureListener { e ->
-                        Toast.makeText(requireContext(), "Error al subir la imagen: ${e.message}", Toast.LENGTH_SHORT).show()
-                    }
-            } else {
-                Toast.makeText(requireContext(), "Usuario no autenticado o imagen no seleccionada", Toast.LENGTH_SHORT).show()
-            }
+                }
+                .addOnFailureListener { e ->
+                    loadingDialog.dismiss() // Ocultar el diálogo de carga en caso de error
+                    Toast.makeText(requireContext(), "Error al subir la imagen: ${e.message}", Toast.LENGTH_SHORT).show()
+                }
         } else {
-            Toast.makeText(requireContext(), validationResult.second, Toast.LENGTH_SHORT).show()
+            loadingDialog.dismiss() // Ocultar el diálogo de carga si hay un problema con el usuario o la imagen
+            Toast.makeText(requireContext(), "Usuario no autenticado o imagen no seleccionada", Toast.LENGTH_SHORT).show()
         }
     }
+
 
     private fun initSpinners(){
         val optionsSexo = resources.getStringArray(R.array.spinner_sexo)

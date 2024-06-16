@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/primary"
-    tools:context=".fragments.ReviewFragment"
+    tools:context=".fragments.VerReseniaUsuario"
     tools:layout_editor_absoluteX="1dp"
     tools:layout_editor_absoluteY="18dp">
 
@@ -45,7 +45,7 @@
 
 
     <ImageView
-        android:id="@+id/reseniaPicture"
+        android:id="@+id/picture_review"
         style="@style/profileImageRound"
         android:layout_width="185dp"
         android:layout_height="187dp"
@@ -59,7 +59,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/dueñoNombre"
+        android:id="@+id/name_review"
         style="@style/textViewEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -69,17 +69,17 @@
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/reseniaPicture" />
+        app:layout_constraintTop_toBottomOf="@+id/picture_review" />
 
     <RatingBar
-        android:id="@+id/ratingBar"
+        android:id="@+id/ratingBar_profile_pet_owner"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="-20dp"
         android:layout_marginEnd="50dp"
         android:layout_marginBottom="30dp"
         android:rating="5"
-        android:theme="@style/ratingBarNormal"
+        android:theme="@style/ratingBarVisual"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -90,15 +90,17 @@
     <TextView
         android:id="@+id/valoration"
         style="@style/textViewEditTitle"
-        android:layout_width="34dp"
-        android:layout_height="35dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
         android:layout_marginBottom="30dp"
-        android:text="0"
+        android:text="@string/txt_tv_ranting"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -108,20 +110,22 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
+        <TextView
+            android:id="@+id/empty_message"
+            style="@style/textViewEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="44dp"
+            android:layout_marginStart="20dp"
+            android:layout_gravity="center"
+            android:text="@string/no_review"
+            android:visibility="gone"/>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/resenia_list"
+            android:id="@+id/review_list"
             android:layout_width="match_parent"
-            android:layout_height="328dp"
-            android:layout_marginTop="12dp"
+            android:layout_height="350dp"
             android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_trendings_flights" />
-
-
-
+            android:visibility="visible" />
     </LinearLayout>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

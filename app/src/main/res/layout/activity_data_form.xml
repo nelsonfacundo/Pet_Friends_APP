@@ -110,6 +110,7 @@
         android:background="@drawable/border_inputs"
         android:ems="10"
         android:hint="@string/txt_input_telefono"
+        android:textAlignment="center"
         android:inputType="text"
         app:layout_constraintBottom_toTopOf="@+id/buttonGuardar"
         app:layout_constraintEnd_toEndOf="parent"

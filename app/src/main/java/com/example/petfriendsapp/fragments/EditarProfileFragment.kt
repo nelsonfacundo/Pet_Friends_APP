@@ -10,9 +10,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
@@ -21,67 +18,45 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.petfriendsapp.MainActivity
 import com.example.petfriendsapp.R
+import com.example.petfriendsapp.components.LoadingDialog
+import com.example.petfriendsapp.databinding.FragmentEditarPerfilBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 
-class EditarPerfilFragment : Fragment() {
+class EditarProfileFragment : Fragment() {
 
-    private lateinit var viewEditarPerfil: View
-    private lateinit var backButton: ImageView
-    private lateinit var editTextNombre: EditText
-    private lateinit var editTextApellido: EditText
-    private lateinit var editTextTelefono: EditText
-    private lateinit var cambiarFoto: ImageView
-    private lateinit var eliminarCuenta: ImageView
-    private lateinit var buttonGuardarPerfil: Button
+    private lateinit var bindingFragment: FragmentEditarPerfilBinding
+    private val binding get() = bindingFragment
+
     private var imageUri: Uri? = null
     private val PICK_IMAGE_REQUEST = 1
+    private lateinit var loadingDialog: LoadingDialog
 
     private val db = FirebaseFirestore.getInstance()
     private val auth = FirebaseAuth.getInstance()
 
-    companion object {
-        val BACK_BUTTON_ID = R.id.ic_back_editar_perfil
-        val EDIT_NOMBRE = R.id.editar_perfil_nombre
-        val EDIT_APELLIDO = R.id.editar_perfil_apellido
-        val EDIT_TELEFONO = R.id.editar_perfil_telefono
-        val CAMBIAR_FOTO_PERFIL = R.id.editar_foto
-        val BUTTON_GUARDAR_PERFIL = R.id.btn_guardar_perfil
-        val BUTTON_ELIMINAR_CUENTA = R.id.ic_delete_editar_perfil
-    }
-
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        viewEditarPerfil = inflater.inflate(R.layout.fragment_editar_perfil, container, false)
-        initViews()
+    ): View {
+        bindingFragment = FragmentEditarPerfilBinding.inflate(inflater, container, false)
         fetchUserProfile()
-        return viewEditarPerfil
+        loadingDialog = LoadingDialog(requireContext())
+        return binding.root
     }
     override fun onStart() {
         super.onStart()
         initListeners()
     }
 
-    private fun initViews() {
-        backButton = viewEditarPerfil.findViewById(BACK_BUTTON_ID)
-        editTextNombre = viewEditarPerfil.findViewById(EDIT_NOMBRE)
-        editTextApellido = viewEditarPerfil.findViewById(EDIT_APELLIDO)
-        editTextTelefono = viewEditarPerfil.findViewById(EDIT_TELEFONO)
-        cambiarFoto = viewEditarPerfil.findViewById(CAMBIAR_FOTO_PERFIL)
-        buttonGuardarPerfil = viewEditarPerfil.findViewById(BUTTON_GUARDAR_PERFIL)
-        eliminarCuenta = viewEditarPerfil.findViewById(BUTTON_ELIMINAR_CUENTA)
-    }
 
     private fun initListeners() {
-        backButton.setOnClickListener { navigateToProfile() }
-        buttonGuardarPerfil.setOnClickListener { saveUserProfile() }
-        cambiarFoto.setOnClickListener { abrirGaleria() }
-        eliminarCuenta.setOnClickListener { alertEliminarCuenta() }
+        binding.icBackEditarPerfil.setOnClickListener { navigateToProfile() }
+        binding.btnGuardarPerfil.setOnClickListener { saveUserProfile() }
+        binding.editarFoto.setOnClickListener { abrirGaleria() }
+        binding.icDeleteEditarPerfil.setOnClickListener { alertEliminarCuenta() }
     }
 
     private fun fetchUserProfile() {
@@ -93,9 +68,10 @@ class EditarPerfilFragment : Fragment() {
             userDocRef.get()
                 .addOnSuccessListener { document ->
                     if (document != null) {
-                        editTextNombre.setText(document.getString("nombre"))
-                        editTextApellido.setText(document.getString("apellido"))
-                        editTextTelefono.setText(document.getString("telefono"))
+                        binding.editarPerfilNombre.setText(document.getString("nombre"))
+                        binding.editarPerfilApellido.setText(document.getString("apellido"))
+                        binding.editarPerfilTelefono.setText(document.getString("telefono"))
+
 
                         val imageUrl = document.getString("avatarUrl")
                         if (imageUrl != null) {
@@ -104,7 +80,7 @@ class EditarPerfilFragment : Fragment() {
                                 .transform(MultiTransformation(CenterCrop(), RoundedCorners(250)))
                                 .placeholder(R.drawable.avatar)
                                 .error(R.drawable.avatar)
-                                .into(cambiarFoto)
+                                .into(binding.editarFoto)
                         }
                     } else {
                         Log.d("EditarPerfilFragment", "No existe el documento")
@@ -135,7 +111,7 @@ class EditarPerfilFragment : Fragment() {
                 Glide.with(this)
                     .load(imageUri)
                     .transform(MultiTransformation(CenterCrop(), RoundedCorners(250)))
-                    .into(cambiarFoto)
+                    .into(binding.editarFoto)
             } else {
                 Log.e("EditarPerfilFragment", "La imagen URI es nulo")
                 Toast.makeText(requireContext(), R.string.photo_changed_failed, Toast.LENGTH_LONG)
@@ -144,11 +120,12 @@ class EditarPerfilFragment : Fragment() {
         }
     }
     private fun saveUserProfile() {
-        val nombre = editTextNombre.text.toString()
-        val apellido = editTextApellido.text.toString()
-        val telefono = editTextTelefono.text.toString()
+        val nombre = binding.editarPerfilNombre.text.toString()
+        val apellido = binding.editarPerfilApellido.text.toString()
+        val telefono = binding.editarPerfilTelefono.text.toString()
 
        if( validateInputs(nombre, apellido,telefono )){
+           loadingDialog.show()
            val nombreCompleto = "$nombre $apellido"
            val user = auth.currentUser
            val uid = user?.uid
@@ -163,6 +140,7 @@ class EditarPerfilFragment : Fragment() {
 
                ))
                    .addOnSuccessListener {
+                       loadingDialog.dismiss()
                        // Si la actualización del nombre y apellido fue exitosa, procede a actualizar la foto de perfil
                        if (imageUri != null) {
                            // Subir la imagen a Firebase Storage
@@ -178,6 +156,7 @@ class EditarPerfilFragment : Fragment() {
                        }
                    }
                    .addOnFailureListener { exception ->
+                       loadingDialog.dismiss()
                        Log.d("EditarPerfilFragment", "Error al actualizar el documento", exception)
                        Toast.makeText(context, R.string.perfil_changed_failed, Toast.LENGTH_LONG).show()
                    }
@@ -262,8 +241,8 @@ class EditarPerfilFragment : Fragment() {
         }
     }
     private fun navigateToProfile() {
-        val action = EditarPerfilFragmentDirections.actionEditarPerfilFragmentToPerfil()
-        viewEditarPerfil.findNavController().navigate(action)
+        val action = EditarProfileFragmentDirections.actionEditarPerfilFragmentToPerfil()
+        binding.root.findNavController().navigate(action)
     }
     //NO ELIMINA
     /*private fun eliminarUsuarioFirestore(uid: String) {
@@ -299,7 +278,4 @@ class EditarPerfilFragment : Fragment() {
         // todo ok, devuelve true
         return true
     }
-
-
-
 }
