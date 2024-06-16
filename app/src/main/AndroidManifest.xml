@@ -60,7 +60,7 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".RegistroActivity"
+            android:name=".RegisterActivity"
             android:exported="true" />
         <activity
             android:name=".LoginActivity"

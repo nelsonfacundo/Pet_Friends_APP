@@ -21,7 +21,6 @@ class MyPetsFragment : Fragment() {
     private lateinit var adapter: MascotaUserFirestoreRecycletAdapter
     private val db = FirebaseFirestore.getInstance()
     private val auth = FirebaseAuth.getInstance()
-    private lateinit var mascotaClickListener: (Mascota, String) -> Unit
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,9 +29,6 @@ class MyPetsFragment : Fragment() {
         _binding = FragmentMyPetsBinding.inflate(inflater, container, false)
         binding.recMisMascotas.layoutManager = LinearLayoutManager(context)
 
-        mascotaClickListener = { mascota, mascotaId ->
-            redirigir(mascota, mascotaId)
-        }
 
         return binding.root
     }
@@ -57,15 +53,12 @@ class MyPetsFragment : Fragment() {
                 .setQuery(query, Mascota::class.java)
                 .build()
 
-            adapter = MascotaUserFirestoreRecycletAdapter(requireContext(), options, mascotaClickListener)
+            adapter = MascotaUserFirestoreRecycletAdapter(requireContext(), options)
             binding.recMisMascotas.adapter = adapter
             adapter.startListening()
         }
     }
 
-    private fun redirigir(mascota: Mascota, mascotaId: String) {
-        // Aquí defines la acción de redireccionamiento al hacer clic en una mascota
-    }
 
     override fun onStart() {
         super.onStart()
@@ -85,3 +78,5 @@ class MyPetsFragment : Fragment() {
         binding.root.findNavController().navigate(action)
     }
 }
+
+

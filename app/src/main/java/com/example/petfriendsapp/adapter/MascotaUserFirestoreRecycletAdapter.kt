@@ -16,7 +16,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 class MascotaUserFirestoreRecycletAdapter(
     private val context: Context,
     options: FirestoreRecyclerOptions<Mascota>,
-    private val clickListener: (Mascota, String) -> Unit
 ) : FirestoreRecyclerAdapter<Mascota, MascotaUserHolder>(options) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MascotaUserHolder {
@@ -34,9 +33,6 @@ class MascotaUserFirestoreRecycletAdapter(
 
         val mascotaId = snapshots.getSnapshot(position).id
 
-        holder.getCardLayout().setOnClickListener {
-            clickListener(model, mascotaId)
-        }
 
         holder.setOnDeleteClickListener {
             showConfirmationDialog(mascotaId)
