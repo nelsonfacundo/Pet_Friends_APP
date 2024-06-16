@@ -11,7 +11,7 @@
 
 
     <TextView
-        android:id="@+id/txt_filtros"
+        android:id="@+id/txt_filters"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -33,10 +33,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@id/guideline3"
-        app:layout_constraintTop_toBottomOf="@+id/txt_filtros" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_filters" />
 
     <TextView
-        android:id="@+id/txt_filtros_animal"
+        android:id="@+id/txt_animal_filters"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -48,7 +48,7 @@
         app:layout_constraintTop_toBottomOf="@+id/divider" />
 
     <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chips_especie"
+        android:id="@+id/species_chips"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -56,11 +56,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@id/guideline3"
-        app:layout_constraintTop_toBottomOf="@+id/txt_filtros_animal"
+        app:layout_constraintTop_toBottomOf="@+id/txt_animal_filters"
         app:singleSelection="true">
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chip_perro"
+            android:id="@+id/dog_chip"
             style="@style/chipFilter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -69,7 +69,7 @@
             android:textSize="11sp" />
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chip_gato"
+            android:id="@+id/cat_chip"
             style="@style/chipFilter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -77,7 +77,7 @@
             android:textSize="11sp" />
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chip_ave"
+            android:id="@+id/bird_chip"
             style="@style/chipFilter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -85,7 +85,7 @@
             android:textSize="11sp" />
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chip_tortuga"
+            android:id="@+id/turtle_chip"
             style="@style/chipFilter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -95,7 +95,7 @@
     </com.google.android.material.chip.ChipGroup>
 
     <TextView
-        android:id="@+id/txt_filtros_edad"
+        android:id="@+id/txt_age_filters"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
@@ -104,10 +104,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toBottomOf="@+id/chips_especie" />
+        app:layout_constraintTop_toBottomOf="@+id/species_chips" />
 
     <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chips_edad"
+        android:id="@+id/age_chips"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -115,32 +115,32 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toBottomOf="@+id/txt_filtros_edad"
+        app:layout_constraintTop_toBottomOf="@+id/txt_age_filters"
         app:singleSelection="true">
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chip_edad_1_3"
+            android:id="@+id/age_1_3_chip"
             style="@style/chipFilter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/txt_edad_1_3" />
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chip_edad_3_6"
+            android:id="@+id/age_3_6_chip"
             style="@style/chipFilter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/txt_edad_3_6" />
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chip_edad_6_9"
+            android:id="@+id/age_6_9_chip"
             style="@style/chipFilter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/txt_edad_6_9" />
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chip_edad_mas_9"
+            android:id="@+id/age_greater_than_9"
             style="@style/chipFilter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -149,7 +149,7 @@
     </com.google.android.material.chip.ChipGroup>
 
     <TextView
-        android:id="@+id/txt_filtros_sexo"
+        android:id="@+id/txt_sex_filters"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
@@ -158,10 +158,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toBottomOf="@+id/chips_edad" />
+        app:layout_constraintTop_toBottomOf="@+id/age_chips" />
 
     <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chips_sexo"
+        android:id="@+id/sex_chips"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -169,18 +169,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toBottomOf="@+id/txt_filtros_sexo"
+        app:layout_constraintTop_toBottomOf="@+id/txt_sex_filters"
         app:singleSelection="true">
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chip_hembra"
+            android:id="@+id/female_chip"
             style="@style/chipFilter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/txt_hembra" />
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chip_macho"
+            android:id="@+id/male_chip"
             style="@style/chipFilter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -189,7 +189,7 @@
     </com.google.android.material.chip.ChipGroup>
 
     <Button
-        android:id="@+id/btn_aplicar_filtros"
+        android:id="@+id/apply_filters_btn"
         style="@style/colorBtnVerde"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -199,10 +199,10 @@
         android:text="@string/txt_aplicar_filtros"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toBottomOf="@+id/chips_sexo" />
+        app:layout_constraintTop_toBottomOf="@+id/sex_chips" />
 
     <Button
-        android:id="@+id/btn_limpiar_filtros"
+        android:id="@+id/clean_filters_btn"
         style="@style/colorBtnVerde"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -212,7 +212,7 @@
         android:text="@string/txt_limpiar_filtros"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chips_sexo" />
+        app:layout_constraintTop_toBottomOf="@+id/sex_chips" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
