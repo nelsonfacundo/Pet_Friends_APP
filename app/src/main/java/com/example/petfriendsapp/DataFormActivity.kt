@@ -39,11 +39,11 @@ class DataFormActivity : AppCompatActivity() {
     }
 
     private fun initListeners() {
-        binding.buttonSeleccionarAvatar.setOnClickListener { abrirGaleria() }
-        binding.buttonGuardar.setOnClickListener { guardarDatos() }
+        binding.buttonSeleccionarAvatar.setOnClickListener { openGallery() }
+        binding.buttonGuardar.setOnClickListener { saveData() }
     }
 
-    private fun abrirGaleria() {
+    private fun openGallery() {
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         startActivityForResult(intent, PICK_IMAGE_REQUEST)
     }
@@ -65,8 +65,8 @@ class DataFormActivity : AppCompatActivity() {
         }
     }
 
-    private fun guardarDatos() {
-        val validationResult = validarDatos()
+    private fun saveData() {
+        val validationResult = validateData()
 
         if (validationResult.first) {
             val nombre = binding.inputNombre.text.toString().trim()
@@ -127,7 +127,7 @@ class DataFormActivity : AppCompatActivity() {
         }
     }
 
-    private fun validarDatos(): Pair<Boolean, String> {
+    private fun validateData(): Pair<Boolean, String> {
         val nombre = binding.inputNombre.text.toString().trim()
         val apellido = binding.inputApellido.text.toString().trim()
         val telefono = binding.inputTelefono.text.toString().trim()

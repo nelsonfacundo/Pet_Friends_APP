@@ -21,7 +21,7 @@
             app:tabBackground="@color/green"
             app:tabGravity="fill"
             app:tabMode="fixed"
-            app:tabTextColor="@android:color/black" />
+            app:tabTextColor="@android:color/white" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.viewpager2.widget.ViewPager2

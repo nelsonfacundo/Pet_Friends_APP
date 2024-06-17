@@ -92,11 +92,18 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             .addOnSuccessListener { documents ->
                 for (document in documents) {
                     val name = document.getString("name")
+                    val address = document.getString("address")
+                    val phone = document.getString("phone")
                     val geoPoint = document.getGeoPoint("location")
                     geoPoint?.let {
                         val vetLocation = LatLng(it.latitude, it.longitude)
                         if (isWithinRadius(currentLocation, vetLocation, 100.0)) {
-                            mMap.addMarker(MarkerOptions().position(vetLocation).title(name))
+                            val markerOptions = MarkerOptions()
+                                .position(vetLocation)
+                                .title(name)
+                                .snippet("Telefono: $phone")
+                                //.snippet("Direccion: $address") // La direccion oculta el telefono y los saltos de linea no funcionan
+                            mMap.addMarker(markerOptions)
                         }
                     }
                 }
