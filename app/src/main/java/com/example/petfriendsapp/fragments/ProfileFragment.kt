@@ -19,13 +19,13 @@ import androidx.core.app.NotificationCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.example.petfriendsapp.databinding.FragmentPerfilBinding
+import com.example.petfriendsapp.databinding.FragmentProfileBinding
 import java.util.Locale
 
-class PerfilFragment : Fragment() {
+class ProfileFragment : Fragment() {
 
-    private lateinit var _binding: FragmentPerfilBinding
-    private val binding get() = _binding
+    private lateinit var bindingFragment: FragmentProfileBinding
+    private val binding get() = bindingFragment
 
     private val db = FirebaseFirestore.getInstance()
     private val auth = FirebaseAuth.getInstance()
@@ -34,7 +34,7 @@ class PerfilFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentPerfilBinding.inflate(inflater, container, false)
+        bindingFragment = FragmentProfileBinding.inflate(inflater, container, false)
         val view = binding.root
 
         fetchUserProfile()
@@ -54,6 +54,7 @@ class PerfilFragment : Fragment() {
         binding.btnCambiarPassword.setOnClickListener { navigateToChangePassword() }
         binding.switchNotificaciones.setOnClickListener { showNotification(requireContext()) }
         binding.icBackFragmentPerfil.setOnClickListener { navigateToHome() }
+        binding.btnMisMascotas.setOnClickListener{ navigateToMyPets() }
     }
 
     private fun fetchUserProfile() {
@@ -171,21 +172,26 @@ class PerfilFragment : Fragment() {
 
 
     private fun navigateToHome() {
-        val action1 = PerfilFragmentDirections.actionPerfilToInicio()
+        val action1 = ProfileFragmentDirections.actionPerfilToInicio()
         binding.root.findNavController().navigate(action1)
     }
     private fun navigateToChangeEmail() {
-        val action1 = PerfilFragmentDirections.actionPerfilToCambiarEmail()
+        val action1 = ProfileFragmentDirections.actionPerfilToCambiarEmail()
         binding.root.findNavController().navigate(action1)
     }
 
     private fun navigateToChangePassword() {
-        val action2 = PerfilFragmentDirections.actionPerfilToCambiarPassword()
+        val action2 = ProfileFragmentDirections.actionPerfilToCambiarPassword()
         binding.root.findNavController().navigate(action2)
     }
 
     private fun navigateToEditProfile() {
-        val action = PerfilFragmentDirections.actionPerfilToEditarPerfilFragment()
+        val action = ProfileFragmentDirections.actionPerfilToEditarPerfilFragment()
+        binding.root.findNavController().navigate(action)
+    }
+
+    private fun navigateToMyPets()  {
+        val action = ProfileFragmentDirections.actionPerfilToMyPetsFragment()
         binding.root.findNavController().navigate(action)
     }
 

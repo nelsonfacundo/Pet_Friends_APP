@@ -16,6 +16,9 @@ class FiltrosFragment : BottomSheetDialogFragment() {
     private lateinit var ageRange3to6: Chip
     private lateinit var ageRange6to9: Chip
     private lateinit var ageRangeOver9: Chip
+    private lateinit var chipGroupSpecie: ChipGroup
+    private lateinit var chipGroupSex: ChipGroup
+    private lateinit var chipGroupAge: ChipGroup
     private var minAge: Int = 0
     private var maxAge: Int = Int.MAX_VALUE
 
@@ -29,27 +32,39 @@ class FiltrosFragment : BottomSheetDialogFragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_filtros, container, false)
 
-        val applyFilters: Button = view.findViewById(R.id.btn_aplicar_filtros)
-        val clearFilters: Button = view.findViewById(R.id.btn_limpiar_filtros)
-        ageRange1to3  = view.findViewById(R.id.chip_edad_1_3)
-        ageRange3to6 = view.findViewById(R.id.chip_edad_3_6)
-        ageRange6to9 = view.findViewById(R.id.chip_edad_6_9)
-        ageRangeOver9 = view.findViewById(R.id.chip_edad_mas_9)
+        val applyFilters: Button = view.findViewById(R.id.apply_filters_btn)
+        val clearFilters: Button = view.findViewById(R.id.clean_filters_btn)
 
+        ageRange1to3  = view.findViewById(R.id.age_1_3_chip)
+        ageRange3to6 = view.findViewById(R.id.age_3_6_chip)
+        ageRange6to9 = view.findViewById(R.id.age_6_9_chip)
+        ageRangeOver9 = view.findViewById(R.id.age_greater_than_9)
+        chipGroupSpecie = view.findViewById(R.id.species_chips)
+        chipGroupSex = view.findViewById(R.id.sex_chips)
+        chipGroupAge = view.findViewById(R.id.age_chips)
+
+        restoreFilters(view)
+
+        //Botón aplicar filtros
         applyFilters.setOnClickListener {
-            //Capturo filtros seleccionados
-            val selectedSpecies = view.findViewById<ChipGroup>(R.id.chips_especie)
-                .checkedChipId.let {id ->view.findViewById<Chip>(id)?.text?.toString()}
+            //Guardo los id de los chips seleccionados para restaurarlos la próxima vez que se inicie el bottomsheet
+            selectedSpecieId = chipGroupSpecie.checkedChipId
+            selectedSexId = chipGroupSex.checkedChipId
+            selectedAgeId = chipGroupAge.checkedChipId
 
-            val selectedSex = view.findViewById<ChipGroup>(R.id.chips_sexo)
-                .checkedChipId.let {id ->view.findViewById<Chip>(id)?.text?.toString()}
+            //Capturo filtros seleccionados para pasarlos al InicioFragment
+            val selectedSpecie = selectedSpecieId
+                .let {id ->view.findViewById<Chip>(id)?.text?.toString()}
+
+            val selectedSex = selectedSexId
+                .let {id ->view.findViewById<Chip>(id)?.text?.toString()}
 
             //Capturo rango de edad seleccionado
             setAgeRange()
 
             //Guardo los filtros
             val result = Bundle().apply {
-                putString("selectedSpecies", selectedSpecies)
+                putString("selectedSpecies", selectedSpecie)
                 putString("selectedSex", selectedSex)
                 putInt("minAge", minAge)
                 putInt("maxAge", maxAge)
@@ -62,7 +77,15 @@ class FiltrosFragment : BottomSheetDialogFragment() {
             dismiss()
         }
 
+        //Botón limpiar filtros
         clearFilters.setOnClickListener{
+
+            //Modifico las variables para cuando se inicie el bottomsheet se restablezcan los chips
+            selectedSpecieId = -1
+            selectedSexId = -1
+            selectedAgeId = -1
+
+            //Bundle para pasar los filtros en null al inicio
             val result = Bundle().apply {
                 putString("selectedSpecies", null)
                 putString("selectedSex", null)
@@ -93,8 +116,24 @@ class FiltrosFragment : BottomSheetDialogFragment() {
         }
     }
 
+    //Restauro los filtros de acuerdo a la última vez
+    private fun restoreFilters(view: View){
+        if (selectedSpecieId != View.NO_ID) {
+            selectedSpecieId?.let { chipGroupSpecie.check(it) }
+        }
+        if (selectedSexId != View.NO_ID) {
+            selectedSexId?.let { chipGroupSex.check(it) }
+        }
+        if (selectedAgeId != View.NO_ID) {
+            selectedAgeId?.let { chipGroupAge.check(it) }
+        }
+    }
+
     companion object {
         const val TAG = "FiltrosFragment"
+        var selectedSpecieId: Int = -1
+        var selectedSexId: Int = -1
+        var selectedAgeId: Int = -1
     }
 
 }

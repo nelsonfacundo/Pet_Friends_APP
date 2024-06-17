@@ -28,7 +28,6 @@ import com.google.firebase.firestore.firestore
 
 class Inicio : Fragment() {
 
-
     private lateinit var viewInicio: View
     private lateinit var buttonCambiarPerfil: Button
     lateinit var recMascotas: RecyclerView
@@ -53,8 +52,7 @@ class Inicio : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ):
-            View? {
+    ): View? {
 
         viewInicio = inflater.inflate(R.layout.fragment_inicio, container, false)
 
@@ -95,9 +93,6 @@ class Inicio : Fragment() {
         fillRecycler()
 
         initListeners()
-
-
-
     }
 
     private fun fillRecycler() {
@@ -128,7 +123,6 @@ class Inicio : Fragment() {
         recMascotas.adapter = adapter
     }
 
-
     private fun redirigir(mascota: Mascota, mascotaId: String) {
         val action = InicioDirections.actionInicioToDetailsAdoptar(
             mascota,
@@ -147,7 +141,6 @@ class Inicio : Fragment() {
 
                     }
                 }
-
             }
     }
 
