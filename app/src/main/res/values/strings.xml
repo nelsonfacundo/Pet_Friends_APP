@@ -176,6 +176,7 @@
     <string name="txt_empty_sexo">El sexo no puede estar vacío</string>
     <string name="txt_opcion_valida_sexo">Selecciona una opcion valida del campo sexo</string>
     <string name="txt_opcion_valida_especie">Selecciona una opcion valida del campo especie</string>
+    <string name="txt_opcion_valida_provincia">Selecciona una opcion valida del campo provincia</string>
 
     <string-array name="spinner_sexo">
         <item>Seleccionar sexo</item>
@@ -189,6 +190,34 @@
         <item>Gato</item>
         <item>Ave</item>
         <item>Tortuga</item>
+    </string-array>
+
+    <string-array name="spinner_provincias">
+        <item>Seleccionar Provincia</item>
+        <item>Buenos Aires</item>
+        <item>Capital Federal</item>
+        <item>Catamarca</item>
+        <item>Chaco</item>
+        <item>Chubut</item>
+        <item>Cordoba</item>
+        <item>Corrientes</item>
+        <item>Entre Ríos</item>
+        <item>Formosa</item>
+        <item>Jujuy</item>
+        <item>La Pampa</item>
+        <item>La Rioja</item>
+        <item>Mendoza</item>
+        <item>Misiones</item>
+        <item>Neuquen</item>
+        <item>Rio Negro</item>
+        <item>Salta</item>
+        <item>San Juan</item>
+        <item>San Luis</item>
+        <item>Santa Cruz</item>
+        <item>Santiago del Estero</item>
+        <item>Tierra del Fuego</item>
+        <item>Tucumán</item>
+
     </string-array>
 
     /Dar en adopcion/

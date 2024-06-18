@@ -37,7 +37,7 @@ class DarAdopcionMascotaFragment : Fragment() {
     private lateinit var editTextEspecie: Spinner
     private lateinit var editTextNombre: EditText
     private lateinit var editTextEdad: EditText
-    private lateinit var editTextUbicacion: EditText
+    private lateinit var editTextUbicacion: Spinner
     private lateinit var editTextSexo: Spinner
     private lateinit var editTextDescripcion: EditText
     private lateinit var imageViewFotoMascota: ImageView
@@ -108,7 +108,7 @@ private fun initViews(){
         loadingDialog.show() // Mostrar el diálogo de carga mientras se envía el formulario
 
         val nombre = editTextNombre.text.toString().trim()
-        val ubicacion = editTextUbicacion.text.toString().trim()
+        val ubicacion = editTextUbicacion.selectedItem.toString()
         val descripcion = editTextDescripcion.text.toString().trim()
         val edadText = editTextEdad.text.toString().trim()
         val edad = edadText.toInt()
@@ -172,28 +172,29 @@ private fun initViews(){
         val adapterEspecie = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, optionsEspecie)
         adapterEspecie.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         editTextEspecie.adapter = adapterEspecie
+
+        val optionsUbicacion = resources.getStringArray(R.array.spinner_provincias)
+        val adapterUbicacion = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, optionsUbicacion)
+        adapterUbicacion.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        editTextUbicacion.adapter = adapterUbicacion
     }
 
     private fun validarDatos():Pair<Boolean,String>{
         val nombre = editTextNombre.text.toString().trim()
-        val ubicacion = editTextUbicacion.text.toString().trim()
         val descripcion = editTextDescripcion.text.toString().trim()
         val edad = editTextEdad.text.toString().trim()
-        val especie = editTextEspecie.toString()
-        val sexo = editTextSexo.toString()
 
 
         if (nombre.isEmpty()) return Pair(false, getString(R.string.txt_empty_nombre))
         if (nombre.length < 3 || nombre.length > 25) return Pair(false, getString(R.string.txt_cantC_nombre_mascota))
-        if (ubicacion.isEmpty()) return Pair(false, getString(R.string.txt_empty_ubicacion))
         if (descripcion.isEmpty()) return Pair(false, getString(R.string.txt_empty_descripcion))
         if(edad.isEmpty()) return Pair(false, getString(R.string.txt_empty_edad))
         val number = edad.toInt()
         if(number < 0 || number > 100) return Pair(false, getString(R.string.txt_empty_edad_incorrecta))
         if (imageUri == null) return Pair(false, getString(R.string.txt_empty_imagen))
-        if(especie == "Seleccionar especie") return Pair(false, getString(R.string.txt_opcion_valida_especie))
-        if(sexo == "Seleccionar sexo") return Pair(false, getString(R.string.txt_opcion_valida_sexo))
-
+        if (editTextEspecie.selectedItemPosition == 0) return Pair(false, getString(R.string.txt_opcion_valida_especie))
+        if (editTextSexo.selectedItemPosition == 0) return Pair(false, getString(R.string.txt_opcion_valida_sexo))
+        if (editTextUbicacion.selectedItemPosition == 0) return Pair(false, getString(R.string.txt_opcion_valida_provincia))
         return Pair(true,"")
     }
 
