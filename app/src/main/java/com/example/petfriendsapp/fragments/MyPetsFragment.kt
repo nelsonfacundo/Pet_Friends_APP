@@ -59,7 +59,6 @@ class MyPetsFragment : Fragment() {
         }
     }
 
-
     override fun onStart() {
         super.onStart()
         initListeners()
@@ -70,8 +69,6 @@ class MyPetsFragment : Fragment() {
         super.onStop()
         adapter.stopListening()
     }
-
-
 
     private fun navigateToPerfil() {
         val action = MyPetsFragmentDirections.actionMyPetsFragmentToPerfil()
