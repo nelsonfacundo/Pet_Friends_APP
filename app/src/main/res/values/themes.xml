@@ -96,6 +96,13 @@
         <item name="android:scaleY">0.7</item>
     </style>
 
+    <style name="RatingBarCustomSizeOne">
+        <item name="android:numStars">1</item>
+        <item name="android:isIndicator">true</item>
+        <item name="android:rating">5</item>
+        <item name="android:theme">@style/ratingBarVisual</item>
+    </style>
+
     <style name="chipFilter" parente="Widget.MaterialComponents.Chip">
         <item name="chipBackgroundColor">@drawable/chip_filter_selector</item>
         <item name="android:textColor">@color/black</item>
