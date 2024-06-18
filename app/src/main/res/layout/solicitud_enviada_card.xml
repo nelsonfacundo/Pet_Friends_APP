@@ -73,7 +73,7 @@
                 android:text="@string/txt_status_static"
                 android:textAlignment="center"
                 android:textAllCaps="true"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/txt_adopt_status"
@@ -83,7 +83,7 @@
                 android:textAlignment="center"
                 android:textAllCaps="true"
                 android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
 
         </LinearLayout>
 
