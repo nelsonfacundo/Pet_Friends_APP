@@ -10,7 +10,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
-class RegistroActivity : AppCompatActivity() {
+class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegistroBinding
     private lateinit var auth: FirebaseAuth
