@@ -82,6 +82,7 @@
     <style name="ratingBarVisual" parent="Theme.MaterialComponents.DayNight">
         <item name="colorControlActivated">@color/yellow</item>
         <item name="colorControlNormal">@color/orange</item>
+        <item name="android:isIndicator">false</item>
     </style>
 
     <style name="RatingBarCustomSize">
