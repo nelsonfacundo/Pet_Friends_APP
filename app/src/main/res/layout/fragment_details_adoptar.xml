@@ -37,8 +37,8 @@
 
     <ImageButton
         android:id="@+id/favoriteButton"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_margin="8dp"
         android:background="@null"
         android:contentDescription="@string/favorite_button_description"
@@ -228,6 +228,7 @@
             android:layout_marginTop="5dp"
             android:rating="3"
             android:theme="@style/ratingBarVisual"
+            android:isIndicator="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imagenDueño"
             app:layout_constraintTop_toBottomOf="@+id/nombreDueño" />
