@@ -15,17 +15,16 @@
         style="@style/textViewEditTitle"
         android:layout_width="327dp"
         android:layout_height="82dp"
-        android:layout_marginStart="50dp"
         android:layout_marginTop="50dp"
         android:layout_marginBottom="631dp"
         android:text="@string/txt_title_dar_review"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.441" />
+        app:layout_constraintVertical_bias="0.5" />
 
     <TextView
         android:id="@+id/calificacion_rating_bar_review"
@@ -243,7 +242,7 @@
             android:layout_height="60dp"
             android:layout_marginStart="50dp"
             android:layout_marginEnd="20dp"
-            android:text="@string/txt_btn_forgot_password"
+            android:text="@string/title_send_review"
             app:layout_constraintBottom_toTopOf="@+id/btn_cambiar_email"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.567"

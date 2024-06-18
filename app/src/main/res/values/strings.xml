@@ -17,7 +17,7 @@
     <string name="txt_registro">Registrarse</string>
     <string name="txt_name">Nombre</string>
     <string name="txt_last_name">Apellido</string>
-    <string name="txt_forgot_password">Forgot password</string>
+    <string name="txt_forgot_password">¿Olvidaste tu contraseña?</string>
     <string name="txt_pass_confirmar">Confirme contraseña</string>
     <string name="register_success">Registro exitoso</string>
     <string name="msj_email_registrado">Email ya registrado</string>
@@ -135,7 +135,7 @@
     <string name="owner_no_review">El dueño no tiene reseñas</string>
 
     /Favorito/
-    <string name="txt_favorito">Favorito</string>
+    <string name="txt_favorito">Favoritos</string>
 
 
     /Details Perro Adoptar/
@@ -216,6 +216,7 @@
         ¿Recomendarías adoptar de este dueño  a otros usuarios?</string>
     <string name="txt_0_500_caracteres">(0/500 caracteres)</string>
     <string name="title_cancel_review">Cancelar Reseña</string>
+    <string name="title_send_review">Enviar</string>
     <string name="txt_pregunta_cancelar_review">¿Estás seguro de que deseas cancelar tu reseña?</string>
     <string name="txt_aceptar_review">Aceptar</string>
     <string name="txt_review_success">Su reseña fue guardada con exito</string>
