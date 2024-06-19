@@ -72,16 +72,12 @@ class FiltrosFragment : BottomSheetDialogFragment() {
     //Restauro los filtros de acuerdo a la última vez
     private fun restoreFilters() {
 
-       /* var selectedSpecie: String? = null
-        var selectedSex: String? = null*/
         if (selectedSpecieId != View.NO_ID) {
             selectedSpecieId?.let { chipGroupSpecie.check(it) }
-            //selectedSpecie = chipGroupSpecie.checkedChipId.toString()
         }
 
         if (selectedSexId != View.NO_ID) {
             selectedSexId?.let { chipGroupSex.check(it) }
-           // selectedSex = chipGroupSex.checkedChipId.toString()
         }
 
         if (selectedAgeId != View.NO_ID) {
@@ -91,16 +87,6 @@ class FiltrosFragment : BottomSheetDialogFragment() {
         if (selectedLocation != null) {
             spinnerLocation.setSelection(resources.getStringArray(R.array.spinner_provincias).indexOf(selectedLocation))
         }
-
-       /* val result = Bundle().apply {
-            putString("selectedSpecies", selectedSpecie)
-            putString("selectedSex", selectedSex)
-            putInt("minAge", minAge)
-            putInt("maxAge", maxAge)
-            putString("selectedLocation", selectedLocation)
-        }
-
-        parentFragmentManager.setFragmentResult("requestKey", result)*/
     }
 
     private fun initListenerApplyFilters(view: View) {
@@ -112,8 +98,12 @@ class FiltrosFragment : BottomSheetDialogFragment() {
             selectedSpecieId = chipGroupSpecie.checkedChipId
             selectedSexId = chipGroupSex.checkedChipId
             selectedAgeId = chipGroupAge.checkedChipId
-            selectedLocation = spinnerLocation.selectedItem.toString() //También para capturar lo seleccionado
 
+            if (spinnerLocation.selectedItemPosition == 0) {
+                selectedLocation = null
+            } else {
+                selectedLocation = spinnerLocation.selectedItem.toString()
+            }
 
             //Capturo filtros seleccionados para pasarlos al InicioFragment
             val selectedSpecie = selectedSpecieId
