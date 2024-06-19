@@ -19,6 +19,7 @@ import com.example.petfriendsapp.R
 import com.example.petfriendsapp.adapter.MascotaFirestoreRecyclerAdapter
 import com.example.petfriendsapp.entities.Mascota
 import com.example.petfriendsapp.fragments.FiltrosFragment
+import com.example.petfriendsapp.fragments.FirestoreDataManager
 import com.example.petfriendsapp.viewmodels.ListViewModel
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.Firebase
@@ -33,6 +34,7 @@ class Inicio : Fragment() {
     lateinit var recMascotas: RecyclerView
     private lateinit var buttonDarEnAdopcion: Button
     private lateinit var viewModel: ListViewModel
+    private lateinit var firestoreDataManager: FirestoreDataManager
     val db = Firebase.firestore
     private lateinit var btnFilters: Button
     private lateinit var mascotaClickListener: (Mascota, String) -> Unit
@@ -59,6 +61,7 @@ class Inicio : Fragment() {
         buttonDarEnAdopcion = viewInicio.findViewById(R.id.button_dar_en_adopcion)
 
         recMascotas = viewInicio.findViewById(R.id.rec_mascota)
+        firestoreDataManager = FirestoreDataManager()
 
         prepareFragment()
         mascotaClickListener = { mascota, mascotaId ->
@@ -118,7 +121,8 @@ class Inicio : Fragment() {
             .setQuery(query, Mascota::class.java)
             .build()
 
-        val adapter = MascotaFirestoreRecyclerAdapter(options, mascotaClickListener)
+        val adapter =
+            MascotaFirestoreRecyclerAdapter(options, firestoreDataManager, mascotaClickListener)
         adapter.startListening()
         recMascotas.adapter = adapter
     }
@@ -159,7 +163,3 @@ class Inicio : Fragment() {
     }
 
 }
-
-
-
-

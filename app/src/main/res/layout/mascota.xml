@@ -28,12 +28,13 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_gravity="end|top"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="TODO"
-            android:src="@drawable/favorito"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:tint="@android:color/white" />
+             />
 
         <LinearLayout
             android:layout_width="match_parent"
