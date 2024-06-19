@@ -56,6 +56,7 @@ class MascotaHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         setName(mascota.nombre)
         setEdad(mascota.edad)
         setSexo(mascota.sexo)
+        setRaza(mascota.especie)
         setImageUrl(mascota.imageUrl)
 
         updateFavoriteButton(isFavorite)
