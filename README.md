@@ -41,4 +41,4 @@ Con sus múltiples funcionalidades, Pet Friends asegura que cada mascota encuent
 
 ### ¡Únete a Pet Friends y forma parte de esta comunidad que cambia vidas, una adopción a la vez!
 
-
+![image](https://github.com/nelsonfacundo/Pet_Friends_APP/assets/116855716/b2b3c3e0-8f36-4d8a-99f3-3dabb5c3bd3c)
