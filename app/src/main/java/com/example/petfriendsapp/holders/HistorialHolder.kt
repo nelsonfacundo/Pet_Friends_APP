@@ -28,7 +28,10 @@ class HistorialHolder (view: View) : RecyclerView.ViewHolder(view) {
     }
     fun bindSolicitanteData(nombreSolicitante: String, urlAvatarSolicitante: String) {
         nombreSolicitanteTextView.text = nombreSolicitante
-        Glide.with(itemView.context).load(urlAvatarSolicitante).into(avatarImageView)
+        Glide.with(itemView.context)
+            .load(urlAvatarSolicitante)
+            .circleCrop()
+            .into(avatarImageView)
     }
 
     fun clear() {

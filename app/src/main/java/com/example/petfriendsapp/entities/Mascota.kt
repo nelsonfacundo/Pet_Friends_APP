@@ -12,7 +12,8 @@ data class Mascota(
     val imageUrl: String = "",
     val userId: String = "",
     val sexo: String="",
-    val estado: String = "pendiente"
+    val estado: String = "pendiente",
+    val isFavorite: Boolean = false
 
 ) : Parcelable {
     constructor(parcel: Parcel) : this(

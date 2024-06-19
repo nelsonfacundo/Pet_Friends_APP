@@ -3,10 +3,12 @@ package com.example.petfriendsapp.fragments
 import android.util.Log
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.auth.FirebaseAuth
 
 class FirestoreDataManager {
 
     private val db = Firebase.firestore
+    private val auth = FirebaseAuth.getInstance()
 
     fun cargarNombreMascota(idMascota: String, onSuccess: (String) -> Unit, onError: (Exception) -> Unit) {
         val mascotaRef = db.collection("mascotas").document(idMascota)
@@ -94,5 +96,47 @@ class FirestoreDataManager {
                 Log.e("FirestoreDataManager", "Error al cargar datos de la peticion", exception)
                 onError(exception) }
     }
-}
+    fun addToFavorites(mascotaId: String, callback: (Boolean) -> Unit) {
+        val userId = auth.currentUser?.uid ?: return
+        val favRef = db.collection("users").document(userId).collection("favoritos").document(mascotaId)
 
+        favRef.set(hashMapOf("mascotaId" to mascotaId))
+            .addOnSuccessListener { callback(true) }
+            .addOnFailureListener { callback(false) }
+    }
+    fun getFavoriteMascotaIds(callback: (List<String>) -> Unit) {
+        val userId = auth.currentUser?.uid ?: return
+        val favRef = db.collection("users").document(userId).collection("favoritos")
+
+        favRef.get()
+            .addOnSuccessListener { documents ->
+                val favoritos = documents.mapNotNull { it.getString("mascotaId") }
+                callback(favoritos)
+            }
+            .addOnFailureListener { exception ->
+                Log.e("FirestoreDataManager", "Error al obtener favoritos", exception)
+                callback(emptyList())
+            }
+    }
+
+    fun removeFromFavorites(mascotaId: String, callback: (Boolean) -> Unit) {
+        val userId = auth.currentUser?.uid ?: return
+        val favRef = db.collection("users").document(userId).collection("favoritos").document(mascotaId)
+
+        favRef.delete()
+            .addOnSuccessListener { callback(true) }
+            .addOnFailureListener { callback(false) }
+    }
+
+    fun getFavoriteIds(callback: (List<String>) -> Unit) {
+        val userId = auth.currentUser?.uid ?: return
+        val favRef = db.collection("users").document(userId).collection("favoritos")
+
+        favRef.get()
+            .addOnSuccessListener { documents ->
+                val favoritos = documents.mapNotNull { it.getString("mascotaId") }
+                callback(favoritos)
+            }
+            .addOnFailureListener { callback(emptyList()) }
+    }
+}
