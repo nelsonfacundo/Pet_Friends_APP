@@ -208,8 +208,8 @@
         <item>La Rioja</item>
         <item>Mendoza</item>
         <item>Misiones</item>
-        <item>Neuquen</item>
-        <item>Rio Negro</item>
+        <item>Neuquén</item>
+        <item>Río Negro</item>
         <item>Salta</item>
         <item>San Juan</item>
         <item>San Luis</item>
@@ -290,6 +290,7 @@
     <string name="txt_macho">Macho</string>
     <string name="txt_limpiar_filtros">Limpiar filtros</string>
     <string name="txt_aplicar_filtros">Aplicar filtros</string>
+    <string name="txt_location_filters">Ubicación</string>
 
     /Historial/
     <string name="txt_estado">Estado:</string>
