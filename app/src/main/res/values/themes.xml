@@ -82,6 +82,7 @@
     <style name="ratingBarVisual" parent="Theme.MaterialComponents.DayNight">
         <item name="colorControlActivated">@color/yellow</item>
         <item name="colorControlNormal">@color/orange</item>
+        <item name="android:isIndicator">false</item>
     </style>
 
     <style name="RatingBarCustomSize">
@@ -95,12 +96,18 @@
         <item name="android:scaleY">0.7</item>
     </style>
 
-    <style name="chipFilter" parente="Widget.MaterialComponents.Chip">
+    <style name="RatingBarCustomSizeOne">
+        <item name="android:numStars">1</item>
+        <item name="android:isIndicator">true</item>
+        <item name="android:rating">5</item>
+        <item name="android:theme">@style/ratingBarVisual</item>
+    </style>
+
+    <style name="ChipFilterCustom" parente="Widget.MaterialComponents.Chip">
         <item name="chipBackgroundColor">@drawable/chip_filter_selector</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">12sp</item>
         <item name="android:checkable">true</item>
     </style>
-
 
 </resources>

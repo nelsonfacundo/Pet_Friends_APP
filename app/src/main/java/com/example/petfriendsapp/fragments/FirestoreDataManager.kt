@@ -1,11 +1,8 @@
 package com.example.petfriendsapp.fragments
 
+import android.util.Log
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-
-import android.util.Log
-import com.example.petfriendsapp.entities.Mascota
-import com.example.petfriendsapp.entities.Solicitud
 import com.google.firebase.auth.FirebaseAuth
 
 class FirestoreDataManager {

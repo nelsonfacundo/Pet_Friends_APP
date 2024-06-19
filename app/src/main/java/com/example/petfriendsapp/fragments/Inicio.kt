@@ -42,6 +42,7 @@ class Inicio : Fragment() {
     private var selectedSex: String? = null
     private var minAge: Int = 0
     private var maxAge: Int = Int.MAX_VALUE
+    private var selectedLocation: String? = null
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -68,7 +69,6 @@ class Inicio : Fragment() {
             redirigir(mascota, mascotaId)
         }
 
-        //Abro bottomSheet de filtros
         btnFilters = viewInicio.findViewById(R.id.btn_filters)
         btnFilters.setOnClickListener { showFiltrosBottomSheet() }
 
@@ -84,12 +84,12 @@ class Inicio : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        //Recibo filtros de FiltrosFragment y actualizo el recycler
         setFragmentResultListener("requestKey") { _, bundle ->
             selectedSpecies = bundle.getString("selectedSpecies")
             selectedSex = bundle.getString("selectedSex")
             minAge = bundle.getInt("minAge")
             maxAge = bundle.getInt("maxAge")
+            selectedLocation = bundle.getString("selectedLocation")
             fillRecycler()
         }
 
@@ -113,6 +113,10 @@ class Inicio : Fragment() {
 
         query = query.whereGreaterThanOrEqualTo("edad", minAge)
             .whereLessThanOrEqualTo("edad", maxAge)
+
+        selectedLocation?.let {
+            if (!it.isNullOrEmpty()) query = query.whereEqualTo("ubicacion", it)
+        }
 
         // Add condition to filter by estado "pendiente"
         query = query.whereEqualTo("estado", "pendiente")

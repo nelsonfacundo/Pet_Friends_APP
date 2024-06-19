@@ -184,8 +184,7 @@ class VerReseniaUsuario : Fragment() {
                         val averageRating = if (count > 0) sum / count else 0
 
                         val averageRatingText = String.format(Locale.getDefault(), "%.0f", averageRating)
-                        val ratingText = getString(R.string.average_rating_text, averageRatingText )
-                        binding.valoration.text = ratingText
+                        binding.valoration.text = averageRatingText
 
                     } else {
                          Log.d("VerReseniaUsuario", "Valoraciones no encontradas")

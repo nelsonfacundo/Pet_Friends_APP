@@ -199,8 +199,7 @@ class ProfilePetOwner : Fragment() {
                     val averageRating = if (count > 0) sum / count else 0
 
                     val averageRatingText = String.format(Locale.getDefault(), "%.0f", averageRating)
-                    val ratingText = getString(R.string.average_rating_text, averageRatingText)
-                    binding.valorationProfilePetOwner.text = ratingText
+                    binding.valorationProfilePetOwner.text = averageRatingText
 
 
                 } else {
