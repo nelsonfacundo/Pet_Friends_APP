@@ -114,7 +114,7 @@ class FirestoreDataManager {
                 callback(favoritos)
             }
             .addOnFailureListener { exception ->
-                Log.e("FirestoreDataManager", "Error al obtener favoritos", exception)
+
                 callback(emptyList())
             }
     }

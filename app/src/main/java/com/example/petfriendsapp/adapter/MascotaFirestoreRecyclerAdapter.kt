@@ -1,5 +1,6 @@
 package com.example.petfriendsapp.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.example.petfriendsapp.R
@@ -24,27 +25,21 @@ class MascotaFirestoreRecyclerAdapter(
     override fun onBindViewHolder(holder: MascotaHolder, position: Int, model: Mascota) {
         val mascotaId = snapshots.getSnapshot(position).id
 
-        // Obtener los IDs de las mascotas favoritas del usuario actual
         firestoreDataManager.getFavoriteIds { favoritos ->
             val isFavorite = favoritos.contains(mascotaId)
 
-            // Llamar al método bind en MascotaHolder para configurar la vista
             holder.bind(model, isFavorite) { newFavoriteState ->
                 if (newFavoriteState) {
-                    // Agregar a favoritos
                     firestoreDataManager.addToFavorites(mascotaId) { success ->
                         if (success) {
-                            // Actualizar la UI si es necesario
                             holder.updateFavoriteButton(true)
                         } else {
                             // Manejar error al agregar a favoritos
-                            // Por ejemplo, mostrar un mensaje al usuario
                         }
                     }
                 } else {
                     firestoreDataManager.removeFromFavorites(mascotaId) { success ->
                         if (success) {
-                            // Actualizar la UI si es necesario
                             holder.updateFavoriteButton(false)
                         }
                     }
@@ -52,8 +47,8 @@ class MascotaFirestoreRecyclerAdapter(
             }
         }
 
-
         holder.getCardLayout().setOnClickListener {
+            Log.d("Adapter", "Card clicked for Mascota ID: $mascotaId")
             mascotaClickListener(model, mascotaId)
         }
     }

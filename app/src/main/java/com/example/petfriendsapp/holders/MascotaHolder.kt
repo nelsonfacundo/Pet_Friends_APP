@@ -58,26 +58,18 @@ class MascotaHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         setSexo(mascota.sexo)
         setImageUrl(mascota.imageUrl)
 
-        // Configurar el estado inicial del botón de favorito
         updateFavoriteButton(isFavorite)
 
-        // Listener para el botón de favorito
         getFavoriteButton().setOnClickListener {
             favoriteClickListener(!isFavorite)
         }
 
-        // Listener para la tarjeta completa (si necesitas algo similar)
-        getCardLayout().setOnClickListener {
-            // Aquí puedes agregar lógica adicional si se necesita
-        }
     }
 
     fun updateFavoriteButton(isFavorite: Boolean) {
         if (isFavorite) {
-            // Si es favorito, establecer el botón como activo (favorito)
             getFavoriteButton().setImageResource(R.drawable.favorite_active)
         } else {
-            // Si no es favorito, establecer el botón como inactivo (no favorito)
             getFavoriteButton().setImageResource(R.drawable.favorito)
         }
     }

@@ -1,6 +1,7 @@
 package fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -132,6 +133,7 @@ class Inicio : Fragment() {
     }
 
     private fun redirigir(mascota: Mascota, mascotaId: String) {
+        Log.d("Fragment", "Redirigiendo a detalles para Mascota ID: $mascotaId + $mascotaId")
         val action = InicioDirections.actionInicioToDetailsAdoptar(
             mascota,
             mascotaId
