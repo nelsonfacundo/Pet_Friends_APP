@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.Spinner
 import com.example.petfriendsapp.R
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.chip.Chip
@@ -19,8 +21,11 @@ class FiltrosFragment : BottomSheetDialogFragment() {
     private lateinit var chipGroupSpecie: ChipGroup
     private lateinit var chipGroupSex: ChipGroup
     private lateinit var chipGroupAge: ChipGroup
+    private lateinit var spinnerLocation: Spinner
     private var minAge: Int = 0
     private var maxAge: Int = Int.MAX_VALUE
+    private lateinit var applyFilters: Button
+    private lateinit var clearFilters: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,9 +37,16 @@ class FiltrosFragment : BottomSheetDialogFragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_filtros, container, false)
 
-        val applyFilters: Button = view.findViewById(R.id.apply_filters_btn)
-        val clearFilters: Button = view.findViewById(R.id.clean_filters_btn)
+        initChips(view)
+        initSpinnerLocation(view)
+        restoreFilters()
+        initListenerApplyFilters(view)
+        initListenerClearFilters(view)
 
+        return view
+    }
+
+    private fun initChips(view: View) {
         ageRange1to3  = view.findViewById(R.id.age_1_3_chip)
         ageRange3to6 = view.findViewById(R.id.age_3_6_chip)
         ageRange6to9 = view.findViewById(R.id.age_6_9_chip)
@@ -42,8 +54,57 @@ class FiltrosFragment : BottomSheetDialogFragment() {
         chipGroupSpecie = view.findViewById(R.id.species_chips)
         chipGroupSex = view.findViewById(R.id.sex_chips)
         chipGroupAge = view.findViewById(R.id.age_chips)
+    }
 
-        restoreFilters(view)
+    private fun initSpinnerLocation(view: View) {
+        spinnerLocation = view.findViewById(R.id.location_spinner_filters)
+        //ArrayAdapter con el array de strings de Strings.xml
+        ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.spinner_provincias,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinnerLocation.adapter = adapter
+        }
+    }
+
+    //Restauro los filtros de acuerdo a la última vez
+    private fun restoreFilters() {
+
+       /* var selectedSpecie: String? = null
+        var selectedSex: String? = null*/
+        if (selectedSpecieId != View.NO_ID) {
+            selectedSpecieId?.let { chipGroupSpecie.check(it) }
+            //selectedSpecie = chipGroupSpecie.checkedChipId.toString()
+        }
+
+        if (selectedSexId != View.NO_ID) {
+            selectedSexId?.let { chipGroupSex.check(it) }
+           // selectedSex = chipGroupSex.checkedChipId.toString()
+        }
+
+        if (selectedAgeId != View.NO_ID) {
+            selectedAgeId?.let { chipGroupAge.check(it) }
+        }
+
+        if (selectedLocation != null) {
+            spinnerLocation.setSelection(resources.getStringArray(R.array.spinner_provincias).indexOf(selectedLocation))
+        }
+
+       /* val result = Bundle().apply {
+            putString("selectedSpecies", selectedSpecie)
+            putString("selectedSex", selectedSex)
+            putInt("minAge", minAge)
+            putInt("maxAge", maxAge)
+            putString("selectedLocation", selectedLocation)
+        }
+
+        parentFragmentManager.setFragmentResult("requestKey", result)*/
+    }
+
+    private fun initListenerApplyFilters(view: View) {
+        applyFilters = view.findViewById(R.id.apply_filters_btn)
 
         //Botón aplicar filtros
         applyFilters.setOnClickListener {
@@ -51,6 +112,8 @@ class FiltrosFragment : BottomSheetDialogFragment() {
             selectedSpecieId = chipGroupSpecie.checkedChipId
             selectedSexId = chipGroupSex.checkedChipId
             selectedAgeId = chipGroupAge.checkedChipId
+            selectedLocation = spinnerLocation.selectedItem.toString() //También para capturar lo seleccionado
+
 
             //Capturo filtros seleccionados para pasarlos al InicioFragment
             val selectedSpecie = selectedSpecieId
@@ -68,6 +131,7 @@ class FiltrosFragment : BottomSheetDialogFragment() {
                 putString("selectedSex", selectedSex)
                 putInt("minAge", minAge)
                 putInt("maxAge", maxAge)
+                putString("selectedLocation", selectedLocation)
             }
 
             //Paso de los filtros al inicio
@@ -76,28 +140,6 @@ class FiltrosFragment : BottomSheetDialogFragment() {
             //Cierro bottomSheet
             dismiss()
         }
-
-        //Botón limpiar filtros
-        clearFilters.setOnClickListener{
-
-            //Modifico las variables para cuando se inicie el bottomsheet se restablezcan los chips
-            selectedSpecieId = -1
-            selectedSexId = -1
-            selectedAgeId = -1
-
-            //Bundle para pasar los filtros en null al inicio
-            val result = Bundle().apply {
-                putString("selectedSpecies", null)
-                putString("selectedSex", null)
-                putInt("minAge", 0)
-                putInt("maxAge", Int.MAX_VALUE)
-            }
-
-            parentFragmentManager.setFragmentResult("requestKey", result)
-            dismiss()
-        }
-
-        return view
     }
 
     private fun setAgeRange(){
@@ -116,16 +158,28 @@ class FiltrosFragment : BottomSheetDialogFragment() {
         }
     }
 
-    //Restauro los filtros de acuerdo a la última vez
-    private fun restoreFilters(view: View){
-        if (selectedSpecieId != View.NO_ID) {
-            selectedSpecieId?.let { chipGroupSpecie.check(it) }
-        }
-        if (selectedSexId != View.NO_ID) {
-            selectedSexId?.let { chipGroupSex.check(it) }
-        }
-        if (selectedAgeId != View.NO_ID) {
-            selectedAgeId?.let { chipGroupAge.check(it) }
+    private fun initListenerClearFilters(view: View) {
+        clearFilters = view.findViewById(R.id.clean_filters_btn)
+        //Botón limpiar filtros
+        clearFilters.setOnClickListener{
+
+            //Modifico las variables para cuando se inicie el bottomsheet se restablezcan los chips
+            selectedSpecieId = -1
+            selectedSexId = -1
+            selectedAgeId = -1
+            selectedLocation = null
+
+            //Bundle para pasar los filtros en null al inicio
+            val result = Bundle().apply {
+                putString("selectedSpecies", null)
+                putString("selectedSex", null)
+                putInt("minAge", 0)
+                putInt("maxAge", Int.MAX_VALUE)
+                putString("selectedLocation", null)
+            }
+
+            parentFragmentManager.setFragmentResult("requestKey", result)
+            dismiss()
         }
     }
 
@@ -134,6 +188,6 @@ class FiltrosFragment : BottomSheetDialogFragment() {
         var selectedSpecieId: Int = -1
         var selectedSexId: Int = -1
         var selectedAgeId: Int = -1
+        var selectedLocation: String? = null
     }
-
 }
